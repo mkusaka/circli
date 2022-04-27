@@ -1,0 +1,16 @@
+{
+  "name": "circli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/mkusaka/circli.git",
+  "author": "mkusaka <hinoshita1992@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "openapi-typescript-codegen": "^0.22.0",
+    "prettier": "^2.6.2"
+  },
+  "scripts": {
+    "update": "curl -o swagger.json https://circleci.com/api/v2/openapi.json && prettier --write swagger.json",
+    "gen": "openapi -i swagger.json -o client --useOptions --useUnionTypes --indent 2"
+  }
+}

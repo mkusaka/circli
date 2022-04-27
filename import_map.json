@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "cliffy/": "https://deno.land/x/cliffy/"
+  }
+}
