@@ -9,6 +9,7 @@
     "@types/node": "^17.0.30",
     "@types/prettier": "^2.6.0",
     "@vercel/ncc": "^0.33.4",
+    "concurrently": "^7.1.0",
     "fast-glob": "^3.2.11",
     "ncc": "^0.3.6",
     "openapi-typescript-codegen": "^0.22.0",
@@ -20,6 +21,11 @@
     "gen": "openapi -i swagger.json -o client --useOptions --useUnionTypes --indent 2",
     "run": "deno run -A main.ts",
     "transform": "ncc run transform.ts",
-    "fmt": "prettier --write transform.ts"
+    "fmt": "prettier --write transform.ts",
+    "compile": "concurrently \"npm:compile:*\"",
+    "compile:linux": "deno compile --target x86_64-unknown-linux-gnu -o dist/linux/circli main.ts",
+    "compile:Mac:amd64": "deno compile --target x86_64-apple-darwin -o dist/macamd/circli main.ts",
+    "compile:Mac:arm64": "deno compile --target aarch64-apple-darwin -o dist/macarm/cicli main.ts",
+    "compile:windows": "deno compile --target x86_64-pc-windows-msvc -o dist/windows/circli.exe main.ts"
   }
 }
