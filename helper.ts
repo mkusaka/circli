@@ -12,7 +12,7 @@ export function isBooleanOrThrow(val: any, key: string): val is boolean {
 export function isStringOrThrow(val: any, key: string): val is string {
   if (typeof val !== "string") {
     throw new ValidationError(
-      "val required to be a string, but got no these value"
+      `val of ${key} required to be a string, but got no these value: ${val}`
     );
   }
   return true;
@@ -24,8 +24,20 @@ export function isStringOrUndefinedOrThrow(
 ): val is string | undefined {
   if (typeof val !== "string" && typeof val !== "undefined") {
     throw new ValidationError(
-      "val required to be a string or undefined, but got no these value"
+      `val of ${key} required to be a string or undefined, but got no these value: ${val}`
     );
   }
   return true;
 }
+
+export const projectSlug = (
+  vcsName: string,
+  userName: string,
+  repoName: string
+) => {
+  if (vcsName === "GitHub" || vcsName == "gh") {
+    return `gh/${userName}/${repoName}`;
+  } else {
+    throw new ValidationError(`unsupported vcs: ${vcsName}`);
+  }
+};

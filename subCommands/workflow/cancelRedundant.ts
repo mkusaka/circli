@@ -6,16 +6,94 @@ import {
   ENV_CIRCLE_WORKFLOW_ID,
   ENV_CIRCLECI_TOKEN,
 } from "../../env.ts";
-import { isStringOrThrow } from "../../helper.ts";
+import { isStringOrThrow, projectSlug } from "../../helper.ts";
+import * as client from "../../client/index.ts";
+import { CommandError } from "https://deno.land/x/cliffy@v0.23.1/command/_errors.ts";
+import { logger } from "../../logger.ts";
 
-export const handler = (options: {
+export const handler = async (options: {
   workflowId: string;
   branchName: string;
   userName: string;
   repoName: string;
   targetUserName?: string | undefined;
-  token: string;
-}) => {};
+  token?: string | undefined;
+}) => {
+  if (options.token) {
+    client.OpenAPI.HEADERS = {
+      "Circle-Token": options.token,
+    };
+  }
+
+  logger.debug({ name: "log", value: "request started" });
+
+  const currentWorkflow = await client.WorkflowService.getWorkflowById({
+    id: options.workflowId,
+  });
+
+  logger.debug({ name: "currentWorkflow", value: currentWorkflow });
+
+  const workflowName = currentWorkflow.name;
+
+  const currentPipeline = await client.PipelineService.getPipelineById({
+    pipelineId: currentWorkflow.pipeline_id,
+  });
+
+  logger.debug({ name: "currentPipeline", value: currentPipeline });
+  const vcs = currentPipeline.vcs?.provider_name || "";
+  const slug = projectSlug(vcs, options.userName, options.repoName);
+
+  const pipelineIds = (
+    await client.PipelineService.listPipelinesForProject({
+      projectSlug: slug,
+      branch: options.branchName,
+    })
+  ).items
+    .filter((pipeline) => {
+      if (options.targetUserName) {
+        return (
+          pipeline.state === "created" &&
+          pipeline.trigger.actor.login === options.targetUserName
+        );
+      }
+      return pipeline.state === "created";
+    })
+    .map((pipeline) => pipeline.id);
+
+  logger.debug({ name: "pipelineIds", value: pipelineIds });
+
+  const cancelTargetWorkflowIds = (
+    await Promise.all(
+      pipelineIds.map((id) => {
+        return client.PipelineService.listWorkflowsByPipelineId({
+          pipelineId: id,
+        });
+      })
+    )
+  ).flatMap(({ items }) =>
+    items
+      .filter(
+        (item) =>
+          (item.status == "on_hold" || item.status === "running") &&
+          item.name === workflowName &&
+          item.id !== options.workflowId
+      )
+      .map((item) => item.id)
+  );
+
+  logger.debug({
+    name: "cancelTargetWorkflowIds",
+    value: cancelTargetWorkflowIds,
+  });
+
+  await Promise.all(
+    cancelTargetWorkflowIds.map((id) => {
+      return client.WorkflowService.cancelWorkflow({ id });
+    })
+  );
+
+  logger.debug({ name: "log", value: "request finished" });
+};
 
 const defaultOrRequiredToken = () => {
   if (ENV_CIRCLECI_TOKEN) {
@@ -110,7 +188,7 @@ export const cancelRedundant = await new Command()
     "circleci user token",
     defaultOrRequiredToken()
   )
-  .action(({ workflowId, branchName, userName, repoName, token }) => {
+  .action(async ({ workflowId, branchName, userName, repoName, token }) => {
     if (!isStringOrThrow(workflowId, "workflowId")) {
       return;
     }
@@ -126,5 +204,9 @@ export const cancelRedundant = await new Command()
     if (!isStringOrThrow(token, "token")) {
       return;
     }
-    handler({ workflowId, branchName, userName, repoName, token });
+    try {
+      await handler({ workflowId, branchName, userName, repoName, token });
+    } catch (e) {
+      throw new CommandError(`command execution error with: ${e}`);
+    }
   });
