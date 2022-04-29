@@ -1,12 +1,7 @@
-/* istanbul ignore file */
-/* tslint:disable */
-/* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
-
+import type { CancelablePromise } from "../core/CancelablePromise.ts";
+import { OpenAPI } from "../core/OpenAPI.ts";
+import { request as __request } from "../core/request.ts";
 export class ScheduleService {
-
   /**
    * Get all schedules
    * Returns all schedules for this project.
@@ -18,9 +13,9 @@ export class ScheduleService {
     pageToken,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string,
+    projectSlug: string;
     /** A token to retrieve the next page of results. **/
-    pageToken?: string,
+    pageToken?: string;
   }): CancelablePromise<{
     items: Array<{
       /**
@@ -34,20 +29,22 @@ export class ScheduleService {
         /**
          * Number of times a schedule triggers per hour, value must be between 1 and 60
          */
-        'per-hour': number;
+        "per-hour": number;
         /**
          * Hours in a day in which the schedule triggers.
          */
-        'hours-of-day': Array<number>;
+        "hours-of-day": Array<number>;
         /**
          * Days in a week in which the schedule triggers.
          */
-        'days-of-week': Array<'TUE' | 'SAT' | 'SUN' | 'MON' | 'THU' | 'WED' | 'FRI'>;
+        "days-of-week": Array<
+          "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
+        >;
       };
       /**
        * The date and time the pipeline was last updated.
        */
-      'updated-at': string;
+      "updated-at": string;
       /**
        * Name of the schedule.
        */
@@ -55,15 +52,15 @@ export class ScheduleService {
       /**
        * The date and time the pipeline was created.
        */
-      'created-at': string;
+      "created-at": string;
       /**
        * The project-slug for the schedule
        */
-      'project-slug': string;
+      "project-slug": string;
       /**
        * Pipeline parameters represented as key-value pairs. Must contain branch or tag.
        */
-      parameters: Record<string, (number | string | boolean)>;
+      parameters: Record<string, number | string | boolean>;
       /**
        * The attribution actor who will run the scheduled pipeline.
        */
@@ -92,17 +89,16 @@ export class ScheduleService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/project/{project-slug}/schedule',
+      method: "GET",
+      url: "/project/{project-slug}/schedule",
       path: {
-        'project-slug': projectSlug,
+        "project-slug": projectSlug,
       },
       query: {
-        'page-token': pageToken,
+        "page-token": pageToken,
       },
     });
   }
-
   /**
    * Create a schedule
    * Creates a schedule and returns the created schedule.
@@ -114,7 +110,7 @@ export class ScheduleService {
     requestBody,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string,
+    projectSlug: string;
     requestBody?: {
       /**
        * Name of the schedule.
@@ -127,43 +123,44 @@ export class ScheduleService {
         /**
          * Number of times a schedule triggers per hour, value must be between 1 and 60
          */
-        'per-hour': number;
+        "per-hour": number;
         /**
          * Hours in a day in which the schedule triggers.
          */
-        'hours-of-day': Array<number>;
+        "hours-of-day": Array<number>;
         /**
          * Days in a week in which the schedule triggers.
          */
-        'days-of-week': Array<'TUE' | 'SAT' | 'SUN' | 'MON' | 'THU' | 'WED' | 'FRI'>;
+        "days-of-week": Array<
+          "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
+        >;
       };
       /**
        * The attribution-actor of the scheduled pipeline.
        */
-      'attribution-actor': 'current' | 'system';
+      "attribution-actor": "current" | "system";
       /**
        * Pipeline parameters represented as key-value pairs. Must contain branch or tag.
        */
-      parameters: Record<string, (number | string | boolean)>;
+      parameters: Record<string, number | string | boolean>;
       /**
        * Description of the schedule.
        */
       description?: string;
-    },
+    };
   }): CancelablePromise<{
     message?: string;
   }> {
     return __request(OpenAPI, {
-      method: 'POST',
-      url: '/project/{project-slug}/schedule',
+      method: "POST",
+      url: "/project/{project-slug}/schedule",
       path: {
-        'project-slug': projectSlug,
+        "project-slug": projectSlug,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     });
   }
-
   /**
    * Update a schedule
    * Updates a schedule and returns the updated schedule.
@@ -175,7 +172,7 @@ export class ScheduleService {
     requestBody,
   }: {
     /** The unique ID of the schedule. **/
-    scheduleId: string,
+    scheduleId: string;
     requestBody?: {
       /**
        * Description of the schedule.
@@ -192,25 +189,27 @@ export class ScheduleService {
         /**
          * Number of times a schedule triggers per hour, value must be between 1 and 60
          */
-        'per-hour'?: number;
+        "per-hour"?: number;
         /**
          * Hours in a day in which the schedule triggers.
          */
-        'hours-of-day'?: Array<number>;
+        "hours-of-day"?: Array<number>;
         /**
          * Days in a week in which the schedule triggers.
          */
-        'days-of-week'?: Array<'TUE' | 'SAT' | 'SUN' | 'MON' | 'THU' | 'WED' | 'FRI'>;
+        "days-of-week"?: Array<
+          "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
+        >;
       };
       /**
        * The attribution-actor of the scheduled pipeline.
        */
-      'attribution-actor'?: 'current' | 'system';
+      "attribution-actor"?: "current" | "system";
       /**
        * Pipeline parameters represented as key-value pairs. Must contain branch or tag.
        */
-      parameters?: Record<string, (number | string | boolean)>;
-    },
+      parameters?: Record<string, number | string | boolean>;
+    };
   }): CancelablePromise<{
     /**
      * The unique ID of the schedule.
@@ -223,20 +222,22 @@ export class ScheduleService {
       /**
        * Number of times a schedule triggers per hour, value must be between 1 and 60
        */
-      'per-hour': number;
+      "per-hour": number;
       /**
        * Hours in a day in which the schedule triggers.
        */
-      'hours-of-day': Array<number>;
+      "hours-of-day": Array<number>;
       /**
        * Days in a week in which the schedule triggers.
        */
-      'days-of-week': Array<'TUE' | 'SAT' | 'SUN' | 'MON' | 'THU' | 'WED' | 'FRI'>;
+      "days-of-week": Array<
+        "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
+      >;
     };
     /**
      * The date and time the pipeline was last updated.
      */
-    'updated-at': string;
+    "updated-at": string;
     /**
      * Name of the schedule.
      */
@@ -244,15 +245,15 @@ export class ScheduleService {
     /**
      * The date and time the pipeline was created.
      */
-    'created-at': string;
+    "created-at": string;
     /**
      * The project-slug for the schedule
      */
-    'project-slug': string;
+    "project-slug": string;
     /**
      * Pipeline parameters represented as key-value pairs. Must contain branch or tag.
      */
-    parameters: Record<string, (number | string | boolean)>;
+    parameters: Record<string, number | string | boolean>;
     /**
      * The attribution actor who will run the scheduled pipeline.
      */
@@ -276,16 +277,15 @@ export class ScheduleService {
     description: string;
   }> {
     return __request(OpenAPI, {
-      method: 'PATCH',
-      url: '/schedule/{schedule-id}',
+      method: "PATCH",
+      url: "/schedule/{schedule-id}",
       path: {
-        'schedule-id': scheduleId,
+        "schedule-id": scheduleId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     });
   }
-
   /**
    * Delete a schedule
    * Deletes the schedule by id.
@@ -296,7 +296,7 @@ export class ScheduleService {
     scheduleId,
   }: {
     /** The unique ID of the schedule. **/
-    scheduleId: string,
+    scheduleId: string;
   }): CancelablePromise<{
     /**
      * A human-readable message
@@ -304,14 +304,13 @@ export class ScheduleService {
     message: string;
   }> {
     return __request(OpenAPI, {
-      method: 'DELETE',
-      url: '/schedule/{schedule-id}',
+      method: "DELETE",
+      url: "/schedule/{schedule-id}",
       path: {
-        'schedule-id': scheduleId,
+        "schedule-id": scheduleId,
       },
     });
   }
-
   /**
    * Get a schedule
    * Get a schedule by id.
@@ -322,7 +321,7 @@ export class ScheduleService {
     scheduleId,
   }: {
     /** The unique ID of the schedule. **/
-    scheduleId: string,
+    scheduleId: string;
   }): CancelablePromise<{
     /**
      * The unique ID of the schedule.
@@ -335,20 +334,22 @@ export class ScheduleService {
       /**
        * Number of times a schedule triggers per hour, value must be between 1 and 60
        */
-      'per-hour': number;
+      "per-hour": number;
       /**
        * Hours in a day in which the schedule triggers.
        */
-      'hours-of-day': Array<number>;
+      "hours-of-day": Array<number>;
       /**
        * Days in a week in which the schedule triggers.
        */
-      'days-of-week': Array<'TUE' | 'SAT' | 'SUN' | 'MON' | 'THU' | 'WED' | 'FRI'>;
+      "days-of-week": Array<
+        "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
+      >;
     };
     /**
      * The date and time the pipeline was last updated.
      */
-    'updated-at': string;
+    "updated-at": string;
     /**
      * Name of the schedule.
      */
@@ -356,15 +357,15 @@ export class ScheduleService {
     /**
      * The date and time the pipeline was created.
      */
-    'created-at': string;
+    "created-at": string;
     /**
      * The project-slug for the schedule
      */
-    'project-slug': string;
+    "project-slug": string;
     /**
      * Pipeline parameters represented as key-value pairs. Must contain branch or tag.
      */
-    parameters: Record<string, (number | string | boolean)>;
+    parameters: Record<string, number | string | boolean>;
     /**
      * The attribution actor who will run the scheduled pipeline.
      */
@@ -388,12 +389,11 @@ export class ScheduleService {
     description: string;
   }> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/schedule/{schedule-id}',
+      method: "GET",
+      url: "/schedule/{schedule-id}",
       path: {
-        'schedule-id': scheduleId,
+        "schedule-id": scheduleId,
       },
     });
   }
-
 }

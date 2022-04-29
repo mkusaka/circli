@@ -1,12 +1,7 @@
-/* istanbul ignore file */
-/* tslint:disable */
-/* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
-
+import type { CancelablePromise } from "../core/CancelablePromise.ts";
+import { OpenAPI } from "../core/OpenAPI.ts";
+import { request as __request } from "../core/request.ts";
 export class InsightsService {
-
   /**
    * Get summary metrics and trends for a project across it's workflows and branches
    * Get summary metrics and trends for a project at workflow and branch level.
@@ -25,13 +20,18 @@ export class InsightsService {
     workflowNames,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string,
+    projectSlug: string;
     /** The time window used to calculate summary metrics. **/
-    reportingWindow?: 'last-7-days' | 'last-90-days' | 'last-24-hours' | 'last-30-days' | 'last-60-days',
+    reportingWindow?:
+      | "last-7-days"
+      | "last-90-days"
+      | "last-24-hours"
+      | "last-30-days"
+      | "last-60-days";
     /** The names of VCS branches to include in branch-level workflow metrics. **/
-    branches?: any,
+    branches?: any;
     /** The names of workflows to include in workflow-level metrics. **/
-    workflowNames?: any,
+    workflowNames?: any;
   }): CancelablePromise<{
     /**
      * The unique ID of the organization
@@ -203,19 +203,18 @@ export class InsightsService {
     all_workflows?: Array<string>;
   }> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/insights/pages/{project-slug}/summary',
+      method: "GET",
+      url: "/insights/pages/{project-slug}/summary",
       path: {
-        'project-slug': projectSlug,
+        "project-slug": projectSlug,
       },
       query: {
-        'reporting-window': reportingWindow,
-        'branches': branches,
-        'workflow-names': workflowNames,
+        "reporting-window": reportingWindow,
+        branches: branches,
+        "workflow-names": workflowNames,
       },
     });
   }
-
   /**
    * Workflow timeseries data
    * If no query parameters are supplied, will return timeseries data for all workflows that have ran on the default branch.
@@ -242,19 +241,19 @@ export class InsightsService {
     endDate,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string,
+    projectSlug: string;
     /** The name of a vcs branch. If not passed we will scope the API call to the default branch. **/
-    branch?: string,
+    branch?: string;
     /** Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. **/
-    allBranches?: boolean,
+    allBranches?: boolean;
     /** The granularity for which to query timeseries data. **/
-    timeseriesGranularity?: 'daily' | 'hourly',
+    timeseriesGranularity?: "daily" | "hourly";
     /** The name of a workflow. If not passed we will scope the API call to the project. **/
-    workflowName?: string,
+    workflowName?: string;
     /** Include only executions that started at or after this date. This must be specified if an end-date is provided. **/
-    startDate?: string,
+    startDate?: string;
     /** Include only executions that started before this date. This date can be at most 90 days after the start-date. **/
-    endDate?: string,
+    endDate?: string;
   }): CancelablePromise<{
     /**
      * A token to pass as a `page-token` query parameter to return the next page of results.
@@ -337,22 +336,21 @@ export class InsightsService {
     }>;
   }> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/insights/time-series/{project-slug}/workflows',
+      method: "GET",
+      url: "/insights/time-series/{project-slug}/workflows",
       path: {
-        'project-slug': projectSlug,
+        "project-slug": projectSlug,
       },
       query: {
-        'branch': branch,
-        'all-branches': allBranches,
-        'timeseries-granularity': timeseriesGranularity,
-        'workflow-name': workflowName,
-        'start-date': startDate,
-        'end-date': endDate,
+        branch: branch,
+        "all-branches": allBranches,
+        "timeseries-granularity": timeseriesGranularity,
+        "workflow-name": workflowName,
+        "start-date": startDate,
+        "end-date": endDate,
       },
     });
   }
-
   /**
    * Job timeseries data
    * Get timeseries data for all jobs within a workflow.
@@ -368,17 +366,17 @@ export class InsightsService {
     endDate,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string,
+    projectSlug: string;
     /** The name of the workflow. **/
-    workflowName: string,
+    workflowName: string;
     /** The name of a vcs branch. If not passed we will scope the API call to the default branch. **/
-    branch?: string,
+    branch?: string;
     /** The granularity for which to query timeseries data. **/
-    timeseriesGranularity?: 'daily' | 'hourly',
+    timeseriesGranularity?: "daily" | "hourly";
     /** Include only executions that started at or after this date. This must be specified if an end-date is provided. **/
-    startDate?: string,
+    startDate?: string;
     /** Include only executions that started before this date. This date can be at most 90 days after the start-date. **/
-    endDate?: string,
+    endDate?: string;
   }): CancelablePromise<{
     /**
      * A token to pass as a `page-token` query parameter to return the next page of results.
@@ -461,21 +459,20 @@ export class InsightsService {
     }>;
   }> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/insights/time-series/{project-slug}/workflows/{workflow-name}/jobs',
+      method: "GET",
+      url: "/insights/time-series/{project-slug}/workflows/{workflow-name}/jobs",
       path: {
-        'project-slug': projectSlug,
-        'workflow-name': workflowName,
+        "project-slug": projectSlug,
+        "workflow-name": workflowName,
       },
       query: {
-        'branch': branch,
-        'timeseries-granularity': timeseriesGranularity,
-        'start-date': startDate,
-        'end-date': endDate,
+        branch: branch,
+        "timeseries-granularity": timeseriesGranularity,
+        "start-date": startDate,
+        "end-date": endDate,
       },
     });
   }
-
   /**
    * Get summary metrics with trends for the entire org, and for each project.
    * Gets aggregated summary metrics with trends for the entire org.
@@ -489,11 +486,16 @@ export class InsightsService {
     projectNames,
   }: {
     /** Org slug in the form `vcs-slug/org-name`. The `/` characters may be URL-escaped. **/
-    orgSlug: string,
+    orgSlug: string;
     /** The time window used to calculate summary metrics. **/
-    reportingWindow?: 'last-7-days' | 'last-90-days' | 'last-24-hours' | 'last-30-days' | 'last-60-days',
+    reportingWindow?:
+      | "last-7-days"
+      | "last-90-days"
+      | "last-24-hours"
+      | "last-30-days"
+      | "last-60-days";
     /** List of project names. **/
-    projectNames?: any,
+    projectNames?: any;
   }): CancelablePromise<{
     /**
      * Aggregated metrics for an org, with trends.
@@ -601,18 +603,17 @@ export class InsightsService {
     all_projects: Array<string>;
   }> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/insights/{org-slug}/summary',
+      method: "GET",
+      url: "/insights/{org-slug}/summary",
       path: {
-        'org-slug': orgSlug,
+        "org-slug": orgSlug,
       },
       query: {
-        'reporting-window': reportingWindow,
-        'project-names': projectNames,
+        "reporting-window": reportingWindow,
+        "project-names": projectNames,
       },
     });
   }
-
   /**
    * Get all branches for a project
    * Get a list of all branches for a specified project. The list will only contain branches currently available within Insights.
@@ -624,22 +625,21 @@ export class InsightsService {
     workflowName,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string,
+    projectSlug: string;
     /** The name of a workflow. If not passed we will scope the API call to the project. **/
-    workflowName?: string,
+    workflowName?: string;
   }): CancelablePromise<any> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/insights/{project-slug}/branches',
+      method: "GET",
+      url: "/insights/{project-slug}/branches",
       path: {
-        'project-slug': projectSlug,
+        "project-slug": projectSlug,
       },
       query: {
-        'workflow-name': workflowName,
+        "workflow-name": workflowName,
       },
     });
   }
-
   /**
    * Get flaky tests for a project
    * Get a list of flaky tests for a given project. Flaky tests are branch agnostic.
@@ -651,21 +651,21 @@ export class InsightsService {
     projectSlug,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string,
+    projectSlug: string;
   }): CancelablePromise<{
     /**
      * A list of flaky tests
      */
-    'flaky-tests': Array<{
-      'time-wasted'?: number;
+    "flaky-tests": Array<{
+      "time-wasted"?: number;
       /**
        * The date and time when workflow was created.
        */
-      'workflow-created-at': any;
+      "workflow-created-at": any;
       /**
        * The ID of the workflow associated with the provided test counts
        */
-      'workflow-id': any;
+      "workflow-id": any;
       /**
        * The class the test belongs to.
        */
@@ -673,27 +673,27 @@ export class InsightsService {
       /**
        * The number of the pipeline.
        */
-      'pipeline-number': number;
+      "pipeline-number": number;
       /**
        * The name of the workflow.
        */
-      'workflow-name': string;
+      "workflow-name": string;
       /**
        * The name of the test.
        */
-      'test-name': string;
+      "test-name": string;
       /**
        * The name of the job.
        */
-      'job-name': string;
+      "job-name": string;
       /**
        * The number of the job.
        */
-      'job-number': number;
+      "job-number": number;
       /**
        * The number of times the test flaked.
        */
-      'times-flaked': number;
+      "times-flaked": number;
       /**
        * The source of the test.
        */
@@ -705,14 +705,13 @@ export class InsightsService {
     }>;
   }> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/insights/{project-slug}/flaky-tests',
+      method: "GET",
+      url: "/insights/{project-slug}/flaky-tests",
       path: {
-        'project-slug': projectSlug,
+        "project-slug": projectSlug,
       },
     });
   }
-
   /**
    * Get summary metrics for a project's workflows
    * Get summary metrics for a project's workflows. Workflow runs going back at most 90 days are included in the aggregation window. Metrics are refreshed daily, and thus may not include executions from the last 24 hours. Please note that Insights is not a real time financial reporting tool and should not be used for credit reporting. The most up to date credit information can be found in Plan Overview in the CircleCI UI.
@@ -727,15 +726,20 @@ export class InsightsService {
     reportingWindow,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string,
+    projectSlug: string;
     /** A token to retrieve the next page of results. **/
-    pageToken?: string,
+    pageToken?: string;
     /** Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. **/
-    allBranches?: boolean,
+    allBranches?: boolean;
     /** The name of a vcs branch. If not passed we will scope the API call to the default branch. **/
-    branch?: string,
+    branch?: string;
     /** The time window used to calculate summary metrics. **/
-    reportingWindow?: 'last-7-days' | 'last-90-days' | 'last-24-hours' | 'last-30-days' | 'last-60-days',
+    reportingWindow?:
+      | "last-7-days"
+      | "last-90-days"
+      | "last-24-hours"
+      | "last-30-days"
+      | "last-60-days";
   }): CancelablePromise<{
     /**
      * Workflow summary metrics.
@@ -823,20 +827,19 @@ export class InsightsService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/insights/{project-slug}/workflows',
+      method: "GET",
+      url: "/insights/{project-slug}/workflows",
       path: {
-        'project-slug': projectSlug,
+        "project-slug": projectSlug,
       },
       query: {
-        'page-token': pageToken,
-        'all-branches': allBranches,
-        'branch': branch,
-        'reporting-window': reportingWindow,
+        "page-token": pageToken,
+        "all-branches": allBranches,
+        branch: branch,
+        "reporting-window": reportingWindow,
       },
     });
   }
-
   /**
    * Get recent runs of a workflow
    * Get recent runs of a workflow. Runs going back at most 90 days are returned. Please note that Insights is not a real time financial reporting tool and should not be used for credit reporting. The most up to date credit information can be found in Plan Overview in the CircleCI UI.
@@ -853,19 +856,19 @@ export class InsightsService {
     endDate,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string,
+    projectSlug: string;
     /** The name of the workflow. **/
-    workflowName: string,
+    workflowName: string;
     /** Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. **/
-    allBranches?: boolean,
+    allBranches?: boolean;
     /** The name of a vcs branch. If not passed we will scope the API call to the default branch. **/
-    branch?: string,
+    branch?: string;
     /** A token to retrieve the next page of results. **/
-    pageToken?: string,
+    pageToken?: string;
     /** Include only executions that started at or after this date. This must be specified if an end-date is provided. **/
-    startDate?: string,
+    startDate?: string;
     /** Include only executions that started before this date. This date can be at most 90 days after the start-date. **/
-    endDate?: string,
+    endDate?: string;
   }): CancelablePromise<{
     /**
      * Recent workflow runs.
@@ -898,7 +901,7 @@ export class InsightsService {
       /**
        * Workflow status.
        */
-      status: 'success' | 'failed' | 'error' | 'canceled' | 'unauthorized';
+      status: "success" | "failed" | "error" | "canceled" | "unauthorized";
     }>;
     /**
      * A token to pass as a `page-token` query parameter to return the next page of results.
@@ -906,22 +909,21 @@ export class InsightsService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/insights/{project-slug}/workflows/{workflow-name}',
+      method: "GET",
+      url: "/insights/{project-slug}/workflows/{workflow-name}",
       path: {
-        'project-slug': projectSlug,
-        'workflow-name': workflowName,
+        "project-slug": projectSlug,
+        "workflow-name": workflowName,
       },
       query: {
-        'all-branches': allBranches,
-        'branch': branch,
-        'page-token': pageToken,
-        'start-date': startDate,
-        'end-date': endDate,
+        "all-branches": allBranches,
+        branch: branch,
+        "page-token": pageToken,
+        "start-date": startDate,
+        "end-date": endDate,
       },
     });
   }
-
   /**
    * Get summary metrics for a project workflow's jobs.
    * Get summary metrics for a project workflow's jobs. Job runs going back at most 90 days are included in the aggregation window. Metrics are refreshed daily, and thus may not include executions from the last 24 hours. Please note that Insights is not a real time financial reporting tool and should not be used for credit reporting. The most up to date credit information can be found in Plan Overview in the CircleCI UI.
@@ -937,17 +939,22 @@ export class InsightsService {
     reportingWindow,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string,
+    projectSlug: string;
     /** The name of the workflow. **/
-    workflowName: string,
+    workflowName: string;
     /** A token to retrieve the next page of results. **/
-    pageToken?: string,
+    pageToken?: string;
     /** Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. **/
-    allBranches?: boolean,
+    allBranches?: boolean;
     /** The name of a vcs branch. If not passed we will scope the API call to the default branch. **/
-    branch?: string,
+    branch?: string;
     /** The time window used to calculate summary metrics. **/
-    reportingWindow?: 'last-7-days' | 'last-90-days' | 'last-24-hours' | 'last-30-days' | 'last-60-days',
+    reportingWindow?:
+      | "last-7-days"
+      | "last-90-days"
+      | "last-24-hours"
+      | "last-30-days"
+      | "last-60-days";
   }): CancelablePromise<{
     /**
      * Job summary metrics.
@@ -1027,21 +1034,20 @@ export class InsightsService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/insights/{project-slug}/workflows/{workflow-name}/jobs',
+      method: "GET",
+      url: "/insights/{project-slug}/workflows/{workflow-name}/jobs",
       path: {
-        'project-slug': projectSlug,
-        'workflow-name': workflowName,
+        "project-slug": projectSlug,
+        "workflow-name": workflowName,
       },
       query: {
-        'page-token': pageToken,
-        'all-branches': allBranches,
-        'branch': branch,
-        'reporting-window': reportingWindow,
+        "page-token": pageToken,
+        "all-branches": allBranches,
+        branch: branch,
+        "reporting-window": reportingWindow,
       },
     });
   }
-
   /**
    * Get recent runs of a workflow job
    * Get recent runs of a job within a workflow. Runs going back at most 90 days are returned. Please note that Insights is not a real time financial reporting tool and should not be used for credit reporting. The most up to date credit information can be found in Plan Overview in the CircleCI UI.
@@ -1058,20 +1064,20 @@ export class InsightsService {
     endDate,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string,
+    projectSlug: string;
     /** The name of the workflow. **/
-    workflowName: string,
+    workflowName: string;
     /** The name of the job. **/
-    jobName: string,
+    jobName: string;
     /** The name of a vcs branch. If not passed we will scope the API call to the default branch.
      * Note - Querying all branches is not supported yet. **/
-    branch?: string,
+    branch?: string;
     /** A token to retrieve the next page of results. **/
-    pageToken?: string,
+    pageToken?: string;
     /** Include only executions that started at or after this date. This must be specified if an end-date is provided. **/
-    startDate?: string,
+    startDate?: string;
     /** Include only executions that started before this date. This date can be at most 90 days after the start-date. **/
-    endDate?: string,
+    endDate?: string;
   }): CancelablePromise<{
     /**
      * Recent job runs.
@@ -1092,7 +1098,7 @@ export class InsightsService {
       /**
        * Job status.
        */
-      status: 'success' | 'not_run' | 'failed' | 'canceled' | 'unauthorized';
+      status: "success" | "not_run" | "failed" | "canceled" | "unauthorized";
       /**
        * The duration in seconds of a run.
        */
@@ -1108,22 +1114,21 @@ export class InsightsService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/insights/{project-slug}/workflows/{workflow-name}/jobs/{job-name}',
+      method: "GET",
+      url: "/insights/{project-slug}/workflows/{workflow-name}/jobs/{job-name}",
       path: {
-        'project-slug': projectSlug,
-        'workflow-name': workflowName,
-        'job-name': jobName,
+        "project-slug": projectSlug,
+        "workflow-name": workflowName,
+        "job-name": jobName,
       },
       query: {
-        'branch': branch,
-        'page-token': pageToken,
-        'start-date': startDate,
-        'end-date': endDate,
+        branch: branch,
+        "page-token": pageToken,
+        "start-date": startDate,
+        "end-date": endDate,
       },
     });
   }
-
   /**
    * Get metrics and trends for workflows
    * Get the metrics and trends for a particular workflow on a single branch or all branches
@@ -1137,13 +1142,13 @@ export class InsightsService {
     branches,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string,
+    projectSlug: string;
     /** The name of the workflow. **/
-    workflowName: string,
+    workflowName: string;
     /** Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. **/
-    allBranches?: boolean,
+    allBranches?: boolean;
     /** The names of VCS branches to include in branch-level workflow metrics. **/
-    branches?: any,
+    branches?: any;
   }): CancelablePromise<{
     /**
      * Metrics aggregated acrooss a workflow for a given time window.
@@ -1255,19 +1260,18 @@ export class InsightsService {
     workflow_names: Array<string>;
   }> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/insights/{project-slug}/workflows/{workflow-name}/summary',
+      method: "GET",
+      url: "/insights/{project-slug}/workflows/{workflow-name}/summary",
       path: {
-        'project-slug': projectSlug,
-        'workflow-name': workflowName,
+        "project-slug": projectSlug,
+        "workflow-name": workflowName,
       },
       query: {
-        'all-branches': allBranches,
-        'branches': branches,
+        "all-branches": allBranches,
+        branches: branches,
       },
     });
   }
-
   /**
    * Get test metrics for a project's workflows
    * Get test metrics for a project's workflows. Currently tests metrics are calculated based on 10 most recent workflow runs.
@@ -1281,13 +1285,13 @@ export class InsightsService {
     allBranches,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string,
+    projectSlug: string;
     /** The name of the workflow. **/
-    workflowName: string,
+    workflowName: string;
     /** The name of a vcs branch. If not passed we will scope the API call to the default branch. **/
-    branch?: string,
+    branch?: string;
     /** Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. **/
-    allBranches?: boolean,
+    allBranches?: boolean;
   }): CancelablePromise<{
     /**
      * The average number of tests executed per run
@@ -1431,17 +1435,16 @@ export class InsightsService {
     }>;
   }> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/insights/{project-slug}/workflows/{workflow-name}/test-metrics',
+      method: "GET",
+      url: "/insights/{project-slug}/workflows/{workflow-name}/test-metrics",
       path: {
-        'project-slug': projectSlug,
-        'workflow-name': workflowName,
+        "project-slug": projectSlug,
+        "workflow-name": workflowName,
       },
       query: {
-        'branch': branch,
-        'all-branches': allBranches,
+        branch: branch,
+        "all-branches": allBranches,
       },
     });
   }
-
 }
