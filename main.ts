@@ -1,13 +1,9 @@
-import { Command } from "cliffy/command/mod.ts";
+import { Command } from "./deps.ts";
+import { workflow } from "./subCommands/workflow.ts";
 
-const { args } = await new Command()
-    .description("Remove directories")
-    .arguments("<dirs...>")
-    .parse(Deno.args);
-
-const foo = Deno.cwd()
-const dirs = args[0]
-
-for (const dir of dirs) {
-    console.log("rmdir %s", dir);
-}
+await new Command()
+  .name("circli")
+  .version("0.0.1")
+  .description("circleci cli")
+  .command("workflow", workflow)
+  .parse(Deno.args);
