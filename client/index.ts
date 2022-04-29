@@ -1,15 +1,12 @@
-/* istanbul ignore file */
-/* tslint:disable */
-/* eslint-disable */
-export { ApiError } from "./core/ApiError";
-export { CancelablePromise, CancelError } from "./core/CancelablePromise";
-export { OpenAPI } from "./core/OpenAPI";
-export type { OpenAPIConfig } from "./core/OpenAPI";
-export { ContextService } from "./services/ContextService";
-export { InsightsService } from "./services/InsightsService";
-export { JobService } from "./services/JobService";
-export { PipelineService } from "./services/PipelineService";
-export { ProjectService } from "./services/ProjectService";
-export { ScheduleService } from "./services/ScheduleService";
-export { UserService } from "./services/UserService";
-export { WorkflowService } from "./services/WorkflowService";
+export { ApiError } from "./core/ApiError.ts";
+export { CancelablePromise, CancelError } from "./core/CancelablePromise.ts";
+export { OpenAPI } from "./core/OpenAPI.ts";
+export type { OpenAPIConfig } from "./core/OpenAPI.ts";
+export { ContextService } from "./services/ContextService.ts";
+export { InsightsService } from "./services/InsightsService.ts";
+export { JobService } from "./services/JobService.ts";
+export { PipelineService } from "./services/PipelineService.ts";
+export { ProjectService } from "./services/ProjectService.ts";
+export { ScheduleService } from "./services/ScheduleService.ts";
+export { UserService } from "./services/UserService.ts";
+export { WorkflowService } from "./services/WorkflowService.ts";
