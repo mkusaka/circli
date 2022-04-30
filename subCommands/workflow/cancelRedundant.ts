@@ -43,6 +43,8 @@ export const handler = async (options: {
     pipelineId: currentWorkflow.pipeline_id,
   });
 
+  const currentPipelineNumber = currentPipeline.number;
+
   logger.debug({ name: "currentPipeline", value: currentPipeline });
   const vcs = currentPipeline.vcs?.provider_name || "";
   const slug = projectSlug(vcs, options.userName, options.repoName);
@@ -57,10 +59,13 @@ export const handler = async (options: {
       if (options.targetUserName) {
         return (
           pipeline.state === "created" &&
+          pipeline.number < currentPipelineNumber &&
           pipeline.trigger.actor.login === options.targetUserName
         );
       }
-      return pipeline.state === "created";
+      return (
+        pipeline.state === "created" && pipeline.number < currentPipelineNumber
+      );
     })
     .map((pipeline) => pipeline.id);
 
