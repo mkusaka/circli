@@ -8,7 +8,6 @@ import {
 } from "../../env.ts";
 import { isStringOrThrow, projectSlug } from "../../helper.ts";
 import * as client from "../../client/index.ts";
-import { CommandError } from "https://deno.land/x/cliffy@v0.23.1/command/_errors.ts";
 import { logger } from "../../logger.ts";
 
 export const handler = async (options: {
@@ -212,6 +211,6 @@ export const cancelRedundant = await new Command()
     try {
       await handler({ workflowId, branchName, userName, repoName, token });
     } catch (e) {
-      throw new CommandError(`command execution error with: ${e}`);
+      throw new Error(`command execution error with: ${e}`, { cause: e });
     }
   });
