@@ -39,11 +39,11 @@ esac
 echo "Detected OS=${os} ext=${ext} arch=${arch}"
 
 file="circli_${os}_${arch}.${ext}"
-url="https://github.com/mkusaka/circli/releases/download/v${version}/${file}"
+url="https://github.com/mkusaka/circli/releases/download/v0.0.4/circli_linux_x86_64.tar.gz"
 
 echo "Downloading ${url} with curl"
 
-curl -L "${url}" | tar xvz circli
+curl -L "${url}" | tar xvz ./circli
 exe="$(pwd)/circli"
 
 echo "Downloaded and unarchived executable: ${exe}"
