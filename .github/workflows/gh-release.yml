@@ -1,0 +1,35 @@
+name: release artifact
+
+on:
+  push:
+    branches-ignore:
+      - '**'
+    tags:
+      - 'v*'
+
+permissions: write-all
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - name: install deps
+        run: yarn install --check-files
+      - name: Release
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          TAG=$(git describe --tags --abbrev=0)
+          echo "TAG: $TAG"
+          gh release create "$TAG" --generate-notes
+          yarn upload
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
