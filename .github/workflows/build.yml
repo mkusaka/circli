@@ -1,9 +1,7 @@
-name: release artifact
+name: build artifact
 
 on:
   push:
-
-permissions: write-all
 
 jobs:
   build:
