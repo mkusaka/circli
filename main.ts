@@ -7,7 +7,7 @@ import packageJson from "./package.json" assert { type: "json" };
 OpenAPI.HEADERS = {
   ...(ENV_CIRCLECI_TOKEN
     ? {
-        "Circle-Token": ENV_CIRCLECI_TOKEN,
+        authorization: `Basic ${ENV_CIRCLECI_TOKEN}`,
       }
     : {}),
 };

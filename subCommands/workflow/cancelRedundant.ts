@@ -21,7 +21,7 @@ export const handler = async (options: {
 }) => {
   if (options.token) {
     client.OpenAPI.HEADERS = {
-      "Circle-Token": options.token,
+      authorization: `Basic ${options.token}`,
     };
   }
 
