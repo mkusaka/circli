@@ -6,7 +6,7 @@ commands:
       - run:
           name: run long sleep
           command: |
-            sleep 30
+            sleep 60
   cancel_redundant_workflow:
     steps:
       - run:
