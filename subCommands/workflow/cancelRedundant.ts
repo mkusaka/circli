@@ -1,4 +1,4 @@
-import { Command } from "../../deps.ts";
+import { Command, Base64 } from "../../deps.ts";
 import {
   ENV_CIRCLE_BRANCH,
   ENV_CIRCLE_PROJECT_REPONAME,
@@ -21,7 +21,7 @@ export const handler = async (options: {
 }) => {
   if (options.token) {
     client.OpenAPI.HEADERS = {
-      authorization: `Basic ${options.token}`,
+      authorization: `Basic ${Base64.encode(options.token)}`,
     };
   }
 
