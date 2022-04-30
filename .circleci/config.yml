@@ -13,7 +13,7 @@ commands:
           name: install cli
           command: |
             bash <(curl https://raw.githubusercontent.com/mkusaka/circli/main/scripts/install.bash)
-            ./circli --verison
+            ./circli --version
             ./circli workflow cancel_redundant_workflow
 jobs:
   sleep:
