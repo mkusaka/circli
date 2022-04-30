@@ -43,8 +43,8 @@ url="https://github.com/mkusaka/circli/releases/download/v${version}/${file}"
 
 echo "Downloading ${url} with curl"
 
-curl -L "${url}" | tar xvz cicli
-exe="$(pwd)/cicli"
+curl -L "${url}" | tar xvz circli
+exe="$(pwd)/circli"
 
 echo "Downloaded and unarchived executable: ${exe}"
 
