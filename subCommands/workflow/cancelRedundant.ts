@@ -26,6 +26,11 @@ export const handler = async (options: {
   }
 
   logger.debug({ name: "log", value: "request started" });
+  logger.debug({ name: "workflowId", value: options.workflowId });
+  logger.debug({ name: "branchName", value: options.branchName });
+  logger.debug({ name: "userName", value: options.userName });
+  logger.debug({ name: "repoName", value: options.repoName });
+  logger.debug({ name: "targetUserName", value: options.targetUserName });
 
   const currentWorkflow = await client.WorkflowService.getWorkflowById({
     id: options.workflowId,
