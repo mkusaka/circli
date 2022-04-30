@@ -39,7 +39,7 @@ esac
 echo "Detected OS=${os} ext=${ext} arch=${arch}"
 
 file="circli_${os}_${arch}.${ext}"
-url="https://github.com/mkusaka/circli/releases/download/v0.0.4/circli_linux_x86_64.tar.gz"
+url="https://github.com/mkusaka/circli/releases/download/v${version}/${file}"
 
 echo "Downloading ${url} with curl"
 
