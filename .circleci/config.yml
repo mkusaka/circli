@@ -21,9 +21,10 @@ jobs:
       - image: cimg/base:2022.04
     steps:
       - cancel_redundant_workflow
-      - sleep
+      - long_sleep
 
 workflows:
+  version: 2
   build:
     jobs:
       - sleep:
