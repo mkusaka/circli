@@ -1,6 +1,6 @@
 {
   "name": "circli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "repository": "https://github.com/mkusaka/circli.git",
   "author": "mkusaka <hinoshita1992@gmail.com>",
@@ -17,17 +17,17 @@
     "typescript": "^4.6.4"
   },
   "scripts": {
-    "update": "concurrently \"npm:update:*\" && prettier --write './**/*.{json,ts}' && yarn gen && yarn transform",
+    "update": "concurrently -m 1 \"npm:update:*\" && prettier --write './**/*.{json,ts}' && yarn gen && yarn transform",
     "update:swagger": "curl -o swagger.json https://circleci.com/api/v2/openapi.json",
     "gen": "openapi -i swagger.json -o client --useOptions --useUnionTypes --indent 2",
     "run": "deno run -A main.ts",
     "transform": "ncc run transform.ts",
     "fmt": "prettier --write transform.ts",
-    "compile": "concurrently \"npm:compile:*\"",
+    "compile": "concurrently -m 1 \"npm:compile:*\"",
     "compile:linux": "deno compile --target x86_64-unknown-linux-gnu -o dist/linux/circli main.ts",
     "compile:Mac:amd64": "deno compile --target x86_64-apple-darwin -o dist/macamd/circli main.ts",
     "compile:Mac:arm64": "deno compile --target aarch64-apple-darwin -o dist/macarm/cicli main.ts",
-    "package": "yarn compile && concurrently \"npm:package:*\"",
+    "package": "yarn compile && concurrently -m 1 \"npm:package:*\"",
     "package:linux": "cp README.md dist/linux/ && cp LICENSE dist/linux/ && tar cvzf circli_linux_x86_64.tar.gz --warning=no-file-changed ./dist/linux",
     "package:Mac:amd64": "cp README.md dist/macamd/ && cp LICENSE dist/macamd/ && tar cvzf circli_Darwin_x86_64.tar.gz --warning=no-file-changed ./dist/linux",
     "package:Mac:arm64": "cp README.md dist/macarm/ && cp LICENSE dist/macarm/ && tar cvzf circli_Darwin_arm64.tar.gz --warning=no-file-changed ./dist/linux",

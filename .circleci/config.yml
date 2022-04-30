@@ -10,7 +10,7 @@ commands:
   cancel_redundant_workflow:
     steps:
       - run:
-          name: run long sleep
+          name: install cli
           command: |
             bash <(curl https://raw.githubusercontent.com/mkusaka/circli/main/scripts/install.bash)
             ./circli --verison
