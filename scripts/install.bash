@@ -43,9 +43,9 @@ url="https://github.com/mkusaka/circli/releases/download/v${version}/${file}"
 
 echo "Downloading ${url} with curl"
 
-curl -L "${url}" | tar xvz nsv
-exe="$(pwd)/nsv"
+curl -L "${url}" | tar xvz cicli
+exe="$(pwd)/cicli"
 
 echo "Downloaded and unarchived executable: ${exe}"
 
-echo "Done: $("${exe}" -version)"
+echo "Done: $("${exe}" --version)"
