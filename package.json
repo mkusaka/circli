@@ -1,6 +1,6 @@
 {
   "name": "circli",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "index.js",
   "repository": "https://github.com/mkusaka/circli.git",
   "author": "mkusaka <hinoshita1992@gmail.com>",
@@ -17,7 +17,8 @@
     "typescript": "^4.6.4"
   },
   "scripts": {
-    "update": "curl -o swagger.json https://circleci.com/api/v2/openapi.json && prettier --write './**/*.{json,ts}' && yarn gen && yarn transform",
+    "update": "concurrently \"npm:update:*\" && prettier --write './**/*.{json,ts}' && yarn gen && yarn transform",
+    "update:swagger": "curl -o swagger.json https://circleci.com/api/v2/openapi.json",
     "gen": "openapi -i swagger.json -o client --useOptions --useUnionTypes --indent 2",
     "run": "deno run -A main.ts",
     "transform": "ncc run transform.ts",
