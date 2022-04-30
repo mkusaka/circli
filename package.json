@@ -1,6 +1,6 @@
 {
   "name": "circli",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "repository": "https://github.com/mkusaka/circli.git",
   "author": "mkusaka <hinoshita1992@gmail.com>",
