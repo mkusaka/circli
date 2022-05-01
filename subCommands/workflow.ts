@@ -1,8 +1,12 @@
 import { Command } from "../deps.ts";
-import { cancelRedundant } from "./workflow/cancelRedundant.ts";
-import { cancel } from "./workflow/cancel.ts";
+import {
+  cancelRedundant,
+  name as cancelRedundantName,
+} from "./workflow/cancelRedundant.ts";
+import { cancel, name as cancelName } from "./workflow/cancel.ts";
 
+export const name = "workflow";
 export const workflow = await new Command()
   .description("workflow command")
-  .command("cancel_redundant", cancelRedundant)
-  .command("cancel", cancel);
+  .command(cancelRedundantName, cancelRedundant)
+  .command(cancelName, cancel);

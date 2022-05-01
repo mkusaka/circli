@@ -50,6 +50,7 @@ const defaultOrRequiredWorkflowId = () => {
   } as const;
 };
 
+export const name = "cancel";
 export const cancel = await new Command()
   .description("cancel redundant workflow")
   .option(

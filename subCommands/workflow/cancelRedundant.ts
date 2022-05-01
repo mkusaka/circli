@@ -169,6 +169,7 @@ const defaultOrRequiredRepoName = () => {
   } as const;
 };
 
+export const name = "cancel_redundant";
 export const cancelRedundant = await new Command()
   .description("cancel redundant workflow")
   .option(
