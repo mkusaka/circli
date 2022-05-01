@@ -14,7 +14,7 @@ commands:
           command: |
             bash <(curl https://raw.githubusercontent.com/mkusaka/circli/main/scripts/install.bash)
             ./circli --version
-            ./circli workflow cancel_redundant_workflow
+            ./circli workflow cancel_redundant
 jobs:
   sleep:
     docker:
