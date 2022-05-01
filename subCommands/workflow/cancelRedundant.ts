@@ -56,16 +56,20 @@ export const handler = async (options: {
     })
   ).items
     .filter((pipeline) => {
+      const pending =
+        pipeline.state === "created" ||
+        pipeline.state === "pending" ||
+        pipeline.state == "setup-pending" ||
+        pipeline.state === "setup";
+
       if (options.targetUserName) {
         return (
-          pipeline.state === "created" &&
+          pending &&
           pipeline.number < currentPipelineNumber &&
           pipeline.trigger.actor.login === options.targetUserName
         );
       }
-      return (
-        pipeline.state === "created" && pipeline.number < currentPipelineNumber
-      );
+      return pending && pipeline.number < currentPipelineNumber;
     })
     .map((pipeline) => pipeline.id);
 
