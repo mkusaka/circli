@@ -10,5 +10,7 @@ jobs:
       - name: Download nsv
         run: |
           bash <(curl https://raw.githubusercontent.com/mkusaka/next-semantic-version-cli/main/scripts/install.bash)
-          git tag "v$(nsv "$(git describe --tags --abbrev=0)")"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag "v$(./nsv "$(git describe --tags --abbrev=0)")"
           git push --tags
