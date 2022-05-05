@@ -31,6 +31,8 @@ jobs:
           d="$(date +"%Y%m%dT%H%M%S")"
           branch=update-"$d"
           git checkout -b "$branch"
+          git add --all
+          git commit -m "daily update $d"
           git push origin "$branch"
           gh pr create --title "update $d" --base main --reviewer mkusaka
         env:
