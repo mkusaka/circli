@@ -1,6 +1,7 @@
 name: check swagger update
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
 
@@ -20,6 +21,18 @@ jobs:
       - name: install deps
         run: yarn install --check-files
       - name: update & check
+        id: check
         run: |
           yarn update
-          git diff HEAD | grep '^' && exit 1 || echo "ok"
+          echo "::set-output name=ok::$(git diff HEAD | grep '^' && exit 1 || echo "ok")"
+      - name: make pr if diff detected
+        if: ${{ steps.check.outputs.ok != 'ok' }}
+        run: |
+          d="$(date +"%Y%m%dT%H%M%S")"
+          branch=update-"$d"
+          git checkout -b "$branch"
+          git push origin "$branch"
+          gh pr create --title "update $d" --base main --reviewer mkusaka
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
