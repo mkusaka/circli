@@ -7,10 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Download nsv
         run: |
           bash <(curl https://raw.githubusercontent.com/mkusaka/next-semantic-version-cli/main/scripts/install.bash)
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          TAG="$(./nsv "$(git describe --tags --abbrev=0)")"
+          RELEASE_TAG="v$TAG"
           git tag "v$(./nsv "$(git describe --tags --abbrev=0)")"
           git push --tags
