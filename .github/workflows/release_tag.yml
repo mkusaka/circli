@@ -2,6 +2,8 @@ name: create release tag
 on:
   workflow_dispatch:
 
+permissions: write-all
+
 jobs:
   release_tag:
     runs-on: ubuntu-latest
