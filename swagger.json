@@ -26,109 +26,6 @@
   ],
   "paths": {
     "/context": {
-      "post": {
-        "summary": "Create a new context",
-        "tags": ["Context"],
-        "operationId": "createContext",
-        "responses": {
-          "200": {
-            "description": "The new context",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid",
-                      "description": "The unique ID of the context."
-                    },
-                    "name": {
-                      "type": "string",
-                      "description": "The user defined name of the context."
-                    },
-                    "created_at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "The date and time the context was created.",
-                      "example": "2015-09-21T17:29:21.042Z"
-                    }
-                  },
-                  "required": ["id", "name", "created_at"],
-                  "title": "Context"
-                }
-              }
-            }
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "description": "The user defined name of the context."
-                  },
-                  "owner": {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "format": "uuid",
-                            "description": "The unique ID of the owner of the context. Specify either this or slug."
-                          },
-                          "type": {
-                            "enum": ["account", "organization"],
-                            "type": "string",
-                            "description": "The type of the owner. Defaults to \"organization\". Accounts are only used as context owners in server.",
-                            "example": "organization"
-                          }
-                        },
-                        "required": ["id"]
-                      },
-                      {
-                        "type": "object",
-                        "properties": {
-                          "slug": {
-                            "type": "string",
-                            "description": "A string that represents an organization. Specify either this or id. Cannot be used for accounts."
-                          },
-                          "type": {
-                            "enum": ["organization"],
-                            "type": "string",
-                            "description": "The type of owner. Defaults to \"organization\". Accounts are only used as context owners in server and must be specified by an id instead of a slug."
-                          }
-                        },
-                        "required": ["slug"]
-                      }
-                    ]
-                  }
-                },
-                "required": ["name", "owner"]
-              }
-            }
-          }
-        }
-      },
       "get": {
         "summary": "List contexts",
         "description": "List all contexts for an owner.",
@@ -235,17 +132,14 @@
             "allowEmptyValue": true
           }
         ]
-      }
-    },
-    "/context/{context-id}": {
-      "get": {
-        "summary": "Get a context",
-        "description": "Returns basic information about a context.",
+      },
+      "post": {
+        "summary": "Create a new context",
         "tags": ["Context"],
-        "operationId": "getContext",
+        "operationId": "createContext",
         "responses": {
           "200": {
-            "description": "The context",
+            "description": "The new context",
             "content": {
               "application/json": {
                 "schema": {
@@ -289,19 +183,61 @@
             "description": "Error response."
           }
         },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "context-id",
-            "description": "ID of the context (UUID)",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "required": true
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The user defined name of the context."
+                  },
+                  "owner": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuid",
+                            "description": "The unique ID of the owner of the context. Specify either this or slug."
+                          },
+                          "type": {
+                            "enum": ["account", "organization"],
+                            "type": "string",
+                            "description": "The type of the owner. Defaults to \"organization\". Accounts are only used as context owners in server.",
+                            "example": "organization"
+                          }
+                        },
+                        "required": ["id"]
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "slug": {
+                            "type": "string",
+                            "description": "A string that represents an organization. Specify either this or id. Cannot be used for accounts."
+                          },
+                          "type": {
+                            "enum": ["organization"],
+                            "type": "string",
+                            "description": "The type of owner. Defaults to \"organization\". Accounts are only used as context owners in server and must be specified by an id instead of a slug."
+                          }
+                        },
+                        "required": ["slug"]
+                      }
+                    ]
+                  }
+                },
+                "required": ["name", "owner"]
+              }
+            }
           }
-        ]
-      },
+        }
+      }
+    },
+    "/context/{context-id}": {
       "delete": {
         "summary": "Delete a context",
         "tags": ["Context"],
@@ -322,6 +258,70 @@
                   "required": ["message"],
                   "description": "message response",
                   "title": "MessageResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "context-id",
+            "description": "ID of the context (UUID)",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ]
+      },
+      "get": {
+        "summary": "Get a context",
+        "description": "Returns basic information about a context.",
+        "tags": ["Context"],
+        "operationId": "getContext",
+        "responses": {
+          "200": {
+            "description": "The context",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid",
+                      "description": "The unique ID of the context."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "The user defined name of the context."
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date and time the context was created.",
+                      "example": "2015-09-21T17:29:21.042Z"
+                    }
+                  },
+                  "required": ["id", "name", "created_at"],
+                  "title": "Context"
                 }
               }
             }
@@ -5004,32 +5004,27 @@
       }
     },
     "/project/{project-slug}/envvar/{name}": {
-      "get": {
-        "summary": "Get a masked environment variable",
-        "description": "Returns the masked value of environment variable :name.",
+      "delete": {
+        "summary": "Delete an environment variable",
+        "description": "Deletes the environment variable named :name.",
         "tags": ["Project"],
-        "operationId": "getEnvVar",
+        "operationId": "deleteEnvVar",
         "responses": {
           "200": {
-            "description": "The environment variable.",
+            "description": "A confirmation message.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "name": {
+                    "message": {
                       "type": "string",
-                      "description": "The name of the environment variable.",
-                      "example": "foo"
-                    },
-                    "value": {
-                      "type": "string",
-                      "description": "The value of the environment variable.",
-                      "example": "xxxx1234"
+                      "description": "A human-readable message"
                     }
                   },
-                  "required": ["name", "value"],
-                  "title": "EnvironmentVariablePair"
+                  "required": ["message"],
+                  "description": "message response",
+                  "title": "MessageResponse"
                 }
               }
             }
@@ -5074,27 +5069,32 @@
           }
         ]
       },
-      "delete": {
-        "summary": "Delete an environment variable",
-        "description": "Deletes the environment variable named :name.",
+      "get": {
+        "summary": "Get a masked environment variable",
+        "description": "Returns the masked value of environment variable :name.",
         "tags": ["Project"],
-        "operationId": "deleteEnvVar",
+        "operationId": "getEnvVar",
         "responses": {
           "200": {
-            "description": "A confirmation message.",
+            "description": "The environment variable.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "name": {
                       "type": "string",
-                      "description": "A human-readable message"
+                      "description": "The name of the environment variable.",
+                      "example": "foo"
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "The value of the environment variable.",
+                      "example": "xxxx1234"
                     }
                   },
-                  "required": ["message"],
-                  "description": "message response",
-                  "title": "MessageResponse"
+                  "required": ["name", "value"],
+                  "title": "EnvironmentVariablePair"
                 }
               }
             }
@@ -7120,27 +7120,143 @@
       }
     },
     "/schedule/{schedule-id}": {
-      "delete": {
-        "summary": "Delete a schedule",
-        "description": "Deletes the schedule by id.",
+      "get": {
+        "summary": "Get a schedule",
+        "description": "Get a schedule by id.",
         "tags": ["Schedule"],
-        "operationId": "deleteScheduleById",
+        "operationId": "getScheduleById",
         "responses": {
           "200": {
-            "description": "A confirmation message.",
+            "description": "A schedule object.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "id": {
                       "type": "string",
-                      "description": "A human-readable message"
+                      "format": "uuid",
+                      "description": "The unique ID of the schedule."
+                    },
+                    "timetable": {
+                      "type": "object",
+                      "properties": {
+                        "per-hour": {
+                          "type": "integer",
+                          "format": "integer",
+                          "description": "Number of times a schedule triggers per hour, value must be between 1 and 60"
+                        },
+                        "hours-of-day": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer",
+                            "format": "integer",
+                            "description": "Hour in a day in UTC, value must be between 0 and 24"
+                          },
+                          "description": "Hours in a day in which the schedule triggers."
+                        },
+                        "days-of-week": {
+                          "type": "array",
+                          "items": {
+                            "enum": [
+                              "TUE",
+                              "SAT",
+                              "SUN",
+                              "MON",
+                              "THU",
+                              "WED",
+                              "FRI"
+                            ],
+                            "type": "string",
+                            "description": "Day in a week, in three letters format"
+                          },
+                          "description": "Days in a week in which the schedule triggers."
+                        }
+                      },
+                      "required": ["per-hour", "hours-of-day", "days-of-week"],
+                      "description": "Timetable that specifies when a schedule triggers."
+                    },
+                    "updated-at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date and time the pipeline was last updated."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the schedule."
+                    },
+                    "created-at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date and time the pipeline was created."
+                    },
+                    "project-slug": {
+                      "type": "string",
+                      "description": "The project-slug for the schedule",
+                      "example": "gh/CircleCI-Public/api-preview-docs"
+                    },
+                    "parameters": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      },
+                      "description": "Pipeline parameters represented as key-value pairs. Must contain branch or tag.",
+                      "example": {
+                        "deploy_prod": true,
+                        "branch": "feature/design-new-api"
+                      }
+                    },
+                    "actor": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "description": "The unique ID of the user."
+                        },
+                        "login": {
+                          "type": "string",
+                          "description": "The login information for the user on the VCS.",
+                          "title": "Login"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the user."
+                        }
+                      },
+                      "required": ["id", "login", "name"],
+                      "title": "User",
+                      "description": "The attribution actor who will run the scheduled pipeline."
+                    },
+                    "description": {
+                      "type": "string",
+                      "x-nullable": true,
+                      "description": "Description of the schedule."
                     }
                   },
-                  "required": ["message"],
-                  "description": "message response",
-                  "title": "MessageResponse"
+                  "required": [
+                    "id",
+                    "name",
+                    "timetable",
+                    "description",
+                    "project-slug",
+                    "actor",
+                    "created-at",
+                    "updated-at",
+                    "parameters"
+                  ],
+                  "description": "A schedule response",
+                  "title": "Schedule"
                 }
               }
             }
@@ -7430,143 +7546,27 @@
           }
         }
       },
-      "get": {
-        "summary": "Get a schedule",
-        "description": "Get a schedule by id.",
+      "delete": {
+        "summary": "Delete a schedule",
+        "description": "Deletes the schedule by id.",
         "tags": ["Schedule"],
-        "operationId": "getScheduleById",
+        "operationId": "deleteScheduleById",
         "responses": {
           "200": {
-            "description": "A schedule object.",
+            "description": "A confirmation message.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
+                    "message": {
                       "type": "string",
-                      "format": "uuid",
-                      "description": "The unique ID of the schedule."
-                    },
-                    "timetable": {
-                      "type": "object",
-                      "properties": {
-                        "per-hour": {
-                          "type": "integer",
-                          "format": "integer",
-                          "description": "Number of times a schedule triggers per hour, value must be between 1 and 60"
-                        },
-                        "hours-of-day": {
-                          "type": "array",
-                          "items": {
-                            "type": "integer",
-                            "format": "integer",
-                            "description": "Hour in a day in UTC, value must be between 0 and 24"
-                          },
-                          "description": "Hours in a day in which the schedule triggers."
-                        },
-                        "days-of-week": {
-                          "type": "array",
-                          "items": {
-                            "enum": [
-                              "TUE",
-                              "SAT",
-                              "SUN",
-                              "MON",
-                              "THU",
-                              "WED",
-                              "FRI"
-                            ],
-                            "type": "string",
-                            "description": "Day in a week, in three letters format"
-                          },
-                          "description": "Days in a week in which the schedule triggers."
-                        }
-                      },
-                      "required": ["per-hour", "hours-of-day", "days-of-week"],
-                      "description": "Timetable that specifies when a schedule triggers."
-                    },
-                    "updated-at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "The date and time the pipeline was last updated."
-                    },
-                    "name": {
-                      "type": "string",
-                      "description": "Name of the schedule."
-                    },
-                    "created-at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "The date and time the pipeline was created."
-                    },
-                    "project-slug": {
-                      "type": "string",
-                      "description": "The project-slug for the schedule",
-                      "example": "gh/CircleCI-Public/api-preview-docs"
-                    },
-                    "parameters": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "anyOf": [
-                          {
-                            "type": "integer"
-                          },
-                          {
-                            "type": "string"
-                          },
-                          {
-                            "type": "boolean"
-                          }
-                        ]
-                      },
-                      "description": "Pipeline parameters represented as key-value pairs. Must contain branch or tag.",
-                      "example": {
-                        "deploy_prod": true,
-                        "branch": "feature/design-new-api"
-                      }
-                    },
-                    "actor": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "format": "uuid",
-                          "description": "The unique ID of the user."
-                        },
-                        "login": {
-                          "type": "string",
-                          "description": "The login information for the user on the VCS.",
-                          "title": "Login"
-                        },
-                        "name": {
-                          "type": "string",
-                          "description": "The name of the user."
-                        }
-                      },
-                      "required": ["id", "login", "name"],
-                      "title": "User",
-                      "description": "The attribution actor who will run the scheduled pipeline."
-                    },
-                    "description": {
-                      "type": "string",
-                      "x-nullable": true,
-                      "description": "Description of the schedule."
+                      "description": "A human-readable message"
                     }
                   },
-                  "required": [
-                    "id",
-                    "name",
-                    "timetable",
-                    "description",
-                    "project-slug",
-                    "actor",
-                    "created-at",
-                    "updated-at",
-                    "parameters"
-                  ],
-                  "description": "A schedule response",
-                  "title": "Schedule"
+                  "required": ["message"],
+                  "description": "message response",
+                  "title": "MessageResponse"
                 }
               }
             }
