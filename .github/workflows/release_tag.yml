@@ -1,6 +1,7 @@
 name: create release tag
 on:
   workflow_dispatch:
+  workflow_call:
 
 permissions: write-all
 
