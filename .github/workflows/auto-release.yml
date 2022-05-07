@@ -12,5 +12,7 @@ jobs:
       - name: Checkout
         if: ${{ github.event.pull_request.merged == true }}
         uses: actions/checkout@v3
-      - uses: github.com/mkusaka/circli/.github/workflows/release_tag.yml
-      - uses: github.com/mkusaka/circli/.github/workflows/gh-release.yml
+      - uses: ./.github/workflows/release_tag.yml
+        if: ${{ github.event.pull_request.merged == true }}
+      - uses: ./.github/workflows/gh-release.yml
+        if: ${{ github.event.pull_request.merged == true }}
