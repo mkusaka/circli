@@ -9,10 +9,19 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      - name: if workflow not merged
+        if: ${{ github.event.pull_request.merged == false }}
+        run: |
+          gh run cancel "$GITHUB_RUN_ID"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout
-        if: ${{ github.event.pull_request.merged == true }}
         uses: actions/checkout@v3
-      - uses: ./.github/workflows/release_tag.yml
-        if: ${{ github.event.pull_request.merged == true }}
-      - uses: ./.github/workflows/gh-release.yml
-        if: ${{ github.event.pull_request.merged == true }}
+  release_tag:
+    needs:
+      - release
+    uses: ./.github/workflows/release_tag.yml
+  release_build:
+    needs:
+      - release_tag
+    uses: ./.github/workflows/gh-release.yml
