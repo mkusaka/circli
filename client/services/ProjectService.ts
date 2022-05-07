@@ -137,35 +137,6 @@ export class ProjectService {
     });
   }
   /**
-   * Delete a checkout key
-   * Deletes the checkout key.
-   * @returns any A confirmation message.
-   * @throws ApiError
-   */
-  public static deleteCheckoutKey({
-    projectSlug,
-    fingerprint,
-  }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
-    /** An SSH key fingerprint. **/
-    fingerprint: string;
-  }): CancelablePromise<{
-    /**
-     * A human-readable message
-     */
-    message: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "DELETE",
-      url: "/project/{project-slug}/checkout-key/{fingerprint}",
-      path: {
-        "project-slug": projectSlug,
-        fingerprint: fingerprint,
-      },
-    });
-  }
-  /**
    * Get a checkout key
    * Returns an individual checkout key.
    * @returns any The checkout key.
@@ -211,38 +182,32 @@ export class ProjectService {
     });
   }
   /**
-   * Create an environment variable
-   * Creates a new environment variable.
-   * @returns any Error response.
+   * Delete a checkout key
+   * Deletes the checkout key.
+   * @returns any A confirmation message.
    * @throws ApiError
    */
-  public static createEnvVar({
+  public static deleteCheckoutKey({
     projectSlug,
-    requestBody,
+    fingerprint,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
     projectSlug: string;
-    requestBody?: {
-      /**
-       * The name of the environment variable.
-       */
-      name: string;
-      /**
-       * The value of the environment variable.
-       */
-      value: string;
-    };
+    /** An SSH key fingerprint. **/
+    fingerprint: string;
   }): CancelablePromise<{
-    message?: string;
+    /**
+     * A human-readable message
+     */
+    message: string;
   }> {
     return __request(OpenAPI, {
-      method: "POST",
-      url: "/project/{project-slug}/envvar",
+      method: "DELETE",
+      url: "/project/{project-slug}/checkout-key/{fingerprint}",
       path: {
         "project-slug": projectSlug,
+        fingerprint: fingerprint,
       },
-      body: requestBody,
-      mediaType: "application/json",
     });
   }
   /**
@@ -281,32 +246,38 @@ export class ProjectService {
     });
   }
   /**
-   * Delete an environment variable
-   * Deletes the environment variable named :name.
-   * @returns any A confirmation message.
+   * Create an environment variable
+   * Creates a new environment variable.
+   * @returns any Error response.
    * @throws ApiError
    */
-  public static deleteEnvVar({
+  public static createEnvVar({
     projectSlug,
-    name,
+    requestBody,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
     projectSlug: string;
-    /** The name of the environment variable. **/
-    name: string;
+    requestBody?: {
+      /**
+       * The name of the environment variable.
+       */
+      name: string;
+      /**
+       * The value of the environment variable.
+       */
+      value: string;
+    };
   }): CancelablePromise<{
-    /**
-     * A human-readable message
-     */
-    message: string;
+    message?: string;
   }> {
     return __request(OpenAPI, {
-      method: "DELETE",
-      url: "/project/{project-slug}/envvar/{name}",
+      method: "POST",
+      url: "/project/{project-slug}/envvar",
       path: {
         "project-slug": projectSlug,
-        name: name,
       },
+      body: requestBody,
+      mediaType: "application/json",
     });
   }
   /**
@@ -335,6 +306,35 @@ export class ProjectService {
   }> {
     return __request(OpenAPI, {
       method: "GET",
+      url: "/project/{project-slug}/envvar/{name}",
+      path: {
+        "project-slug": projectSlug,
+        name: name,
+      },
+    });
+  }
+  /**
+   * Delete an environment variable
+   * Deletes the environment variable named :name.
+   * @returns any A confirmation message.
+   * @throws ApiError
+   */
+  public static deleteEnvVar({
+    projectSlug,
+    name,
+  }: {
+    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    projectSlug: string;
+    /** The name of the environment variable. **/
+    name: string;
+  }): CancelablePromise<{
+    /**
+     * A human-readable message
+     */
+    message: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "DELETE",
       url: "/project/{project-slug}/envvar/{name}",
       path: {
         "project-slug": projectSlug,
