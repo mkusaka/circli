@@ -38,7 +38,11 @@ jobs:
           git config --local user.name "GitHub Action"
           git commit -m "daily update $d"
           git push origin "$branch"
-          gh pr create --title "update $d" --base main --reviewer mkusaka -b ""
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          curl "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls" \
+                 -vv \
+                 -X POST \
+                 -H "Accept: application/vnd.github.shadow-cat-preview+json" \
+                 -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                 -H "Content-Type: application/json" \
+                 -d '{"title":"'"daily update $d"'","head":"'"$branch"'","base":"main"}'
 
