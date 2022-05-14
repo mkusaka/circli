@@ -4416,6 +4416,81 @@
       }
     },
     "/project/{project-slug}/envvar": {
+      "get": {
+        "summary": "List all environment variables",
+        "description": "Returns four 'x' characters, in addition to the last four ASCII characters of the value, consistent with the display of environment variable values on the CircleCI website.",
+        "tags": ["Project"],
+        "operationId": "listEnvVars",
+        "responses": {
+          "200": {
+            "description": "A sequence of environment variables.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "The name of the environment variable.",
+                            "example": "foo"
+                          },
+                          "value": {
+                            "type": "string",
+                            "description": "The value of the environment variable.",
+                            "example": "xxxx1234"
+                          }
+                        },
+                        "required": ["name", "value"],
+                        "title": "EnvironmentVariablePair"
+                      }
+                    },
+                    "next_page_token": {
+                      "type": "string",
+                      "x-nullable": true,
+                      "description": "A token to pass as a `page-token` query parameter to return the next page of results."
+                    }
+                  },
+                  "required": ["items", "next_page_token"],
+                  "title": "EnvironmentVariableListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project-slug",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "gh/CircleCI-Public/api-preview-docs",
+            "allowReserved": true
+          }
+        ]
+      },
       "post": {
         "summary": "Create an environment variable",
         "description": "Creates a new environment variable.",
@@ -4498,81 +4573,6 @@
             }
           }
         }
-      },
-      "get": {
-        "summary": "List all environment variables",
-        "description": "Returns four 'x' characters, in addition to the last four ASCII characters of the value, consistent with the display of environment variable values on the CircleCI website.",
-        "tags": ["Project"],
-        "operationId": "listEnvVars",
-        "responses": {
-          "200": {
-            "description": "A sequence of environment variables.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "items": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "name": {
-                            "type": "string",
-                            "description": "The name of the environment variable.",
-                            "example": "foo"
-                          },
-                          "value": {
-                            "type": "string",
-                            "description": "The value of the environment variable.",
-                            "example": "xxxx1234"
-                          }
-                        },
-                        "required": ["name", "value"],
-                        "title": "EnvironmentVariablePair"
-                      }
-                    },
-                    "next_page_token": {
-                      "type": "string",
-                      "x-nullable": true,
-                      "description": "A token to pass as a `page-token` query parameter to return the next page of results."
-                    }
-                  },
-                  "required": ["items", "next_page_token"],
-                  "title": "EnvironmentVariableListResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "project-slug",
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "example": "gh/CircleCI-Public/api-preview-docs",
-            "allowReserved": true
-          }
-        ]
       }
     },
     "/project/{project-slug}/envvar/{name}": {
@@ -6692,176 +6692,6 @@
       }
     },
     "/schedule/{schedule-id}": {
-      "get": {
-        "summary": "Get a schedule",
-        "description": "Get a schedule by id.",
-        "tags": ["Schedule"],
-        "operationId": "getScheduleById",
-        "responses": {
-          "200": {
-            "description": "A schedule object.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid",
-                      "description": "The unique ID of the schedule."
-                    },
-                    "timetable": {
-                      "type": "object",
-                      "properties": {
-                        "per-hour": {
-                          "type": "integer",
-                          "format": "integer",
-                          "description": "Number of times a schedule triggers per hour, value must be between 1 and 60"
-                        },
-                        "hours-of-day": {
-                          "type": "array",
-                          "items": {
-                            "type": "integer",
-                            "format": "integer",
-                            "description": "Hour in a day in UTC, value must be between 0 and 24"
-                          },
-                          "description": "Hours in a day in which the schedule triggers."
-                        },
-                        "days-of-week": {
-                          "type": "array",
-                          "items": {
-                            "enum": [
-                              "TUE",
-                              "SAT",
-                              "SUN",
-                              "MON",
-                              "THU",
-                              "WED",
-                              "FRI"
-                            ],
-                            "type": "string",
-                            "description": "Day in a week, in three letters format"
-                          },
-                          "description": "Days in a week in which the schedule triggers."
-                        }
-                      },
-                      "required": ["per-hour", "hours-of-day", "days-of-week"],
-                      "description": "Timetable that specifies when a schedule triggers."
-                    },
-                    "updated-at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "The date and time the pipeline was last updated."
-                    },
-                    "name": {
-                      "type": "string",
-                      "description": "Name of the schedule."
-                    },
-                    "created-at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "The date and time the pipeline was created."
-                    },
-                    "project-slug": {
-                      "type": "string",
-                      "description": "The project-slug for the schedule",
-                      "example": "gh/CircleCI-Public/api-preview-docs"
-                    },
-                    "parameters": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "anyOf": [
-                          {
-                            "type": "integer"
-                          },
-                          {
-                            "type": "string"
-                          },
-                          {
-                            "type": "boolean"
-                          }
-                        ]
-                      },
-                      "description": "Pipeline parameters represented as key-value pairs. Must contain branch or tag.",
-                      "example": {
-                        "deploy_prod": true,
-                        "branch": "feature/design-new-api"
-                      }
-                    },
-                    "actor": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "format": "uuid",
-                          "description": "The unique ID of the user."
-                        },
-                        "login": {
-                          "type": "string",
-                          "description": "The login information for the user on the VCS.",
-                          "title": "Login"
-                        },
-                        "name": {
-                          "type": "string",
-                          "description": "The name of the user."
-                        }
-                      },
-                      "required": ["id", "login", "name"],
-                      "title": "User",
-                      "description": "The attribution actor who will run the scheduled pipeline."
-                    },
-                    "description": {
-                      "type": "string",
-                      "x-nullable": true,
-                      "description": "Description of the schedule."
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name",
-                    "timetable",
-                    "description",
-                    "project-slug",
-                    "actor",
-                    "created-at",
-                    "updated-at",
-                    "parameters"
-                  ],
-                  "description": "A schedule response",
-                  "title": "Schedule"
-                }
-              }
-            }
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "schedule-id",
-            "description": "The unique ID of the schedule.",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "required": true
-          }
-        ]
-      },
       "patch": {
         "summary": "Update a schedule",
         "description": "Updates a schedule and returns the updated schedule.",
@@ -7117,6 +6947,176 @@
             }
           }
         }
+      },
+      "get": {
+        "summary": "Get a schedule",
+        "description": "Get a schedule by id.",
+        "tags": ["Schedule"],
+        "operationId": "getScheduleById",
+        "responses": {
+          "200": {
+            "description": "A schedule object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid",
+                      "description": "The unique ID of the schedule."
+                    },
+                    "timetable": {
+                      "type": "object",
+                      "properties": {
+                        "per-hour": {
+                          "type": "integer",
+                          "format": "integer",
+                          "description": "Number of times a schedule triggers per hour, value must be between 1 and 60"
+                        },
+                        "hours-of-day": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer",
+                            "format": "integer",
+                            "description": "Hour in a day in UTC, value must be between 0 and 24"
+                          },
+                          "description": "Hours in a day in which the schedule triggers."
+                        },
+                        "days-of-week": {
+                          "type": "array",
+                          "items": {
+                            "enum": [
+                              "TUE",
+                              "SAT",
+                              "SUN",
+                              "MON",
+                              "THU",
+                              "WED",
+                              "FRI"
+                            ],
+                            "type": "string",
+                            "description": "Day in a week, in three letters format"
+                          },
+                          "description": "Days in a week in which the schedule triggers."
+                        }
+                      },
+                      "required": ["per-hour", "hours-of-day", "days-of-week"],
+                      "description": "Timetable that specifies when a schedule triggers."
+                    },
+                    "updated-at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date and time the pipeline was last updated."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the schedule."
+                    },
+                    "created-at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date and time the pipeline was created."
+                    },
+                    "project-slug": {
+                      "type": "string",
+                      "description": "The project-slug for the schedule",
+                      "example": "gh/CircleCI-Public/api-preview-docs"
+                    },
+                    "parameters": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      },
+                      "description": "Pipeline parameters represented as key-value pairs. Must contain branch or tag.",
+                      "example": {
+                        "deploy_prod": true,
+                        "branch": "feature/design-new-api"
+                      }
+                    },
+                    "actor": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "description": "The unique ID of the user."
+                        },
+                        "login": {
+                          "type": "string",
+                          "description": "The login information for the user on the VCS.",
+                          "title": "Login"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the user."
+                        }
+                      },
+                      "required": ["id", "login", "name"],
+                      "title": "User",
+                      "description": "The attribution actor who will run the scheduled pipeline."
+                    },
+                    "description": {
+                      "type": "string",
+                      "x-nullable": true,
+                      "description": "Description of the schedule."
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name",
+                    "timetable",
+                    "description",
+                    "project-slug",
+                    "actor",
+                    "created-at",
+                    "updated-at",
+                    "parameters"
+                  ],
+                  "description": "A schedule response",
+                  "title": "Schedule"
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "schedule-id",
+            "description": "The unique ID of the schedule.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ]
       },
       "delete": {
         "summary": "Delete a schedule",
