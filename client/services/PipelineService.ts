@@ -194,8 +194,8 @@ export class PipelineService {
     });
   }
   /**
-   * Get a pipeline
-   * Returns a pipeline by ID.
+   * Get a pipeline by ID
+   * Returns a pipeline by the pipeline ID.
    * @returns any A pipeline object.
    * @throws ApiError
    */
@@ -456,45 +456,6 @@ export class PipelineService {
     });
   }
   /**
-   * Trigger a new pipeline
-   * Triggers a new pipeline on the project.
-   * @returns any Error response.
-   * @throws ApiError
-   */
-  public static triggerPipeline({
-    projectSlug,
-    requestBody,
-  }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
-    requestBody?: {
-      /**
-       * The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
-       */
-      branch?: string;
-      /**
-       * The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.
-       */
-      tag?: string;
-      /**
-       * An object containing pipeline parameters and their values.
-       */
-      parameters?: Record<string, number | string | boolean>;
-    };
-  }): CancelablePromise<{
-    message?: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "POST",
-      url: "/project/{project-slug}/pipeline",
-      path: {
-        "project-slug": projectSlug,
-      },
-      body: requestBody,
-      mediaType: "application/json",
-    });
-  }
-  /**
    * Get all pipelines
    * Returns all pipelines for this project.
    * @returns any A sequence of pipelines.
@@ -652,6 +613,45 @@ export class PipelineService {
     });
   }
   /**
+   * Trigger a new pipeline
+   * Triggers a new pipeline on the project.
+   * @returns any Error response.
+   * @throws ApiError
+   */
+  public static triggerPipeline({
+    projectSlug,
+    requestBody,
+  }: {
+    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    projectSlug: string;
+    requestBody?: {
+      /**
+       * The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
+       */
+      branch?: string;
+      /**
+       * The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.
+       */
+      tag?: string;
+      /**
+       * An object containing pipeline parameters and their values.
+       */
+      parameters?: Record<string, number | string | boolean>;
+    };
+  }): CancelablePromise<{
+    message?: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/project/{project-slug}/pipeline",
+      path: {
+        "project-slug": projectSlug,
+      },
+      body: requestBody,
+      mediaType: "application/json",
+    });
+  }
+  /**
    * Get your pipelines
    * Returns a sequence of all pipelines for this project triggered by the user.
    * @returns any A sequence of pipelines.
@@ -805,8 +805,8 @@ export class PipelineService {
     });
   }
   /**
-   * Get a pipeline
-   * Returns a pipeline by number.
+   * Get a pipeline by pipeline number
+   * Returns a pipeline by the pipeline number.
    * @returns any A pipeline object.
    * @throws ApiError
    */
