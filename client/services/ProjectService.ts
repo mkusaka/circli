@@ -59,6 +59,37 @@ export class ProjectService {
     });
   }
   /**
+   * Create a new checkout key
+   * Creates a new checkout key. This API request is only usable with a user API token.
+   * @returns any Error response.
+   * @throws ApiError
+   */
+  public static createCheckoutKey({
+    projectSlug,
+    requestBody,
+  }: {
+    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    projectSlug: string;
+    requestBody?: {
+      /**
+       * The type of checkout key to create. This may be either `deploy-key` or `user-key`.
+       */
+      type: "user-key" | "deploy-key";
+    };
+  }): CancelablePromise<{
+    message?: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/project/{project-slug}/checkout-key",
+      path: {
+        "project-slug": projectSlug,
+      },
+      body: requestBody,
+      mediaType: "application/json",
+    });
+  }
+  /**
    * Get all checkout keys
    * Returns a sequence of checkout keys for `:project`.
    * @returns any A sequence of checkout keys.
@@ -103,37 +134,6 @@ export class ProjectService {
       path: {
         "project-slug": projectSlug,
       },
-    });
-  }
-  /**
-   * Create a new checkout key
-   * Creates a new checkout key. This API request is only usable with a user API token.
-   * @returns any Error response.
-   * @throws ApiError
-   */
-  public static createCheckoutKey({
-    projectSlug,
-    requestBody,
-  }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
-    requestBody?: {
-      /**
-       * The type of checkout key to create. This may be either `deploy-key` or `user-key`.
-       */
-      type: "user-key" | "deploy-key";
-    };
-  }): CancelablePromise<{
-    message?: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "POST",
-      url: "/project/{project-slug}/checkout-key",
-      path: {
-        "project-slug": projectSlug,
-      },
-      body: requestBody,
-      mediaType: "application/json",
     });
   }
   /**
