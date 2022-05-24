@@ -26,6 +26,109 @@
   ],
   "paths": {
     "/context": {
+      "post": {
+        "summary": "Create a new context",
+        "tags": ["Context"],
+        "operationId": "createContext",
+        "responses": {
+          "200": {
+            "description": "The new context",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid",
+                      "description": "The unique ID of the context."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "The user defined name of the context."
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date and time the context was created.",
+                      "example": "2015-09-21T17:29:21.042Z"
+                    }
+                  },
+                  "required": ["id", "name", "created_at"],
+                  "title": "Context"
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The user defined name of the context."
+                  },
+                  "owner": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuid",
+                            "description": "The unique ID of the owner of the context. Specify either this or slug."
+                          },
+                          "type": {
+                            "enum": ["account", "organization"],
+                            "type": "string",
+                            "description": "The type of the owner. Defaults to \"organization\". Accounts are only used as context owners in server.",
+                            "example": "organization"
+                          }
+                        },
+                        "required": ["id"]
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "slug": {
+                            "type": "string",
+                            "description": "A string that represents an organization. Specify either this or id. Cannot be used for accounts."
+                          },
+                          "type": {
+                            "enum": ["organization"],
+                            "type": "string",
+                            "description": "The type of owner. Defaults to \"organization\". Accounts are only used as context owners in server and must be specified by an id instead of a slug."
+                          }
+                        },
+                        "required": ["slug"]
+                      }
+                    ]
+                  }
+                },
+                "required": ["name", "owner"]
+              }
+            }
+          }
+        }
+      },
       "get": {
         "summary": "List contexts",
         "description": "List all contexts for an owner.",
@@ -132,109 +235,6 @@
             "allowEmptyValue": true
           }
         ]
-      },
-      "post": {
-        "summary": "Create a new context",
-        "tags": ["Context"],
-        "operationId": "createContext",
-        "responses": {
-          "200": {
-            "description": "The new context",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid",
-                      "description": "The unique ID of the context."
-                    },
-                    "name": {
-                      "type": "string",
-                      "description": "The user defined name of the context."
-                    },
-                    "created_at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "The date and time the context was created.",
-                      "example": "2015-09-21T17:29:21.042Z"
-                    }
-                  },
-                  "required": ["id", "name", "created_at"],
-                  "title": "Context"
-                }
-              }
-            }
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "description": "The user defined name of the context."
-                  },
-                  "owner": {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "format": "uuid",
-                            "description": "The unique ID of the owner of the context. Specify either this or slug."
-                          },
-                          "type": {
-                            "enum": ["account", "organization"],
-                            "type": "string",
-                            "description": "The type of the owner. Defaults to \"organization\". Accounts are only used as context owners in server.",
-                            "example": "organization"
-                          }
-                        },
-                        "required": ["id"]
-                      },
-                      {
-                        "type": "object",
-                        "properties": {
-                          "slug": {
-                            "type": "string",
-                            "description": "A string that represents an organization. Specify either this or id. Cannot be used for accounts."
-                          },
-                          "type": {
-                            "enum": ["organization"],
-                            "type": "string",
-                            "description": "The type of owner. Defaults to \"organization\". Accounts are only used as context owners in server and must be specified by an id instead of a slug."
-                          }
-                        },
-                        "required": ["slug"]
-                      }
-                    ]
-                  }
-                },
-                "required": ["name", "owner"]
-              }
-            }
-          }
-        }
       }
     },
     "/context/{context-id}": {
@@ -437,6 +437,70 @@
       }
     },
     "/context/{context-id}/environment-variable/{env-var-name}": {
+      "delete": {
+        "summary": "Remove an environment variable",
+        "description": "Delete an environment variable from a context.",
+        "tags": ["Context"],
+        "operationId": "deleteEnvironmentVariableFromContext",
+        "responses": {
+          "200": {
+            "description": "A confirmation message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A human-readable message"
+                    }
+                  },
+                  "required": ["message"],
+                  "description": "message response",
+                  "title": "MessageResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "env-var-name",
+            "description": "The name of the environment variable",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "POSTGRES_USER"
+          },
+          {
+            "in": "path",
+            "name": "context-id",
+            "description": "ID of the context (UUID)",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ]
+      },
       "put": {
         "summary": "Add or update an environment variable",
         "description": "Create or update an environment variable within a context. Returns information about the environment variable, not including its value.",
@@ -543,70 +607,6 @@
             }
           }
         }
-      },
-      "delete": {
-        "summary": "Remove an environment variable",
-        "description": "Delete an environment variable from a context.",
-        "tags": ["Context"],
-        "operationId": "deleteEnvironmentVariableFromContext",
-        "responses": {
-          "200": {
-            "description": "A confirmation message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "A human-readable message"
-                    }
-                  },
-                  "required": ["message"],
-                  "description": "message response",
-                  "title": "MessageResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "env-var-name",
-            "description": "The name of the environment variable",
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "example": "POSTGRES_USER"
-          },
-          {
-            "in": "path",
-            "name": "context-id",
-            "description": "ID of the context (UUID)",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "required": true
-          }
-        ]
       }
     },
     "/insights/pages/{project-slug}/summary": {
@@ -4416,6 +4416,81 @@
       }
     },
     "/project/{project-slug}/envvar": {
+      "get": {
+        "summary": "List all environment variables",
+        "description": "Returns four 'x' characters, in addition to the last four ASCII characters of the value, consistent with the display of environment variable values on the CircleCI website.",
+        "tags": ["Project"],
+        "operationId": "listEnvVars",
+        "responses": {
+          "200": {
+            "description": "A sequence of environment variables.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "The name of the environment variable.",
+                            "example": "foo"
+                          },
+                          "value": {
+                            "type": "string",
+                            "description": "The value of the environment variable.",
+                            "example": "xxxx1234"
+                          }
+                        },
+                        "required": ["name", "value"],
+                        "title": "EnvironmentVariablePair"
+                      }
+                    },
+                    "next_page_token": {
+                      "type": "string",
+                      "x-nullable": true,
+                      "description": "A token to pass as a `page-token` query parameter to return the next page of results."
+                    }
+                  },
+                  "required": ["items", "next_page_token"],
+                  "title": "EnvironmentVariableListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project-slug",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "gh/CircleCI-Public/api-preview-docs",
+            "allowReserved": true
+          }
+        ]
+      },
       "post": {
         "summary": "Create an environment variable",
         "description": "Creates a new environment variable.",
@@ -4498,81 +4573,6 @@
             }
           }
         }
-      },
-      "get": {
-        "summary": "List all environment variables",
-        "description": "Returns four 'x' characters, in addition to the last four ASCII characters of the value, consistent with the display of environment variable values on the CircleCI website.",
-        "tags": ["Project"],
-        "operationId": "listEnvVars",
-        "responses": {
-          "200": {
-            "description": "A sequence of environment variables.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "items": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "name": {
-                            "type": "string",
-                            "description": "The name of the environment variable.",
-                            "example": "foo"
-                          },
-                          "value": {
-                            "type": "string",
-                            "description": "The value of the environment variable.",
-                            "example": "xxxx1234"
-                          }
-                        },
-                        "required": ["name", "value"],
-                        "title": "EnvironmentVariablePair"
-                      }
-                    },
-                    "next_page_token": {
-                      "type": "string",
-                      "x-nullable": true,
-                      "description": "A token to pass as a `page-token` query parameter to return the next page of results."
-                    }
-                  },
-                  "required": ["items", "next_page_token"],
-                  "title": "EnvironmentVariableListResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "project-slug",
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "example": "gh/CircleCI-Public/api-preview-docs",
-            "allowReserved": true
-          }
-        ]
       }
     },
     "/project/{project-slug}/envvar/{name}": {
@@ -5044,6 +5044,127 @@
       }
     },
     "/project/{project-slug}/pipeline": {
+      "post": {
+        "summary": "Trigger a new pipeline",
+        "description": "Triggers a new pipeline on the project.",
+        "tags": ["Pipeline"],
+        "operationId": "triggerPipeline",
+        "responses": {
+          "201": {
+            "description": "The created pipeline.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid",
+                      "description": "The unique ID of the pipeline."
+                    },
+                    "state": {
+                      "enum": [
+                        "created",
+                        "errored",
+                        "setup-pending",
+                        "setup",
+                        "pending"
+                      ],
+                      "type": "string",
+                      "description": "The current state of the pipeline."
+                    },
+                    "number": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "The number of the pipeline."
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date and time the pipeline was created."
+                    }
+                  },
+                  "required": ["id", "state", "number", "created_at"],
+                  "description": "A pipeline creation response.",
+                  "title": "PipelineCreation"
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project-slug",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "gh/CircleCI-Public/api-preview-docs",
+            "allowReserved": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "branch": {
+                    "type": "string",
+                    "description": "The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).",
+                    "example": "feature/design-new-api"
+                  },
+                  "tag": {
+                    "type": "string",
+                    "description": "The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.",
+                    "example": "v3.1.4159"
+                  },
+                  "parameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "boolean"
+                        }
+                      ]
+                    },
+                    "description": "An object containing pipeline parameters and their values.",
+                    "example": {
+                      "deploy_prod": true
+                    }
+                  }
+                },
+                "x-nullable": true,
+                "description": "The information you can supply when triggering a pipeline.",
+                "title": "TriggerPipelineParameters"
+              }
+            }
+          }
+        }
+      },
       "get": {
         "summary": "Get all pipelines",
         "description": "Returns all pipelines for this project.",
@@ -5338,127 +5459,6 @@
             "allowEmptyValue": true
           }
         ]
-      },
-      "post": {
-        "summary": "Trigger a new pipeline",
-        "description": "Triggers a new pipeline on the project.",
-        "tags": ["Pipeline"],
-        "operationId": "triggerPipeline",
-        "responses": {
-          "201": {
-            "description": "The created pipeline.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid",
-                      "description": "The unique ID of the pipeline."
-                    },
-                    "state": {
-                      "enum": [
-                        "created",
-                        "errored",
-                        "setup-pending",
-                        "setup",
-                        "pending"
-                      ],
-                      "type": "string",
-                      "description": "The current state of the pipeline."
-                    },
-                    "number": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "The number of the pipeline."
-                    },
-                    "created_at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "The date and time the pipeline was created."
-                    }
-                  },
-                  "required": ["id", "state", "number", "created_at"],
-                  "description": "A pipeline creation response.",
-                  "title": "PipelineCreation"
-                }
-              }
-            }
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "project-slug",
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "example": "gh/CircleCI-Public/api-preview-docs",
-            "allowReserved": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "branch": {
-                    "type": "string",
-                    "description": "The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).",
-                    "example": "feature/design-new-api"
-                  },
-                  "tag": {
-                    "type": "string",
-                    "description": "The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.",
-                    "example": "v3.1.4159"
-                  },
-                  "parameters": {
-                    "type": "object",
-                    "additionalProperties": {
-                      "anyOf": [
-                        {
-                          "type": "integer"
-                        },
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "boolean"
-                        }
-                      ]
-                    },
-                    "description": "An object containing pipeline parameters and their values.",
-                    "example": {
-                      "deploy_prod": true
-                    }
-                  }
-                },
-                "x-nullable": true,
-                "description": "The information you can supply when triggering a pipeline.",
-                "title": "TriggerPipelineParameters"
-              }
-            }
-          }
-        }
       }
     },
     "/project/{project-slug}/pipeline/mine": {
@@ -6692,60 +6692,6 @@
       }
     },
     "/schedule/{schedule-id}": {
-      "delete": {
-        "summary": "Delete a schedule",
-        "description": "Deletes the schedule by id.",
-        "tags": ["Schedule"],
-        "operationId": "deleteScheduleById",
-        "responses": {
-          "200": {
-            "description": "A confirmation message.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "A human-readable message"
-                    }
-                  },
-                  "required": ["message"],
-                  "description": "message response",
-                  "title": "MessageResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "schedule-id",
-            "description": "The unique ID of the schedule.",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "required": true
-          }
-        ]
-      },
       "get": {
         "summary": "Get a schedule",
         "description": "Get a schedule by id.",
@@ -6883,6 +6829,60 @@
                   ],
                   "description": "A schedule response",
                   "title": "Schedule"
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "schedule-id",
+            "description": "The unique ID of the schedule.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a schedule",
+        "description": "Deletes the schedule by id.",
+        "tags": ["Schedule"],
+        "operationId": "deleteScheduleById",
+        "responses": {
+          "200": {
+            "description": "A confirmation message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A human-readable message"
+                    }
+                  },
+                  "required": ["message"],
+                  "description": "message response",
+                  "title": "MessageResponse"
                 }
               }
             }
