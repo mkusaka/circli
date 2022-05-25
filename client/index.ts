@@ -9,4 +9,5 @@ export { PipelineService } from "./services/PipelineService.ts";
 export { ProjectService } from "./services/ProjectService.ts";
 export { ScheduleService } from "./services/ScheduleService.ts";
 export { UserService } from "./services/UserService.ts";
+export { WebhookService } from "./services/WebhookService.ts";
 export { WorkflowService } from "./services/WorkflowService.ts";
