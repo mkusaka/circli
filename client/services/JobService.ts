@@ -1,7 +1,12 @@
-import type { CancelablePromise } from "../core/CancelablePromise.ts";
-import { OpenAPI } from "../core/OpenAPI.ts";
-import { request as __request } from "../core/request.ts";
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+import type { CancelablePromise } from '../core/CancelablePromise';
+import { OpenAPI } from '../core/OpenAPI';
+import { request as __request } from '../core/request';
+
 export class JobService {
+
   /**
    * Get job details
    * Returns job details.
@@ -13,9 +18,9 @@ export class JobService {
     projectSlug,
   }: {
     /** The number of the job. **/
-    jobNumber: any;
+    jobNumber: any,
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
   }): CancelablePromise<{
     /**
      * URL of the job in CircleCI Web UI.
@@ -160,14 +165,15 @@ export class JobService {
     stopped_at?: string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/project/{project-slug}/job/{job-number}",
+      method: 'GET',
+      url: '/project/{project-slug}/job/{job-number}',
       path: {
-        "job-number": jobNumber,
-        "project-slug": projectSlug,
+        'job-number': jobNumber,
+        'project-slug': projectSlug,
       },
     });
   }
+
   /**
    * Cancel job
    * Cancel job with a given job number.
@@ -179,21 +185,22 @@ export class JobService {
     projectSlug,
   }: {
     /** The number of the job. **/
-    jobNumber: any;
+    jobNumber: any,
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
   }): CancelablePromise<{
     message?: string;
   }> {
     return __request(OpenAPI, {
-      method: "POST",
-      url: "/project/{project-slug}/job/{job-number}/cancel",
+      method: 'POST',
+      url: '/project/{project-slug}/job/{job-number}/cancel',
       path: {
-        "job-number": jobNumber,
-        "project-slug": projectSlug,
+        'job-number': jobNumber,
+        'project-slug': projectSlug,
       },
     });
   }
+
   /**
    * Get a job's artifacts
    * Returns a job's artifacts.
@@ -205,9 +212,9 @@ export class JobService {
     projectSlug,
   }: {
     /** The number of the job. **/
-    jobNumber: any;
+    jobNumber: any,
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
   }): CancelablePromise<{
     items: Array<{
       /**
@@ -229,14 +236,15 @@ export class JobService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/project/{project-slug}/{job-number}/artifacts",
+      method: 'GET',
+      url: '/project/{project-slug}/{job-number}/artifacts',
       path: {
-        "job-number": jobNumber,
-        "project-slug": projectSlug,
+        'job-number': jobNumber,
+        'project-slug': projectSlug,
       },
     });
   }
+
   /**
    * Get test metadata
    * Get test metadata for a build. In the rare case where there is more than 250MB of test data on the job, no results will be returned.
@@ -248,9 +256,9 @@ export class JobService {
     projectSlug,
   }: {
     /** The number of the job. **/
-    jobNumber: any;
+    jobNumber: any,
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
   }): CancelablePromise<{
     items: Array<{
       /**
@@ -288,12 +296,13 @@ export class JobService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/project/{project-slug}/{job-number}/tests",
+      method: 'GET',
+      url: '/project/{project-slug}/{job-number}/tests',
       path: {
-        "job-number": jobNumber,
-        "project-slug": projectSlug,
+        'job-number': jobNumber,
+        'project-slug': projectSlug,
       },
     });
   }
+
 }

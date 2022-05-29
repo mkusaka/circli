@@ -1,7 +1,12 @@
-import type { CancelablePromise } from "../core/CancelablePromise.ts";
-import { OpenAPI } from "../core/OpenAPI.ts";
-import { request as __request } from "../core/request.ts";
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+import type { CancelablePromise } from '../core/CancelablePromise';
+import { OpenAPI } from '../core/OpenAPI';
+import { request as __request } from '../core/request';
+
 export class WebhookService {
+
   /**
    * List webhooks
    * Get a list of webhook that match the given scope-type and scope-id
@@ -13,9 +18,9 @@ export class WebhookService {
     scopeType,
   }: {
     /** ID of the scope being used (at the moment, only project ID is supported) **/
-    scopeId: string;
+    scopeId: string,
     /** Type of the scope being used **/
-    scopeType: "project";
+    scopeType: 'project',
   }): CancelablePromise<{
     items: Array<{
       /**
@@ -25,7 +30,7 @@ export class WebhookService {
       /**
        * Whether to enforce TLS certificate verification when delivering the webhook
        */
-      "verify-tls": boolean;
+      'verify-tls': boolean;
       /**
        * The unique ID of the webhook
        */
@@ -33,11 +38,11 @@ export class WebhookService {
       /**
        * This is a secret used to build an hmac hash of the payload and passed as a header in the webhook request
        */
-      "signing-secret": string;
+      'signing-secret': string;
       /**
        * The date and time the webhook was last updated.
        */
-      "updated-at": string;
+      'updated-at': string;
       /**
        * Name of the webhook
        */
@@ -45,7 +50,7 @@ export class WebhookService {
       /**
        * The date and time the webhook was created.
        */
-      "created-at": string;
+      'created-at': string;
       /**
        * The scope in which the relevant events that will trigger webhooks
        */
@@ -62,7 +67,7 @@ export class WebhookService {
       /**
        * Events that will trigger the webhook
        */
-      events: Array<"workflow-completed" | "job-completed">;
+      events: Array<'workflow-completed' | 'job-completed'>;
     }>;
     /**
      * A token to pass as a `page-token` query parameter to return the next page of results.
@@ -70,14 +75,15 @@ export class WebhookService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/webhook",
+      method: 'GET',
+      url: '/webhook',
       query: {
-        "scope-id": scopeId,
-        "scope-type": scopeType,
+        'scope-id': scopeId,
+        'scope-type': scopeType,
       },
     });
   }
+
   /**
    * Create a webhook
    * @returns any Error response.
@@ -94,7 +100,7 @@ export class WebhookService {
       /**
        * Events that will trigger the webhook
        */
-      events: Array<"workflow-completed" | "job-completed">;
+      events: Array<'workflow-completed' | 'job-completed'>;
       /**
        * URL to deliver the webhook to. Note: must include protocol as well (http/https)
        */
@@ -102,11 +108,11 @@ export class WebhookService {
       /**
        * Whether to enforce TLS certificate verification when delivering the webhook
        */
-      "verify-tls": boolean;
+      'verify-tls': boolean;
       /**
        * This is a secret used to build an hmac hash of the payload and passed as a header in the webhook request
        */
-      "signing-secret": string;
+      'signing-secret': string;
       /**
        * The scope in which the relevant events that will trigger webhooks
        */
@@ -118,19 +124,20 @@ export class WebhookService {
         /**
          * Type of the scope being used
          */
-        type: "project";
+        type: 'project';
       };
-    };
+    },
   }): CancelablePromise<{
     message?: string;
   }> {
     return __request(OpenAPI, {
-      method: "POST",
-      url: "/webhook",
+      method: 'POST',
+      url: '/webhook',
       body: requestBody,
-      mediaType: "application/json",
+      mediaType: 'application/json',
     });
   }
+
   /**
    * Get a webhook
    * Get a webhook by id.
@@ -141,7 +148,7 @@ export class WebhookService {
     webhookId,
   }: {
     /** ID of the webhook (UUID) **/
-    webhookId: string;
+    webhookId: string,
   }): CancelablePromise<{
     /**
      * URL to deliver the webhook to. Note: must include protocol as well (http/https)
@@ -150,7 +157,7 @@ export class WebhookService {
     /**
      * Whether to enforce TLS certificate verification when delivering the webhook
      */
-    "verify-tls": boolean;
+    'verify-tls': boolean;
     /**
      * The unique ID of the webhook
      */
@@ -158,11 +165,11 @@ export class WebhookService {
     /**
      * This is a secret used to build an hmac hash of the payload and passed as a header in the webhook request
      */
-    "signing-secret": string;
+    'signing-secret': string;
     /**
      * The date and time the webhook was last updated.
      */
-    "updated-at": string;
+    'updated-at': string;
     /**
      * Name of the webhook
      */
@@ -170,7 +177,7 @@ export class WebhookService {
     /**
      * The date and time the webhook was created.
      */
-    "created-at": string;
+    'created-at': string;
     /**
      * The scope in which the relevant events that will trigger webhooks
      */
@@ -187,16 +194,17 @@ export class WebhookService {
     /**
      * Events that will trigger the webhook
      */
-    events: Array<"workflow-completed" | "job-completed">;
+    events: Array<'workflow-completed' | 'job-completed'>;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/webhook/{webhook-id}",
+      method: 'GET',
+      url: '/webhook/{webhook-id}',
       path: {
-        "webhook-id": webhookId,
+        'webhook-id': webhookId,
       },
     });
   }
+
   /**
    * Delete a webhook
    * @returns any A confirmation message
@@ -206,7 +214,7 @@ export class WebhookService {
     webhookId,
   }: {
     /** ID of the webhook (UUID) **/
-    webhookId: string;
+    webhookId: string,
   }): CancelablePromise<{
     /**
      * A human-readable message
@@ -214,13 +222,14 @@ export class WebhookService {
     message: string;
   }> {
     return __request(OpenAPI, {
-      method: "DELETE",
-      url: "/webhook/{webhook-id}",
+      method: 'DELETE',
+      url: '/webhook/{webhook-id}',
       path: {
-        "webhook-id": webhookId,
+        'webhook-id': webhookId,
       },
     });
   }
+
   /**
    * Update a webhook
    * @returns any A webhook
@@ -231,7 +240,7 @@ export class WebhookService {
     requestBody,
   }: {
     /** ID of the webhook (UUID) **/
-    webhookId: string;
+    webhookId: string,
     requestBody?: {
       /**
        * Name of the webhook
@@ -240,7 +249,7 @@ export class WebhookService {
       /**
        * Events that will trigger the webhook
        */
-      events?: Array<"workflow-completed" | "job-completed">;
+      events?: Array<'workflow-completed' | 'job-completed'>;
       /**
        * URL to deliver the webhook to. Note: must include protocol as well (http/https)
        */
@@ -248,12 +257,12 @@ export class WebhookService {
       /**
        * This is a secret used to build an hmac hash of the payload and passed as a header in the webhook request
        */
-      "signing-secret"?: string;
+      'signing-secret'?: string;
       /**
        * Whether to enforce TLS certificate verification when delivering the webhook
        */
-      "verify-tls"?: boolean;
-    };
+      'verify-tls'?: boolean;
+    },
   }): CancelablePromise<{
     /**
      * URL to deliver the webhook to. Note: must include protocol as well (http/https)
@@ -262,7 +271,7 @@ export class WebhookService {
     /**
      * Whether to enforce TLS certificate verification when delivering the webhook
      */
-    "verify-tls": boolean;
+    'verify-tls': boolean;
     /**
      * The unique ID of the webhook
      */
@@ -270,11 +279,11 @@ export class WebhookService {
     /**
      * This is a secret used to build an hmac hash of the payload and passed as a header in the webhook request
      */
-    "signing-secret": string;
+    'signing-secret': string;
     /**
      * The date and time the webhook was last updated.
      */
-    "updated-at": string;
+    'updated-at': string;
     /**
      * Name of the webhook
      */
@@ -282,7 +291,7 @@ export class WebhookService {
     /**
      * The date and time the webhook was created.
      */
-    "created-at": string;
+    'created-at': string;
     /**
      * The scope in which the relevant events that will trigger webhooks
      */
@@ -299,16 +308,17 @@ export class WebhookService {
     /**
      * Events that will trigger the webhook
      */
-    events: Array<"workflow-completed" | "job-completed">;
+    events: Array<'workflow-completed' | 'job-completed'>;
   }> {
     return __request(OpenAPI, {
-      method: "PUT",
-      url: "/webhook/{webhook-id}",
+      method: 'PUT',
+      url: '/webhook/{webhook-id}',
       path: {
-        "webhook-id": webhookId,
+        'webhook-id': webhookId,
       },
       body: requestBody,
-      mediaType: "application/json",
+      mediaType: 'application/json',
     });
   }
+
 }

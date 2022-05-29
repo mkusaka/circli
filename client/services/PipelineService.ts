@@ -1,7 +1,12 @@
-import type { CancelablePromise } from "../core/CancelablePromise.ts";
-import { OpenAPI } from "../core/OpenAPI.ts";
-import { request as __request } from "../core/request.ts";
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+import type { CancelablePromise } from '../core/CancelablePromise';
+import { OpenAPI } from '../core/OpenAPI';
+import { request as __request } from '../core/request';
+
 export class PipelineService {
+
   /**
    * Get a list of pipelines
    * Returns all pipelines for the most recently built projects (max 250) you follow in an organization.
@@ -14,11 +19,11 @@ export class PipelineService {
     mine,
   }: {
     /** Org slug in the form `vcs-slug/org-name` **/
-    orgSlug?: string;
+    orgSlug?: string,
     /** A token to retrieve the next page of results. **/
-    pageToken?: string;
+    pageToken?: string,
     /** Only include entries created by your user. **/
-    mine?: boolean;
+    mine?: boolean,
   }): CancelablePromise<{
     items: Array<{
       /**
@@ -32,13 +37,7 @@ export class PipelineService {
         /**
          * The type of error.
          */
-        type:
-          | "config"
-          | "config-fetch"
-          | "timeout"
-          | "permission"
-          | "other"
-          | "plan";
+        type: 'config' | 'config-fetch' | 'timeout' | 'permission' | 'other' | 'plan';
         /**
          * A human-readable error message.
          */
@@ -56,11 +55,11 @@ export class PipelineService {
        * The number of the pipeline.
        */
       number: number;
-      trigger_parameters?: Record<string, number | string | boolean>;
+      trigger_parameters?: Record<string, (number | string | boolean)>;
       /**
        * The current state of the pipeline.
        */
-      state: "created" | "errored" | "setup-pending" | "setup" | "pending";
+      state: 'created' | 'errored' | 'setup-pending' | 'setup' | 'pending';
       /**
        * The date and time the pipeline was created.
        */
@@ -72,7 +71,7 @@ export class PipelineService {
         /**
          * The type of trigger.
          */
-        type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
+        type: 'scheduled_pipeline' | 'explicit' | 'api' | 'webhook';
         /**
          * The date and time the trigger was received.
          */
@@ -148,15 +147,16 @@ export class PipelineService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/pipeline",
+      method: 'GET',
+      url: '/pipeline',
       query: {
-        "org-slug": orgSlug,
-        "page-token": pageToken,
-        mine: mine,
+        'org-slug': orgSlug,
+        'page-token': pageToken,
+        'mine': mine,
       },
     });
   }
+
   /**
    * Continue a pipeline
    * Continue a pipeline from the setup phase.
@@ -170,7 +170,7 @@ export class PipelineService {
       /**
        * A pipeline continuation key.
        */
-      "continuation-key": string;
+      'continuation-key': string;
       /**
        * A configuration string for the pipeline.
        */
@@ -178,8 +178,8 @@ export class PipelineService {
       /**
        * An object containing pipeline parameters and their values.
        */
-      parameters?: Record<string, number | string | boolean>;
-    };
+      parameters?: Record<string, (number | string | boolean)>;
+    },
   }): CancelablePromise<{
     /**
      * A human-readable message
@@ -187,12 +187,13 @@ export class PipelineService {
     message: string;
   }> {
     return __request(OpenAPI, {
-      method: "POST",
-      url: "/pipeline/continue",
+      method: 'POST',
+      url: '/pipeline/continue',
       body: requestBody,
-      mediaType: "application/json",
+      mediaType: 'application/json',
     });
   }
+
   /**
    * Get a pipeline by ID
    * Returns a pipeline by the pipeline ID.
@@ -203,7 +204,7 @@ export class PipelineService {
     pipelineId,
   }: {
     /** The unique ID of the pipeline. **/
-    pipelineId: string;
+    pipelineId: string,
   }): CancelablePromise<{
     /**
      * The unique ID of the pipeline.
@@ -216,13 +217,7 @@ export class PipelineService {
       /**
        * The type of error.
        */
-      type:
-        | "config"
-        | "config-fetch"
-        | "timeout"
-        | "permission"
-        | "other"
-        | "plan";
+      type: 'config' | 'config-fetch' | 'timeout' | 'permission' | 'other' | 'plan';
       /**
        * A human-readable error message.
        */
@@ -240,11 +235,11 @@ export class PipelineService {
      * The number of the pipeline.
      */
     number: number;
-    trigger_parameters?: Record<string, number | string | boolean>;
+    trigger_parameters?: Record<string, (number | string | boolean)>;
     /**
      * The current state of the pipeline.
      */
-    state: "created" | "errored" | "setup-pending" | "setup" | "pending";
+    state: 'created' | 'errored' | 'setup-pending' | 'setup' | 'pending';
     /**
      * The date and time the pipeline was created.
      */
@@ -256,7 +251,7 @@ export class PipelineService {
       /**
        * The type of trigger.
        */
-      type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
+      type: 'scheduled_pipeline' | 'explicit' | 'api' | 'webhook';
       /**
        * The date and time the trigger was received.
        */
@@ -327,13 +322,14 @@ export class PipelineService {
     };
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/pipeline/{pipeline-id}",
+      method: 'GET',
+      url: '/pipeline/{pipeline-id}',
       path: {
-        "pipeline-id": pipelineId,
+        'pipeline-id': pipelineId,
       },
     });
   }
+
   /**
    * Get a pipeline's configuration
    * Returns a pipeline's configuration by ID.
@@ -344,7 +340,7 @@ export class PipelineService {
     pipelineId,
   }: {
     /** The unique ID of the pipeline. **/
-    pipelineId: string;
+    pipelineId: string,
   }): CancelablePromise<{
     /**
      * The source configuration for the pipeline, before any config compilation has been performed. If there is no config, then this field will be empty.
@@ -357,20 +353,21 @@ export class PipelineService {
     /**
      * The setup configuration for the pipeline used for Setup Workflows. If there were errors processing the pipeline's configuration or if setup workflows are not enabled, then this field should not exist
      */
-    "setup-config"?: string;
+    'setup-config'?: string;
     /**
      * The compiled setup configuration for the pipeline, after all orb expansion has been performed. If there were errors processing the pipeline's setup workflows, then this field may be empty.
      */
-    "compiled-setup-config"?: string;
+    'compiled-setup-config'?: string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/pipeline/{pipeline-id}/config",
+      method: 'GET',
+      url: '/pipeline/{pipeline-id}/config',
       path: {
-        "pipeline-id": pipelineId,
+        'pipeline-id': pipelineId,
       },
     });
   }
+
   /**
    * Get a pipeline's workflows
    * Returns a paginated list of workflows by pipeline ID.
@@ -382,9 +379,9 @@ export class PipelineService {
     pageToken,
   }: {
     /** The unique ID of the pipeline. **/
-    pipelineId: string;
+    pipelineId: string,
     /** A token to retrieve the next page of results. **/
-    pageToken?: string;
+    pageToken?: string,
   }): CancelablePromise<{
     /**
      * A list of workflows.
@@ -411,20 +408,11 @@ export class PipelineService {
       /**
        * Tag used for the workflow
        */
-      tag?: "setup";
+      tag?: 'setup';
       /**
        * The current status of the workflow.
        */
-      status:
-        | "success"
-        | "running"
-        | "not_run"
-        | "failed"
-        | "error"
-        | "failing"
-        | "on_hold"
-        | "canceled"
-        | "unauthorized";
+      status: 'success' | 'running' | 'not_run' | 'failed' | 'error' | 'failing' | 'on_hold' | 'canceled' | 'unauthorized';
       started_by: string;
       /**
        * The number of the pipeline this workflow belongs to.
@@ -445,16 +433,17 @@ export class PipelineService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/pipeline/{pipeline-id}/workflow",
+      method: 'GET',
+      url: '/pipeline/{pipeline-id}/workflow',
       path: {
-        "pipeline-id": pipelineId,
+        'pipeline-id': pipelineId,
       },
       query: {
-        "page-token": pageToken,
+        'page-token': pageToken,
       },
     });
   }
+
   /**
    * Get all pipelines
    * Returns all pipelines for this project.
@@ -467,11 +456,11 @@ export class PipelineService {
     pageToken,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
     /** The name of a vcs branch. **/
-    branch?: string;
+    branch?: string,
     /** A token to retrieve the next page of results. **/
-    pageToken?: string;
+    pageToken?: string,
   }): CancelablePromise<{
     items: Array<{
       /**
@@ -485,13 +474,7 @@ export class PipelineService {
         /**
          * The type of error.
          */
-        type:
-          | "config"
-          | "config-fetch"
-          | "timeout"
-          | "permission"
-          | "other"
-          | "plan";
+        type: 'config' | 'config-fetch' | 'timeout' | 'permission' | 'other' | 'plan';
         /**
          * A human-readable error message.
          */
@@ -509,11 +492,11 @@ export class PipelineService {
        * The number of the pipeline.
        */
       number: number;
-      trigger_parameters?: Record<string, number | string | boolean>;
+      trigger_parameters?: Record<string, (number | string | boolean)>;
       /**
        * The current state of the pipeline.
        */
-      state: "created" | "errored" | "setup-pending" | "setup" | "pending";
+      state: 'created' | 'errored' | 'setup-pending' | 'setup' | 'pending';
       /**
        * The date and time the pipeline was created.
        */
@@ -525,7 +508,7 @@ export class PipelineService {
         /**
          * The type of trigger.
          */
-        type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
+        type: 'scheduled_pipeline' | 'explicit' | 'api' | 'webhook';
         /**
          * The date and time the trigger was received.
          */
@@ -601,17 +584,18 @@ export class PipelineService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/project/{project-slug}/pipeline",
+      method: 'GET',
+      url: '/project/{project-slug}/pipeline',
       path: {
-        "project-slug": projectSlug,
+        'project-slug': projectSlug,
       },
       query: {
-        branch: branch,
-        "page-token": pageToken,
+        'branch': branch,
+        'page-token': pageToken,
       },
     });
   }
+
   /**
    * Trigger a new pipeline
    * Triggers a new pipeline on the project.
@@ -623,7 +607,7 @@ export class PipelineService {
     requestBody,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
     requestBody?: {
       /**
        * The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
@@ -636,21 +620,22 @@ export class PipelineService {
       /**
        * An object containing pipeline parameters and their values.
        */
-      parameters?: Record<string, number | string | boolean>;
-    };
+      parameters?: Record<string, (number | string | boolean)>;
+    },
   }): CancelablePromise<{
     message?: string;
   }> {
     return __request(OpenAPI, {
-      method: "POST",
-      url: "/project/{project-slug}/pipeline",
+      method: 'POST',
+      url: '/project/{project-slug}/pipeline',
       path: {
-        "project-slug": projectSlug,
+        'project-slug': projectSlug,
       },
       body: requestBody,
-      mediaType: "application/json",
+      mediaType: 'application/json',
     });
   }
+
   /**
    * Get your pipelines
    * Returns a sequence of all pipelines for this project triggered by the user.
@@ -662,9 +647,9 @@ export class PipelineService {
     pageToken,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
     /** A token to retrieve the next page of results. **/
-    pageToken?: string;
+    pageToken?: string,
   }): CancelablePromise<{
     items: Array<{
       /**
@@ -678,13 +663,7 @@ export class PipelineService {
         /**
          * The type of error.
          */
-        type:
-          | "config"
-          | "config-fetch"
-          | "timeout"
-          | "permission"
-          | "other"
-          | "plan";
+        type: 'config' | 'config-fetch' | 'timeout' | 'permission' | 'other' | 'plan';
         /**
          * A human-readable error message.
          */
@@ -702,11 +681,11 @@ export class PipelineService {
        * The number of the pipeline.
        */
       number: number;
-      trigger_parameters?: Record<string, number | string | boolean>;
+      trigger_parameters?: Record<string, (number | string | boolean)>;
       /**
        * The current state of the pipeline.
        */
-      state: "created" | "errored" | "setup-pending" | "setup" | "pending";
+      state: 'created' | 'errored' | 'setup-pending' | 'setup' | 'pending';
       /**
        * The date and time the pipeline was created.
        */
@@ -718,7 +697,7 @@ export class PipelineService {
         /**
          * The type of trigger.
          */
-        type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
+        type: 'scheduled_pipeline' | 'explicit' | 'api' | 'webhook';
         /**
          * The date and time the trigger was received.
          */
@@ -794,16 +773,17 @@ export class PipelineService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/project/{project-slug}/pipeline/mine",
+      method: 'GET',
+      url: '/project/{project-slug}/pipeline/mine',
       path: {
-        "project-slug": projectSlug,
+        'project-slug': projectSlug,
       },
       query: {
-        "page-token": pageToken,
+        'page-token': pageToken,
       },
     });
   }
+
   /**
    * Get a pipeline by pipeline number
    * Returns a pipeline by the pipeline number.
@@ -815,9 +795,9 @@ export class PipelineService {
     pipelineNumber,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
     /** The number of the pipeline. **/
-    pipelineNumber: any;
+    pipelineNumber: any,
   }): CancelablePromise<{
     /**
      * The unique ID of the pipeline.
@@ -830,13 +810,7 @@ export class PipelineService {
       /**
        * The type of error.
        */
-      type:
-        | "config"
-        | "config-fetch"
-        | "timeout"
-        | "permission"
-        | "other"
-        | "plan";
+      type: 'config' | 'config-fetch' | 'timeout' | 'permission' | 'other' | 'plan';
       /**
        * A human-readable error message.
        */
@@ -854,11 +828,11 @@ export class PipelineService {
      * The number of the pipeline.
      */
     number: number;
-    trigger_parameters?: Record<string, number | string | boolean>;
+    trigger_parameters?: Record<string, (number | string | boolean)>;
     /**
      * The current state of the pipeline.
      */
-    state: "created" | "errored" | "setup-pending" | "setup" | "pending";
+    state: 'created' | 'errored' | 'setup-pending' | 'setup' | 'pending';
     /**
      * The date and time the pipeline was created.
      */
@@ -870,7 +844,7 @@ export class PipelineService {
       /**
        * The type of trigger.
        */
-      type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
+      type: 'scheduled_pipeline' | 'explicit' | 'api' | 'webhook';
       /**
        * The date and time the trigger was received.
        */
@@ -941,12 +915,13 @@ export class PipelineService {
     };
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/project/{project-slug}/pipeline/{pipeline-number}",
+      method: 'GET',
+      url: '/project/{project-slug}/pipeline/{pipeline-number}',
       path: {
-        "project-slug": projectSlug,
-        "pipeline-number": pipelineNumber,
+        'project-slug': projectSlug,
+        'pipeline-number': pipelineNumber,
       },
     });
   }
+
 }

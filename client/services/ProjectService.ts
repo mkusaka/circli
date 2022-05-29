@@ -1,7 +1,12 @@
-import type { CancelablePromise } from "../core/CancelablePromise.ts";
-import { OpenAPI } from "../core/OpenAPI.ts";
-import { request as __request } from "../core/request.ts";
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+import type { CancelablePromise } from '../core/CancelablePromise';
+import { OpenAPI } from '../core/OpenAPI';
+import { request as __request } from '../core/request';
+
 export class ProjectService {
+
   /**
    * Get a project
    * Retrieves a project by project slug.
@@ -12,7 +17,7 @@ export class ProjectService {
     projectSlug,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
   }): CancelablePromise<{
     /**
      * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
@@ -46,18 +51,19 @@ export class ProjectService {
       /**
        * The VCS provider
        */
-      provider: "Bitbucket" | "CircleCI" | "GitHub";
+      provider: 'Bitbucket' | 'CircleCI' | 'GitHub';
       default_branch: string;
     };
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/project/{project-slug}",
+      method: 'GET',
+      url: '/project/{project-slug}',
       path: {
-        "project-slug": projectSlug,
+        'project-slug': projectSlug,
       },
     });
   }
+
   /**
    * Create a new checkout key
    * Creates a new checkout key. This API request is only usable with a user API token.
@@ -69,26 +75,27 @@ export class ProjectService {
     requestBody,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
     requestBody?: {
       /**
        * The type of checkout key to create. This may be either `deploy-key` or `user-key`.
        */
-      type: "user-key" | "deploy-key";
-    };
+      type: 'user-key' | 'deploy-key';
+    },
   }): CancelablePromise<{
     message?: string;
   }> {
     return __request(OpenAPI, {
-      method: "POST",
-      url: "/project/{project-slug}/checkout-key",
+      method: 'POST',
+      url: '/project/{project-slug}/checkout-key',
       path: {
-        "project-slug": projectSlug,
+        'project-slug': projectSlug,
       },
       body: requestBody,
-      mediaType: "application/json",
+      mediaType: 'application/json',
     });
   }
+
   /**
    * Get all checkout keys
    * Returns a sequence of checkout keys for `:project`.
@@ -99,17 +106,17 @@ export class ProjectService {
     projectSlug,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
   }): CancelablePromise<{
     items: Array<{
       /**
        * A public SSH key.
        */
-      "public-key": string;
+      'public-key': string;
       /**
        * The type of checkout key. This may be either `deploy-key` or `github-user-key`.
        */
-      type: "deploy-key" | "github-user-key";
+      type: 'deploy-key' | 'github-user-key';
       /**
        * An SSH key fingerprint.
        */
@@ -121,7 +128,7 @@ export class ProjectService {
       /**
        * The date and time the checkout key was created.
        */
-      "created-at": string;
+      'created-at': string;
     }>;
     /**
      * A token to pass as a `page-token` query parameter to return the next page of results.
@@ -129,13 +136,14 @@ export class ProjectService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/project/{project-slug}/checkout-key",
+      method: 'GET',
+      url: '/project/{project-slug}/checkout-key',
       path: {
-        "project-slug": projectSlug,
+        'project-slug': projectSlug,
       },
     });
   }
+
   /**
    * Delete a checkout key
    * Deletes the checkout key.
@@ -147,9 +155,9 @@ export class ProjectService {
     fingerprint,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
     /** An SSH key fingerprint. **/
-    fingerprint: string;
+    fingerprint: string,
   }): CancelablePromise<{
     /**
      * A human-readable message
@@ -157,14 +165,15 @@ export class ProjectService {
     message: string;
   }> {
     return __request(OpenAPI, {
-      method: "DELETE",
-      url: "/project/{project-slug}/checkout-key/{fingerprint}",
+      method: 'DELETE',
+      url: '/project/{project-slug}/checkout-key/{fingerprint}',
       path: {
-        "project-slug": projectSlug,
-        fingerprint: fingerprint,
+        'project-slug': projectSlug,
+        'fingerprint': fingerprint,
       },
     });
   }
+
   /**
    * Get a checkout key
    * Returns an individual checkout key.
@@ -176,18 +185,18 @@ export class ProjectService {
     fingerprint,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
     /** An SSH key fingerprint. **/
-    fingerprint: string;
+    fingerprint: string,
   }): CancelablePromise<{
     /**
      * A public SSH key.
      */
-    "public-key": string;
+    'public-key': string;
     /**
      * The type of checkout key. This may be either `deploy-key` or `github-user-key`.
      */
-    type: "deploy-key" | "github-user-key";
+    type: 'deploy-key' | 'github-user-key';
     /**
      * An SSH key fingerprint.
      */
@@ -199,17 +208,18 @@ export class ProjectService {
     /**
      * The date and time the checkout key was created.
      */
-    "created-at": string;
+    'created-at': string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/project/{project-slug}/checkout-key/{fingerprint}",
+      method: 'GET',
+      url: '/project/{project-slug}/checkout-key/{fingerprint}',
       path: {
-        "project-slug": projectSlug,
-        fingerprint: fingerprint,
+        'project-slug': projectSlug,
+        'fingerprint': fingerprint,
       },
     });
   }
+
   /**
    * List all environment variables
    * Returns four 'x' characters, in addition to the last four ASCII characters of the value, consistent with the display of environment variable values on the CircleCI website.
@@ -220,7 +230,7 @@ export class ProjectService {
     projectSlug,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
   }): CancelablePromise<{
     items: Array<{
       /**
@@ -238,13 +248,14 @@ export class ProjectService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/project/{project-slug}/envvar",
+      method: 'GET',
+      url: '/project/{project-slug}/envvar',
       path: {
-        "project-slug": projectSlug,
+        'project-slug': projectSlug,
       },
     });
   }
+
   /**
    * Create an environment variable
    * Creates a new environment variable.
@@ -256,7 +267,7 @@ export class ProjectService {
     requestBody,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
     requestBody?: {
       /**
        * The name of the environment variable.
@@ -266,20 +277,21 @@ export class ProjectService {
        * The value of the environment variable.
        */
       value: string;
-    };
+    },
   }): CancelablePromise<{
     message?: string;
   }> {
     return __request(OpenAPI, {
-      method: "POST",
-      url: "/project/{project-slug}/envvar",
+      method: 'POST',
+      url: '/project/{project-slug}/envvar',
       path: {
-        "project-slug": projectSlug,
+        'project-slug': projectSlug,
       },
       body: requestBody,
-      mediaType: "application/json",
+      mediaType: 'application/json',
     });
   }
+
   /**
    * Get a masked environment variable
    * Returns the masked value of environment variable :name.
@@ -291,9 +303,9 @@ export class ProjectService {
     name,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
     /** The name of the environment variable. **/
-    name: string;
+    name: string,
   }): CancelablePromise<{
     /**
      * The name of the environment variable.
@@ -305,14 +317,15 @@ export class ProjectService {
     value: string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/project/{project-slug}/envvar/{name}",
+      method: 'GET',
+      url: '/project/{project-slug}/envvar/{name}',
       path: {
-        "project-slug": projectSlug,
-        name: name,
+        'project-slug': projectSlug,
+        'name': name,
       },
     });
   }
+
   /**
    * Delete an environment variable
    * Deletes the environment variable named :name.
@@ -324,9 +337,9 @@ export class ProjectService {
     name,
   }: {
     /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
-    projectSlug: string;
+    projectSlug: string,
     /** The name of the environment variable. **/
-    name: string;
+    name: string,
   }): CancelablePromise<{
     /**
      * A human-readable message
@@ -334,12 +347,13 @@ export class ProjectService {
     message: string;
   }> {
     return __request(OpenAPI, {
-      method: "DELETE",
-      url: "/project/{project-slug}/envvar/{name}",
+      method: 'DELETE',
+      url: '/project/{project-slug}/envvar/{name}',
       path: {
-        "project-slug": projectSlug,
-        name: name,
+        'project-slug': projectSlug,
+        'name': name,
       },
     });
   }
+
 }

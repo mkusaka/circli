@@ -1,7 +1,12 @@
-import type { CancelablePromise } from "../core/CancelablePromise.ts";
-import { OpenAPI } from "../core/OpenAPI.ts";
-import { request as __request } from "../core/request.ts";
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+import type { CancelablePromise } from '../core/CancelablePromise';
+import { OpenAPI } from '../core/OpenAPI';
+import { request as __request } from '../core/request';
+
 export class UserService {
+
   /**
    * User Information
    * Provides information about the user that is currently signed in.
@@ -23,10 +28,11 @@ export class UserService {
     name: string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/me",
+      method: 'GET',
+      url: '/me',
     });
   }
+
   /**
    * Collaborations
    * Provides the set of organizations of which a user is a member or a collaborator.
@@ -39,35 +45,34 @@ export class UserService {
    * @returns any Collaborations
    * @throws ApiError
    */
-  public static getCollaborations(): CancelablePromise<
-    Array<{
-      /**
-       * The UUID of the organization
-       */
-      id: string;
-      /**
-       * The VCS provider
-       */
-      "vcs-type": string;
-      /**
-       * The name of the organization
-       */
-      name: string;
-      /**
-       * URL to the user's avatar on the VCS
-       */
-      avatar_url: string;
-      /**
-       * The slug of the organization
-       */
-      slug: string;
-    }>
-  > {
+  public static getCollaborations(): CancelablePromise<Array<{
+    /**
+     * The UUID of the organization
+     */
+    id: string;
+    /**
+     * The VCS provider
+     */
+    'vcs-type': string;
+    /**
+     * The name of the organization
+     */
+    name: string;
+    /**
+     * URL to the user's avatar on the VCS
+     */
+    avatar_url: string;
+    /**
+     * The slug of the organization
+     */
+    slug: string;
+  }>> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/me/collaborations",
+      method: 'GET',
+      url: '/me/collaborations',
     });
   }
+
   /**
    * User Information
    * Provides information about the user with the given ID.
@@ -78,7 +83,7 @@ export class UserService {
     id,
   }: {
     /** The unique ID of the user. **/
-    id: string;
+    id: string,
   }): CancelablePromise<{
     /**
      * The unique ID of the user.
@@ -94,11 +99,12 @@ export class UserService {
     name: string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/user/{id}",
+      method: 'GET',
+      url: '/user/{id}',
       path: {
-        id: id,
+        'id': id,
       },
     });
   }
+
 }

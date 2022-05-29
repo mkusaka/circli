@@ -1,7 +1,12 @@
-import type { CancelablePromise } from "../core/CancelablePromise.ts";
-import { OpenAPI } from "../core/OpenAPI.ts";
-import { request as __request } from "../core/request.ts";
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+import type { CancelablePromise } from '../core/CancelablePromise';
+import { OpenAPI } from '../core/OpenAPI';
+import { request as __request } from '../core/request';
+
 export class WorkflowService {
+
   /**
    * Get a workflow
    * Returns summary fields of a workflow by ID.
@@ -12,7 +17,7 @@ export class WorkflowService {
     id,
   }: {
     /** The unique ID of the workflow. **/
-    id: string;
+    id: string,
   }): CancelablePromise<{
     /**
      * The ID of the pipeline this workflow belongs to.
@@ -35,20 +40,11 @@ export class WorkflowService {
     /**
      * Tag used for the workflow
      */
-    tag?: "setup";
+    tag?: 'setup';
     /**
      * The current status of the workflow.
      */
-    status:
-      | "success"
-      | "running"
-      | "not_run"
-      | "failed"
-      | "error"
-      | "failing"
-      | "on_hold"
-      | "canceled"
-      | "unauthorized";
+    status: 'success' | 'running' | 'not_run' | 'failed' | 'error' | 'failing' | 'on_hold' | 'canceled' | 'unauthorized';
     started_by: string;
     /**
      * The number of the pipeline this workflow belongs to.
@@ -64,13 +60,14 @@ export class WorkflowService {
     stopped_at: string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/workflow/{id}",
+      method: 'GET',
+      url: '/workflow/{id}',
       path: {
-        id: id,
+        'id': id,
       },
     });
   }
+
   /**
    * Approve a job
    * Approves a pending approval job in a workflow.
@@ -82,21 +79,22 @@ export class WorkflowService {
     id,
   }: {
     /** The ID of the job being approved. **/
-    approvalRequestId: string;
+    approvalRequestId: string,
     /** The unique ID of the workflow. **/
-    id: string;
+    id: string,
   }): CancelablePromise<{
     message?: string;
   }> {
     return __request(OpenAPI, {
-      method: "POST",
-      url: "/workflow/{id}/approve/{approval_request_id}",
+      method: 'POST',
+      url: '/workflow/{id}/approve/{approval_request_id}',
       path: {
-        approval_request_id: approvalRequestId,
-        id: id,
+        'approval_request_id': approvalRequestId,
+        'id': id,
       },
     });
   }
+
   /**
    * Cancel a workflow
    * Cancels a running workflow.
@@ -107,18 +105,19 @@ export class WorkflowService {
     id,
   }: {
     /** The unique ID of the workflow. **/
-    id: string;
+    id: string,
   }): CancelablePromise<{
     message?: string;
   }> {
     return __request(OpenAPI, {
-      method: "POST",
-      url: "/workflow/{id}/cancel",
+      method: 'POST',
+      url: '/workflow/{id}/cancel',
       path: {
-        id: id,
+        'id': id,
       },
     });
   }
+
   /**
    * Get a workflow's jobs
    * Returns a sequence of jobs for a workflow.
@@ -129,7 +128,7 @@ export class WorkflowService {
     id,
   }: {
     /** The unique ID of the workflow. **/
-    id: string;
+    id: string,
   }): CancelablePromise<{
     items: Array<{
       /**
@@ -171,7 +170,7 @@ export class WorkflowService {
       /**
        * The type of job.
        */
-      type: "build" | "approval";
+      type: 'build' | 'approval';
       /**
        * The time when the job stopped.
        */
@@ -187,13 +186,14 @@ export class WorkflowService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: "GET",
-      url: "/workflow/{id}/job",
+      method: 'GET',
+      url: '/workflow/{id}/job',
       path: {
-        id: id,
+        'id': id,
       },
     });
   }
+
   /**
    * Rerun a workflow
    * Reruns a workflow.
@@ -205,7 +205,7 @@ export class WorkflowService {
     requestBody,
   }: {
     /** The unique ID of the workflow. **/
-    id: string;
+    id: string,
     requestBody?: {
       /**
        * Whether to enable SSH access for the triggering user on the newly-rerun job. Requires the jobs parameter to be used and so is mutually exclusive with the from_failed parameter.
@@ -223,18 +223,19 @@ export class WorkflowService {
        * Completes rerun using sparse trees logic, an optimization for workflows that have disconnected subgraphs. Requires jobs parameter and so is mutually exclusive with the from_failed parameter.
        */
       sparse_tree?: boolean;
-    };
+    },
   }): CancelablePromise<{
     message?: string;
   }> {
     return __request(OpenAPI, {
-      method: "POST",
-      url: "/workflow/{id}/rerun",
+      method: 'POST',
+      url: '/workflow/{id}/rerun',
       path: {
-        id: id,
+        'id': id,
       },
       body: requestBody,
-      mediaType: "application/json",
+      mediaType: 'application/json',
     });
   }
+
 }
