@@ -1,28 +1,22 @@
-/* istanbul ignore file */
-/* tslint:disable */
-/* eslint-disable */
-import type { ApiRequestOptions } from './ApiRequestOptions';
-
+import type { ApiRequestOptions } from "./ApiRequestOptions.ts";
 type Resolver<T> = (options: ApiRequestOptions) => Promise<T>;
 type Headers = Record<string, string>;
-
 export type OpenAPIConfig = {
   BASE: string;
   VERSION: string;
   WITH_CREDENTIALS: boolean;
-  CREDENTIALS: 'include' | 'omit' | 'same-origin';
+  CREDENTIALS: "include" | "omit" | "same-origin";
   TOKEN?: string | Resolver<string>;
   USERNAME?: string | Resolver<string>;
   PASSWORD?: string | Resolver<string>;
   HEADERS?: Headers | Resolver<Headers>;
   ENCODE_PATH?: (path: string) => string;
 };
-
 export const OpenAPI: OpenAPIConfig = {
-  BASE: 'https://circleci.com/api/v2',
-  VERSION: '2',
+  BASE: "https://circleci.com/api/v2",
+  VERSION: "2",
   WITH_CREDENTIALS: false,
-  CREDENTIALS: 'include',
+  CREDENTIALS: "include",
   TOKEN: undefined,
   USERNAME: undefined,
   PASSWORD: undefined,
