@@ -1,12 +1,7 @@
-/* istanbul ignore file */
-/* tslint:disable */
-/* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
-
+import type { CancelablePromise } from "../core/CancelablePromise.ts";
+import { OpenAPI } from "../core/OpenAPI.ts";
+import { request as __request } from "../core/request.ts";
 export class ContextService {
-
   /**
    * List contexts
    * List all contexts for an owner.
@@ -20,13 +15,13 @@ export class ContextService {
     pageToken,
   }: {
     /** The unique ID of the owner of the context. Specify either this or owner-slug. **/
-    ownerId?: string,
+    ownerId?: string;
     /** A string that represents an organization. Specify either this or owner-id. Cannot be used for accounts. **/
-    ownerSlug?: string,
+    ownerSlug?: string;
     /** The type of the owner. Defaults to "organization". Accounts are only used as context owners in server. **/
-    ownerType?: 'account' | 'organization',
+    ownerType?: "account" | "organization";
     /** A token to retrieve the next page of results. **/
-    pageToken?: string,
+    pageToken?: string;
   }): CancelablePromise<{
     items: Array<{
       /**
@@ -48,17 +43,16 @@ export class ContextService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/context',
+      method: "GET",
+      url: "/context",
       query: {
-        'owner-id': ownerId,
-        'owner-slug': ownerSlug,
-        'owner-type': ownerType,
-        'page-token': pageToken,
+        "owner-id": ownerId,
+        "owner-slug": ownerSlug,
+        "owner-type": ownerType,
+        "page-token": pageToken,
       },
     });
   }
-
   /**
    * Create a new context
    * @returns any The new context
@@ -72,26 +66,28 @@ export class ContextService {
        * The user defined name of the context.
        */
       name: string;
-      owner: ({
-        /**
-         * The unique ID of the owner of the context. Specify either this or slug.
-         */
-        id: string;
-        /**
-         * The type of the owner. Defaults to "organization". Accounts are only used as context owners in server.
-         */
-        type?: 'account' | 'organization';
-      } | {
-        /**
-         * A string that represents an organization. Specify either this or id. Cannot be used for accounts.
-         */
-        slug: string;
-        /**
-         * The type of owner. Defaults to "organization". Accounts are only used as context owners in server and must be specified by an id instead of a slug.
-         */
-        type?: 'organization';
-      });
-    },
+      owner:
+        | {
+            /**
+             * The unique ID of the owner of the context. Specify either this or slug.
+             */
+            id: string;
+            /**
+             * The type of the owner. Defaults to "organization". Accounts are only used as context owners in server.
+             */
+            type?: "account" | "organization";
+          }
+        | {
+            /**
+             * A string that represents an organization. Specify either this or id. Cannot be used for accounts.
+             */
+            slug: string;
+            /**
+             * The type of owner. Defaults to "organization". Accounts are only used as context owners in server and must be specified by an id instead of a slug.
+             */
+            type?: "organization";
+          };
+    };
   }): CancelablePromise<{
     /**
      * The unique ID of the context.
@@ -107,13 +103,12 @@ export class ContextService {
     created_at: string;
   }> {
     return __request(OpenAPI, {
-      method: 'POST',
-      url: '/context',
+      method: "POST",
+      url: "/context",
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     });
   }
-
   /**
    * Delete a context
    * @returns any A confirmation message
@@ -123,7 +118,7 @@ export class ContextService {
     contextId,
   }: {
     /** ID of the context (UUID) **/
-    contextId: string,
+    contextId: string;
   }): CancelablePromise<{
     /**
      * A human-readable message
@@ -131,14 +126,13 @@ export class ContextService {
     message: string;
   }> {
     return __request(OpenAPI, {
-      method: 'DELETE',
-      url: '/context/{context-id}',
+      method: "DELETE",
+      url: "/context/{context-id}",
       path: {
-        'context-id': contextId,
+        "context-id": contextId,
       },
     });
   }
-
   /**
    * Get a context
    * Returns basic information about a context.
@@ -149,7 +143,7 @@ export class ContextService {
     contextId,
   }: {
     /** ID of the context (UUID) **/
-    contextId: string,
+    contextId: string;
   }): CancelablePromise<{
     /**
      * The unique ID of the context.
@@ -165,14 +159,13 @@ export class ContextService {
     created_at: string;
   }> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/context/{context-id}',
+      method: "GET",
+      url: "/context/{context-id}",
       path: {
-        'context-id': contextId,
+        "context-id": contextId,
       },
     });
   }
-
   /**
    * List environment variables
    * List information about environment variables in a context, not including their values.
@@ -183,7 +176,7 @@ export class ContextService {
     contextId,
   }: {
     /** ID of the context (UUID) **/
-    contextId: string,
+    contextId: string;
   }): CancelablePromise<{
     items: Array<{
       /**
@@ -205,14 +198,13 @@ export class ContextService {
     next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: 'GET',
-      url: '/context/{context-id}/environment-variable',
+      method: "GET",
+      url: "/context/{context-id}/environment-variable",
       path: {
-        'context-id': contextId,
+        "context-id": contextId,
       },
     });
   }
-
   /**
    * Add or update an environment variable
    * Create or update an environment variable within a context. Returns information about the environment variable, not including its value.
@@ -225,46 +217,48 @@ export class ContextService {
     requestBody,
   }: {
     /** ID of the context (UUID) **/
-    contextId: string,
+    contextId: string;
     /** The name of the environment variable **/
-    envVarName: string,
+    envVarName: string;
     requestBody?: {
       /**
        * The value of the environment variable
        */
       value: string;
-    },
-  }): CancelablePromise<({
-    /**
-     * The name of the environment variable
-     */
-    variable: string;
-    /**
-     * The date and time the environment variable was created.
-     */
-    created_at: string;
-    /**
-     * ID of the context (UUID)
-     */
-    context_id: string;
-  } | {
-    /**
-     * A human-readable message
-     */
-    message: string;
-  })> {
+    };
+  }): CancelablePromise<
+    | {
+        /**
+         * The name of the environment variable
+         */
+        variable: string;
+        /**
+         * The date and time the environment variable was created.
+         */
+        created_at: string;
+        /**
+         * ID of the context (UUID)
+         */
+        context_id: string;
+      }
+    | {
+        /**
+         * A human-readable message
+         */
+        message: string;
+      }
+  > {
     return __request(OpenAPI, {
-      method: 'PUT',
-      url: '/context/{context-id}/environment-variable/{env-var-name}',
+      method: "PUT",
+      url: "/context/{context-id}/environment-variable/{env-var-name}",
       path: {
-        'context-id': contextId,
-        'env-var-name': envVarName,
+        "context-id": contextId,
+        "env-var-name": envVarName,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     });
   }
-
   /**
    * Remove an environment variable
    * Delete an environment variable from a context.
@@ -276,9 +270,9 @@ export class ContextService {
     contextId,
   }: {
     /** The name of the environment variable **/
-    envVarName: string,
+    envVarName: string;
     /** ID of the context (UUID) **/
-    contextId: string,
+    contextId: string;
   }): CancelablePromise<{
     /**
      * A human-readable message
@@ -286,13 +280,12 @@ export class ContextService {
     message: string;
   }> {
     return __request(OpenAPI, {
-      method: 'DELETE',
-      url: '/context/{context-id}/environment-variable/{env-var-name}',
+      method: "DELETE",
+      url: "/context/{context-id}/environment-variable/{env-var-name}",
       path: {
-        'env-var-name': envVarName,
-        'context-id': contextId,
+        "env-var-name": envVarName,
+        "context-id": contextId,
       },
     });
   }
-
 }
