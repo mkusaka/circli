@@ -3,57 +3,6 @@ import { OpenAPI } from "../core/OpenAPI.ts";
 import { request as __request } from "../core/request.ts";
 export class ContextService {
   /**
-   * List contexts
-   * List all contexts for an owner.
-   * @returns any A paginated list of contexts
-   * @throws ApiError
-   */
-  public static listContexts({
-    ownerId,
-    ownerSlug,
-    ownerType,
-    pageToken,
-  }: {
-    /** The unique ID of the owner of the context. Specify either this or owner-slug. **/
-    ownerId?: string;
-    /** A string that represents an organization. Specify either this or owner-id. Cannot be used for accounts. **/
-    ownerSlug?: string;
-    /** The type of the owner. Defaults to "organization". Accounts are only used as context owners in server. **/
-    ownerType?: "account" | "organization";
-    /** A token to retrieve the next page of results. **/
-    pageToken?: string;
-  }): CancelablePromise<{
-    items: Array<{
-      /**
-       * The unique ID of the context.
-       */
-      id: string;
-      /**
-       * The user defined name of the context.
-       */
-      name: string;
-      /**
-       * The date and time the context was created.
-       */
-      created_at: string;
-    }>;
-    /**
-     * A token to pass as a `page-token` query parameter to return the next page of results.
-     */
-    next_page_token: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/context",
-      query: {
-        "owner-id": ownerId,
-        "owner-slug": ownerSlug,
-        "owner-type": ownerType,
-        "page-token": pageToken,
-      },
-    });
-  }
-  /**
    * Create a new context
    * @returns any The new context
    * @throws ApiError
@@ -110,6 +59,81 @@ export class ContextService {
     });
   }
   /**
+   * List contexts
+   * List all contexts for an owner.
+   * @returns any A paginated list of contexts
+   * @throws ApiError
+   */
+  public static listContexts({
+    ownerId,
+    ownerSlug,
+    ownerType,
+    pageToken,
+  }: {
+    /** The unique ID of the owner of the context. Specify either this or owner-slug. **/
+    ownerId?: string;
+    /** A string that represents an organization. Specify either this or owner-id. Cannot be used for accounts. **/
+    ownerSlug?: string;
+    /** The type of the owner. Defaults to "organization". Accounts are only used as context owners in server. **/
+    ownerType?: "account" | "organization";
+    /** A token to retrieve the next page of results. **/
+    pageToken?: string;
+  }): CancelablePromise<{
+    items: Array<{
+      /**
+       * The unique ID of the context.
+       */
+      id: string;
+      /**
+       * The user defined name of the context.
+       */
+      name: string;
+      /**
+       * The date and time the context was created.
+       */
+      created_at: string;
+    }>;
+    /**
+     * A token to pass as a `page-token` query parameter to return the next page of results.
+     */
+    next_page_token: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/context",
+      query: {
+        "owner-id": ownerId,
+        "owner-slug": ownerSlug,
+        "owner-type": ownerType,
+        "page-token": pageToken,
+      },
+    });
+  }
+  /**
+   * Delete a context
+   * @returns any A confirmation message
+   * @throws ApiError
+   */
+  public static deleteContext({
+    contextId,
+  }: {
+    /** ID of the context (UUID) **/
+    contextId: string;
+  }): CancelablePromise<{
+    /**
+     * A human-readable message
+     */
+    message: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/context/{context-id}",
+      path: {
+        "context-id": contextId,
+      },
+    });
+  }
+  /**
    * Get a context
    * Returns basic information about a context.
    * @returns any The context
@@ -136,30 +160,6 @@ export class ContextService {
   }> {
     return __request(OpenAPI, {
       method: "GET",
-      url: "/context/{context-id}",
-      path: {
-        "context-id": contextId,
-      },
-    });
-  }
-  /**
-   * Delete a context
-   * @returns any A confirmation message
-   * @throws ApiError
-   */
-  public static deleteContext({
-    contextId,
-  }: {
-    /** ID of the context (UUID) **/
-    contextId: string;
-  }): CancelablePromise<{
-    /**
-     * A human-readable message
-     */
-    message: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "DELETE",
       url: "/context/{context-id}",
       path: {
         "context-id": contextId,
