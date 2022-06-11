@@ -93,7 +93,21 @@ export class JobService {
     /**
      * The current status of the job.
      */
-    status: any;
+    status:
+      | "success"
+      | "running"
+      | "not_run"
+      | "failed"
+      | "retried"
+      | "queued"
+      | "not_running"
+      | "infrastructure_fail"
+      | "timedout"
+      | "on_hold"
+      | "terminated-unknown"
+      | "blocked"
+      | "canceled"
+      | "unauthorized";
     /**
      * The number of the job.
      */

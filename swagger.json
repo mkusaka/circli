@@ -4823,6 +4823,23 @@
                       "description": "A number of parallel runs the job has."
                     },
                     "status": {
+                      "enum": [
+                        "success",
+                        "running",
+                        "not_run",
+                        "failed",
+                        "retried",
+                        "queued",
+                        "not_running",
+                        "infrastructure_fail",
+                        "timedout",
+                        "on_hold",
+                        "terminated-unknown",
+                        "blocked",
+                        "canceled",
+                        "unauthorized"
+                      ],
+                      "type": "string",
                       "description": "The current status of the job."
                     },
                     "number": {
@@ -8213,6 +8230,23 @@
                             "example": "gh/CircleCI-Public/api-preview-docs"
                           },
                           "status": {
+                            "enum": [
+                              "success",
+                              "running",
+                              "not_run",
+                              "failed",
+                              "retried",
+                              "queued",
+                              "not_running",
+                              "infrastructure_fail",
+                              "timedout",
+                              "on_hold",
+                              "terminated-unknown",
+                              "blocked",
+                              "canceled",
+                              "unauthorized"
+                            ],
+                            "type": "string",
                             "description": "The current status of the job."
                           },
                           "type": {

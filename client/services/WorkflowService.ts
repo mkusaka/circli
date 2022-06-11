@@ -167,7 +167,21 @@ export class WorkflowService {
       /**
        * The current status of the job.
        */
-      status: any;
+      status:
+        | "success"
+        | "running"
+        | "not_run"
+        | "failed"
+        | "retried"
+        | "queued"
+        | "not_running"
+        | "infrastructure_fail"
+        | "timedout"
+        | "on_hold"
+        | "terminated-unknown"
+        | "blocked"
+        | "canceled"
+        | "unauthorized";
       /**
        * The type of job.
        */
