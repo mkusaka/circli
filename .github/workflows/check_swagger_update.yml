@@ -18,7 +18,7 @@ jobs:
           cache: 'yarn'
       - uses: denoland/setup-deno@v1
         with:
-          deno-version: v1.x
+          deno-version: '1.22.0'
       - name: install deps
         run: yarn install --check-files
       - name: update & check
