@@ -12,9 +12,13 @@ export class WebhookService {
     scopeId,
     scopeType,
   }: {
-    /** ID of the scope being used (at the moment, only project ID is supported) **/
+    /**
+     * ID of the scope being used (at the moment, only project ID is supported)
+     */
     scopeId: string;
-    /** Type of the scope being used **/
+    /**
+     * Type of the scope being used
+     */
     scopeType: "project";
   }): CancelablePromise<{
     items: Array<{
@@ -139,7 +143,9 @@ export class WebhookService {
   public static deleteWebhook({
     webhookId,
   }: {
-    /** ID of the webhook (UUID) **/
+    /**
+     * ID of the webhook (UUID)
+     */
     webhookId: string;
   }): CancelablePromise<{
     /**
@@ -164,7 +170,9 @@ export class WebhookService {
   public static getWebhookById({
     webhookId,
   }: {
-    /** ID of the webhook (UUID) **/
+    /**
+     * ID of the webhook (UUID)
+     */
     webhookId: string;
   }): CancelablePromise<{
     /**
@@ -230,7 +238,9 @@ export class WebhookService {
     webhookId,
     requestBody,
   }: {
-    /** ID of the webhook (UUID) **/
+    /**
+     * ID of the webhook (UUID)
+     */
     webhookId: string;
     requestBody?: {
       /**

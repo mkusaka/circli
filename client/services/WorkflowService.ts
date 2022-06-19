@@ -11,7 +11,9 @@ export class WorkflowService {
   public static getWorkflowById({
     id,
   }: {
-    /** The unique ID of the workflow. **/
+    /**
+     * The unique ID of the workflow.
+     */
     id: string;
   }): CancelablePromise<{
     /**
@@ -81,9 +83,13 @@ export class WorkflowService {
     approvalRequestId,
     id,
   }: {
-    /** The ID of the job being approved. **/
+    /**
+     * The ID of the job being approved.
+     */
     approvalRequestId: string;
-    /** The unique ID of the workflow. **/
+    /**
+     * The unique ID of the workflow.
+     */
     id: string;
   }): CancelablePromise<{
     message?: string;
@@ -106,7 +112,9 @@ export class WorkflowService {
   public static cancelWorkflow({
     id,
   }: {
-    /** The unique ID of the workflow. **/
+    /**
+     * The unique ID of the workflow.
+     */
     id: string;
   }): CancelablePromise<{
     message?: string;
@@ -128,7 +136,9 @@ export class WorkflowService {
   public static listWorkflowJobs({
     id,
   }: {
-    /** The unique ID of the workflow. **/
+    /**
+     * The unique ID of the workflow.
+     */
     id: string;
   }): CancelablePromise<{
     items: Array<{
@@ -218,7 +228,9 @@ export class WorkflowService {
     id,
     requestBody,
   }: {
-    /** The unique ID of the workflow. **/
+    /**
+     * The unique ID of the workflow.
+     */
     id: string;
     requestBody?: {
       /**

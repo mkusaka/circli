@@ -77,7 +77,9 @@ export class UserService {
   public static getUser({
     id,
   }: {
-    /** The unique ID of the user. **/
+    /**
+     * The unique ID of the user.
+     */
     id: string;
   }): CancelablePromise<{
     /**

@@ -70,13 +70,21 @@ export class ContextService {
     ownerType,
     pageToken,
   }: {
-    /** The unique ID of the owner of the context. Specify either this or owner-slug. **/
+    /**
+     * The unique ID of the owner of the context. Specify either this or owner-slug.
+     */
     ownerId?: string;
-    /** A string that represents an organization. Specify either this or owner-id. Cannot be used for accounts. **/
+    /**
+     * A string that represents an organization. Specify either this or owner-id. Cannot be used for accounts.
+     */
     ownerSlug?: string;
-    /** The type of the owner. Defaults to "organization". Accounts are only used as context owners in server. **/
+    /**
+     * The type of the owner. Defaults to "organization". Accounts are only used as context owners in server.
+     */
     ownerType?: "account" | "organization";
-    /** A token to retrieve the next page of results. **/
+    /**
+     * A token to retrieve the next page of results.
+     */
     pageToken?: string;
   }): CancelablePromise<{
     items: Array<{
@@ -118,7 +126,9 @@ export class ContextService {
   public static getContext({
     contextId,
   }: {
-    /** ID of the context (UUID) **/
+    /**
+     * ID of the context (UUID)
+     */
     contextId: string;
   }): CancelablePromise<{
     /**
@@ -150,7 +160,9 @@ export class ContextService {
   public static deleteContext({
     contextId,
   }: {
-    /** ID of the context (UUID) **/
+    /**
+     * ID of the context (UUID)
+     */
     contextId: string;
   }): CancelablePromise<{
     /**
@@ -175,7 +187,9 @@ export class ContextService {
   public static listEnvironmentVariablesFromContext({
     contextId,
   }: {
-    /** ID of the context (UUID) **/
+    /**
+     * ID of the context (UUID)
+     */
     contextId: string;
   }): CancelablePromise<{
     items: Array<{
@@ -215,9 +229,13 @@ export class ContextService {
     envVarName,
     contextId,
   }: {
-    /** The name of the environment variable **/
+    /**
+     * The name of the environment variable
+     */
     envVarName: string;
-    /** ID of the context (UUID) **/
+    /**
+     * ID of the context (UUID)
+     */
     contextId: string;
   }): CancelablePromise<{
     /**
@@ -245,9 +263,13 @@ export class ContextService {
     envVarName,
     requestBody,
   }: {
-    /** ID of the context (UUID) **/
+    /**
+     * ID of the context (UUID)
+     */
     contextId: string;
-    /** The name of the environment variable **/
+    /**
+     * The name of the environment variable
+     */
     envVarName: string;
     requestBody?: {
       /**
