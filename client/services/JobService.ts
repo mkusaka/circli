@@ -12,9 +12,13 @@ export class JobService {
     jobNumber,
     projectSlug,
   }: {
-    /** The number of the job. **/
+    /**
+     * The number of the job.
+     */
     jobNumber: any;
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
   }): CancelablePromise<{
     /**
@@ -192,9 +196,13 @@ export class JobService {
     jobNumber,
     projectSlug,
   }: {
-    /** The number of the job. **/
+    /**
+     * The number of the job.
+     */
     jobNumber: any;
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
   }): CancelablePromise<{
     message?: string;
@@ -218,9 +226,13 @@ export class JobService {
     jobNumber,
     projectSlug,
   }: {
-    /** The number of the job. **/
+    /**
+     * The number of the job.
+     */
     jobNumber: any;
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
   }): CancelablePromise<{
     items: Array<{
@@ -261,9 +273,13 @@ export class JobService {
     jobNumber,
     projectSlug,
   }: {
-    /** The number of the job. **/
+    /**
+     * The number of the job.
+     */
     jobNumber: any;
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
   }): CancelablePromise<{
     items: Array<{

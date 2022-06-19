@@ -13,11 +13,17 @@ export class PipelineService {
     pageToken,
     mine,
   }: {
-    /** Org slug in the form `vcs-slug/org-name` **/
+    /**
+     * Org slug in the form `vcs-slug/org-name`
+     */
     orgSlug?: string;
-    /** A token to retrieve the next page of results. **/
+    /**
+     * A token to retrieve the next page of results.
+     */
     pageToken?: string;
-    /** Only include entries created by your user. **/
+    /**
+     * Only include entries created by your user.
+     */
     mine?: boolean;
   }): CancelablePromise<{
     items: Array<{
@@ -202,7 +208,9 @@ export class PipelineService {
   public static getPipelineById({
     pipelineId,
   }: {
-    /** The unique ID of the pipeline. **/
+    /**
+     * The unique ID of the pipeline.
+     */
     pipelineId: string;
   }): CancelablePromise<{
     /**
@@ -343,7 +351,9 @@ export class PipelineService {
   public static getPipelineConfigById({
     pipelineId,
   }: {
-    /** The unique ID of the pipeline. **/
+    /**
+     * The unique ID of the pipeline.
+     */
     pipelineId: string;
   }): CancelablePromise<{
     /**
@@ -381,9 +391,13 @@ export class PipelineService {
     pipelineId,
     pageToken,
   }: {
-    /** The unique ID of the pipeline. **/
+    /**
+     * The unique ID of the pipeline.
+     */
     pipelineId: string;
-    /** A token to retrieve the next page of results. **/
+    /**
+     * A token to retrieve the next page of results.
+     */
     pageToken?: string;
   }): CancelablePromise<{
     /**
@@ -465,7 +479,9 @@ export class PipelineService {
     projectSlug,
     requestBody,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
     requestBody?: {
       /**
@@ -505,11 +521,17 @@ export class PipelineService {
     branch,
     pageToken,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
-    /** The name of a vcs branch. **/
+    /**
+     * The name of a vcs branch.
+     */
     branch?: string;
-    /** A token to retrieve the next page of results. **/
+    /**
+     * A token to retrieve the next page of results.
+     */
     pageToken?: string;
   }): CancelablePromise<{
     items: Array<{
@@ -661,9 +683,13 @@ export class PipelineService {
     projectSlug,
     pageToken,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
-    /** A token to retrieve the next page of results. **/
+    /**
+     * A token to retrieve the next page of results.
+     */
     pageToken?: string;
   }): CancelablePromise<{
     items: Array<{
@@ -814,9 +840,13 @@ export class PipelineService {
     projectSlug,
     pipelineNumber,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
-    /** The number of the pipeline. **/
+    /**
+     * The number of the pipeline.
+     */
     pipelineNumber: any;
   }): CancelablePromise<{
     /**

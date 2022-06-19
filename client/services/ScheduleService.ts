@@ -12,9 +12,13 @@ export class ScheduleService {
     projectSlug,
     pageToken,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
-    /** A token to retrieve the next page of results. **/
+    /**
+     * A token to retrieve the next page of results.
+     */
     pageToken?: string;
   }): CancelablePromise<{
     items: Array<{
@@ -109,7 +113,9 @@ export class ScheduleService {
     projectSlug,
     requestBody,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
     requestBody?: {
       /**
@@ -170,7 +176,9 @@ export class ScheduleService {
   public static getScheduleById({
     scheduleId,
   }: {
-    /** The unique ID of the schedule. **/
+    /**
+     * The unique ID of the schedule.
+     */
     scheduleId: string;
   }): CancelablePromise<{
     /**
@@ -255,7 +263,9 @@ export class ScheduleService {
   public static deleteScheduleById({
     scheduleId,
   }: {
-    /** The unique ID of the schedule. **/
+    /**
+     * The unique ID of the schedule.
+     */
     scheduleId: string;
   }): CancelablePromise<{
     /**
@@ -281,7 +291,9 @@ export class ScheduleService {
     scheduleId,
     requestBody,
   }: {
-    /** The unique ID of the schedule. **/
+    /**
+     * The unique ID of the schedule.
+     */
     scheduleId: string;
     requestBody?: {
       /**

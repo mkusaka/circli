@@ -11,7 +11,9 @@ export class ProjectService {
   public static getProjectBySlug({
     projectSlug,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
   }): CancelablePromise<{
     /**
@@ -68,7 +70,9 @@ export class ProjectService {
     projectSlug,
     requestBody,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
     requestBody?: {
       /**
@@ -98,7 +102,9 @@ export class ProjectService {
   public static listCheckoutKeys({
     projectSlug,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
   }): CancelablePromise<{
     items: Array<{
@@ -146,9 +152,13 @@ export class ProjectService {
     projectSlug,
     fingerprint,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
-    /** An SSH key fingerprint. **/
+    /**
+     * An SSH key fingerprint.
+     */
     fingerprint: string;
   }): CancelablePromise<{
     /**
@@ -175,9 +185,13 @@ export class ProjectService {
     projectSlug,
     fingerprint,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
-    /** An SSH key fingerprint. **/
+    /**
+     * An SSH key fingerprint.
+     */
     fingerprint: string;
   }): CancelablePromise<{
     /**
@@ -220,7 +234,9 @@ export class ProjectService {
     projectSlug,
     requestBody,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
     requestBody?: {
       /**
@@ -254,7 +270,9 @@ export class ProjectService {
   public static listEnvVars({
     projectSlug,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
   }): CancelablePromise<{
     items: Array<{
@@ -290,9 +308,13 @@ export class ProjectService {
     projectSlug,
     name,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
-    /** The name of the environment variable. **/
+    /**
+     * The name of the environment variable.
+     */
     name: string;
   }): CancelablePromise<{
     /**
@@ -319,9 +341,13 @@ export class ProjectService {
     projectSlug,
     name,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
-    /** The name of the environment variable. **/
+    /**
+     * The name of the environment variable.
+     */
     name: string;
   }): CancelablePromise<{
     /**

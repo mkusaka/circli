@@ -19,18 +19,26 @@ export class InsightsService {
     branches,
     workflowNames,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
-    /** The time window used to calculate summary metrics. **/
+    /**
+     * The time window used to calculate summary metrics.
+     */
     reportingWindow?:
       | "last-7-days"
       | "last-90-days"
       | "last-24-hours"
       | "last-30-days"
       | "last-60-days";
-    /** The names of VCS branches to include in branch-level workflow metrics. **/
+    /**
+     * The names of VCS branches to include in branch-level workflow metrics.
+     */
     branches?: any;
-    /** The names of workflows to include in workflow-level metrics. **/
+    /**
+     * The names of workflows to include in workflow-level metrics.
+     */
     workflowNames?: any;
   }): CancelablePromise<{
     /**
@@ -229,17 +237,29 @@ export class InsightsService {
     startDate,
     endDate,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
-    /** The name of the workflow. **/
+    /**
+     * The name of the workflow.
+     */
     workflowName: string;
-    /** The name of a vcs branch. If not passed we will scope the API call to the default branch. **/
+    /**
+     * The name of a vcs branch. If not passed we will scope the API call to the default branch.
+     */
     branch?: string;
-    /** The granularity for which to query timeseries data. **/
+    /**
+     * The granularity for which to query timeseries data.
+     */
     timeseriesGranularity?: "daily" | "hourly";
-    /** Include only executions that started at or after this date. This must be specified if an end-date is provided. **/
+    /**
+     * Include only executions that started at or after this date. This must be specified if an end-date is provided.
+     */
     startDate?: string;
-    /** Include only executions that started before this date. This date can be at most 90 days after the start-date. **/
+    /**
+     * Include only executions that started before this date. This date can be at most 90 days after the start-date.
+     */
     endDate?: string;
   }): CancelablePromise<{
     /**
@@ -349,16 +369,22 @@ export class InsightsService {
     reportingWindow,
     projectNames,
   }: {
-    /** Org slug in the form `vcs-slug/org-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Org slug in the form `vcs-slug/org-name`. The `/` characters may be URL-escaped.
+     */
     orgSlug: string;
-    /** The time window used to calculate summary metrics. **/
+    /**
+     * The time window used to calculate summary metrics.
+     */
     reportingWindow?:
       | "last-7-days"
       | "last-90-days"
       | "last-24-hours"
       | "last-30-days"
       | "last-60-days";
-    /** List of project names. **/
+    /**
+     * List of project names.
+     */
     projectNames?: any;
   }): CancelablePromise<{
     /**
@@ -488,9 +514,13 @@ export class InsightsService {
     projectSlug,
     workflowName,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
-    /** The name of a workflow. If not passed we will scope the API call to the project. **/
+    /**
+     * The name of a workflow. If not passed we will scope the API call to the project.
+     */
     workflowName?: string;
   }): CancelablePromise<any> {
     return __request(OpenAPI, {
@@ -514,7 +544,9 @@ export class InsightsService {
   public static getFlakyTests({
     projectSlug,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
   }): CancelablePromise<{
     /**
@@ -589,15 +621,25 @@ export class InsightsService {
     branch,
     reportingWindow,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
-    /** A token to retrieve the next page of results. **/
+    /**
+     * A token to retrieve the next page of results.
+     */
     pageToken?: string;
-    /** Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. **/
+    /**
+     * Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter.
+     */
     allBranches?: boolean;
-    /** The name of a vcs branch. If not passed we will scope the API call to the default branch. **/
+    /**
+     * The name of a vcs branch. If not passed we will scope the API call to the default branch.
+     */
     branch?: string;
-    /** The time window used to calculate summary metrics. **/
+    /**
+     * The time window used to calculate summary metrics.
+     */
     reportingWindow?:
       | "last-7-days"
       | "last-90-days"
@@ -719,19 +761,33 @@ export class InsightsService {
     startDate,
     endDate,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
-    /** The name of the workflow. **/
+    /**
+     * The name of the workflow.
+     */
     workflowName: string;
-    /** Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. **/
+    /**
+     * Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter.
+     */
     allBranches?: boolean;
-    /** The name of a vcs branch. If not passed we will scope the API call to the default branch. **/
+    /**
+     * The name of a vcs branch. If not passed we will scope the API call to the default branch.
+     */
     branch?: string;
-    /** A token to retrieve the next page of results. **/
+    /**
+     * A token to retrieve the next page of results.
+     */
     pageToken?: string;
-    /** Include only executions that started at or after this date. This must be specified if an end-date is provided. **/
+    /**
+     * Include only executions that started at or after this date. This must be specified if an end-date is provided.
+     */
     startDate?: string;
-    /** Include only executions that started before this date. This date can be at most 90 days after the start-date. **/
+    /**
+     * Include only executions that started before this date. This date can be at most 90 days after the start-date.
+     */
     endDate?: string;
   }): CancelablePromise<{
     /**
@@ -802,17 +858,29 @@ export class InsightsService {
     branch,
     reportingWindow,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
-    /** The name of the workflow. **/
+    /**
+     * The name of the workflow.
+     */
     workflowName: string;
-    /** A token to retrieve the next page of results. **/
+    /**
+     * A token to retrieve the next page of results.
+     */
     pageToken?: string;
-    /** Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. **/
+    /**
+     * Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter.
+     */
     allBranches?: boolean;
-    /** The name of a vcs branch. If not passed we will scope the API call to the default branch. **/
+    /**
+     * The name of a vcs branch. If not passed we will scope the API call to the default branch.
+     */
     branch?: string;
-    /** The time window used to calculate summary metrics. **/
+    /**
+     * The time window used to calculate summary metrics.
+     */
     reportingWindow?:
       | "last-7-days"
       | "last-90-days"
@@ -924,13 +992,21 @@ export class InsightsService {
     allBranches,
     branches,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
-    /** The name of the workflow. **/
+    /**
+     * The name of the workflow.
+     */
     workflowName: string;
-    /** Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. **/
+    /**
+     * Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter.
+     */
     allBranches?: boolean;
-    /** The names of VCS branches to include in branch-level workflow metrics. **/
+    /**
+     * The names of VCS branches to include in branch-level workflow metrics.
+     */
     branches?: any;
   }): CancelablePromise<{
     /**
@@ -1067,13 +1143,21 @@ export class InsightsService {
     branch,
     allBranches,
   }: {
-    /** Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. **/
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
     projectSlug: string;
-    /** The name of the workflow. **/
+    /**
+     * The name of the workflow.
+     */
     workflowName: string;
-    /** The name of a vcs branch. If not passed we will scope the API call to the default branch. **/
+    /**
+     * The name of a vcs branch. If not passed we will scope the API call to the default branch.
+     */
     branch?: string;
-    /** Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. **/
+    /**
+     * Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter.
+     */
     allBranches?: boolean;
   }): CancelablePromise<{
     /**
