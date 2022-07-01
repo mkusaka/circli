@@ -143,6 +143,39 @@ export class ProjectService {
     });
   }
   /**
+   * Delete a checkout key
+   * Deletes the checkout key.
+   * @returns any A confirmation message.
+   * @throws ApiError
+   */
+  public static deleteCheckoutKey({
+    projectSlug,
+    fingerprint,
+  }: {
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
+    projectSlug: string;
+    /**
+     * An SSH key fingerprint.
+     */
+    fingerprint: string;
+  }): CancelablePromise<{
+    /**
+     * A human-readable message
+     */
+    message: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/project/{project-slug}/checkout-key/{fingerprint}",
+      path: {
+        "project-slug": projectSlug,
+        fingerprint: fingerprint,
+      },
+    });
+  }
+  /**
    * Get a checkout key
    * Returns an individual checkout key.
    * @returns any The checkout key.
@@ -192,35 +225,39 @@ export class ProjectService {
     });
   }
   /**
-   * Delete a checkout key
-   * Deletes the checkout key.
-   * @returns any A confirmation message.
+   * List all environment variables
+   * Returns four 'x' characters, in addition to the last four ASCII characters of the value, consistent with the display of environment variable values on the CircleCI website.
+   * @returns any A sequence of environment variables.
    * @throws ApiError
    */
-  public static deleteCheckoutKey({
+  public static listEnvVars({
     projectSlug,
-    fingerprint,
   }: {
     /**
      * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
      */
     projectSlug: string;
-    /**
-     * An SSH key fingerprint.
-     */
-    fingerprint: string;
   }): CancelablePromise<{
+    items: Array<{
+      /**
+       * The name of the environment variable.
+       */
+      name: string;
+      /**
+       * The value of the environment variable.
+       */
+      value: string;
+    }>;
     /**
-     * A human-readable message
+     * A token to pass as a `page-token` query parameter to return the next page of results.
      */
-    message: string;
+    next_page_token: string;
   }> {
     return __request(OpenAPI, {
-      method: "DELETE",
-      url: "/project/{project-slug}/checkout-key/{fingerprint}",
+      method: "GET",
+      url: "/project/{project-slug}/envvar",
       path: {
         "project-slug": projectSlug,
-        fingerprint: fingerprint,
       },
     });
   }
@@ -262,76 +299,6 @@ export class ProjectService {
     });
   }
   /**
-   * List all environment variables
-   * Returns four 'x' characters, in addition to the last four ASCII characters of the value, consistent with the display of environment variable values on the CircleCI website.
-   * @returns any A sequence of environment variables.
-   * @throws ApiError
-   */
-  public static listEnvVars({
-    projectSlug,
-  }: {
-    /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
-     */
-    projectSlug: string;
-  }): CancelablePromise<{
-    items: Array<{
-      /**
-       * The name of the environment variable.
-       */
-      name: string;
-      /**
-       * The value of the environment variable.
-       */
-      value: string;
-    }>;
-    /**
-     * A token to pass as a `page-token` query parameter to return the next page of results.
-     */
-    next_page_token: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/project/{project-slug}/envvar",
-      path: {
-        "project-slug": projectSlug,
-      },
-    });
-  }
-  /**
-   * Delete an environment variable
-   * Deletes the environment variable named :name.
-   * @returns any A confirmation message.
-   * @throws ApiError
-   */
-  public static deleteEnvVar({
-    projectSlug,
-    name,
-  }: {
-    /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
-     */
-    projectSlug: string;
-    /**
-     * The name of the environment variable.
-     */
-    name: string;
-  }): CancelablePromise<{
-    /**
-     * A human-readable message
-     */
-    message: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "DELETE",
-      url: "/project/{project-slug}/envvar/{name}",
-      path: {
-        "project-slug": projectSlug,
-        name: name,
-      },
-    });
-  }
-  /**
    * Get a masked environment variable
    * Returns the masked value of environment variable :name.
    * @returns any The environment variable.
@@ -361,6 +328,39 @@ export class ProjectService {
   }> {
     return __request(OpenAPI, {
       method: "GET",
+      url: "/project/{project-slug}/envvar/{name}",
+      path: {
+        "project-slug": projectSlug,
+        name: name,
+      },
+    });
+  }
+  /**
+   * Delete an environment variable
+   * Deletes the environment variable named :name.
+   * @returns any A confirmation message.
+   * @throws ApiError
+   */
+  public static deleteEnvVar({
+    projectSlug,
+    name,
+  }: {
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
+    projectSlug: string;
+    /**
+     * The name of the environment variable.
+     */
+    name: string;
+  }): CancelablePromise<{
+    /**
+     * A human-readable message
+     */
+    message: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "DELETE",
       url: "/project/{project-slug}/envvar/{name}",
       path: {
         "project-slug": projectSlug,
