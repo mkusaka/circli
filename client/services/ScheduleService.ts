@@ -46,6 +46,10 @@ export class ScheduleService {
               "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
             >;
             /**
+             * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
+             */
+            "days-of-month"?: Array<number>;
+            /**
              * Months in which the schedule triggers.
              */
             months?: Array<
@@ -76,6 +80,12 @@ export class ScheduleService {
              * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
              */
             "days-of-month": Array<number>;
+            /**
+             * Days in a week in which the schedule triggers.
+             */
+            "days-of-week"?: Array<
+              "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
+            >;
             /**
              * Months in which the schedule triggers.
              */
@@ -191,6 +201,10 @@ export class ScheduleService {
               "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
             >;
             /**
+             * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
+             */
+            "days-of-month"?: Array<number>;
+            /**
              * Months in which the schedule triggers.
              */
             months?: Array<
@@ -221,6 +235,12 @@ export class ScheduleService {
              * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
              */
             "days-of-month": Array<number>;
+            /**
+             * Days in a week in which the schedule triggers.
+             */
+            "days-of-week"?: Array<
+              "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
+            >;
             /**
              * Months in which the schedule triggers.
              */
@@ -303,6 +323,10 @@ export class ScheduleService {
             "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
           >;
           /**
+           * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
+           */
+          "days-of-month"?: Array<number>;
+          /**
            * Months in which the schedule triggers.
            */
           months?: Array<
@@ -333,6 +357,12 @@ export class ScheduleService {
            * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
            */
           "days-of-month": Array<number>;
+          /**
+           * Days in a week in which the schedule triggers.
+           */
+          "days-of-week"?: Array<
+            "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
+          >;
           /**
            * Months in which the schedule triggers.
            */
@@ -427,71 +457,43 @@ export class ScheduleService {
       /**
        * Timetable that specifies when a schedule triggers.
        */
-      timetable?:
-        | {
-            /**
-             * Number of times a schedule triggers per hour, value must be between 1 and 60
-             */
-            "per-hour"?: number;
-            /**
-             * Hours in a day in which the schedule triggers.
-             */
-            "hours-of-day"?: Array<number>;
-            /**
-             * Days in a week in which the schedule triggers.
-             */
-            "days-of-week"?: Array<
-              "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
-            >;
-            /**
-             * Months in which the schedule triggers.
-             */
-            months?: Array<
-              | "MAR"
-              | "NOV"
-              | "DEC"
-              | "JUN"
-              | "MAY"
-              | "OCT"
-              | "FEB"
-              | "APR"
-              | "SEP"
-              | "AUG"
-              | "JAN"
-              | "JUL"
-            >;
-          }
-        | {
-            /**
-             * Number of times a schedule triggers per hour, value must be between 1 and 60
-             */
-            "per-hour"?: number;
-            /**
-             * Hours in a day in which the schedule triggers.
-             */
-            "hours-of-day"?: Array<number>;
-            /**
-             * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
-             */
-            "days-of-month"?: Array<number>;
-            /**
-             * Months in which the schedule triggers.
-             */
-            months?: Array<
-              | "MAR"
-              | "NOV"
-              | "DEC"
-              | "JUN"
-              | "MAY"
-              | "OCT"
-              | "FEB"
-              | "APR"
-              | "SEP"
-              | "AUG"
-              | "JAN"
-              | "JUL"
-            >;
-          };
+      timetable?: {
+        /**
+         * Number of times a schedule triggers per hour, value must be between 1 and 60
+         */
+        "per-hour"?: number;
+        /**
+         * Hours in a day in which the schedule triggers.
+         */
+        "hours-of-day"?: Array<number>;
+        /**
+         * Days in a week in which the schedule triggers.
+         */
+        "days-of-week"?: Array<
+          "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
+        >;
+        /**
+         * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
+         */
+        "days-of-month"?: Array<number>;
+        /**
+         * Months in which the schedule triggers.
+         */
+        months?: Array<
+          | "MAR"
+          | "NOV"
+          | "DEC"
+          | "JUN"
+          | "MAY"
+          | "OCT"
+          | "FEB"
+          | "APR"
+          | "SEP"
+          | "AUG"
+          | "JAN"
+          | "JUL"
+        >;
+      };
       /**
        * The attribution-actor of the scheduled pipeline.
        */
@@ -526,6 +528,10 @@ export class ScheduleService {
             "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
           >;
           /**
+           * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
+           */
+          "days-of-month"?: Array<number>;
+          /**
            * Months in which the schedule triggers.
            */
           months?: Array<
@@ -556,6 +562,12 @@ export class ScheduleService {
            * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
            */
           "days-of-month": Array<number>;
+          /**
+           * Days in a week in which the schedule triggers.
+           */
+          "days-of-week"?: Array<
+            "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
+          >;
           /**
            * Months in which the schedule triggers.
            */
