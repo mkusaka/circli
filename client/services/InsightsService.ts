@@ -233,7 +233,7 @@ export class InsightsService {
     projectSlug,
     workflowName,
     branch,
-    timeseriesGranularity,
+    granularity,
     startDate,
     endDate,
   }: {
@@ -252,7 +252,7 @@ export class InsightsService {
     /**
      * The granularity for which to query timeseries data.
      */
-    timeseriesGranularity?: "daily" | "hourly";
+    granularity?: "daily" | "hourly";
     /**
      * Include only executions that started at or after this date. This must be specified if an end-date is provided.
      */
@@ -351,7 +351,7 @@ export class InsightsService {
       },
       query: {
         branch: branch,
-        "timeseries-granularity": timeseriesGranularity,
+        granularity: granularity,
         "start-date": startDate,
         "end-date": endDate,
       },
@@ -1010,7 +1010,7 @@ export class InsightsService {
     branches?: any;
   }): CancelablePromise<{
     /**
-     * Metrics aggregated acrooss a workflow for a given time window.
+     * Metrics aggregated across a workflow for a given time window.
      */
     metrics: {
       /**
@@ -1077,7 +1077,7 @@ export class InsightsService {
       throughput: number;
     };
     /**
-     * Trends for aggregated metrics acrooss a workflow for a given time window.
+     * Trends for aggregated metrics across a workflow for a given time window.
      */
     trends: {
       /**
