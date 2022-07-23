@@ -136,6 +136,32 @@ export class WebhookService {
     });
   }
   /**
+   * Delete a webhook
+   * @returns any A confirmation message
+   * @throws ApiError
+   */
+  public static deleteWebhook({
+    webhookId,
+  }: {
+    /**
+     * ID of the webhook (UUID)
+     */
+    webhookId: string;
+  }): CancelablePromise<{
+    /**
+     * A human-readable message
+     */
+    message: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/webhook/{webhook-id}",
+      path: {
+        "webhook-id": webhookId,
+      },
+    });
+  }
+  /**
    * Update a webhook
    * @returns any A webhook
    * @throws ApiError
@@ -289,32 +315,6 @@ export class WebhookService {
   }> {
     return __request(OpenAPI, {
       method: "GET",
-      url: "/webhook/{webhook-id}",
-      path: {
-        "webhook-id": webhookId,
-      },
-    });
-  }
-  /**
-   * Delete a webhook
-   * @returns any A confirmation message
-   * @throws ApiError
-   */
-  public static deleteWebhook({
-    webhookId,
-  }: {
-    /**
-     * ID of the webhook (UUID)
-     */
-    webhookId: string;
-  }): CancelablePromise<{
-    /**
-     * A human-readable message
-     */
-    message: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "DELETE",
       url: "/webhook/{webhook-id}",
       path: {
         "webhook-id": webhookId,
