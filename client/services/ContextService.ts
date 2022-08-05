@@ -3,62 +3,6 @@ import { OpenAPI } from "../core/OpenAPI.ts";
 import { request as __request } from "../core/request.ts";
 export class ContextService {
   /**
-   * Create a new context
-   * @returns any The new context
-   * @throws ApiError
-   */
-  public static createContext({
-    requestBody,
-  }: {
-    requestBody?: {
-      /**
-       * The user defined name of the context.
-       */
-      name: string;
-      owner:
-        | {
-            /**
-             * The unique ID of the owner of the context. Specify either this or slug.
-             */
-            id: string;
-            /**
-             * The type of the owner. Defaults to "organization". Accounts are only used as context owners in server.
-             */
-            type?: "account" | "organization";
-          }
-        | {
-            /**
-             * A string that represents an organization. Specify either this or id. Cannot be used for accounts.
-             */
-            slug: string;
-            /**
-             * The type of owner. Defaults to "organization". Accounts are only used as context owners in server and must be specified by an id instead of a slug.
-             */
-            type?: "organization";
-          };
-    };
-  }): CancelablePromise<{
-    /**
-     * The unique ID of the context.
-     */
-    id: string;
-    /**
-     * The user defined name of the context.
-     */
-    name: string;
-    /**
-     * The date and time the context was created.
-     */
-    created_at: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "POST",
-      url: "/context",
-      body: requestBody,
-      mediaType: "application/json",
-    });
-  }
-  /**
    * List contexts
    * List all contexts for an owner.
    * @returns any A paginated list of contexts
@@ -118,29 +62,59 @@ export class ContextService {
     });
   }
   /**
-   * Delete a context
-   * @returns any A confirmation message
+   * Create a new context
+   * @returns any The new context
    * @throws ApiError
    */
-  public static deleteContext({
-    contextId,
+  public static createContext({
+    requestBody,
   }: {
-    /**
-     * ID of the context (UUID)
-     */
-    contextId: string;
+    requestBody?: {
+      /**
+       * The user defined name of the context.
+       */
+      name: string;
+      owner:
+        | {
+            /**
+             * The unique ID of the owner of the context. Specify either this or slug.
+             */
+            id: string;
+            /**
+             * The type of the owner. Defaults to "organization". Accounts are only used as context owners in server.
+             */
+            type?: "account" | "organization";
+          }
+        | {
+            /**
+             * A string that represents an organization. Specify either this or id. Cannot be used for accounts.
+             */
+            slug: string;
+            /**
+             * The type of owner. Defaults to "organization". Accounts are only used as context owners in server and must be specified by an id instead of a slug.
+             */
+            type?: "organization";
+          };
+    };
   }): CancelablePromise<{
     /**
-     * A human-readable message
+     * The unique ID of the context.
      */
-    message: string;
+    id: string;
+    /**
+     * The user defined name of the context.
+     */
+    name: string;
+    /**
+     * The date and time the context was created.
+     */
+    created_at: string;
   }> {
     return __request(OpenAPI, {
-      method: "DELETE",
-      url: "/context/{context-id}",
-      path: {
-        "context-id": contextId,
-      },
+      method: "POST",
+      url: "/context",
+      body: requestBody,
+      mediaType: "application/json",
     });
   }
   /**
@@ -172,6 +146,32 @@ export class ContextService {
   }> {
     return __request(OpenAPI, {
       method: "GET",
+      url: "/context/{context-id}",
+      path: {
+        "context-id": contextId,
+      },
+    });
+  }
+  /**
+   * Delete a context
+   * @returns any A confirmation message
+   * @throws ApiError
+   */
+  public static deleteContext({
+    contextId,
+  }: {
+    /**
+     * ID of the context (UUID)
+     */
+    contextId: string;
+  }): CancelablePromise<{
+    /**
+     * A human-readable message
+     */
+    message: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "DELETE",
       url: "/context/{context-id}",
       path: {
         "context-id": contextId,
@@ -215,39 +215,6 @@ export class ContextService {
       method: "GET",
       url: "/context/{context-id}/environment-variable",
       path: {
-        "context-id": contextId,
-      },
-    });
-  }
-  /**
-   * Remove an environment variable
-   * Delete an environment variable from a context.
-   * @returns any A confirmation message
-   * @throws ApiError
-   */
-  public static deleteEnvironmentVariableFromContext({
-    envVarName,
-    contextId,
-  }: {
-    /**
-     * The name of the environment variable
-     */
-    envVarName: string;
-    /**
-     * ID of the context (UUID)
-     */
-    contextId: string;
-  }): CancelablePromise<{
-    /**
-     * A human-readable message
-     */
-    message: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "DELETE",
-      url: "/context/{context-id}/environment-variable/{env-var-name}",
-      path: {
-        "env-var-name": envVarName,
         "context-id": contextId,
       },
     });
@@ -308,6 +275,39 @@ export class ContextService {
       },
       body: requestBody,
       mediaType: "application/json",
+    });
+  }
+  /**
+   * Remove an environment variable
+   * Delete an environment variable from a context.
+   * @returns any A confirmation message
+   * @throws ApiError
+   */
+  public static deleteEnvironmentVariableFromContext({
+    envVarName,
+    contextId,
+  }: {
+    /**
+     * The name of the environment variable
+     */
+    envVarName: string;
+    /**
+     * ID of the context (UUID)
+     */
+    contextId: string;
+  }): CancelablePromise<{
+    /**
+     * A human-readable message
+     */
+    message: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/context/{context-id}/environment-variable/{env-var-name}",
+      path: {
+        "env-var-name": envVarName,
+        "context-id": contextId,
+      },
     });
   }
 }
