@@ -143,39 +143,6 @@ export class ProjectService {
     });
   }
   /**
-   * Delete a checkout key
-   * Deletes the checkout key.
-   * @returns any A confirmation message.
-   * @throws ApiError
-   */
-  public static deleteCheckoutKey({
-    projectSlug,
-    fingerprint,
-  }: {
-    /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
-     */
-    projectSlug: string;
-    /**
-     * An SSH key fingerprint.
-     */
-    fingerprint: string;
-  }): CancelablePromise<{
-    /**
-     * A human-readable message
-     */
-    message: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "DELETE",
-      url: "/project/{project-slug}/checkout-key/{fingerprint}",
-      path: {
-        "project-slug": projectSlug,
-        fingerprint: fingerprint,
-      },
-    });
-  }
-  /**
    * Get a checkout key
    * Returns an individual checkout key.
    * @returns any The checkout key.
@@ -217,6 +184,39 @@ export class ProjectService {
   }> {
     return __request(OpenAPI, {
       method: "GET",
+      url: "/project/{project-slug}/checkout-key/{fingerprint}",
+      path: {
+        "project-slug": projectSlug,
+        fingerprint: fingerprint,
+      },
+    });
+  }
+  /**
+   * Delete a checkout key
+   * Deletes the checkout key.
+   * @returns any A confirmation message.
+   * @throws ApiError
+   */
+  public static deleteCheckoutKey({
+    projectSlug,
+    fingerprint,
+  }: {
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
+    projectSlug: string;
+    /**
+     * An SSH key fingerprint.
+     */
+    fingerprint: string;
+  }): CancelablePromise<{
+    /**
+     * A human-readable message
+     */
+    message: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "DELETE",
       url: "/project/{project-slug}/checkout-key/{fingerprint}",
       path: {
         "project-slug": projectSlug,
