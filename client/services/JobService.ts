@@ -189,7 +189,7 @@ export class JobService {
   /**
    * Cancel job
    * Cancel job with a given job number.
-   * @returns any Error response.
+   * @returns any
    * @throws ApiError
    */
   public static cancelJob({
@@ -205,7 +205,10 @@ export class JobService {
      */
     projectSlug: string;
   }): CancelablePromise<{
-    message?: string;
+    /**
+     * A human-readable message
+     */
+    message: string;
   }> {
     return __request(OpenAPI, {
       method: "POST",
