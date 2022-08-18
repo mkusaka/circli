@@ -286,6 +286,33 @@ export class ScheduleService {
     });
   }
   /**
+   * Delete a schedule
+   * Deletes the schedule by id.
+   * @returns any A confirmation message.
+   * @throws ApiError
+   */
+  public static deleteScheduleById({
+    scheduleId,
+  }: {
+    /**
+     * The unique ID of the schedule.
+     */
+    scheduleId: string;
+  }): CancelablePromise<{
+    /**
+     * A human-readable message
+     */
+    message: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/schedule/{schedule-id}",
+      path: {
+        "schedule-id": scheduleId,
+      },
+    });
+  }
+  /**
    * Update a schedule
    * Updates a schedule and returns the updated schedule.
    * @returns any A schedule object.
@@ -632,33 +659,6 @@ export class ScheduleService {
   }> {
     return __request(OpenAPI, {
       method: "GET",
-      url: "/schedule/{schedule-id}",
-      path: {
-        "schedule-id": scheduleId,
-      },
-    });
-  }
-  /**
-   * Delete a schedule
-   * Deletes the schedule by id.
-   * @returns any A confirmation message.
-   * @throws ApiError
-   */
-  public static deleteScheduleById({
-    scheduleId,
-  }: {
-    /**
-     * The unique ID of the schedule.
-     */
-    scheduleId: string;
-  }): CancelablePromise<{
-    /**
-     * A human-readable message
-     */
-    message: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "DELETE",
       url: "/schedule/{schedule-id}",
       path: {
         "schedule-id": scheduleId,
