@@ -4264,71 +4264,6 @@
       }
     },
     "/project/{project-slug}/checkout-key/{fingerprint}": {
-      "delete": {
-        "summary": "Delete a checkout key",
-        "description": "Deletes the checkout key.",
-        "tags": ["Project"],
-        "operationId": "deleteCheckoutKey",
-        "responses": {
-          "200": {
-            "description": "A confirmation message.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "A human-readable message"
-                    }
-                  },
-                  "required": ["message"],
-                  "description": "message response",
-                  "title": "MessageResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "project-slug",
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "example": "gh/CircleCI-Public/api-preview-docs",
-            "allowReserved": true
-          },
-          {
-            "in": "path",
-            "name": "fingerprint",
-            "description": "An SSH key fingerprint.",
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "example": "c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f"
-          }
-        ]
-      },
       "get": {
         "summary": "Get a checkout key",
         "description": "Returns an individual checkout key.",
@@ -4379,6 +4314,71 @@
                     "created-at"
                   ],
                   "title": "CheckoutKey"
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project-slug",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "gh/CircleCI-Public/api-preview-docs",
+            "allowReserved": true
+          },
+          {
+            "in": "path",
+            "name": "fingerprint",
+            "description": "An SSH key fingerprint.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f"
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a checkout key",
+        "description": "Deletes the checkout key.",
+        "tags": ["Project"],
+        "operationId": "deleteCheckoutKey",
+        "responses": {
+          "200": {
+            "description": "A confirmation message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A human-readable message"
+                    }
+                  },
+                  "required": ["message"],
+                  "description": "message response",
+                  "title": "MessageResponse"
                 }
               }
             }
@@ -4585,27 +4585,32 @@
       }
     },
     "/project/{project-slug}/envvar/{name}": {
-      "delete": {
-        "summary": "Delete an environment variable",
-        "description": "Deletes the environment variable named :name.",
+      "get": {
+        "summary": "Get a masked environment variable",
+        "description": "Returns the masked value of environment variable :name.",
         "tags": ["Project"],
-        "operationId": "deleteEnvVar",
+        "operationId": "getEnvVar",
         "responses": {
           "200": {
-            "description": "A confirmation message.",
+            "description": "The environment variable.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "name": {
                       "type": "string",
-                      "description": "A human-readable message"
+                      "description": "The name of the environment variable.",
+                      "example": "foo"
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "The value of the environment variable.",
+                      "example": "xxxx1234"
                     }
                   },
-                  "required": ["message"],
-                  "description": "message response",
-                  "title": "MessageResponse"
+                  "required": ["name", "value"],
+                  "title": "EnvironmentVariablePair"
                 }
               }
             }
@@ -4650,32 +4655,27 @@
           }
         ]
       },
-      "get": {
-        "summary": "Get a masked environment variable",
-        "description": "Returns the masked value of environment variable :name.",
+      "delete": {
+        "summary": "Delete an environment variable",
+        "description": "Deletes the environment variable named :name.",
         "tags": ["Project"],
-        "operationId": "getEnvVar",
+        "operationId": "deleteEnvVar",
         "responses": {
           "200": {
-            "description": "The environment variable.",
+            "description": "A confirmation message.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "name": {
+                    "message": {
                       "type": "string",
-                      "description": "The name of the environment variable.",
-                      "example": "foo"
-                    },
-                    "value": {
-                      "type": "string",
-                      "description": "The value of the environment variable.",
-                      "example": "xxxx1234"
+                      "description": "A human-readable message"
                     }
                   },
-                  "required": ["name", "value"],
-                  "title": "EnvironmentVariablePair"
+                  "required": ["message"],
+                  "description": "message response",
+                  "title": "MessageResponse"
                 }
               }
             }
@@ -5071,129 +5071,6 @@
       }
     },
     "/project/{project-slug}/pipeline": {
-      "post": {
-        "summary": "Trigger a new pipeline",
-        "description": "Triggers a new pipeline on the project.",
-        "tags": ["Pipeline"],
-        "operationId": "triggerPipeline",
-        "responses": {
-          "201": {
-            "description": "The created pipeline.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid",
-                      "description": "The unique ID of the pipeline.",
-                      "example": "5034460f-c7c4-4c43-9457-de07e2029e7b"
-                    },
-                    "state": {
-                      "enum": [
-                        "created",
-                        "errored",
-                        "setup-pending",
-                        "setup",
-                        "pending"
-                      ],
-                      "type": "string",
-                      "description": "The current state of the pipeline."
-                    },
-                    "number": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "The number of the pipeline.",
-                      "example": "25"
-                    },
-                    "created_at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "The date and time the pipeline was created."
-                    }
-                  },
-                  "required": ["id", "state", "number", "created_at"],
-                  "description": "A pipeline creation response.",
-                  "title": "PipelineCreation"
-                }
-              }
-            }
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "project-slug",
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "example": "gh/CircleCI-Public/api-preview-docs",
-            "allowReserved": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "branch": {
-                    "type": "string",
-                    "description": "The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).",
-                    "example": "feature/design-new-api"
-                  },
-                  "tag": {
-                    "type": "string",
-                    "description": "The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.",
-                    "example": "v3.1.4159"
-                  },
-                  "parameters": {
-                    "type": "object",
-                    "additionalProperties": {
-                      "anyOf": [
-                        {
-                          "type": "integer"
-                        },
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "boolean"
-                        }
-                      ]
-                    },
-                    "description": "An object containing pipeline parameters and their values.",
-                    "example": {
-                      "deploy_prod": true
-                    }
-                  }
-                },
-                "x-nullable": true,
-                "description": "The information you can supply when triggering a pipeline.",
-                "title": "TriggerPipelineParameters"
-              }
-            }
-          }
-        }
-      },
       "get": {
         "summary": "Get all pipelines",
         "description": "Returns all pipelines for this project.",
@@ -5490,6 +5367,129 @@
             "allowEmptyValue": true
           }
         ]
+      },
+      "post": {
+        "summary": "Trigger a new pipeline",
+        "description": "Triggers a new pipeline on the project.",
+        "tags": ["Pipeline"],
+        "operationId": "triggerPipeline",
+        "responses": {
+          "201": {
+            "description": "The created pipeline.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid",
+                      "description": "The unique ID of the pipeline.",
+                      "example": "5034460f-c7c4-4c43-9457-de07e2029e7b"
+                    },
+                    "state": {
+                      "enum": [
+                        "created",
+                        "errored",
+                        "setup-pending",
+                        "setup",
+                        "pending"
+                      ],
+                      "type": "string",
+                      "description": "The current state of the pipeline."
+                    },
+                    "number": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "The number of the pipeline.",
+                      "example": "25"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date and time the pipeline was created."
+                    }
+                  },
+                  "required": ["id", "state", "number", "created_at"],
+                  "description": "A pipeline creation response.",
+                  "title": "PipelineCreation"
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project-slug",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "gh/CircleCI-Public/api-preview-docs",
+            "allowReserved": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "branch": {
+                    "type": "string",
+                    "description": "The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).",
+                    "example": "feature/design-new-api"
+                  },
+                  "tag": {
+                    "type": "string",
+                    "description": "The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.",
+                    "example": "v3.1.4159"
+                  },
+                  "parameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "boolean"
+                        }
+                      ]
+                    },
+                    "description": "An object containing pipeline parameters and their values.",
+                    "example": {
+                      "deploy_prod": true
+                    }
+                  }
+                },
+                "x-nullable": true,
+                "description": "The information you can supply when triggering a pipeline.",
+                "title": "TriggerPipelineParameters"
+              }
+            }
+          }
+        }
       }
     },
     "/project/{project-slug}/pipeline/mine": {
@@ -7053,6 +7053,60 @@
       }
     },
     "/schedule/{schedule-id}": {
+      "delete": {
+        "summary": "Delete a schedule",
+        "description": "Deletes the schedule by id.",
+        "tags": ["Schedule"],
+        "operationId": "deleteScheduleById",
+        "responses": {
+          "200": {
+            "description": "A confirmation message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A human-readable message"
+                    }
+                  },
+                  "required": ["message"],
+                  "description": "message response",
+                  "title": "MessageResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "schedule-id",
+            "description": "The unique ID of the schedule.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ]
+      },
       "patch": {
         "summary": "Update a schedule",
         "description": "Updates a schedule and returns the updated schedule.",
@@ -7731,60 +7785,6 @@
             "required": true
           }
         ]
-      },
-      "delete": {
-        "summary": "Delete a schedule",
-        "description": "Deletes the schedule by id.",
-        "tags": ["Schedule"],
-        "operationId": "deleteScheduleById",
-        "responses": {
-          "200": {
-            "description": "A confirmation message.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "A human-readable message"
-                    }
-                  },
-                  "required": ["message"],
-                  "description": "message response",
-                  "title": "MessageResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "schedule-id",
-            "description": "The unique ID of the schedule.",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "required": true
-          }
-        ]
       }
     },
     "/user/{id}": {
@@ -8160,6 +8160,59 @@
       }
     },
     "/webhook/{webhook-id}": {
+      "delete": {
+        "summary": "Delete a webhook",
+        "tags": ["Webhook"],
+        "operationId": "deleteWebhook",
+        "responses": {
+          "200": {
+            "description": "A confirmation message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A human-readable message"
+                    }
+                  },
+                  "required": ["message"],
+                  "description": "message response",
+                  "title": "MessageResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "webhook-id",
+            "description": "ID of the webhook (UUID)",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ]
+      },
       "put": {
         "summary": "Update a webhook",
         "tags": ["Webhook"],
@@ -8310,59 +8363,6 @@
             }
           }
         }
-      },
-      "delete": {
-        "summary": "Delete a webhook",
-        "tags": ["Webhook"],
-        "operationId": "deleteWebhook",
-        "responses": {
-          "200": {
-            "description": "A confirmation message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "A human-readable message"
-                    }
-                  },
-                  "required": ["message"],
-                  "description": "message response",
-                  "title": "MessageResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "webhook-id",
-            "description": "ID of the webhook (UUID)",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "required": true
-          }
-        ]
       },
       "get": {
         "summary": "Get a webhook",
