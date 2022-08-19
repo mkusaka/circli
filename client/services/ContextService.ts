@@ -220,39 +220,6 @@ export class ContextService {
     });
   }
   /**
-   * Remove an environment variable
-   * Delete an environment variable from a context.
-   * @returns any A confirmation message
-   * @throws ApiError
-   */
-  public static deleteEnvironmentVariableFromContext({
-    envVarName,
-    contextId,
-  }: {
-    /**
-     * The name of the environment variable
-     */
-    envVarName: string;
-    /**
-     * ID of the context (UUID)
-     */
-    contextId: string;
-  }): CancelablePromise<{
-    /**
-     * A human-readable message
-     */
-    message: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "DELETE",
-      url: "/context/{context-id}/environment-variable/{env-var-name}",
-      path: {
-        "env-var-name": envVarName,
-        "context-id": contextId,
-      },
-    });
-  }
-  /**
    * Add or update an environment variable
    * Create or update an environment variable within a context. Returns information about the environment variable, not including its value.
    * @returns any The new environment variable
@@ -308,6 +275,39 @@ export class ContextService {
       },
       body: requestBody,
       mediaType: "application/json",
+    });
+  }
+  /**
+   * Remove an environment variable
+   * Delete an environment variable from a context.
+   * @returns any A confirmation message
+   * @throws ApiError
+   */
+  public static deleteEnvironmentVariableFromContext({
+    envVarName,
+    contextId,
+  }: {
+    /**
+     * The name of the environment variable
+     */
+    envVarName: string;
+    /**
+     * ID of the context (UUID)
+     */
+    contextId: string;
+  }): CancelablePromise<{
+    /**
+     * A human-readable message
+     */
+    message: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/context/{context-id}/environment-variable/{env-var-name}",
+      path: {
+        "env-var-name": envVarName,
+        "context-id": contextId,
+      },
     });
   }
 }
