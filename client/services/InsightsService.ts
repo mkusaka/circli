@@ -550,7 +550,7 @@ export class InsightsService {
     projectSlug: string;
   }): CancelablePromise<{
     /**
-     * A list of flaky tests
+     * A list of all instances of flakes. Note that a test is no longer considered flaky after 2 weeks have passed without a flake. Each flake resets this timer.
      */
     "flaky-tests": Array<{
       "time-wasted"?: number;
@@ -599,6 +599,10 @@ export class InsightsService {
        */
       file: string;
     }>;
+    /**
+     * A count of unique tests that have failed. If your project has N tests that have flaked multiple times each, this will be equal to N.
+     */
+    "total-flaky-tests": number;
   }> {
     return __request(OpenAPI, {
       method: "GET",
