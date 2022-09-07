@@ -537,7 +537,7 @@ export class InsightsService {
   /**
    * Get flaky tests for a project
    * Get a list of flaky tests for a given project. Flaky tests are branch agnostic.
-   * A flaky test is a test that passed and faliled in the same commit.
+   * A flaky test is a test that passed and failed in the same commit.
    * @returns any A list of flaky tests for a project
    * @throws ApiError
    */
