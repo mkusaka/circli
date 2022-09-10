@@ -506,7 +506,7 @@ export class InsightsService {
   }
   /**
    * Get all branches for a project
-   * Get a list of all branches for a specified project. The list will only contain branches currently available within Insights.
+   * Get a list of all branches for a specified project. The list will only contain branches currently available within Insights. The maximum number of branches returned by this endpoint is 5,000.
    * @returns any A list of branches for a project
    * @throws ApiError
    */
