@@ -118,32 +118,6 @@ export class ContextService {
     });
   }
   /**
-   * Delete a context
-   * @returns any A confirmation message
-   * @throws ApiError
-   */
-  public static deleteContext({
-    contextId,
-  }: {
-    /**
-     * ID of the context (UUID)
-     */
-    contextId: string;
-  }): CancelablePromise<{
-    /**
-     * A human-readable message
-     */
-    message: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "DELETE",
-      url: "/context/{context-id}",
-      path: {
-        "context-id": contextId,
-      },
-    });
-  }
-  /**
    * Get a context
    * Returns basic information about a context.
    * @returns any The context
@@ -172,6 +146,32 @@ export class ContextService {
   }> {
     return __request(OpenAPI, {
       method: "GET",
+      url: "/context/{context-id}",
+      path: {
+        "context-id": contextId,
+      },
+    });
+  }
+  /**
+   * Delete a context
+   * @returns any A confirmation message
+   * @throws ApiError
+   */
+  public static deleteContext({
+    contextId,
+  }: {
+    /**
+     * ID of the context (UUID)
+     */
+    contextId: string;
+  }): CancelablePromise<{
+    /**
+     * A human-readable message
+     */
+    message: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "DELETE",
       url: "/context/{context-id}",
       path: {
         "context-id": contextId,
