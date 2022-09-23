@@ -14,12 +14,13 @@
     "fast-glob": "^3.2.12",
     "openapi-typescript-codegen": "^0.23.0",
     "prettier": "^2.7.1",
+    "sort-json": "^2.0.1",
     "typescript": "^4.8.3"
   },
   "scripts": {
     "bump:patch": "npm version patch",
     "update": "concurrently -m 1 \"npm:update:*\" && prettier --write './**/*.{json,ts}' && yarn gen && yarn transform",
-    "update:swagger": "curl -o swagger.json https://circleci.com/api/v2/openapi.json",
+    "update:swagger": "curl -o swagger.json https://circleci.com/api/v2/openapi.json && yarn sortswagger",
     "gen": "openapi -i swagger.json -o client --useOptions --useUnionTypes --indent 2",
     "run": "deno run -A main.ts",
     "transform": "ncc run transform.ts",
@@ -37,6 +38,6 @@
     "upload:Mac:amd64": "gh release upload \"$(git describe --tags --abbrev=0)\" circli_Darwin_x86_64.tar.gz",
     "upload:Mac:arm64": "gh release upload \"$(git describe --tags --abbrev=0)\" circli_Darwin_arm64.tar.gz",
     "gen:swaggerdts": " npx json-dts-gen swagger.json",
-    "sorter": "ncc run sorter.ts --transpile-only --v8-cache && yarn prettier --write swagger.json"
+    "sortswagger": "sort-json swagger.json && yarn prettier --write swagger.json"
   }
 }
