@@ -37,6 +37,6 @@
     "upload:Mac:amd64": "gh release upload \"$(git describe --tags --abbrev=0)\" circli_Darwin_x86_64.tar.gz",
     "upload:Mac:arm64": "gh release upload \"$(git describe --tags --abbrev=0)\" circli_Darwin_arm64.tar.gz",
     "gen:swaggerdts": " npx json-dts-gen swagger.json",
-    "sorter": "ncc run sorter.ts --transpile-only --v8-cache"
+    "sorter": "ncc run sorter.ts --transpile-only --v8-cache && yarn prettier --write swagger.json"
   }
 }
