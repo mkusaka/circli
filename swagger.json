@@ -59,10 +59,7 @@
             "name": "owner-type",
             "required": false,
             "schema": {
-              "enum": [
-                "account",
-                "organization"
-              ],
+              "enum": ["account", "organization"],
               "type": "string"
             }
           },
@@ -102,11 +99,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "id",
-                          "name",
-                          "created_at"
-                        ],
+                        "required": ["id", "name", "created_at"],
                         "title": "Context",
                         "type": "object"
                       },
@@ -118,10 +111,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "items",
-                    "next_page_token"
-                  ],
+                  "required": ["items", "next_page_token"],
                   "type": "object"
                 }
               }
@@ -145,9 +135,7 @@
           }
         },
         "summary": "List contexts",
-        "tags": [
-          "Context"
-        ]
+        "tags": ["Context"]
       },
       "post": {
         "operationId": "createContext",
@@ -171,17 +159,12 @@
                           },
                           "type": {
                             "description": "The type of the owner. Defaults to \"organization\". Accounts are only used as context owners in server.",
-                            "enum": [
-                              "account",
-                              "organization"
-                            ],
+                            "enum": ["account", "organization"],
                             "example": "organization",
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "id"
-                        ],
+                        "required": ["id"],
                         "type": "object"
                       },
                       {
@@ -192,24 +175,17 @@
                           },
                           "type": {
                             "description": "The type of owner. Defaults to \"organization\". Accounts are only used as context owners in server and must be specified by an id instead of a slug.",
-                            "enum": [
-                              "organization"
-                            ],
+                            "enum": ["organization"],
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "slug"
-                        ],
+                        "required": ["slug"],
                         "type": "object"
                       }
                     ]
                   }
                 },
-                "required": [
-                  "name",
-                  "owner"
-                ],
+                "required": ["name", "owner"],
                 "type": "object"
               }
             }
@@ -237,11 +213,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "id",
-                    "name",
-                    "created_at"
-                  ],
+                  "required": ["id", "name", "created_at"],
                   "title": "Context",
                   "type": "object"
                 }
@@ -266,9 +238,7 @@
           }
         },
         "summary": "Create a new context",
-        "tags": [
-          "Context"
-        ]
+        "tags": ["Context"]
       }
     },
     "/context/{context-id}": {
@@ -298,9 +268,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "title": "MessageResponse",
                   "type": "object"
                 }
@@ -325,9 +293,7 @@
           }
         },
         "summary": "Delete a context",
-        "tags": [
-          "Context"
-        ]
+        "tags": ["Context"]
       },
       "get": {
         "description": "Returns basic information about a context.",
@@ -366,11 +332,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "id",
-                    "name",
-                    "created_at"
-                  ],
+                  "required": ["id", "name", "created_at"],
                   "title": "Context",
                   "type": "object"
                 }
@@ -395,9 +357,7 @@
           }
         },
         "summary": "Get a context",
-        "tags": [
-          "Context"
-        ]
+        "tags": ["Context"]
       }
     },
     "/context/{context-id}/environment-variable": {
@@ -442,11 +402,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "variable",
-                          "created_at",
-                          "context_id"
-                        ],
+                        "required": ["variable", "created_at", "context_id"],
                         "type": "object"
                       },
                       "type": "array"
@@ -457,10 +413,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "items",
-                    "next_page_token"
-                  ],
+                  "required": ["items", "next_page_token"],
                   "type": "object"
                 }
               }
@@ -484,9 +437,7 @@
           }
         },
         "summary": "List environment variables",
-        "tags": [
-          "Context"
-        ]
+        "tags": ["Context"]
       }
     },
     "/context/{context-id}/environment-variable/{env-var-name}": {
@@ -527,9 +478,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "title": "MessageResponse",
                   "type": "object"
                 }
@@ -554,9 +503,7 @@
           }
         },
         "summary": "Remove an environment variable",
-        "tags": [
-          "Context"
-        ]
+        "tags": ["Context"]
       },
       "put": {
         "description": "Create or update an environment variable within a context. Returns information about the environment variable, not including its value.",
@@ -594,9 +541,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "value"
-                ],
+                "required": ["value"],
                 "type": "object"
               }
             }
@@ -627,11 +572,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "variable",
-                        "created_at",
-                        "context_id"
-                      ],
+                      "required": ["variable", "created_at", "context_id"],
                       "type": "object"
                     },
                     {
@@ -642,9 +583,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "message"
-                      ],
+                      "required": ["message"],
                       "title": "MessageResponse",
                       "type": "object"
                     }
@@ -671,9 +610,7 @@
           }
         },
         "summary": "Add or update an environment variable",
-        "tags": [
-          "Context"
-        ]
+        "tags": ["Context"]
       }
     },
     "/insights/pages/{project-slug}/summary": {
@@ -839,10 +776,7 @@
                           "type": "object"
                         }
                       },
-                      "required": [
-                        "metrics",
-                        "trends"
-                      ],
+                      "required": ["metrics", "trends"],
                       "type": "object"
                     },
                     "project_id": {
@@ -1013,11 +947,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "workflow_name",
-                          "metrics",
-                          "trends"
-                        ],
+                        "required": ["workflow_name", "metrics", "trends"],
                         "type": "object"
                       },
                       "type": "array"
@@ -1046,9 +976,7 @@
           }
         },
         "summary": "Get summary metrics and trends for a project across it's workflows and branches",
-        "tags": [
-          "Insights"
-        ]
+        "tags": ["Insights"]
       }
     },
     "/insights/time-series/{project-slug}/workflows/{workflow-name}/jobs": {
@@ -1093,10 +1021,7 @@
             "name": "granularity",
             "required": false,
             "schema": {
-              "enum": [
-                "daily",
-                "hourly"
-              ],
+              "enum": ["daily", "hourly"],
               "type": "string"
             }
           },
@@ -1270,10 +1195,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "next_page_token",
-                    "items"
-                  ],
+                  "required": ["next_page_token", "items"],
                   "type": "object"
                 }
               }
@@ -1297,9 +1219,7 @@
           }
         },
         "summary": "Job timeseries data",
-        "tags": [
-          "Insights"
-        ]
+        "tags": ["Insights"]
       }
     },
     "/insights/{org-slug}/summary": {
@@ -1442,10 +1362,7 @@
                           "type": "object"
                         }
                       },
-                      "required": [
-                        "metrics",
-                        "trends"
-                      ],
+                      "required": ["metrics", "trends"],
                       "type": "object"
                     },
                     "org_project_data": {
@@ -1524,21 +1441,13 @@
                             "type": "object"
                           }
                         },
-                        "required": [
-                          "project_name",
-                          "metrics",
-                          "trends"
-                        ],
+                        "required": ["project_name", "metrics", "trends"],
                         "type": "object"
                       },
                       "type": "array"
                     }
                   },
-                  "required": [
-                    "org_data",
-                    "org_project_data",
-                    "all_projects"
-                  ],
+                  "required": ["org_data", "org_project_data", "all_projects"],
                   "type": "object"
                 }
               }
@@ -1562,9 +1471,7 @@
           }
         },
         "summary": "Get summary metrics with trends for the entire org, and for each project.",
-        "tags": [
-          "Insights"
-        ]
+        "tags": ["Insights"]
       }
     },
     "/insights/{project-slug}/branches": {
@@ -1620,9 +1527,7 @@
           }
         },
         "summary": "Get all branches for a project",
-        "tags": [
-          "Insights"
-        ]
+        "tags": ["Insights"]
       }
     },
     "/insights/{project-slug}/flaky-tests": {
@@ -1758,10 +1663,7 @@
                       "type": "number"
                     }
                   },
-                  "required": [
-                    "flaky-tests",
-                    "total-flaky-tests"
-                  ],
+                  "required": ["flaky-tests", "total-flaky-tests"],
                   "type": "object"
                 }
               }
@@ -1785,9 +1687,7 @@
           }
         },
         "summary": "Get flaky tests for a project",
-        "tags": [
-          "Insights"
-        ]
+        "tags": ["Insights"]
       }
     },
     "/insights/{project-slug}/workflows": {
@@ -2015,10 +1915,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "items",
-                    "next_page_token"
-                  ],
+                  "required": ["items", "next_page_token"],
                   "type": "object"
                 }
               }
@@ -2042,9 +1939,7 @@
           }
         },
         "summary": "Get summary metrics for a project's workflows",
-        "tags": [
-          "Insights"
-        ]
+        "tags": ["Insights"]
       }
     },
     "/insights/{project-slug}/workflows/{workflow-name}": {
@@ -2201,10 +2096,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "items",
-                    "next_page_token"
-                  ],
+                  "required": ["items", "next_page_token"],
                   "type": "object"
                 }
               }
@@ -2228,9 +2120,7 @@
           }
         },
         "summary": "Get recent runs of a workflow",
-        "tags": [
-          "Insights"
-        ]
+        "tags": ["Insights"]
       }
     },
     "/insights/{project-slug}/workflows/{workflow-name}/jobs": {
@@ -2450,10 +2340,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "items",
-                    "next_page_token"
-                  ],
+                  "required": ["items", "next_page_token"],
                   "type": "object"
                 }
               }
@@ -2477,9 +2364,7 @@
           }
         },
         "summary": "Get summary metrics for a project workflow's jobs.",
-        "tags": [
-          "Insights"
-        ]
+        "tags": ["Insights"]
       }
     },
     "/insights/{project-slug}/workflows/{workflow-name}/summary": {
@@ -2723,11 +2608,7 @@
                       "type": "array"
                     }
                   },
-                  "required": [
-                    "metrics",
-                    "trends",
-                    "workflow_names"
-                  ],
+                  "required": ["metrics", "trends", "workflow_names"],
                   "type": "object"
                 }
               }
@@ -2751,9 +2632,7 @@
           }
         },
         "summary": "Get metrics and trends for workflows",
-        "tags": [
-          "Insights"
-        ]
+        "tags": ["Insights"]
       }
     },
     "/insights/{project-slug}/workflows/{workflow-name}/test-metrics": {
@@ -3067,9 +2946,7 @@
           }
         },
         "summary": "Get test metrics for a project's workflows",
-        "tags": [
-          "Insights"
-        ]
+        "tags": ["Insights"]
       }
     },
     "/me": {
@@ -3097,11 +2974,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "id",
-                    "login",
-                    "name"
-                  ],
+                  "required": ["id", "login", "name"],
                   "title": "User",
                   "type": "object"
                 }
@@ -3126,9 +2999,7 @@
           }
         },
         "summary": "User Information",
-        "tags": [
-          "User"
-        ]
+        "tags": ["User"]
       }
     },
     "/me/collaborations": {
@@ -3198,9 +3069,7 @@
           }
         },
         "summary": "Collaborations",
-        "tags": [
-          "User"
-        ]
+        "tags": ["User"]
       }
     },
     "/pipeline": {
@@ -3276,10 +3145,7 @@
                                   "type": "string"
                                 }
                               },
-                              "required": [
-                                "type",
-                                "message"
-                              ],
+                              "required": ["type", "message"],
                               "type": "object"
                             },
                             "type": "array"
@@ -3329,10 +3195,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "login",
-                                  "avatar_url"
-                                ],
+                                "required": ["login", "avatar_url"],
                                 "type": "object"
                               },
                               "received_at": {
@@ -3351,11 +3214,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "type",
-                              "received_at",
-                              "actor"
-                            ],
+                            "required": ["type", "received_at", "actor"],
                             "type": "object"
                           },
                           "trigger_parameters": {
@@ -3405,10 +3264,7 @@
                                     "x-nullable": true
                                   }
                                 },
-                                "required": [
-                                  "subject",
-                                  "body"
-                                ],
+                                "required": ["subject", "body"],
                                 "type": "object"
                               },
                               "origin_repository_url": {
@@ -3476,10 +3332,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "items",
-                    "next_page_token"
-                  ],
+                  "required": ["items", "next_page_token"],
                   "title": "PipelineListResponse",
                   "type": "object"
                 }
@@ -3512,9 +3365,7 @@
           }
         },
         "summary": "Get a list of pipelines",
-        "tags": [
-          "Pipeline"
-        ]
+        "tags": ["Pipeline"]
       }
     },
     "/pipeline/continue": {
@@ -3556,10 +3407,7 @@
                     "type": "object"
                   }
                 },
-                "required": [
-                  "continuation-key",
-                  "configuration"
-                ],
+                "required": ["continuation-key", "configuration"],
                 "type": "object"
               }
             }
@@ -3577,9 +3425,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "title": "MessageResponse",
                   "type": "object"
                 }
@@ -3604,9 +3450,7 @@
           }
         },
         "summary": "Continue a pipeline",
-        "tags": [
-          "Pipeline"
-        ]
+        "tags": ["Pipeline"]
       }
     },
     "/pipeline/{pipeline-id}": {
@@ -3660,10 +3504,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "type",
-                          "message"
-                        ],
+                        "required": ["type", "message"],
                         "type": "object"
                       },
                       "type": "array"
@@ -3713,10 +3554,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "login",
-                            "avatar_url"
-                          ],
+                          "required": ["login", "avatar_url"],
                           "type": "object"
                         },
                         "received_at": {
@@ -3735,11 +3573,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "type",
-                        "received_at",
-                        "actor"
-                      ],
+                      "required": ["type", "received_at", "actor"],
                       "type": "object"
                     },
                     "trigger_parameters": {
@@ -3789,10 +3623,7 @@
                               "x-nullable": true
                             }
                           },
-                          "required": [
-                            "subject",
-                            "body"
-                          ],
+                          "required": ["subject", "body"],
                           "type": "object"
                         },
                         "origin_repository_url": {
@@ -3881,9 +3712,7 @@
           }
         },
         "summary": "Get a pipeline by ID",
-        "tags": [
-          "Pipeline"
-        ]
+        "tags": ["Pipeline"]
       }
     },
     "/pipeline/{pipeline-id}/config": {
@@ -3927,10 +3756,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "source",
-                    "compiled"
-                  ],
+                  "required": ["source", "compiled"],
                   "title": "PipelineConfig",
                   "type": "object"
                 }
@@ -3955,9 +3781,7 @@
           }
         },
         "summary": "Get a pipeline's configuration",
-        "tags": [
-          "Pipeline"
-        ]
+        "tags": ["Pipeline"]
       }
     },
     "/pipeline/{pipeline-id}/workflow": {
@@ -4066,9 +3890,7 @@
                           },
                           "tag": {
                             "description": "Tag used for the workflow",
-                            "enum": [
-                              "setup"
-                            ],
+                            "enum": ["setup"],
                             "example": "setup",
                             "type": "string",
                             "x-nullable": true
@@ -4097,10 +3919,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "items",
-                    "next_page_token"
-                  ],
+                  "required": ["items", "next_page_token"],
                   "title": "WorkflowListResponse",
                   "type": "object"
                 }
@@ -4134,9 +3953,7 @@
           }
         },
         "summary": "Get a pipeline's workflows",
-        "tags": [
-          "Pipeline"
-        ]
+        "tags": ["Pipeline"]
       }
     },
     "/project/{project-slug}": {
@@ -4202,11 +4019,7 @@
                         },
                         "provider": {
                           "description": "The VCS provider",
-                          "enum": [
-                            "Bitbucket",
-                            "CircleCI",
-                            "GitHub"
-                          ],
+                          "enum": ["Bitbucket", "CircleCI", "GitHub"],
                           "type": "string"
                         },
                         "vcs_url": {
@@ -4215,11 +4028,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "vcs_url",
-                        "provider",
-                        "default_branch"
-                      ],
+                      "required": ["vcs_url", "provider", "default_branch"],
                       "type": "object"
                     }
                   },
@@ -4256,9 +4065,7 @@
           }
         },
         "summary": "Get a project",
-        "tags": [
-          "Project"
-        ]
+        "tags": ["Project"]
       }
     },
     "/project/{project-slug}/checkout-key": {
@@ -4310,10 +4117,7 @@
                           },
                           "type": {
                             "description": "The type of checkout key. This may be either `deploy-key` or `github-user-key`.",
-                            "enum": [
-                              "deploy-key",
-                              "github-user-key"
-                            ],
+                            "enum": ["deploy-key", "github-user-key"],
                             "example": "deploy-key",
                             "title": "CheckoutKeyType",
                             "type": "string"
@@ -4337,10 +4141,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "items",
-                    "next_page_token"
-                  ],
+                  "required": ["items", "next_page_token"],
                   "title": "CheckoutKeyListResponse",
                   "type": "object"
                 }
@@ -4365,9 +4166,7 @@
           }
         },
         "summary": "Get all checkout keys",
-        "tags": [
-          "Project"
-        ]
+        "tags": ["Project"]
       },
       "post": {
         "description": "Creates a new checkout key. This API request is only usable with a user API token.",
@@ -4392,18 +4191,13 @@
                 "properties": {
                   "type": {
                     "description": "The type of checkout key to create. This may be either `deploy-key` or `user-key`.",
-                    "enum": [
-                      "user-key",
-                      "deploy-key"
-                    ],
+                    "enum": ["user-key", "deploy-key"],
                     "example": "deploy-key",
                     "title": "CheckoutKeyInputType",
                     "type": "string"
                   }
                 },
-                "required": [
-                  "type"
-                ],
+                "required": ["type"],
                 "title": "CheckoutKeyInput",
                 "type": "object"
               }
@@ -4439,10 +4233,7 @@
                     },
                     "type": {
                       "description": "The type of checkout key. This may be either `deploy-key` or `github-user-key`.",
-                      "enum": [
-                        "deploy-key",
-                        "github-user-key"
-                      ],
+                      "enum": ["deploy-key", "github-user-key"],
                       "example": "deploy-key",
                       "title": "CheckoutKeyType",
                       "type": "string"
@@ -4479,9 +4270,7 @@
           }
         },
         "summary": "Create a new checkout key",
-        "tags": [
-          "Project"
-        ]
+        "tags": ["Project"]
       }
     },
     "/project/{project-slug}/checkout-key/{fingerprint}": {
@@ -4523,9 +4312,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "title": "MessageResponse",
                   "type": "object"
                 }
@@ -4550,9 +4337,7 @@
           }
         },
         "summary": "Delete a checkout key",
-        "tags": [
-          "Project"
-        ]
+        "tags": ["Project"]
       },
       "get": {
         "description": "Returns an individual checkout key.",
@@ -4609,10 +4394,7 @@
                     },
                     "type": {
                       "description": "The type of checkout key. This may be either `deploy-key` or `github-user-key`.",
-                      "enum": [
-                        "deploy-key",
-                        "github-user-key"
-                      ],
+                      "enum": ["deploy-key", "github-user-key"],
                       "example": "deploy-key",
                       "title": "CheckoutKeyType",
                       "type": "string"
@@ -4649,9 +4431,7 @@
           }
         },
         "summary": "Get a checkout key",
-        "tags": [
-          "Project"
-        ]
+        "tags": ["Project"]
       }
     },
     "/project/{project-slug}/envvar": {
@@ -4691,10 +4471,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "name",
-                          "value"
-                        ],
+                        "required": ["name", "value"],
                         "title": "EnvironmentVariablePair",
                         "type": "object"
                       },
@@ -4706,10 +4483,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "items",
-                    "next_page_token"
-                  ],
+                  "required": ["items", "next_page_token"],
                   "title": "EnvironmentVariableListResponse",
                   "type": "object"
                 }
@@ -4734,9 +4508,7 @@
           }
         },
         "summary": "List all environment variables",
-        "tags": [
-          "Project"
-        ]
+        "tags": ["Project"]
       },
       "post": {
         "description": "Creates a new environment variable.",
@@ -4770,10 +4542,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "name",
-                  "value"
-                ],
+                "required": ["name", "value"],
                 "title": "EnvironmentVariablePair",
                 "type": "object"
               }
@@ -4797,10 +4566,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "name",
-                    "value"
-                  ],
+                  "required": ["name", "value"],
                   "title": "EnvironmentVariablePair",
                   "type": "object"
                 }
@@ -4825,9 +4591,7 @@
           }
         },
         "summary": "Create an environment variable",
-        "tags": [
-          "Project"
-        ]
+        "tags": ["Project"]
       }
     },
     "/project/{project-slug}/envvar/{name}": {
@@ -4869,9 +4633,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "title": "MessageResponse",
                   "type": "object"
                 }
@@ -4896,9 +4658,7 @@
           }
         },
         "summary": "Delete an environment variable",
-        "tags": [
-          "Project"
-        ]
+        "tags": ["Project"]
       },
       "get": {
         "description": "Returns the masked value of environment variable :name.",
@@ -4943,10 +4703,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "name",
-                    "value"
-                  ],
+                  "required": ["name", "value"],
                   "title": "EnvironmentVariablePair",
                   "type": "object"
                 }
@@ -4971,9 +4728,7 @@
           }
         },
         "summary": "Get a masked environment variable",
-        "tags": [
-          "Project"
-        ]
+        "tags": ["Project"]
       }
     },
     "/project/{project-slug}/job/{job-number}": {
@@ -5018,9 +4773,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "name"
-                        ],
+                        "required": ["name"],
                         "type": "object"
                       },
                       "type": "array"
@@ -5048,9 +4801,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "resource_class"
-                      ],
+                      "required": ["resource_class"],
                       "type": "object"
                     },
                     "latest_workflow": {
@@ -5067,10 +4818,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "id",
-                        "name"
-                      ],
+                      "required": ["id", "name"],
                       "type": "object"
                     },
                     "messages": {
@@ -5091,10 +4839,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "type",
-                          "message"
-                        ],
+                        "required": ["type", "message"],
                         "type": "object"
                       },
                       "type": "array"
@@ -5116,9 +4861,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "name"
-                      ],
+                      "required": ["name"],
                       "type": "object"
                     },
                     "parallel_runs": {
@@ -5136,10 +4879,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "index",
-                          "status"
-                        ],
+                        "required": ["index", "status"],
                         "type": "object"
                       },
                       "type": "array"
@@ -5159,9 +4899,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "id"
-                      ],
+                      "required": ["id"],
                       "type": "object"
                     },
                     "project": {
@@ -5187,12 +4925,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "id",
-                        "slug",
-                        "name",
-                        "external_url"
-                      ],
+                      "required": ["id", "slug", "name", "external_url"],
                       "type": "object"
                     },
                     "queued_at": {
@@ -5279,9 +5012,7 @@
           }
         },
         "summary": "Get job details",
-        "tags": [
-          "Job"
-        ]
+        "tags": ["Job"]
       }
     },
     "/project/{project-slug}/job/{job-number}/cancel": {
@@ -5321,9 +5052,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "title": "MessageResponse",
                   "type": "object"
                 }
@@ -5348,9 +5077,7 @@
           }
         },
         "summary": "Cancel job",
-        "tags": [
-          "Job"
-        ]
+        "tags": ["Job"]
       }
     },
     "/project/{project-slug}/pipeline": {
@@ -5428,10 +5155,7 @@
                                   "type": "string"
                                 }
                               },
-                              "required": [
-                                "type",
-                                "message"
-                              ],
+                              "required": ["type", "message"],
                               "type": "object"
                             },
                             "type": "array"
@@ -5481,10 +5205,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "login",
-                                  "avatar_url"
-                                ],
+                                "required": ["login", "avatar_url"],
                                 "type": "object"
                               },
                               "received_at": {
@@ -5503,11 +5224,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "type",
-                              "received_at",
-                              "actor"
-                            ],
+                            "required": ["type", "received_at", "actor"],
                             "type": "object"
                           },
                           "trigger_parameters": {
@@ -5557,10 +5274,7 @@
                                     "x-nullable": true
                                   }
                                 },
-                                "required": [
-                                  "subject",
-                                  "body"
-                                ],
+                                "required": ["subject", "body"],
                                 "type": "object"
                               },
                               "origin_repository_url": {
@@ -5628,10 +5342,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "items",
-                    "next_page_token"
-                  ],
+                  "required": ["items", "next_page_token"],
                   "title": "PipelineListResponse",
                   "type": "object"
                 }
@@ -5665,9 +5376,7 @@
           }
         },
         "summary": "Get all pipelines",
-        "tags": [
-          "Pipeline"
-        ]
+        "tags": ["Pipeline"]
       },
       "post": {
         "description": "Triggers a new pipeline on the project.",
@@ -5765,12 +5474,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "id",
-                    "state",
-                    "number",
-                    "created_at"
-                  ],
+                  "required": ["id", "state", "number", "created_at"],
                   "title": "PipelineCreation",
                   "type": "object"
                 }
@@ -5795,9 +5499,7 @@
           }
         },
         "summary": "Trigger a new pipeline",
-        "tags": [
-          "Pipeline"
-        ]
+        "tags": ["Pipeline"]
       }
     },
     "/project/{project-slug}/pipeline/mine": {
@@ -5865,10 +5567,7 @@
                                   "type": "string"
                                 }
                               },
-                              "required": [
-                                "type",
-                                "message"
-                              ],
+                              "required": ["type", "message"],
                               "type": "object"
                             },
                             "type": "array"
@@ -5918,10 +5617,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "login",
-                                  "avatar_url"
-                                ],
+                                "required": ["login", "avatar_url"],
                                 "type": "object"
                               },
                               "received_at": {
@@ -5940,11 +5636,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "type",
-                              "received_at",
-                              "actor"
-                            ],
+                            "required": ["type", "received_at", "actor"],
                             "type": "object"
                           },
                           "trigger_parameters": {
@@ -5994,10 +5686,7 @@
                                     "x-nullable": true
                                   }
                                 },
-                                "required": [
-                                  "subject",
-                                  "body"
-                                ],
+                                "required": ["subject", "body"],
                                 "type": "object"
                               },
                               "origin_repository_url": {
@@ -6065,10 +5754,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "items",
-                    "next_page_token"
-                  ],
+                  "required": ["items", "next_page_token"],
                   "title": "PipelineListResponse",
                   "type": "object"
                 }
@@ -6102,9 +5788,7 @@
           }
         },
         "summary": "Get your pipelines",
-        "tags": [
-          "Pipeline"
-        ]
+        "tags": ["Pipeline"]
       }
     },
     "/project/{project-slug}/pipeline/{pipeline-number}": {
@@ -6166,10 +5850,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "type",
-                          "message"
-                        ],
+                        "required": ["type", "message"],
                         "type": "object"
                       },
                       "type": "array"
@@ -6219,10 +5900,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "login",
-                            "avatar_url"
-                          ],
+                          "required": ["login", "avatar_url"],
                           "type": "object"
                         },
                         "received_at": {
@@ -6241,11 +5919,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "type",
-                        "received_at",
-                        "actor"
-                      ],
+                      "required": ["type", "received_at", "actor"],
                       "type": "object"
                     },
                     "trigger_parameters": {
@@ -6295,10 +5969,7 @@
                               "x-nullable": true
                             }
                           },
-                          "required": [
-                            "subject",
-                            "body"
-                          ],
+                          "required": ["subject", "body"],
                           "type": "object"
                         },
                         "origin_repository_url": {
@@ -6387,9 +6058,7 @@
           }
         },
         "summary": "Get a pipeline by pipeline number",
-        "tags": [
-          "Pipeline"
-        ]
+        "tags": ["Pipeline"]
       }
     },
     "/project/{project-slug}/schedule": {
@@ -6448,11 +6117,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "id",
-                              "login",
-                              "name"
-                            ],
+                            "required": ["id", "login", "name"],
                             "title": "User",
                             "type": "object"
                           },
@@ -6678,10 +6343,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "items",
-                    "next_page_token"
-                  ],
+                  "required": ["items", "next_page_token"],
                   "type": "object"
                 }
               }
@@ -6705,9 +6367,7 @@
           }
         },
         "summary": "Get all schedules",
-        "tags": [
-          "Schedule"
-        ]
+        "tags": ["Schedule"]
       },
       "post": {
         "description": "Creates a schedule and returns the created schedule.",
@@ -6733,10 +6393,7 @@
                 "properties": {
                   "attribution-actor": {
                     "description": "The attribution-actor of the scheduled pipeline.",
-                    "enum": [
-                      "current",
-                      "system"
-                    ],
+                    "enum": ["current", "system"],
                     "example": "current",
                     "type": "string"
                   },
@@ -6957,11 +6614,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "id",
-                        "login",
-                        "name"
-                      ],
+                      "required": ["id", "login", "name"],
                       "title": "User",
                       "type": "object"
                     },
@@ -7200,9 +6853,7 @@
           }
         },
         "summary": "Create a schedule",
-        "tags": [
-          "Schedule"
-        ]
+        "tags": ["Schedule"]
       }
     },
     "/project/{project-slug}/{job-number}/artifacts": {
@@ -7255,11 +6906,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "path",
-                          "node_index",
-                          "url"
-                        ],
+                        "required": ["path", "node_index", "url"],
                         "title": "Artifact",
                         "type": "object"
                       },
@@ -7271,10 +6918,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "items",
-                    "next_page_token"
-                  ],
+                  "required": ["items", "next_page_token"],
                   "title": "ArtifactListResponse",
                   "type": "object"
                 }
@@ -7299,9 +6943,7 @@
           }
         },
         "summary": "Get a job's artifacts",
-        "tags": [
-          "Job"
-        ]
+        "tags": ["Job"]
       }
     },
     "/project/{project-slug}/{job-number}/tests": {
@@ -7396,10 +7038,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "items",
-                    "next_page_token"
-                  ],
+                  "required": ["items", "next_page_token"],
                   "title": "TestsResponse",
                   "type": "object"
                 }
@@ -7424,9 +7063,7 @@
           }
         },
         "summary": "Get test metadata",
-        "tags": [
-          "Job"
-        ]
+        "tags": ["Job"]
       }
     },
     "/schedule/{schedule-id}": {
@@ -7457,9 +7094,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "title": "MessageResponse",
                   "type": "object"
                 }
@@ -7484,9 +7119,7 @@
           }
         },
         "summary": "Delete a schedule",
-        "tags": [
-          "Schedule"
-        ]
+        "tags": ["Schedule"]
       },
       "get": {
         "description": "Get a schedule by id.",
@@ -7528,11 +7161,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "id",
-                        "login",
-                        "name"
-                      ],
+                      "required": ["id", "login", "name"],
                       "title": "User",
                       "type": "object"
                     },
@@ -7771,9 +7400,7 @@
           }
         },
         "summary": "Get a schedule",
-        "tags": [
-          "Schedule"
-        ]
+        "tags": ["Schedule"]
       },
       "patch": {
         "description": "Updates a schedule and returns the updated schedule.",
@@ -7798,10 +7425,7 @@
                 "properties": {
                   "attribution-actor": {
                     "description": "The attribution-actor of the scheduled pipeline.",
-                    "enum": [
-                      "current",
-                      "system"
-                    ],
+                    "enum": ["current", "system"],
                     "example": "current",
                     "type": "string"
                   },
@@ -7935,11 +7559,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "id",
-                        "login",
-                        "name"
-                      ],
+                      "required": ["id", "login", "name"],
                       "title": "User",
                       "type": "object"
                     },
@@ -8178,9 +7798,7 @@
           }
         },
         "summary": "Update a schedule",
-        "tags": [
-          "Schedule"
-        ]
+        "tags": ["Schedule"]
       }
     },
     "/user/{id}": {
@@ -8220,11 +7838,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "id",
-                    "login",
-                    "name"
-                  ],
+                  "required": ["id", "login", "name"],
                   "title": "User",
                   "type": "object"
                 }
@@ -8249,9 +7863,7 @@
           }
         },
         "summary": "User Information",
-        "tags": [
-          "User"
-        ]
+        "tags": ["User"]
       }
     },
     "/webhook": {
@@ -8275,9 +7887,7 @@
             "name": "scope-type",
             "required": true,
             "schema": {
-              "enum": [
-                "project"
-              ],
+              "enum": ["project"],
               "type": "string"
             }
           }
@@ -8301,10 +7911,7 @@
                           "events": {
                             "description": "Events that will trigger the webhook",
                             "items": {
-                              "enum": [
-                                "workflow-completed",
-                                "job-completed"
-                              ],
+                              "enum": ["workflow-completed", "job-completed"],
                               "type": "string"
                             },
                             "type": "array"
@@ -8331,10 +7938,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "id",
-                              "type"
-                            ],
+                            "required": ["id", "type"],
                             "type": "object"
                           },
                           "signing-secret": {
@@ -8378,10 +7982,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "items",
-                    "next_page_token"
-                  ],
+                  "required": ["items", "next_page_token"],
                   "type": "object"
                 }
               }
@@ -8405,9 +8006,7 @@
           }
         },
         "summary": "List webhooks",
-        "tags": [
-          "Webhook"
-        ]
+        "tags": ["Webhook"]
       },
       "post": {
         "operationId": "createWebhook",
@@ -8420,10 +8019,7 @@
                   "events": {
                     "description": "Events that will trigger the webhook",
                     "items": {
-                      "enum": [
-                        "workflow-completed",
-                        "job-completed"
-                      ],
+                      "enum": ["workflow-completed", "job-completed"],
                       "type": "string"
                     },
                     "type": "array"
@@ -8442,16 +8038,11 @@
                       },
                       "type": {
                         "description": "Type of the scope being used",
-                        "enum": [
-                          "project"
-                        ],
+                        "enum": ["project"],
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "id",
-                      "type"
-                    ],
+                    "required": ["id", "type"],
                     "type": "object"
                   },
                   "signing-secret": {
@@ -8495,10 +8086,7 @@
                     "events": {
                       "description": "Events that will trigger the webhook",
                       "items": {
-                        "enum": [
-                          "workflow-completed",
-                          "job-completed"
-                        ],
+                        "enum": ["workflow-completed", "job-completed"],
                         "type": "string"
                       },
                       "type": "array"
@@ -8525,10 +8113,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "id",
-                        "type"
-                      ],
+                      "required": ["id", "type"],
                       "type": "object"
                     },
                     "signing-secret": {
@@ -8585,9 +8170,7 @@
           }
         },
         "summary": "Create a webhook",
-        "tags": [
-          "Webhook"
-        ]
+        "tags": ["Webhook"]
       }
     },
     "/webhook/{webhook-id}": {
@@ -8617,9 +8200,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "title": "MessageResponse",
                   "type": "object"
                 }
@@ -8644,9 +8225,7 @@
           }
         },
         "summary": "Delete a webhook",
-        "tags": [
-          "Webhook"
-        ]
+        "tags": ["Webhook"]
       },
       "get": {
         "description": "Get a webhook by id.",
@@ -8678,10 +8257,7 @@
                     "events": {
                       "description": "Events that will trigger the webhook",
                       "items": {
-                        "enum": [
-                          "workflow-completed",
-                          "job-completed"
-                        ],
+                        "enum": ["workflow-completed", "job-completed"],
                         "type": "string"
                       },
                       "type": "array"
@@ -8708,10 +8284,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "id",
-                        "type"
-                      ],
+                      "required": ["id", "type"],
                       "type": "object"
                     },
                     "signing-secret": {
@@ -8768,9 +8341,7 @@
           }
         },
         "summary": "Get a webhook",
-        "tags": [
-          "Webhook"
-        ]
+        "tags": ["Webhook"]
       },
       "put": {
         "operationId": "updateWebhook",
@@ -8795,10 +8366,7 @@
                   "events": {
                     "description": "Events that will trigger the webhook",
                     "items": {
-                      "enum": [
-                        "workflow-completed",
-                        "job-completed"
-                      ],
+                      "enum": ["workflow-completed", "job-completed"],
                       "type": "string"
                     },
                     "type": "array"
@@ -8840,10 +8408,7 @@
                     "events": {
                       "description": "Events that will trigger the webhook",
                       "items": {
-                        "enum": [
-                          "workflow-completed",
-                          "job-completed"
-                        ],
+                        "enum": ["workflow-completed", "job-completed"],
                         "type": "string"
                       },
                       "type": "array"
@@ -8870,10 +8435,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "id",
-                        "type"
-                      ],
+                      "required": ["id", "type"],
                       "type": "object"
                     },
                     "signing-secret": {
@@ -8930,9 +8492,7 @@
           }
         },
         "summary": "Update a webhook",
-        "tags": [
-          "Webhook"
-        ]
+        "tags": ["Webhook"]
       }
     },
     "/workflow/{id}": {
@@ -9026,9 +8586,7 @@
                     },
                     "tag": {
                       "description": "Tag used for the workflow",
-                      "enum": [
-                        "setup"
-                      ],
+                      "enum": ["setup"],
                       "example": "setup",
                       "type": "string",
                       "x-nullable": true
@@ -9089,9 +8647,7 @@
           }
         },
         "summary": "Get a workflow",
-        "tags": [
-          "Workflow"
-        ]
+        "tags": ["Workflow"]
       }
     },
     "/workflow/{id}/approve/{approval_request_id}": {
@@ -9133,9 +8689,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "title": "MessageResponse",
                   "type": "object"
                 }
@@ -9160,9 +8714,7 @@
           }
         },
         "summary": "Approve a job",
-        "tags": [
-          "Workflow"
-        ]
+        "tags": ["Workflow"]
       }
     },
     "/workflow/{id}/cancel": {
@@ -9194,9 +8746,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "title": "MessageResponse",
                   "type": "object"
                 }
@@ -9221,9 +8771,7 @@
           }
         },
         "summary": "Cancel a workflow",
-        "tags": [
-          "Workflow"
-        ]
+        "tags": ["Workflow"]
       }
     },
     "/workflow/{id}/job": {
@@ -9329,10 +8877,7 @@
                           },
                           "type": {
                             "description": "The type of job.",
-                            "enum": [
-                              "build",
-                              "approval"
-                            ],
+                            "enum": ["build", "approval"],
                             "type": "string"
                           }
                         },
@@ -9356,10 +8901,7 @@
                       "x-nullable": true
                     }
                   },
-                  "required": [
-                    "items",
-                    "next_page_token"
-                  ],
+                  "required": ["items", "next_page_token"],
                   "title": "WorkflowJobListResponse",
                   "type": "object"
                 }
@@ -9393,9 +8935,7 @@
           }
         },
         "summary": "Get a workflow's jobs",
-        "tags": [
-          "Workflow"
-        ]
+        "tags": ["Workflow"]
       }
     },
     "/workflow/{id}/rerun": {
@@ -9470,9 +9010,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "workflow_id"
-                  ],
+                  "required": ["workflow_id"],
                   "type": "object"
                 }
               }
@@ -9496,9 +9034,7 @@
           }
         },
         "summary": "Rerun a workflow",
-        "tags": [
-          "Workflow"
-        ]
+        "tags": ["Workflow"]
       }
     }
   },
