@@ -7,14 +7,14 @@
   "author": "mkusaka <hinoshita1992@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^17.0.36",
+    "@types/node": "^18.7.18",
     "@types/prettier": "^2.7.0",
     "@vercel/ncc": "^0.34.0",
-    "concurrently": "^7.3.0",
-    "fast-glob": "^3.2.11",
+    "concurrently": "^7.4.0",
+    "fast-glob": "^3.2.12",
     "openapi-typescript-codegen": "^0.23.0",
     "prettier": "^2.7.1",
-    "typescript": "^4.8.2"
+    "typescript": "^4.8.3"
   },
   "scripts": {
     "bump:patch": "npm version patch",
@@ -36,6 +36,7 @@
     "upload:linux": "gh release upload \"$(git describe --tags --abbrev=0)\" circli_linux_x86_64.tar.gz",
     "upload:Mac:amd64": "gh release upload \"$(git describe --tags --abbrev=0)\" circli_Darwin_x86_64.tar.gz",
     "upload:Mac:arm64": "gh release upload \"$(git describe --tags --abbrev=0)\" circli_Darwin_arm64.tar.gz",
-    "gen:swaggerdts": " npx json-dts-gen swagger.json"
+    "gen:swaggerdts": " npx json-dts-gen swagger.json",
+    "sorter": "ncc run sorter.ts --transpile-only --v8-cache"
   }
 }
