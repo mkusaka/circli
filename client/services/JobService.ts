@@ -22,26 +22,81 @@ export class JobService {
     projectSlug: string;
   }): CancelablePromise<{
     /**
-     * URL of the job in CircleCI Web UI.
+     * List of contexts used by the job.
      */
-    web_url: string;
-    /**
-     * Information about a project.
-     */
-    project: {
-      id: string;
+    contexts: Array<{
       /**
-       * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
-       */
-      slug: string;
-      /**
-       * The name of the project
+       * The name of the context.
        */
       name: string;
+    }>;
+    /**
+     * The time when the job was created.
+     */
+    created_at: string;
+    /**
+     * Duration of a job in milliseconds.
+     */
+    duration: number;
+    /**
+     * Information about executor used for a job.
+     */
+    executor: {
       /**
-       * URL to the repository hosting the project's code
+       * Resource class name.
        */
-      external_url: string;
+      resource_class: string;
+      /**
+       * Executor type.
+       */
+      type?: string;
+    };
+    /**
+     * Info about the latest workflow the job was a part of.
+     */
+    latest_workflow: {
+      /**
+       * The unique ID of the workflow.
+       */
+      id: string;
+      /**
+       * The name of the workflow.
+       */
+      name: string;
+    };
+    /**
+     * Messages from CircleCI execution platform.
+     */
+    messages: Array<{
+      /**
+       * Information describing message.
+       */
+      message: string;
+      /**
+       * Value describing the reason for message to be added to the job.
+       */
+      reason?: string;
+      /**
+       * Message type.
+       */
+      type: string;
+    }>;
+    /**
+     * The name of the job.
+     */
+    name: string;
+    /**
+     * The number of the job.
+     */
+    number: number;
+    /**
+     * Information about an organization.
+     */
+    organization: {
+      /**
+       * The name of the organization.
+       */
+      name: string;
     };
     /**
      * Info about parallels runs and their status.
@@ -57,43 +112,44 @@ export class JobService {
       status: string;
     }>;
     /**
-     * The date and time the job started.
-     */
-    started_at: string;
-    /**
-     * Info about the latest workflow the job was a part of.
-     */
-    latest_workflow: {
-      /**
-       * The unique ID of the workflow.
-       */
-      id: string;
-      /**
-       * The name of the workflow.
-       */
-      name: string;
-    };
-    /**
-     * The name of the job.
-     */
-    name: string;
-    /**
-     * Information about executor used for a job.
-     */
-    executor: {
-      /**
-       * Resource class name.
-       */
-      resource_class: string;
-      /**
-       * Executor type.
-       */
-      type?: string;
-    };
-    /**
      * A number of parallel runs the job has.
      */
     parallelism: number;
+    /**
+     * Info about a pipeline the job is a part of.
+     */
+    pipeline: {
+      /**
+       * The unique ID of the pipeline.
+       */
+      id: string;
+    };
+    /**
+     * Information about a project.
+     */
+    project: {
+      /**
+       * URL to the repository hosting the project's code
+       */
+      external_url: string;
+      id: string;
+      /**
+       * The name of the project
+       */
+      name: string;
+      /**
+       * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+       */
+      slug: string;
+    };
+    /**
+     * The time when the job was placed in a queue.
+     */
+    queued_at: string;
+    /**
+     * The date and time the job started.
+     */
+    started_at: string;
     /**
      * The current status of the job.
      */
@@ -113,69 +169,13 @@ export class JobService {
       | "canceled"
       | "unauthorized";
     /**
-     * The number of the job.
-     */
-    number: number;
-    /**
-     * Info about a pipeline the job is a part of.
-     */
-    pipeline: {
-      /**
-       * The unique ID of the pipeline.
-       */
-      id: string;
-    };
-    /**
-     * Duration of a job in milliseconds.
-     */
-    duration: number;
-    /**
-     * The time when the job was created.
-     */
-    created_at: string;
-    /**
-     * Messages from CircleCI execution platform.
-     */
-    messages: Array<{
-      /**
-       * Message type.
-       */
-      type: string;
-      /**
-       * Information describing message.
-       */
-      message: string;
-      /**
-       * Value describing the reason for message to be added to the job.
-       */
-      reason?: string;
-    }>;
-    /**
-     * List of contexts used by the job.
-     */
-    contexts: Array<{
-      /**
-       * The name of the context.
-       */
-      name: string;
-    }>;
-    /**
-     * Information about an organization.
-     */
-    organization: {
-      /**
-       * The name of the organization.
-       */
-      name: string;
-    };
-    /**
-     * The time when the job was placed in a queue.
-     */
-    queued_at: string;
-    /**
      * The time when the job stopped.
      */
     stopped_at?: string;
+    /**
+     * URL of the job in CircleCI Web UI.
+     */
+    web_url: string;
   }> {
     return __request(OpenAPI, {
       method: "GET",
@@ -240,13 +240,13 @@ export class JobService {
   }): CancelablePromise<{
     items: Array<{
       /**
-       * The artifact path.
-       */
-      path: string;
-      /**
        * The index of the node that stored the artifact.
        */
       node_index: number;
+      /**
+       * The artifact path.
+       */
+      path: string;
       /**
        * The URL to download the artifact contents.
        */
@@ -287,33 +287,33 @@ export class JobService {
   }): CancelablePromise<{
     items: Array<{
       /**
-       * The failure message associated with the test.
+       * The programmatic location of the test.
        */
-      message: string;
-      /**
-       * The program that generated the test results
-       */
-      source: string;
-      /**
-       * The time it took to run the test in seconds
-       */
-      run_time: number;
+      classname: string;
       /**
        * The file in which the test is defined.
        */
       file: string;
       /**
-       * Indication of whether the test succeeded.
+       * The failure message associated with the test.
        */
-      result: string;
+      message: string;
       /**
        * The name of the test.
        */
       name: string;
       /**
-       * The programmatic location of the test.
+       * Indication of whether the test succeeded.
        */
-      classname: string;
+      result: string;
+      /**
+       * The time it took to run the test in seconds
+       */
+      run_time: number;
+      /**
+       * The program that generated the test results
+       */
+      source: string;
     }>;
     /**
      * A token to pass as a `page-token` query parameter to return the next page of results.

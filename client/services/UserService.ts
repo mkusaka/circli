@@ -42,25 +42,25 @@ export class UserService {
   public static getCollaborations(): CancelablePromise<
     Array<{
       /**
+       * URL to the user's avatar on the VCS
+       */
+      avatar_url: string;
+      /**
        * The UUID of the organization
        */
       id: string;
-      /**
-       * The VCS provider
-       */
-      "vcs-type": string;
       /**
        * The name of the organization
        */
       name: string;
       /**
-       * URL to the user's avatar on the VCS
-       */
-      avatar_url: string;
-      /**
        * The slug of the organization
        */
       slug: string;
+      /**
+       * The VCS provider
+       */
+      "vcs-type": string;
     }>
   > {
     return __request(OpenAPI, {

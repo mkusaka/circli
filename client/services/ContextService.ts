@@ -3,6 +3,65 @@ import { OpenAPI } from "../core/OpenAPI.ts";
 import { request as __request } from "../core/request.ts";
 export class ContextService {
   /**
+   * List contexts
+   * List all contexts for an owner.
+   * @returns any A paginated list of contexts
+   * @throws ApiError
+   */
+  public static listContexts({
+    ownerId,
+    ownerSlug,
+    ownerType,
+    pageToken,
+  }: {
+    /**
+     * The unique ID of the owner of the context. Specify either this or owner-slug.
+     */
+    ownerId?: string;
+    /**
+     * A string that represents an organization. Specify either this or owner-id. Cannot be used for accounts.
+     */
+    ownerSlug?: string;
+    /**
+     * The type of the owner. Defaults to "organization". Accounts are only used as context owners in server.
+     */
+    ownerType?: "account" | "organization";
+    /**
+     * A token to retrieve the next page of results.
+     */
+    pageToken?: string;
+  }): CancelablePromise<{
+    items: Array<{
+      /**
+       * The date and time the context was created.
+       */
+      created_at: string;
+      /**
+       * The unique ID of the context.
+       */
+      id: string;
+      /**
+       * The user defined name of the context.
+       */
+      name: string;
+    }>;
+    /**
+     * A token to pass as a `page-token` query parameter to return the next page of results.
+     */
+    next_page_token: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/context",
+      query: {
+        "owner-id": ownerId,
+        "owner-slug": ownerSlug,
+        "owner-type": ownerType,
+        "page-token": pageToken,
+      },
+    });
+  }
+  /**
    * Create a new context
    * @returns any The new context
    * @throws ApiError
@@ -39,6 +98,10 @@ export class ContextService {
     };
   }): CancelablePromise<{
     /**
+     * The date and time the context was created.
+     */
+    created_at: string;
+    /**
      * The unique ID of the context.
      */
     id: string;
@@ -46,75 +109,12 @@ export class ContextService {
      * The user defined name of the context.
      */
     name: string;
-    /**
-     * The date and time the context was created.
-     */
-    created_at: string;
   }> {
     return __request(OpenAPI, {
       method: "POST",
       url: "/context",
       body: requestBody,
       mediaType: "application/json",
-    });
-  }
-  /**
-   * List contexts
-   * List all contexts for an owner.
-   * @returns any A paginated list of contexts
-   * @throws ApiError
-   */
-  public static listContexts({
-    ownerId,
-    ownerSlug,
-    ownerType,
-    pageToken,
-  }: {
-    /**
-     * The unique ID of the owner of the context. Specify either this or owner-slug.
-     */
-    ownerId?: string;
-    /**
-     * A string that represents an organization. Specify either this or owner-id. Cannot be used for accounts.
-     */
-    ownerSlug?: string;
-    /**
-     * The type of the owner. Defaults to "organization". Accounts are only used as context owners in server.
-     */
-    ownerType?: "account" | "organization";
-    /**
-     * A token to retrieve the next page of results.
-     */
-    pageToken?: string;
-  }): CancelablePromise<{
-    items: Array<{
-      /**
-       * The unique ID of the context.
-       */
-      id: string;
-      /**
-       * The user defined name of the context.
-       */
-      name: string;
-      /**
-       * The date and time the context was created.
-       */
-      created_at: string;
-    }>;
-    /**
-     * A token to pass as a `page-token` query parameter to return the next page of results.
-     */
-    next_page_token: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/context",
-      query: {
-        "owner-id": ownerId,
-        "owner-slug": ownerSlug,
-        "owner-type": ownerType,
-        "page-token": pageToken,
-      },
     });
   }
   /**
@@ -158,6 +158,10 @@ export class ContextService {
     contextId: string;
   }): CancelablePromise<{
     /**
+     * The date and time the context was created.
+     */
+    created_at: string;
+    /**
      * The unique ID of the context.
      */
     id: string;
@@ -165,10 +169,6 @@ export class ContextService {
      * The user defined name of the context.
      */
     name: string;
-    /**
-     * The date and time the context was created.
-     */
-    created_at: string;
   }> {
     return __request(OpenAPI, {
       method: "GET",
@@ -194,17 +194,17 @@ export class ContextService {
   }): CancelablePromise<{
     items: Array<{
       /**
-       * The name of the environment variable
+       * ID of the context (UUID)
        */
-      variable: string;
+      context_id: string;
       /**
        * The date and time the environment variable was created.
        */
       created_at: string;
       /**
-       * ID of the context (UUID)
+       * The name of the environment variable
        */
-      context_id: string;
+      variable: string;
     }>;
     /**
      * A token to pass as a `page-token` query parameter to return the next page of results.
@@ -280,17 +280,17 @@ export class ContextService {
   }): CancelablePromise<
     | {
         /**
-         * The name of the environment variable
+         * ID of the context (UUID)
          */
-        variable: string;
+        context_id: string;
         /**
          * The date and time the environment variable was created.
          */
         created_at: string;
         /**
-         * ID of the context (UUID)
+         * The name of the environment variable
          */
-        context_id: string;
+        variable: string;
       }
     | {
         /**
