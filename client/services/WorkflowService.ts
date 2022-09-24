@@ -16,11 +16,12 @@ export class WorkflowService {
      */
     id: string;
   }): CancelablePromise<{
-    /**
-     * The ID of the pipeline this workflow belongs to.
-     */
-    pipeline_id: string;
     canceled_by?: string;
+    /**
+     * The date and time the workflow was created.
+     */
+    created_at: string;
+    errored_by?: string;
     /**
      * The unique ID of the workflow.
      */
@@ -30,14 +31,18 @@ export class WorkflowService {
      */
     name: string;
     /**
+     * The ID of the pipeline this workflow belongs to.
+     */
+    pipeline_id: string;
+    /**
+     * The number of the pipeline this workflow belongs to.
+     */
+    pipeline_number: number;
+    /**
      * The project-slug for the pipeline this workflow belongs to.
      */
     project_slug: string;
-    errored_by?: string;
-    /**
-     * Tag used for the workflow
-     */
-    tag?: "setup";
+    started_by: string;
     /**
      * The current status of the workflow.
      */
@@ -51,19 +56,14 @@ export class WorkflowService {
       | "on_hold"
       | "canceled"
       | "unauthorized";
-    started_by: string;
-    /**
-     * The number of the pipeline this workflow belongs to.
-     */
-    pipeline_number: number;
-    /**
-     * The date and time the workflow was created.
-     */
-    created_at: string;
     /**
      * The date and time the workflow stopped.
      */
     stopped_at: string;
+    /**
+     * Tag used for the workflow
+     */
+    tag?: "setup";
   }> {
     return __request(OpenAPI, {
       method: "GET",
@@ -143,6 +143,14 @@ export class WorkflowService {
   }): CancelablePromise<{
     items: Array<{
       /**
+       * The unique ID of the job.
+       */
+      approval_request_id?: string;
+      /**
+       * The unique ID of the user.
+       */
+      approved_by?: string;
+      /**
        * The unique ID of the user.
        */
       canceled_by?: string;
@@ -151,29 +159,25 @@ export class WorkflowService {
        */
       dependencies: Array<string>;
       /**
-       * The number of the job.
-       */
-      job_number?: number;
-      /**
        * The unique ID of the job.
        */
       id: string;
       /**
-       * The date and time the job started.
+       * The number of the job.
        */
-      started_at: string;
+      job_number?: number;
       /**
        * The name of the job.
        */
       name: string;
       /**
-       * The unique ID of the user.
-       */
-      approved_by?: string;
-      /**
        * The project-slug for the job.
        */
       project_slug: string;
+      /**
+       * The date and time the job started.
+       */
+      started_at: string;
       /**
        * The current status of the job.
        */
@@ -193,17 +197,13 @@ export class WorkflowService {
         | "canceled"
         | "unauthorized";
       /**
-       * The type of job.
-       */
-      type: "build" | "approval";
-      /**
        * The time when the job stopped.
        */
       stopped_at?: string;
       /**
-       * The unique ID of the job.
+       * The type of job.
        */
-      approval_request_id?: string;
+      type: "build" | "approval";
     }>;
     /**
      * A token to pass as a `page-token` query parameter to return the next page of results.

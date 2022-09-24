@@ -23,108 +23,6 @@ export class ScheduleService {
   }): CancelablePromise<{
     items: Array<{
       /**
-       * The unique ID of the schedule.
-       */
-      id: string;
-      /**
-       * Timetable that specifies when a schedule triggers.
-       */
-      timetable:
-        | {
-            /**
-             * Number of times a schedule triggers per hour, value must be between 1 and 60
-             */
-            "per-hour": number;
-            /**
-             * Hours in a day in which the schedule triggers.
-             */
-            "hours-of-day": Array<number>;
-            /**
-             * Days in a week in which the schedule triggers.
-             */
-            "days-of-week": Array<
-              "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
-            >;
-            /**
-             * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
-             */
-            "days-of-month"?: Array<number>;
-            /**
-             * Months in which the schedule triggers.
-             */
-            months?: Array<
-              | "MAR"
-              | "NOV"
-              | "DEC"
-              | "JUN"
-              | "MAY"
-              | "OCT"
-              | "FEB"
-              | "APR"
-              | "SEP"
-              | "AUG"
-              | "JAN"
-              | "JUL"
-            >;
-          }
-        | {
-            /**
-             * Number of times a schedule triggers per hour, value must be between 1 and 60
-             */
-            "per-hour": number;
-            /**
-             * Hours in a day in which the schedule triggers.
-             */
-            "hours-of-day": Array<number>;
-            /**
-             * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
-             */
-            "days-of-month": Array<number>;
-            /**
-             * Days in a week in which the schedule triggers.
-             */
-            "days-of-week"?: Array<
-              "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
-            >;
-            /**
-             * Months in which the schedule triggers.
-             */
-            months?: Array<
-              | "MAR"
-              | "NOV"
-              | "DEC"
-              | "JUN"
-              | "MAY"
-              | "OCT"
-              | "FEB"
-              | "APR"
-              | "SEP"
-              | "AUG"
-              | "JAN"
-              | "JUL"
-            >;
-          };
-      /**
-       * The date and time the pipeline was last updated.
-       */
-      "updated-at": string;
-      /**
-       * Name of the schedule.
-       */
-      name: string;
-      /**
-       * The date and time the pipeline was created.
-       */
-      "created-at": string;
-      /**
-       * The project-slug for the schedule
-       */
-      "project-slug": string;
-      /**
-       * Pipeline parameters represented as key-value pairs. Must contain branch or tag.
-       */
-      parameters: Record<string, number | string | boolean>;
-      /**
        * The attribution actor who will run the scheduled pipeline.
        */
       actor: {
@@ -142,9 +40,111 @@ export class ScheduleService {
         name: string;
       };
       /**
+       * The date and time the pipeline was created.
+       */
+      "created-at": string;
+      /**
        * Description of the schedule.
        */
       description: string;
+      /**
+       * The unique ID of the schedule.
+       */
+      id: string;
+      /**
+       * Name of the schedule.
+       */
+      name: string;
+      /**
+       * Pipeline parameters represented as key-value pairs. Must contain branch or tag.
+       */
+      parameters: Record<string, number | string | boolean>;
+      /**
+       * The project-slug for the schedule
+       */
+      "project-slug": string;
+      /**
+       * Timetable that specifies when a schedule triggers.
+       */
+      timetable:
+        | {
+            /**
+             * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
+             */
+            "days-of-month"?: Array<number>;
+            /**
+             * Days in a week in which the schedule triggers.
+             */
+            "days-of-week": Array<
+              "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
+            >;
+            /**
+             * Hours in a day in which the schedule triggers.
+             */
+            "hours-of-day": Array<number>;
+            /**
+             * Months in which the schedule triggers.
+             */
+            months?: Array<
+              | "MAR"
+              | "NOV"
+              | "DEC"
+              | "JUN"
+              | "MAY"
+              | "OCT"
+              | "FEB"
+              | "APR"
+              | "SEP"
+              | "AUG"
+              | "JAN"
+              | "JUL"
+            >;
+            /**
+             * Number of times a schedule triggers per hour, value must be between 1 and 60
+             */
+            "per-hour": number;
+          }
+        | {
+            /**
+             * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
+             */
+            "days-of-month": Array<number>;
+            /**
+             * Days in a week in which the schedule triggers.
+             */
+            "days-of-week"?: Array<
+              "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
+            >;
+            /**
+             * Hours in a day in which the schedule triggers.
+             */
+            "hours-of-day": Array<number>;
+            /**
+             * Months in which the schedule triggers.
+             */
+            months?: Array<
+              | "MAR"
+              | "NOV"
+              | "DEC"
+              | "JUN"
+              | "MAY"
+              | "OCT"
+              | "FEB"
+              | "APR"
+              | "SEP"
+              | "AUG"
+              | "JAN"
+              | "JUL"
+            >;
+            /**
+             * Number of times a schedule triggers per hour, value must be between 1 and 60
+             */
+            "per-hour": number;
+          };
+      /**
+       * The date and time the pipeline was last updated.
+       */
+      "updated-at": string;
     }>;
     /**
      * A token to pass as a `page-token` query parameter to return the next page of results.
@@ -178,22 +178,30 @@ export class ScheduleService {
     projectSlug: string;
     requestBody?: {
       /**
+       * The attribution-actor of the scheduled pipeline.
+       */
+      "attribution-actor": "current" | "system";
+      /**
+       * Description of the schedule.
+       */
+      description?: string;
+      /**
        * Name of the schedule.
        */
       name: string;
+      /**
+       * Pipeline parameters represented as key-value pairs. Must contain branch or tag.
+       */
+      parameters: Record<string, number | string | boolean>;
       /**
        * Timetable that specifies when a schedule triggers.
        */
       timetable:
         | {
             /**
-             * Number of times a schedule triggers per hour, value must be between 1 and 60
+             * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
              */
-            "per-hour": number;
-            /**
-             * Hours in a day in which the schedule triggers.
-             */
-            "hours-of-day": Array<number>;
+            "days-of-month"?: Array<number>;
             /**
              * Days in a week in which the schedule triggers.
              */
@@ -201,9 +209,9 @@ export class ScheduleService {
               "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
             >;
             /**
-             * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
+             * Hours in a day in which the schedule triggers.
              */
-            "days-of-month"?: Array<number>;
+            "hours-of-day": Array<number>;
             /**
              * Months in which the schedule triggers.
              */
@@ -221,16 +229,12 @@ export class ScheduleService {
               | "JAN"
               | "JUL"
             >;
-          }
-        | {
             /**
              * Number of times a schedule triggers per hour, value must be between 1 and 60
              */
             "per-hour": number;
-            /**
-             * Hours in a day in which the schedule triggers.
-             */
-            "hours-of-day": Array<number>;
+          }
+        | {
             /**
              * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
              */
@@ -242,6 +246,10 @@ export class ScheduleService {
               "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
             >;
             /**
+             * Hours in a day in which the schedule triggers.
+             */
+            "hours-of-day": Array<number>;
+            /**
              * Months in which the schedule triggers.
              */
             months?: Array<
@@ -258,19 +266,11 @@ export class ScheduleService {
               | "JAN"
               | "JUL"
             >;
+            /**
+             * Number of times a schedule triggers per hour, value must be between 1 and 60
+             */
+            "per-hour": number;
           };
-      /**
-       * The attribution-actor of the scheduled pipeline.
-       */
-      "attribution-actor": "current" | "system";
-      /**
-       * Pipeline parameters represented as key-value pairs. Must contain branch or tag.
-       */
-      parameters: Record<string, number | string | boolean>;
-      /**
-       * Description of the schedule.
-       */
-      description?: string;
     };
   }): CancelablePromise<{
     message?: string;
@@ -327,108 +327,6 @@ export class ScheduleService {
     scheduleId: string;
   }): CancelablePromise<{
     /**
-     * The unique ID of the schedule.
-     */
-    id: string;
-    /**
-     * Timetable that specifies when a schedule triggers.
-     */
-    timetable:
-      | {
-          /**
-           * Number of times a schedule triggers per hour, value must be between 1 and 60
-           */
-          "per-hour": number;
-          /**
-           * Hours in a day in which the schedule triggers.
-           */
-          "hours-of-day": Array<number>;
-          /**
-           * Days in a week in which the schedule triggers.
-           */
-          "days-of-week": Array<
-            "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
-          >;
-          /**
-           * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
-           */
-          "days-of-month"?: Array<number>;
-          /**
-           * Months in which the schedule triggers.
-           */
-          months?: Array<
-            | "MAR"
-            | "NOV"
-            | "DEC"
-            | "JUN"
-            | "MAY"
-            | "OCT"
-            | "FEB"
-            | "APR"
-            | "SEP"
-            | "AUG"
-            | "JAN"
-            | "JUL"
-          >;
-        }
-      | {
-          /**
-           * Number of times a schedule triggers per hour, value must be between 1 and 60
-           */
-          "per-hour": number;
-          /**
-           * Hours in a day in which the schedule triggers.
-           */
-          "hours-of-day": Array<number>;
-          /**
-           * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
-           */
-          "days-of-month": Array<number>;
-          /**
-           * Days in a week in which the schedule triggers.
-           */
-          "days-of-week"?: Array<
-            "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
-          >;
-          /**
-           * Months in which the schedule triggers.
-           */
-          months?: Array<
-            | "MAR"
-            | "NOV"
-            | "DEC"
-            | "JUN"
-            | "MAY"
-            | "OCT"
-            | "FEB"
-            | "APR"
-            | "SEP"
-            | "AUG"
-            | "JAN"
-            | "JUL"
-          >;
-        };
-    /**
-     * The date and time the pipeline was last updated.
-     */
-    "updated-at": string;
-    /**
-     * Name of the schedule.
-     */
-    name: string;
-    /**
-     * The date and time the pipeline was created.
-     */
-    "created-at": string;
-    /**
-     * The project-slug for the schedule
-     */
-    "project-slug": string;
-    /**
-     * Pipeline parameters represented as key-value pairs. Must contain branch or tag.
-     */
-    parameters: Record<string, number | string | boolean>;
-    /**
      * The attribution actor who will run the scheduled pipeline.
      */
     actor: {
@@ -446,9 +344,111 @@ export class ScheduleService {
       name: string;
     };
     /**
+     * The date and time the pipeline was created.
+     */
+    "created-at": string;
+    /**
      * Description of the schedule.
      */
     description: string;
+    /**
+     * The unique ID of the schedule.
+     */
+    id: string;
+    /**
+     * Name of the schedule.
+     */
+    name: string;
+    /**
+     * Pipeline parameters represented as key-value pairs. Must contain branch or tag.
+     */
+    parameters: Record<string, number | string | boolean>;
+    /**
+     * The project-slug for the schedule
+     */
+    "project-slug": string;
+    /**
+     * Timetable that specifies when a schedule triggers.
+     */
+    timetable:
+      | {
+          /**
+           * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
+           */
+          "days-of-month"?: Array<number>;
+          /**
+           * Days in a week in which the schedule triggers.
+           */
+          "days-of-week": Array<
+            "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
+          >;
+          /**
+           * Hours in a day in which the schedule triggers.
+           */
+          "hours-of-day": Array<number>;
+          /**
+           * Months in which the schedule triggers.
+           */
+          months?: Array<
+            | "MAR"
+            | "NOV"
+            | "DEC"
+            | "JUN"
+            | "MAY"
+            | "OCT"
+            | "FEB"
+            | "APR"
+            | "SEP"
+            | "AUG"
+            | "JAN"
+            | "JUL"
+          >;
+          /**
+           * Number of times a schedule triggers per hour, value must be between 1 and 60
+           */
+          "per-hour": number;
+        }
+      | {
+          /**
+           * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
+           */
+          "days-of-month": Array<number>;
+          /**
+           * Days in a week in which the schedule triggers.
+           */
+          "days-of-week"?: Array<
+            "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
+          >;
+          /**
+           * Hours in a day in which the schedule triggers.
+           */
+          "hours-of-day": Array<number>;
+          /**
+           * Months in which the schedule triggers.
+           */
+          months?: Array<
+            | "MAR"
+            | "NOV"
+            | "DEC"
+            | "JUN"
+            | "MAY"
+            | "OCT"
+            | "FEB"
+            | "APR"
+            | "SEP"
+            | "AUG"
+            | "JAN"
+            | "JUL"
+          >;
+          /**
+           * Number of times a schedule triggers per hour, value must be between 1 and 60
+           */
+          "per-hour": number;
+        };
+    /**
+     * The date and time the pipeline was last updated.
+     */
+    "updated-at": string;
   }> {
     return __request(OpenAPI, {
       method: "GET",
@@ -474,6 +474,10 @@ export class ScheduleService {
     scheduleId: string;
     requestBody?: {
       /**
+       * The attribution-actor of the scheduled pipeline.
+       */
+      "attribution-actor"?: "current" | "system";
+      /**
        * Description of the schedule.
        */
       description?: string;
@@ -482,17 +486,17 @@ export class ScheduleService {
        */
       name?: string;
       /**
+       * Pipeline parameters represented as key-value pairs. Must contain branch or tag.
+       */
+      parameters?: Record<string, number | string | boolean>;
+      /**
        * Timetable that specifies when a schedule triggers.
        */
       timetable?: {
         /**
-         * Number of times a schedule triggers per hour, value must be between 1 and 60
+         * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
          */
-        "per-hour"?: number;
-        /**
-         * Hours in a day in which the schedule triggers.
-         */
-        "hours-of-day"?: Array<number>;
+        "days-of-month"?: Array<number>;
         /**
          * Days in a week in which the schedule triggers.
          */
@@ -500,9 +504,9 @@ export class ScheduleService {
           "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
         >;
         /**
-         * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
+         * Hours in a day in which the schedule triggers.
          */
-        "days-of-month"?: Array<number>;
+        "hours-of-day"?: Array<number>;
         /**
          * Months in which the schedule triggers.
          */
@@ -520,119 +524,13 @@ export class ScheduleService {
           | "JAN"
           | "JUL"
         >;
+        /**
+         * Number of times a schedule triggers per hour, value must be between 1 and 60
+         */
+        "per-hour"?: number;
       };
-      /**
-       * The attribution-actor of the scheduled pipeline.
-       */
-      "attribution-actor"?: "current" | "system";
-      /**
-       * Pipeline parameters represented as key-value pairs. Must contain branch or tag.
-       */
-      parameters?: Record<string, number | string | boolean>;
     };
   }): CancelablePromise<{
-    /**
-     * The unique ID of the schedule.
-     */
-    id: string;
-    /**
-     * Timetable that specifies when a schedule triggers.
-     */
-    timetable:
-      | {
-          /**
-           * Number of times a schedule triggers per hour, value must be between 1 and 60
-           */
-          "per-hour": number;
-          /**
-           * Hours in a day in which the schedule triggers.
-           */
-          "hours-of-day": Array<number>;
-          /**
-           * Days in a week in which the schedule triggers.
-           */
-          "days-of-week": Array<
-            "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
-          >;
-          /**
-           * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
-           */
-          "days-of-month"?: Array<number>;
-          /**
-           * Months in which the schedule triggers.
-           */
-          months?: Array<
-            | "MAR"
-            | "NOV"
-            | "DEC"
-            | "JUN"
-            | "MAY"
-            | "OCT"
-            | "FEB"
-            | "APR"
-            | "SEP"
-            | "AUG"
-            | "JAN"
-            | "JUL"
-          >;
-        }
-      | {
-          /**
-           * Number of times a schedule triggers per hour, value must be between 1 and 60
-           */
-          "per-hour": number;
-          /**
-           * Hours in a day in which the schedule triggers.
-           */
-          "hours-of-day": Array<number>;
-          /**
-           * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
-           */
-          "days-of-month": Array<number>;
-          /**
-           * Days in a week in which the schedule triggers.
-           */
-          "days-of-week"?: Array<
-            "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
-          >;
-          /**
-           * Months in which the schedule triggers.
-           */
-          months?: Array<
-            | "MAR"
-            | "NOV"
-            | "DEC"
-            | "JUN"
-            | "MAY"
-            | "OCT"
-            | "FEB"
-            | "APR"
-            | "SEP"
-            | "AUG"
-            | "JAN"
-            | "JUL"
-          >;
-        };
-    /**
-     * The date and time the pipeline was last updated.
-     */
-    "updated-at": string;
-    /**
-     * Name of the schedule.
-     */
-    name: string;
-    /**
-     * The date and time the pipeline was created.
-     */
-    "created-at": string;
-    /**
-     * The project-slug for the schedule
-     */
-    "project-slug": string;
-    /**
-     * Pipeline parameters represented as key-value pairs. Must contain branch or tag.
-     */
-    parameters: Record<string, number | string | boolean>;
     /**
      * The attribution actor who will run the scheduled pipeline.
      */
@@ -651,9 +549,111 @@ export class ScheduleService {
       name: string;
     };
     /**
+     * The date and time the pipeline was created.
+     */
+    "created-at": string;
+    /**
      * Description of the schedule.
      */
     description: string;
+    /**
+     * The unique ID of the schedule.
+     */
+    id: string;
+    /**
+     * Name of the schedule.
+     */
+    name: string;
+    /**
+     * Pipeline parameters represented as key-value pairs. Must contain branch or tag.
+     */
+    parameters: Record<string, number | string | boolean>;
+    /**
+     * The project-slug for the schedule
+     */
+    "project-slug": string;
+    /**
+     * Timetable that specifies when a schedule triggers.
+     */
+    timetable:
+      | {
+          /**
+           * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
+           */
+          "days-of-month"?: Array<number>;
+          /**
+           * Days in a week in which the schedule triggers.
+           */
+          "days-of-week": Array<
+            "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
+          >;
+          /**
+           * Hours in a day in which the schedule triggers.
+           */
+          "hours-of-day": Array<number>;
+          /**
+           * Months in which the schedule triggers.
+           */
+          months?: Array<
+            | "MAR"
+            | "NOV"
+            | "DEC"
+            | "JUN"
+            | "MAY"
+            | "OCT"
+            | "FEB"
+            | "APR"
+            | "SEP"
+            | "AUG"
+            | "JAN"
+            | "JUL"
+          >;
+          /**
+           * Number of times a schedule triggers per hour, value must be between 1 and 60
+           */
+          "per-hour": number;
+        }
+      | {
+          /**
+           * Days in a month in which the schedule triggers. This is mutually exclusive with days in a week.
+           */
+          "days-of-month": Array<number>;
+          /**
+           * Days in a week in which the schedule triggers.
+           */
+          "days-of-week"?: Array<
+            "TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI"
+          >;
+          /**
+           * Hours in a day in which the schedule triggers.
+           */
+          "hours-of-day": Array<number>;
+          /**
+           * Months in which the schedule triggers.
+           */
+          months?: Array<
+            | "MAR"
+            | "NOV"
+            | "DEC"
+            | "JUN"
+            | "MAY"
+            | "OCT"
+            | "FEB"
+            | "APR"
+            | "SEP"
+            | "AUG"
+            | "JAN"
+            | "JUL"
+          >;
+          /**
+           * Number of times a schedule triggers per hour, value must be between 1 and 60
+           */
+          "per-hour": number;
+        };
+    /**
+     * The date and time the pipeline was last updated.
+     */
+    "updated-at": string;
   }> {
     return __request(OpenAPI, {
       method: "PATCH",

@@ -16,15 +16,15 @@ export class ProjectService {
      */
     projectSlug: string;
   }): CancelablePromise<{
-    /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
-     */
-    slug: string;
+    id: string;
     /**
      * The name of the project
      */
     name: string;
-    id: string;
+    /**
+     * The id of the organization the project belongs to
+     */
+    organization_id: string;
     /**
      * The name of the organization the project belongs to
      */
@@ -34,27 +34,76 @@ export class ProjectService {
      */
     organization_slug: string;
     /**
-     * The id of the organization the project belongs to
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
      */
-    organization_id: string;
+    slug: string;
     /**
      * Information about the VCS that hosts the project source code.
      */
     vcs_info: {
-      /**
-       * URL to the repository hosting the project's code
-       */
-      vcs_url: string;
+      default_branch: string;
       /**
        * The VCS provider
        */
       provider: "Bitbucket" | "CircleCI" | "GitHub";
-      default_branch: string;
+      /**
+       * URL to the repository hosting the project's code
+       */
+      vcs_url: string;
     };
   }> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/project/{project-slug}",
+      path: {
+        "project-slug": projectSlug,
+      },
+    });
+  }
+  /**
+   * Get all checkout keys
+   * Returns a sequence of checkout keys for `:project`.
+   * @returns any A sequence of checkout keys.
+   * @throws ApiError
+   */
+  public static listCheckoutKeys({
+    projectSlug,
+  }: {
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
+    projectSlug: string;
+  }): CancelablePromise<{
+    items: Array<{
+      /**
+       * The date and time the checkout key was created.
+       */
+      "created-at": string;
+      /**
+       * An SSH key fingerprint.
+       */
+      fingerprint: string;
+      /**
+       * A boolean value that indicates if this key is preferred.
+       */
+      preferred: boolean;
+      /**
+       * A public SSH key.
+       */
+      "public-key": string;
+      /**
+       * The type of checkout key. This may be either `deploy-key` or `github-user-key`.
+       */
+      type: "deploy-key" | "github-user-key";
+    }>;
+    /**
+     * A token to pass as a `page-token` query parameter to return the next page of results.
+     */
+    next_page_token: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/project/{project-slug}/checkout-key",
       path: {
         "project-slug": projectSlug,
       },
@@ -94,104 +143,6 @@ export class ProjectService {
     });
   }
   /**
-   * Get all checkout keys
-   * Returns a sequence of checkout keys for `:project`.
-   * @returns any A sequence of checkout keys.
-   * @throws ApiError
-   */
-  public static listCheckoutKeys({
-    projectSlug,
-  }: {
-    /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
-     */
-    projectSlug: string;
-  }): CancelablePromise<{
-    items: Array<{
-      /**
-       * A public SSH key.
-       */
-      "public-key": string;
-      /**
-       * The type of checkout key. This may be either `deploy-key` or `github-user-key`.
-       */
-      type: "deploy-key" | "github-user-key";
-      /**
-       * An SSH key fingerprint.
-       */
-      fingerprint: string;
-      /**
-       * A boolean value that indicates if this key is preferred.
-       */
-      preferred: boolean;
-      /**
-       * The date and time the checkout key was created.
-       */
-      "created-at": string;
-    }>;
-    /**
-     * A token to pass as a `page-token` query parameter to return the next page of results.
-     */
-    next_page_token: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/project/{project-slug}/checkout-key",
-      path: {
-        "project-slug": projectSlug,
-      },
-    });
-  }
-  /**
-   * Get a checkout key
-   * Returns an individual checkout key.
-   * @returns any The checkout key.
-   * @throws ApiError
-   */
-  public static getCheckoutKey({
-    projectSlug,
-    fingerprint,
-  }: {
-    /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
-     */
-    projectSlug: string;
-    /**
-     * An SSH key fingerprint.
-     */
-    fingerprint: string;
-  }): CancelablePromise<{
-    /**
-     * A public SSH key.
-     */
-    "public-key": string;
-    /**
-     * The type of checkout key. This may be either `deploy-key` or `github-user-key`.
-     */
-    type: "deploy-key" | "github-user-key";
-    /**
-     * An SSH key fingerprint.
-     */
-    fingerprint: string;
-    /**
-     * A boolean value that indicates if this key is preferred.
-     */
-    preferred: boolean;
-    /**
-     * The date and time the checkout key was created.
-     */
-    "created-at": string;
-  }> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/project/{project-slug}/checkout-key/{fingerprint}",
-      path: {
-        "project-slug": projectSlug,
-        fingerprint: fingerprint,
-      },
-    });
-  }
-  /**
    * Delete a checkout key
    * Deletes the checkout key.
    * @returns any A confirmation message.
@@ -221,6 +172,92 @@ export class ProjectService {
       path: {
         "project-slug": projectSlug,
         fingerprint: fingerprint,
+      },
+    });
+  }
+  /**
+   * Get a checkout key
+   * Returns an individual checkout key.
+   * @returns any The checkout key.
+   * @throws ApiError
+   */
+  public static getCheckoutKey({
+    projectSlug,
+    fingerprint,
+  }: {
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
+    projectSlug: string;
+    /**
+     * An SSH key fingerprint.
+     */
+    fingerprint: string;
+  }): CancelablePromise<{
+    /**
+     * The date and time the checkout key was created.
+     */
+    "created-at": string;
+    /**
+     * An SSH key fingerprint.
+     */
+    fingerprint: string;
+    /**
+     * A boolean value that indicates if this key is preferred.
+     */
+    preferred: boolean;
+    /**
+     * A public SSH key.
+     */
+    "public-key": string;
+    /**
+     * The type of checkout key. This may be either `deploy-key` or `github-user-key`.
+     */
+    type: "deploy-key" | "github-user-key";
+  }> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/project/{project-slug}/checkout-key/{fingerprint}",
+      path: {
+        "project-slug": projectSlug,
+        fingerprint: fingerprint,
+      },
+    });
+  }
+  /**
+   * List all environment variables
+   * Returns four 'x' characters, in addition to the last four ASCII characters of the value, consistent with the display of environment variable values on the CircleCI website.
+   * @returns any A sequence of environment variables.
+   * @throws ApiError
+   */
+  public static listEnvVars({
+    projectSlug,
+  }: {
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
+    projectSlug: string;
+  }): CancelablePromise<{
+    items: Array<{
+      /**
+       * The name of the environment variable.
+       */
+      name: string;
+      /**
+       * The value of the environment variable.
+       */
+      value: string;
+    }>;
+    /**
+     * A token to pass as a `page-token` query parameter to return the next page of results.
+     */
+    next_page_token: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/project/{project-slug}/envvar",
+      path: {
+        "project-slug": projectSlug,
       },
     });
   }
@@ -259,43 +296,6 @@ export class ProjectService {
       },
       body: requestBody,
       mediaType: "application/json",
-    });
-  }
-  /**
-   * List all environment variables
-   * Returns four 'x' characters, in addition to the last four ASCII characters of the value, consistent with the display of environment variable values on the CircleCI website.
-   * @returns any A sequence of environment variables.
-   * @throws ApiError
-   */
-  public static listEnvVars({
-    projectSlug,
-  }: {
-    /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
-     */
-    projectSlug: string;
-  }): CancelablePromise<{
-    items: Array<{
-      /**
-       * The name of the environment variable.
-       */
-      name: string;
-      /**
-       * The value of the environment variable.
-       */
-      value: string;
-    }>;
-    /**
-     * A token to pass as a `page-token` query parameter to return the next page of results.
-     */
-    next_page_token: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/project/{project-slug}/envvar",
-      path: {
-        "project-slug": projectSlug,
-      },
     });
   }
   /**

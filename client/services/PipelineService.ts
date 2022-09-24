@@ -28,13 +28,17 @@ export class PipelineService {
   }): CancelablePromise<{
     items: Array<{
       /**
-       * The unique ID of the pipeline.
+       * The date and time the pipeline was created.
        */
-      id: string;
+      created_at: string;
       /**
        * A sequence of errors that have occurred within the pipeline.
        */
       errors: Array<{
+        /**
+         * A human-readable error message.
+         */
+        message: string;
         /**
          * The type of error.
          */
@@ -45,74 +49,83 @@ export class PipelineService {
           | "permission"
           | "other"
           | "plan";
-        /**
-         * A human-readable error message.
-         */
-        message: string;
       }>;
+      /**
+       * The unique ID of the pipeline.
+       */
+      id: string;
+      /**
+       * The number of the pipeline.
+       */
+      number: number;
       /**
        * The project-slug for the pipeline.
        */
       project_slug: string;
       /**
-       * The date and time the pipeline was last updated.
-       */
-      updated_at?: string;
-      /**
-       * The number of the pipeline.
-       */
-      number: number;
-      trigger_parameters?: Record<string, string | number | boolean>;
-      /**
        * The current state of the pipeline.
        */
       state: "created" | "errored" | "setup-pending" | "setup" | "pending";
-      /**
-       * The date and time the pipeline was created.
-       */
-      created_at: string;
       /**
        * A summary of the trigger.
        */
       trigger: {
         /**
-         * The type of trigger.
+         * The user who triggered the Pipeline.
          */
-        type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
+        actor: {
+          /**
+           * URL to the user's avatar on the VCS
+           */
+          avatar_url: string;
+          /**
+           * The login information for the user on the VCS.
+           */
+          login: string;
+        };
         /**
          * The date and time the trigger was received.
          */
         received_at: string;
         /**
-         * The user who triggered the Pipeline.
+         * The type of trigger.
          */
-        actor: {
-          /**
-           * The login information for the user on the VCS.
-           */
-          login: string;
-          /**
-           * URL to the user's avatar on the VCS
-           */
-          avatar_url: string;
-        };
+        type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
       };
+      trigger_parameters?: Record<string, string | number | boolean>;
+      /**
+       * The date and time the pipeline was last updated.
+       */
+      updated_at?: string;
       /**
        * VCS information for the pipeline.
        */
       vcs?: {
         /**
-         * Name of the VCS provider (e.g. GitHub, Bitbucket).
-         */
-        provider_name: string;
-        /**
-         * URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
-         */
-        target_repository_url: string;
-        /**
          * The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
          */
         branch?: string;
+        /**
+         * The latest commit in the pipeline.
+         */
+        commit?: {
+          /**
+           * The body of the commit message.
+           */
+          body: string;
+          /**
+           * The subject of the commit message.
+           */
+          subject: string;
+        };
+        /**
+         * URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
+         */
+        origin_repository_url: string;
+        /**
+         * Name of the VCS provider (e.g. GitHub, Bitbucket).
+         */
+        provider_name: string;
         /**
          * The code review id.
          */
@@ -130,22 +143,9 @@ export class PipelineService {
          */
         tag?: string;
         /**
-         * The latest commit in the pipeline.
+         * URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
          */
-        commit?: {
-          /**
-           * The subject of the commit message.
-           */
-          subject: string;
-          /**
-           * The body of the commit message.
-           */
-          body: string;
-        };
-        /**
-         * URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
-         */
-        origin_repository_url: string;
+        target_repository_url: string;
       };
     }>;
     /**
@@ -174,13 +174,13 @@ export class PipelineService {
   }: {
     requestBody?: {
       /**
-       * A pipeline continuation key.
-       */
-      "continuation-key": string;
-      /**
        * A configuration string for the pipeline.
        */
       configuration: string;
+      /**
+       * A pipeline continuation key.
+       */
+      "continuation-key": string;
       /**
        * An object containing pipeline parameters and their values.
        */
@@ -214,13 +214,17 @@ export class PipelineService {
     pipelineId: string;
   }): CancelablePromise<{
     /**
-     * The unique ID of the pipeline.
+     * The date and time the pipeline was created.
      */
-    id: string;
+    created_at: string;
     /**
      * A sequence of errors that have occurred within the pipeline.
      */
     errors: Array<{
+      /**
+       * A human-readable error message.
+       */
+      message: string;
       /**
        * The type of error.
        */
@@ -231,74 +235,83 @@ export class PipelineService {
         | "permission"
         | "other"
         | "plan";
-      /**
-       * A human-readable error message.
-       */
-      message: string;
     }>;
+    /**
+     * The unique ID of the pipeline.
+     */
+    id: string;
+    /**
+     * The number of the pipeline.
+     */
+    number: number;
     /**
      * The project-slug for the pipeline.
      */
     project_slug: string;
     /**
-     * The date and time the pipeline was last updated.
-     */
-    updated_at?: string;
-    /**
-     * The number of the pipeline.
-     */
-    number: number;
-    trigger_parameters?: Record<string, string | number | boolean>;
-    /**
      * The current state of the pipeline.
      */
     state: "created" | "errored" | "setup-pending" | "setup" | "pending";
-    /**
-     * The date and time the pipeline was created.
-     */
-    created_at: string;
     /**
      * A summary of the trigger.
      */
     trigger: {
       /**
-       * The type of trigger.
+       * The user who triggered the Pipeline.
        */
-      type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
+      actor: {
+        /**
+         * URL to the user's avatar on the VCS
+         */
+        avatar_url: string;
+        /**
+         * The login information for the user on the VCS.
+         */
+        login: string;
+      };
       /**
        * The date and time the trigger was received.
        */
       received_at: string;
       /**
-       * The user who triggered the Pipeline.
+       * The type of trigger.
        */
-      actor: {
-        /**
-         * The login information for the user on the VCS.
-         */
-        login: string;
-        /**
-         * URL to the user's avatar on the VCS
-         */
-        avatar_url: string;
-      };
+      type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
     };
+    trigger_parameters?: Record<string, string | number | boolean>;
+    /**
+     * The date and time the pipeline was last updated.
+     */
+    updated_at?: string;
     /**
      * VCS information for the pipeline.
      */
     vcs?: {
       /**
-       * Name of the VCS provider (e.g. GitHub, Bitbucket).
-       */
-      provider_name: string;
-      /**
-       * URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
-       */
-      target_repository_url: string;
-      /**
        * The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
        */
       branch?: string;
+      /**
+       * The latest commit in the pipeline.
+       */
+      commit?: {
+        /**
+         * The body of the commit message.
+         */
+        body: string;
+        /**
+         * The subject of the commit message.
+         */
+        subject: string;
+      };
+      /**
+       * URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
+       */
+      origin_repository_url: string;
+      /**
+       * Name of the VCS provider (e.g. GitHub, Bitbucket).
+       */
+      provider_name: string;
       /**
        * The code review id.
        */
@@ -316,22 +329,9 @@ export class PipelineService {
        */
       tag?: string;
       /**
-       * The latest commit in the pipeline.
+       * URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
        */
-      commit?: {
-        /**
-         * The subject of the commit message.
-         */
-        subject: string;
-        /**
-         * The body of the commit message.
-         */
-        body: string;
-      };
-      /**
-       * URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
-       */
-      origin_repository_url: string;
+      target_repository_url: string;
     };
   }> {
     return __request(OpenAPI, {
@@ -357,21 +357,21 @@ export class PipelineService {
     pipelineId: string;
   }): CancelablePromise<{
     /**
-     * The source configuration for the pipeline, before any config compilation has been performed. If there is no config, then this field will be empty.
-     */
-    source: string;
-    /**
      * The compiled configuration for the pipeline, after all orb expansion has been performed. If there were errors processing the pipeline's configuration, then this field may be empty.
      */
     compiled: string;
+    /**
+     * The compiled setup configuration for the pipeline, after all orb expansion has been performed. If there were errors processing the pipeline's setup workflows, then this field may be empty.
+     */
+    "compiled-setup-config"?: string;
     /**
      * The setup configuration for the pipeline used for Setup Workflows. If there were errors processing the pipeline's configuration or if setup workflows are not enabled, then this field should not exist
      */
     "setup-config"?: string;
     /**
-     * The compiled setup configuration for the pipeline, after all orb expansion has been performed. If there were errors processing the pipeline's setup workflows, then this field may be empty.
+     * The source configuration for the pipeline, before any config compilation has been performed. If there is no config, then this field will be empty.
      */
-    "compiled-setup-config"?: string;
+    source: string;
   }> {
     return __request(OpenAPI, {
       method: "GET",
@@ -404,11 +404,12 @@ export class PipelineService {
      * A list of workflows.
      */
     items: Array<{
-      /**
-       * The ID of the pipeline this workflow belongs to.
-       */
-      pipeline_id: string;
       canceled_by?: string;
+      /**
+       * The date and time the workflow was created.
+       */
+      created_at: string;
+      errored_by?: string;
       /**
        * The unique ID of the workflow.
        */
@@ -418,14 +419,18 @@ export class PipelineService {
        */
       name: string;
       /**
+       * The ID of the pipeline this workflow belongs to.
+       */
+      pipeline_id: string;
+      /**
+       * The number of the pipeline this workflow belongs to.
+       */
+      pipeline_number: number;
+      /**
        * The project-slug for the pipeline this workflow belongs to.
        */
       project_slug: string;
-      errored_by?: string;
-      /**
-       * Tag used for the workflow
-       */
-      tag?: "setup";
+      started_by: string;
       /**
        * The current status of the workflow.
        */
@@ -439,19 +444,14 @@ export class PipelineService {
         | "on_hold"
         | "canceled"
         | "unauthorized";
-      started_by: string;
-      /**
-       * The number of the pipeline this workflow belongs to.
-       */
-      pipeline_number: number;
-      /**
-       * The date and time the workflow was created.
-       */
-      created_at: string;
       /**
        * The date and time the workflow stopped.
        */
       stopped_at: string;
+      /**
+       * Tag used for the workflow
+       */
+      tag?: "setup";
     }>;
     /**
      * A token to pass as a `page-token` query parameter to return the next page of results.
@@ -467,47 +467,6 @@ export class PipelineService {
       query: {
         "page-token": pageToken,
       },
-    });
-  }
-  /**
-   * Trigger a new pipeline
-   * Triggers a new pipeline on the project.
-   * @returns any Error response.
-   * @throws ApiError
-   */
-  public static triggerPipeline({
-    projectSlug,
-    requestBody,
-  }: {
-    /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
-     */
-    projectSlug: string;
-    requestBody?: {
-      /**
-       * The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
-       */
-      branch?: string;
-      /**
-       * The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.
-       */
-      tag?: string;
-      /**
-       * An object containing pipeline parameters and their values.
-       */
-      parameters?: Record<string, number | string | boolean>;
-    };
-  }): CancelablePromise<{
-    message?: string;
-  }> {
-    return __request(OpenAPI, {
-      method: "POST",
-      url: "/project/{project-slug}/pipeline",
-      path: {
-        "project-slug": projectSlug,
-      },
-      body: requestBody,
-      mediaType: "application/json",
     });
   }
   /**
@@ -536,13 +495,17 @@ export class PipelineService {
   }): CancelablePromise<{
     items: Array<{
       /**
-       * The unique ID of the pipeline.
+       * The date and time the pipeline was created.
        */
-      id: string;
+      created_at: string;
       /**
        * A sequence of errors that have occurred within the pipeline.
        */
       errors: Array<{
+        /**
+         * A human-readable error message.
+         */
+        message: string;
         /**
          * The type of error.
          */
@@ -553,74 +516,83 @@ export class PipelineService {
           | "permission"
           | "other"
           | "plan";
-        /**
-         * A human-readable error message.
-         */
-        message: string;
       }>;
+      /**
+       * The unique ID of the pipeline.
+       */
+      id: string;
+      /**
+       * The number of the pipeline.
+       */
+      number: number;
       /**
        * The project-slug for the pipeline.
        */
       project_slug: string;
       /**
-       * The date and time the pipeline was last updated.
-       */
-      updated_at?: string;
-      /**
-       * The number of the pipeline.
-       */
-      number: number;
-      trigger_parameters?: Record<string, string | number | boolean>;
-      /**
        * The current state of the pipeline.
        */
       state: "created" | "errored" | "setup-pending" | "setup" | "pending";
-      /**
-       * The date and time the pipeline was created.
-       */
-      created_at: string;
       /**
        * A summary of the trigger.
        */
       trigger: {
         /**
-         * The type of trigger.
+         * The user who triggered the Pipeline.
          */
-        type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
+        actor: {
+          /**
+           * URL to the user's avatar on the VCS
+           */
+          avatar_url: string;
+          /**
+           * The login information for the user on the VCS.
+           */
+          login: string;
+        };
         /**
          * The date and time the trigger was received.
          */
         received_at: string;
         /**
-         * The user who triggered the Pipeline.
+         * The type of trigger.
          */
-        actor: {
-          /**
-           * The login information for the user on the VCS.
-           */
-          login: string;
-          /**
-           * URL to the user's avatar on the VCS
-           */
-          avatar_url: string;
-        };
+        type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
       };
+      trigger_parameters?: Record<string, string | number | boolean>;
+      /**
+       * The date and time the pipeline was last updated.
+       */
+      updated_at?: string;
       /**
        * VCS information for the pipeline.
        */
       vcs?: {
         /**
-         * Name of the VCS provider (e.g. GitHub, Bitbucket).
-         */
-        provider_name: string;
-        /**
-         * URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
-         */
-        target_repository_url: string;
-        /**
          * The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
          */
         branch?: string;
+        /**
+         * The latest commit in the pipeline.
+         */
+        commit?: {
+          /**
+           * The body of the commit message.
+           */
+          body: string;
+          /**
+           * The subject of the commit message.
+           */
+          subject: string;
+        };
+        /**
+         * URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
+         */
+        origin_repository_url: string;
+        /**
+         * Name of the VCS provider (e.g. GitHub, Bitbucket).
+         */
+        provider_name: string;
         /**
          * The code review id.
          */
@@ -638,22 +610,9 @@ export class PipelineService {
          */
         tag?: string;
         /**
-         * The latest commit in the pipeline.
+         * URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
          */
-        commit?: {
-          /**
-           * The subject of the commit message.
-           */
-          subject: string;
-          /**
-           * The body of the commit message.
-           */
-          body: string;
-        };
-        /**
-         * URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
-         */
-        origin_repository_url: string;
+        target_repository_url: string;
       };
     }>;
     /**
@@ -671,6 +630,47 @@ export class PipelineService {
         branch: branch,
         "page-token": pageToken,
       },
+    });
+  }
+  /**
+   * Trigger a new pipeline
+   * Triggers a new pipeline on the project.
+   * @returns any Error response.
+   * @throws ApiError
+   */
+  public static triggerPipeline({
+    projectSlug,
+    requestBody,
+  }: {
+    /**
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     */
+    projectSlug: string;
+    requestBody?: {
+      /**
+       * The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
+       */
+      branch?: string;
+      /**
+       * An object containing pipeline parameters and their values.
+       */
+      parameters?: Record<string, number | string | boolean>;
+      /**
+       * The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.
+       */
+      tag?: string;
+    };
+  }): CancelablePromise<{
+    message?: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/project/{project-slug}/pipeline",
+      path: {
+        "project-slug": projectSlug,
+      },
+      body: requestBody,
+      mediaType: "application/json",
     });
   }
   /**
@@ -694,13 +694,17 @@ export class PipelineService {
   }): CancelablePromise<{
     items: Array<{
       /**
-       * The unique ID of the pipeline.
+       * The date and time the pipeline was created.
        */
-      id: string;
+      created_at: string;
       /**
        * A sequence of errors that have occurred within the pipeline.
        */
       errors: Array<{
+        /**
+         * A human-readable error message.
+         */
+        message: string;
         /**
          * The type of error.
          */
@@ -711,74 +715,83 @@ export class PipelineService {
           | "permission"
           | "other"
           | "plan";
-        /**
-         * A human-readable error message.
-         */
-        message: string;
       }>;
+      /**
+       * The unique ID of the pipeline.
+       */
+      id: string;
+      /**
+       * The number of the pipeline.
+       */
+      number: number;
       /**
        * The project-slug for the pipeline.
        */
       project_slug: string;
       /**
-       * The date and time the pipeline was last updated.
-       */
-      updated_at?: string;
-      /**
-       * The number of the pipeline.
-       */
-      number: number;
-      trigger_parameters?: Record<string, string | number | boolean>;
-      /**
        * The current state of the pipeline.
        */
       state: "created" | "errored" | "setup-pending" | "setup" | "pending";
-      /**
-       * The date and time the pipeline was created.
-       */
-      created_at: string;
       /**
        * A summary of the trigger.
        */
       trigger: {
         /**
-         * The type of trigger.
+         * The user who triggered the Pipeline.
          */
-        type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
+        actor: {
+          /**
+           * URL to the user's avatar on the VCS
+           */
+          avatar_url: string;
+          /**
+           * The login information for the user on the VCS.
+           */
+          login: string;
+        };
         /**
          * The date and time the trigger was received.
          */
         received_at: string;
         /**
-         * The user who triggered the Pipeline.
+         * The type of trigger.
          */
-        actor: {
-          /**
-           * The login information for the user on the VCS.
-           */
-          login: string;
-          /**
-           * URL to the user's avatar on the VCS
-           */
-          avatar_url: string;
-        };
+        type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
       };
+      trigger_parameters?: Record<string, string | number | boolean>;
+      /**
+       * The date and time the pipeline was last updated.
+       */
+      updated_at?: string;
       /**
        * VCS information for the pipeline.
        */
       vcs?: {
         /**
-         * Name of the VCS provider (e.g. GitHub, Bitbucket).
-         */
-        provider_name: string;
-        /**
-         * URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
-         */
-        target_repository_url: string;
-        /**
          * The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
          */
         branch?: string;
+        /**
+         * The latest commit in the pipeline.
+         */
+        commit?: {
+          /**
+           * The body of the commit message.
+           */
+          body: string;
+          /**
+           * The subject of the commit message.
+           */
+          subject: string;
+        };
+        /**
+         * URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
+         */
+        origin_repository_url: string;
+        /**
+         * Name of the VCS provider (e.g. GitHub, Bitbucket).
+         */
+        provider_name: string;
         /**
          * The code review id.
          */
@@ -796,22 +809,9 @@ export class PipelineService {
          */
         tag?: string;
         /**
-         * The latest commit in the pipeline.
+         * URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
          */
-        commit?: {
-          /**
-           * The subject of the commit message.
-           */
-          subject: string;
-          /**
-           * The body of the commit message.
-           */
-          body: string;
-        };
-        /**
-         * URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
-         */
-        origin_repository_url: string;
+        target_repository_url: string;
       };
     }>;
     /**
@@ -850,13 +850,17 @@ export class PipelineService {
     pipelineNumber: any;
   }): CancelablePromise<{
     /**
-     * The unique ID of the pipeline.
+     * The date and time the pipeline was created.
      */
-    id: string;
+    created_at: string;
     /**
      * A sequence of errors that have occurred within the pipeline.
      */
     errors: Array<{
+      /**
+       * A human-readable error message.
+       */
+      message: string;
       /**
        * The type of error.
        */
@@ -867,74 +871,83 @@ export class PipelineService {
         | "permission"
         | "other"
         | "plan";
-      /**
-       * A human-readable error message.
-       */
-      message: string;
     }>;
+    /**
+     * The unique ID of the pipeline.
+     */
+    id: string;
+    /**
+     * The number of the pipeline.
+     */
+    number: number;
     /**
      * The project-slug for the pipeline.
      */
     project_slug: string;
     /**
-     * The date and time the pipeline was last updated.
-     */
-    updated_at?: string;
-    /**
-     * The number of the pipeline.
-     */
-    number: number;
-    trigger_parameters?: Record<string, string | number | boolean>;
-    /**
      * The current state of the pipeline.
      */
     state: "created" | "errored" | "setup-pending" | "setup" | "pending";
-    /**
-     * The date and time the pipeline was created.
-     */
-    created_at: string;
     /**
      * A summary of the trigger.
      */
     trigger: {
       /**
-       * The type of trigger.
+       * The user who triggered the Pipeline.
        */
-      type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
+      actor: {
+        /**
+         * URL to the user's avatar on the VCS
+         */
+        avatar_url: string;
+        /**
+         * The login information for the user on the VCS.
+         */
+        login: string;
+      };
       /**
        * The date and time the trigger was received.
        */
       received_at: string;
       /**
-       * The user who triggered the Pipeline.
+       * The type of trigger.
        */
-      actor: {
-        /**
-         * The login information for the user on the VCS.
-         */
-        login: string;
-        /**
-         * URL to the user's avatar on the VCS
-         */
-        avatar_url: string;
-      };
+      type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
     };
+    trigger_parameters?: Record<string, string | number | boolean>;
+    /**
+     * The date and time the pipeline was last updated.
+     */
+    updated_at?: string;
     /**
      * VCS information for the pipeline.
      */
     vcs?: {
       /**
-       * Name of the VCS provider (e.g. GitHub, Bitbucket).
-       */
-      provider_name: string;
-      /**
-       * URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
-       */
-      target_repository_url: string;
-      /**
        * The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
        */
       branch?: string;
+      /**
+       * The latest commit in the pipeline.
+       */
+      commit?: {
+        /**
+         * The body of the commit message.
+         */
+        body: string;
+        /**
+         * The subject of the commit message.
+         */
+        subject: string;
+      };
+      /**
+       * URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
+       */
+      origin_repository_url: string;
+      /**
+       * Name of the VCS provider (e.g. GitHub, Bitbucket).
+       */
+      provider_name: string;
       /**
        * The code review id.
        */
@@ -952,22 +965,9 @@ export class PipelineService {
        */
       tag?: string;
       /**
-       * The latest commit in the pipeline.
+       * URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
        */
-      commit?: {
-        /**
-         * The subject of the commit message.
-         */
-        subject: string;
-        /**
-         * The body of the commit message.
-         */
-        body: string;
-      };
-      /**
-       * URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
-       */
-      origin_repository_url: string;
+      target_repository_url: string;
     };
   }> {
     return __request(OpenAPI, {

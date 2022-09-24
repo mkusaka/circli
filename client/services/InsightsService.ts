@@ -42,13 +42,17 @@ export class InsightsService {
     workflowNames?: any;
   }): CancelablePromise<{
     /**
+     * A list of all the branches for a given project.
+     */
+    all_branches?: Array<string>;
+    /**
+     * A list of all the workflows for a given project.
+     */
+    all_workflows?: Array<string>;
+    /**
      * The unique ID of the organization
      */
     org_id?: any;
-    /**
-     * The unique ID of the project
-     */
-    project_id?: any;
     /**
      * Metrics and trends data aggregated for a given project.
      */
@@ -57,40 +61,28 @@ export class InsightsService {
        * Metrics aggregated across all workflows and branches for a project.
        */
       metrics: {
-        /**
-         * The total number of runs.
-         */
-        total_runs: number;
-        /**
-         * Total duration, in seconds.
-         */
-        total_duration_secs: number;
-        /**
-         * The total credits consumed over the current timeseries interval.
-         */
-        total_credits_used: number;
         success_rate: number;
         /**
          * The average number of runs per day.
          */
         throughput: number;
+        /**
+         * The total credits consumed over the current timeseries interval.
+         */
+        total_credits_used: number;
+        /**
+         * Total duration, in seconds.
+         */
+        total_duration_secs: number;
+        /**
+         * The total number of runs.
+         */
+        total_runs: number;
       };
       /**
        * Metric trends aggregated across all workflows and branches for a project.
        */
       trends: {
-        /**
-         * The trend value for total number of runs.
-         */
-        total_runs: number;
-        /**
-         * Trend value for total duration.
-         */
-        total_duration_secs: number;
-        /**
-         * The trend value for total credits consumed.
-         */
-        total_credits_used: number;
         /**
          * The trend value for the success rate.
          */
@@ -99,64 +91,28 @@ export class InsightsService {
          * Trend value for the average number of runs per day.
          */
         throughput: number;
-      };
-    };
-    /**
-     * A list of metrics and trends data for workflows for a given project.
-     */
-    project_workflow_data?: Array<{
-      /**
-       * The name of the workflow.
-       */
-      workflow_name: string;
-      /**
-       * Metrics aggregated across a workflow or branchfor a project.
-       */
-      metrics: {
-        /**
-         * The total credits consumed over the current timeseries interval.
-         */
-        total_credits_used: number;
-        /**
-         * The 95th percentile duration among a group of workflow runs.
-         */
-        p95_duration_secs: number;
-        /**
-         * The total number of runs.
-         */
-        total_runs: number;
-        success_rate: number;
-      };
-      /**
-       * Trends aggregated across a workflow or branch for a project.
-       */
-      trends: {
         /**
          * The trend value for total credits consumed.
          */
         total_credits_used: number;
         /**
-         * The 95th percentile duration among a group of workflow runs.
+         * Trend value for total duration.
          */
-        p95_duration_secs: number;
+        total_duration_secs: number;
         /**
          * The trend value for total number of runs.
          */
         total_runs: number;
-        /**
-         * The trend value for the success rate.
-         */
-        success_rate: number;
       };
-    }>;
+    };
+    /**
+     * The unique ID of the project
+     */
+    project_id?: any;
     /**
      * A list of metrics and trends data for branches for a given project.
      */
     project_workflow_branch_data?: Array<{
-      /**
-       * The name of the workflow.
-       */
-      workflow_name: string;
       /**
        * The VCS branch of a workflow's trigger.
        */
@@ -166,49 +122,93 @@ export class InsightsService {
        */
       metrics: {
         /**
+         * The 95th percentile duration among a group of workflow runs.
+         */
+        p95_duration_secs: number;
+        success_rate: number;
+        /**
          * The total credits consumed over the current timeseries interval.
          */
         total_credits_used: number;
         /**
-         * The 95th percentile duration among a group of workflow runs.
-         */
-        p95_duration_secs: number;
-        /**
          * The total number of runs.
          */
         total_runs: number;
-        success_rate: number;
       };
       /**
        * Trends aggregated across a workflow or branch for a project.
        */
       trends: {
         /**
+         * The 95th percentile duration among a group of workflow runs.
+         */
+        p95_duration_secs: number;
+        /**
+         * The trend value for the success rate.
+         */
+        success_rate: number;
+        /**
          * The trend value for total credits consumed.
          */
         total_credits_used: number;
+        /**
+         * The trend value for total number of runs.
+         */
+        total_runs: number;
+      };
+      /**
+       * The name of the workflow.
+       */
+      workflow_name: string;
+    }>;
+    /**
+     * A list of metrics and trends data for workflows for a given project.
+     */
+    project_workflow_data?: Array<{
+      /**
+       * Metrics aggregated across a workflow or branchfor a project.
+       */
+      metrics: {
+        /**
+         * The 95th percentile duration among a group of workflow runs.
+         */
+        p95_duration_secs: number;
+        success_rate: number;
+        /**
+         * The total credits consumed over the current timeseries interval.
+         */
+        total_credits_used: number;
+        /**
+         * The total number of runs.
+         */
+        total_runs: number;
+      };
+      /**
+       * Trends aggregated across a workflow or branch for a project.
+       */
+      trends: {
         /**
          * The 95th percentile duration among a group of workflow runs.
          */
         p95_duration_secs: number;
         /**
-         * The trend value for total number of runs.
-         */
-        total_runs: number;
-        /**
          * The trend value for the success rate.
          */
         success_rate: number;
+        /**
+         * The trend value for total credits consumed.
+         */
+        total_credits_used: number;
+        /**
+         * The trend value for total number of runs.
+         */
+        total_runs: number;
       };
+      /**
+       * The name of the workflow.
+       */
+      workflow_name: string;
     }>;
-    /**
-     * A list of all the branches for a given project.
-     */
-    all_branches?: Array<string>;
-    /**
-     * A list of all the workflows for a given project.
-     */
-    all_workflows?: Array<string>;
   }> {
     return __request(OpenAPI, {
       method: "GET",
@@ -263,73 +263,33 @@ export class InsightsService {
     endDate?: string;
   }): CancelablePromise<{
     /**
-     * A token to pass as a `page-token` query parameter to return the next page of results.
-     */
-    next_page_token: string;
-    /**
      * Aggregate metrics for a workflow at a time granularity
      */
     items: Array<{
-      /**
-       * The name of the workflow.
-       */
-      name: string;
-      /**
-       * The start time for the earliest execution included in the metrics.
-       */
-      min_started_at: string;
       /**
        * The end time of the last execution included in the metrics.
        */
       max_ended_at: string;
       /**
-       * The start of the interval for timeseries metrics.
-       */
-      timestamp: string;
-      /**
        * Metrics relating to a workflow's runs.
        */
       metrics: {
-        /**
-         * The total number of runs.
-         */
-        total_runs: number;
-        /**
-         * The number of failed runs.
-         */
-        failed_runs: number;
-        /**
-         * The number of successful runs.
-         */
-        successful_runs: number;
-        /**
-         * The average number of runs per day.
-         */
-        throughput: number;
-        /**
-         * The median credits consumed over the current timeseries interval.
-         */
-        median_credits_used: number;
-        /**
-         * The total credits consumed over the current timeseries interval.
-         */
-        total_credits_used: number;
         /**
          * Metrics relating to the duration of runs for a workflow.
          */
         duration_metrics: {
           /**
-           * The minimum duration, in seconds, among a group of runs.
+           * The max duration, in seconds, among a group of runs.
            */
-          min: number;
+          max: number;
           /**
            * The median duration, in seconds, among a group of runs.
            */
           median: number;
           /**
-           * The max duration, in seconds, among a group of runs.
+           * The minimum duration, in seconds, among a group of runs.
            */
-          max: number;
+          min: number;
           /**
            * The 95th percentile duration, in seconds, among a group of runs.
            */
@@ -339,8 +299,48 @@ export class InsightsService {
            */
           total: number;
         };
+        /**
+         * The number of failed runs.
+         */
+        failed_runs: number;
+        /**
+         * The median credits consumed over the current timeseries interval.
+         */
+        median_credits_used: number;
+        /**
+         * The number of successful runs.
+         */
+        successful_runs: number;
+        /**
+         * The average number of runs per day.
+         */
+        throughput: number;
+        /**
+         * The total credits consumed over the current timeseries interval.
+         */
+        total_credits_used: number;
+        /**
+         * The total number of runs.
+         */
+        total_runs: number;
       };
+      /**
+       * The start time for the earliest execution included in the metrics.
+       */
+      min_started_at: string;
+      /**
+       * The name of the workflow.
+       */
+      name: string;
+      /**
+       * The start of the interval for timeseries metrics.
+       */
+      timestamp: string;
     }>;
+    /**
+     * A token to pass as a `page-token` query parameter to return the next page of results.
+     */
+    next_page_token: string;
   }> {
     return __request(OpenAPI, {
       method: "GET",
@@ -388,6 +388,10 @@ export class InsightsService {
     projectNames?: any;
   }): CancelablePromise<{
     /**
+     * A list of all the project names in the organization.
+     */
+    all_projects: Array<string>;
+    /**
      * Aggregated metrics for an org, with trends.
      */
     org_data: {
@@ -395,40 +399,28 @@ export class InsightsService {
        * Metrics for a single org metrics.
        */
       metrics: {
-        /**
-         * The total number of runs.
-         */
-        total_runs: number;
-        /**
-         * Total duration, in seconds.
-         */
-        total_duration_secs: number;
-        /**
-         * The total credits consumed over the current timeseries interval.
-         */
-        total_credits_used: number;
         success_rate: number;
         /**
          * The average number of runs per day.
          */
         throughput: number;
+        /**
+         * The total credits consumed over the current timeseries interval.
+         */
+        total_credits_used: number;
+        /**
+         * Total duration, in seconds.
+         */
+        total_duration_secs: number;
+        /**
+         * The total number of runs.
+         */
+        total_runs: number;
       };
       /**
        * Trends for a single org.
        */
       trends: {
-        /**
-         * The trend value for total number of runs.
-         */
-        total_runs: number;
-        /**
-         * Trend value for total duration.
-         */
-        total_duration_secs: number;
-        /**
-         * The trend value for total credits consumed.
-         */
-        total_credits_used: number;
         /**
          * The trend value for the success rate.
          */
@@ -437,38 +429,6 @@ export class InsightsService {
          * Trend value for the average number of runs per day.
          */
         throughput: number;
-      };
-    };
-    /**
-     * Metrics for a single project, across all branches
-     */
-    org_project_data: Array<{
-      /**
-       * The name of the project.
-       */
-      project_name: string;
-      /**
-       * Metrics for a single project, across all branches.
-       */
-      metrics: {
-        /**
-         * The total credits consumed over the current timeseries interval.
-         */
-        total_credits_used: number;
-        /**
-         * Total duration, in seconds.
-         */
-        total_duration_secs: number;
-        /**
-         * The total number of runs.
-         */
-        total_runs: number;
-        success_rate: number;
-      };
-      /**
-       * Trends for a single project, across all branches.
-       */
-      trends: {
         /**
          * The trend value for total credits consumed.
          */
@@ -481,16 +441,56 @@ export class InsightsService {
          * The trend value for total number of runs.
          */
         total_runs: number;
+      };
+    };
+    /**
+     * Metrics for a single project, across all branches
+     */
+    org_project_data: Array<{
+      /**
+       * Metrics for a single project, across all branches.
+       */
+      metrics: {
+        success_rate: number;
+        /**
+         * The total credits consumed over the current timeseries interval.
+         */
+        total_credits_used: number;
+        /**
+         * Total duration, in seconds.
+         */
+        total_duration_secs: number;
+        /**
+         * The total number of runs.
+         */
+        total_runs: number;
+      };
+      /**
+       * The name of the project.
+       */
+      project_name: string;
+      /**
+       * Trends for a single project, across all branches.
+       */
+      trends: {
         /**
          * The trend value for the success rate.
          */
         success_rate: number;
+        /**
+         * The trend value for total credits consumed.
+         */
+        total_credits_used: number;
+        /**
+         * Trend value for total duration.
+         */
+        total_duration_secs: number;
+        /**
+         * The trend value for total number of runs.
+         */
+        total_runs: number;
       };
     }>;
-    /**
-     * A list of all the project names in the organization.
-     */
-    all_projects: Array<string>;
   }> {
     return __request(OpenAPI, {
       method: "GET",
@@ -553,31 +553,14 @@ export class InsightsService {
      * A list of all instances of flakes. Note that a test is no longer considered flaky after 2 weeks have passed without a flake. Each flake resets this timer.
      */
     "flaky-tests": Array<{
-      "time-wasted"?: number;
-      /**
-       * The date and time when workflow was created.
-       */
-      "workflow-created-at": any;
-      /**
-       * The ID of the workflow associated with the provided test counts
-       */
-      "workflow-id": any;
       /**
        * The class the test belongs to.
        */
       classname: string;
       /**
-       * The number of the pipeline.
+       * The file the test belongs to.
        */
-      "pipeline-number": number;
-      /**
-       * The name of the workflow.
-       */
-      "workflow-name": string;
-      /**
-       * The name of the test.
-       */
-      "test-name": string;
+      file: string;
       /**
        * The name of the job.
        */
@@ -587,17 +570,34 @@ export class InsightsService {
        */
       "job-number": number;
       /**
-       * The number of times the test flaked.
+       * The number of the pipeline.
        */
-      "times-flaked": number;
+      "pipeline-number": number;
       /**
        * The source of the test.
        */
       source: string;
       /**
-       * The file the test belongs to.
+       * The name of the test.
        */
-      file: string;
+      "test-name": string;
+      "time-wasted"?: number;
+      /**
+       * The number of times the test flaked.
+       */
+      "times-flaked": number;
+      /**
+       * The date and time when workflow was created.
+       */
+      "workflow-created-at": any;
+      /**
+       * The ID of the workflow associated with the provided test counts
+       */
+      "workflow-id": any;
+      /**
+       * The name of the workflow.
+       */
+      "workflow-name": string;
     }>;
     /**
      * A count of unique tests that have failed. If your project has N tests that have flaked multiple times each, this will be equal to N.
@@ -656,50 +656,17 @@ export class InsightsService {
      */
     items: Array<{
       /**
-       * The name of the workflow.
-       */
-      name: string;
-      /**
-       * The start of the aggregation window for workflow metrics.
-       */
-      window_start: string;
-      /**
-       * The end of the aggregation window for workflow metrics.
-       */
-      window_end: string;
-      /**
        * Metrics relating to a workflow's runs.
        */
       metrics: {
-        /**
-         * The total number of runs.
-         */
-        total_runs: number;
-        /**
-         * The number of successful runs.
-         */
-        successful_runs: number;
-        /**
-         * The mean time to recovery (mean time between failures and their next success) in seconds.
-         */
-        mttr: number;
-        /**
-         * The total credits consumed by the workflow in the aggregation window. Note that Insights is not a real time financial reporting tool and should not be used for credit reporting.
-         */
-        total_credits_used: number;
-        /**
-         * The number of failed runs.
-         */
-        failed_runs: number;
-        success_rate: number;
         /**
          * Metrics relating to the duration of runs for a workflow.
          */
         duration_metrics: {
           /**
-           * The minimum duration, in seconds, among a group of runs.
+           * The max duration, in seconds, among a group of runs.
            */
-          min: number;
+          max: number;
           /**
            * The mean duration, in seconds, among a group of runs.
            */
@@ -709,27 +676,60 @@ export class InsightsService {
            */
           median: number;
           /**
+           * The minimum duration, in seconds, among a group of runs.
+           */
+          min: number;
+          /**
            * The 95th percentile duration, in seconds, among a group of runs.
            */
           p95: number;
-          /**
-           * The max duration, in seconds, among a group of runs.
-           */
-          max: number;
           /**
            * The standard deviation, in seconds, among a group of runs.
            */
           standard_deviation: number;
         };
         /**
-         * The number of recovered workflow executions per day.
+         * The number of failed runs.
          */
-        total_recoveries: number;
+        failed_runs: number;
+        /**
+         * The mean time to recovery (mean time between failures and their next success) in seconds.
+         */
+        mttr: number;
+        success_rate: number;
+        /**
+         * The number of successful runs.
+         */
+        successful_runs: number;
         /**
          * The average number of runs per day.
          */
         throughput: number;
+        /**
+         * The total credits consumed by the workflow in the aggregation window. Note that Insights is not a real time financial reporting tool and should not be used for credit reporting.
+         */
+        total_credits_used: number;
+        /**
+         * The number of recovered workflow executions per day.
+         */
+        total_recoveries: number;
+        /**
+         * The total number of runs.
+         */
+        total_runs: number;
       };
+      /**
+       * The name of the workflow.
+       */
+      name: string;
+      /**
+       * The end of the aggregation window for workflow metrics.
+       */
+      window_end: string;
+      /**
+       * The start of the aggregation window for workflow metrics.
+       */
+      window_start: string;
     }>;
     /**
      * A token to pass as a `page-token` query parameter to return the next page of results.
@@ -799,33 +799,33 @@ export class InsightsService {
      */
     items: Array<{
       /**
-       * The unique ID of the workflow.
-       */
-      id: string;
-      /**
        * The VCS branch of a Workflow's trigger.
        */
       branch: string;
-      /**
-       * The duration in seconds of a run.
-       */
-      duration: number;
       /**
        * The date and time the workflow was created.
        */
       created_at: string;
       /**
-       * The date and time the workflow stopped.
-       */
-      stopped_at: string;
-      /**
        * The number of credits used during execution. Note that Insights is not a real time financial reporting tool and should not be used for credit reporting.
        */
       credits_used: number;
       /**
+       * The duration in seconds of a run.
+       */
+      duration: number;
+      /**
+       * The unique ID of the workflow.
+       */
+      id: string;
+      /**
        * Workflow status.
        */
       status: "success" | "failed" | "error" | "canceled" | "unauthorized";
+      /**
+       * The date and time the workflow stopped.
+       */
+      stopped_at: string;
     }>;
     /**
      * A token to pass as a `page-token` query parameter to return the next page of results.
@@ -897,30 +897,43 @@ export class InsightsService {
      */
     items: Array<{
       /**
-       * The name of the job.
-       */
-      name: string;
-      /**
-       * The start of the aggregation window for job metrics.
-       */
-      window_start: string;
-      /**
-       * The end of the aggregation window for job metrics.
-       */
-      window_end: string;
-      /**
        * Metrics relating to a workflow job's runs.
        */
       metrics: {
-        success_rate: number;
         /**
-         * The total number of runs.
+         * Metrics relating to the duration of runs for a workflow job.
          */
-        total_runs: number;
+        duration_metrics: {
+          /**
+           * The max duration, in seconds, among a group of runs.
+           */
+          max: number;
+          /**
+           * The mean duration, in seconds, among a group of runs.
+           */
+          mean: number;
+          /**
+           * The median duration, in seconds, among a group of runs.
+           */
+          median: number;
+          /**
+           * The minimum duration, in seconds, among a group of runs.
+           */
+          min: number;
+          /**
+           * The 95th percentile duration, in seconds, among a group of runs.
+           */
+          p95: number;
+          /**
+           * The standard deviation, in seconds, among a group of runs.
+           */
+          standard_deviation: number;
+        };
         /**
          * The number of failed runs.
          */
         failed_runs: number;
+        success_rate: number;
         /**
          * The number of successful runs.
          */
@@ -934,35 +947,22 @@ export class InsightsService {
          */
         total_credits_used: number;
         /**
-         * Metrics relating to the duration of runs for a workflow job.
+         * The total number of runs.
          */
-        duration_metrics: {
-          /**
-           * The minimum duration, in seconds, among a group of runs.
-           */
-          min: number;
-          /**
-           * The mean duration, in seconds, among a group of runs.
-           */
-          mean: number;
-          /**
-           * The median duration, in seconds, among a group of runs.
-           */
-          median: number;
-          /**
-           * The 95th percentile duration, in seconds, among a group of runs.
-           */
-          p95: number;
-          /**
-           * The max duration, in seconds, among a group of runs.
-           */
-          max: number;
-          /**
-           * The standard deviation, in seconds, among a group of runs.
-           */
-          standard_deviation: number;
-        };
+        total_runs: number;
       };
+      /**
+       * The name of the job.
+       */
+      name: string;
+      /**
+       * The end of the aggregation window for job metrics.
+       */
+      window_end: string;
+      /**
+       * The start of the aggregation window for job metrics.
+       */
+      window_start: string;
     }>;
     /**
      * A token to pass as a `page-token` query parameter to return the next page of results.
@@ -1018,38 +1018,13 @@ export class InsightsService {
      */
     metrics: {
       /**
-       * The total number of runs.
-       */
-      total_runs: number;
-      /**
-       * The number of successful runs.
-       */
-      successful_runs: number;
-      /**
-       * The mean time to recovery (mean time between failures and their next success) in seconds.
-       */
-      mttr: number;
-      /**
-       * The total credits consumed by the workflow in the aggregation window. Note that Insights is not a real time financial reporting tool and should not be used for credit reporting.
-       */
-      total_credits_used: number;
-      /**
-       * The number of failed runs.
-       */
-      failed_runs: number;
-      success_rate: number;
-      /**
-       * The start of the aggregation window for workflow metrics.
-       */
-      window_start: string;
-      /**
        * Metrics relating to the duration of runs for a workflow.
        */
       duration_metrics: {
         /**
-         * The minimum duration, in seconds, among a group of runs.
+         * The max duration, in seconds, among a group of runs.
          */
-        min: number;
+        max: number;
         /**
          * The mean duration, in seconds, among a group of runs.
          */
@@ -1059,63 +1034,88 @@ export class InsightsService {
          */
         median: number;
         /**
+         * The minimum duration, in seconds, among a group of runs.
+         */
+        min: number;
+        /**
          * The 95th percentile duration, in seconds, among a group of runs.
          */
         p95: number;
-        /**
-         * The max duration, in seconds, among a group of runs.
-         */
-        max: number;
         /**
          * The standard deviation, in seconds, among a group of runs.
          */
         standard_deviation: number;
       };
       /**
-       * The end of the aggregation window for workflow metrics.
+       * The number of failed runs.
        */
-      window_end: string;
+      failed_runs: number;
+      /**
+       * The mean time to recovery (mean time between failures and their next success) in seconds.
+       */
+      mttr: number;
+      success_rate: number;
+      /**
+       * The number of successful runs.
+       */
+      successful_runs: number;
       /**
        * The average number of runs per day.
        */
       throughput: number;
+      /**
+       * The total credits consumed by the workflow in the aggregation window. Note that Insights is not a real time financial reporting tool and should not be used for credit reporting.
+       */
+      total_credits_used: number;
+      /**
+       * The total number of runs.
+       */
+      total_runs: number;
+      /**
+       * The end of the aggregation window for workflow metrics.
+       */
+      window_end: string;
+      /**
+       * The start of the aggregation window for workflow metrics.
+       */
+      window_start: string;
     };
     /**
      * Trends for aggregated metrics across a workflow for a given time window.
      */
     trends: {
       /**
-       * The trend value for total number of runs.
-       */
-      total_runs: number;
-      /**
        * The trend value for number of failed runs.
        */
       failed_runs: number;
-      /**
-       * The trend value for the success rate.
-       */
-      success_rate: number;
-      /**
-       * Trend value for the 95th percentile duration for a workflow for a given time window.
-       */
-      p95_duration_secs: number;
       /**
        * Trend value for the 50th percentile duration for a workflow for a given time window.
        */
       median_duration_secs: number;
       /**
-       * The trend value for total credits consumed.
-       */
-      total_credits_used: number;
-      /**
        * trend for mean time to recovery (mean time between failures and their next success).
        */
       mttr: number;
       /**
+       * Trend value for the 95th percentile duration for a workflow for a given time window.
+       */
+      p95_duration_secs: number;
+      /**
+       * The trend value for the success rate.
+       */
+      success_rate: number;
+      /**
        * Trend value for the average number of runs per day.
        */
       throughput: number;
+      /**
+       * The trend value for total credits consumed.
+       */
+      total_credits_used: number;
+      /**
+       * The trend value for total number of runs.
+       */
+      total_runs: number;
     };
     /**
      * A list of all the workflow names for a given project.
@@ -1173,14 +1173,6 @@ export class InsightsService {
      */
     most_failed_tests: Array<{
       /**
-       * The 95th percentile duration, in seconds, among a group of test runs.
-       */
-      p95_duration: number;
-      /**
-       * The total number of times the test was run.
-       */
-      total_runs: number;
-      /**
        * The class the test belongs to.
        */
       classname: string;
@@ -1189,25 +1181,33 @@ export class InsightsService {
        */
       failed_runs: number;
       /**
-       * Whether the test is flaky.
-       */
-      flaky: boolean;
-      /**
-       * The source of the test.
-       */
-      source: string;
-      /**
        * The file the test belongs to.
        */
       file: string;
+      /**
+       * Whether the test is flaky.
+       */
+      flaky: boolean;
       /**
        * The name of the job.
        */
       job_name: string;
       /**
+       * The 95th percentile duration, in seconds, among a group of test runs.
+       */
+      p95_duration: number;
+      /**
+       * The source of the test.
+       */
+      source: string;
+      /**
        * The name of the test.
        */
       test_name: string;
+      /**
+       * The total number of times the test was run.
+       */
+      total_runs: number;
     }>;
     /**
      * The number of tests with the same success rate being omitted from most_failed_tests
@@ -1218,14 +1218,6 @@ export class InsightsService {
      */
     slowest_tests: Array<{
       /**
-       * The 95th percentile duration, in seconds, among a group of test runs.
-       */
-      p95_duration: number;
-      /**
-       * The total number of times the test was run.
-       */
-      total_runs: number;
-      /**
        * The class the test belongs to.
        */
       classname: string;
@@ -1234,34 +1226,38 @@ export class InsightsService {
        */
       failed_runs: number;
       /**
-       * Whether the test is flaky.
-       */
-      flaky: boolean;
-      /**
-       * The source of the test.
-       */
-      source: string;
-      /**
        * The file the test belongs to.
        */
       file: string;
+      /**
+       * Whether the test is flaky.
+       */
+      flaky: boolean;
       /**
        * The name of the job.
        */
       job_name: string;
       /**
+       * The 95th percentile duration, in seconds, among a group of test runs.
+       */
+      p95_duration: number;
+      /**
+       * The source of the test.
+       */
+      source: string;
+      /**
        * The name of the test.
        */
       test_name: string;
+      /**
+       * The total number of times the test was run.
+       */
+      total_runs: number;
     }>;
     /**
      * The number of tests with the same duration rate being omitted from slowest_tests
      */
     slowest_tests_extra: number;
-    /**
-     * The total number of test runs
-     */
-    total_test_runs: number;
     /**
      * Test counts grouped by pipeline number and workflow id
      */
@@ -1270,10 +1266,6 @@ export class InsightsService {
        * The number of the pipeline associated with the provided test counts
        */
       pipeline_number: number;
-      /**
-       * The ID of the workflow associated with the provided test counts
-       */
-      workflow_id: any;
       /**
        * The success rate calculated from test counts
        */
@@ -1303,7 +1295,15 @@ export class InsightsService {
          */
         total: number;
       };
+      /**
+       * The ID of the workflow associated with the provided test counts
+       */
+      workflow_id: any;
     }>;
+    /**
+     * The total number of test runs
+     */
+    total_test_runs: number;
   }> {
     return __request(OpenAPI, {
       method: "GET",
