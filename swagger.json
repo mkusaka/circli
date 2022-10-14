@@ -374,6 +374,16 @@
               "format": "uuid",
               "type": "string"
             }
+          },
+          {
+            "allowEmptyValue": true,
+            "description": "A token to retrieve the next page of results.",
+            "in": "query",
+            "name": "page-token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
