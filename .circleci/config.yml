@@ -18,7 +18,7 @@ commands:
 jobs:
   sleep:
     docker:
-      - image: cimg/base:2022.09
+      - image: cimg/base:2022.10
     steps:
       - cancel_redundant_workflow
       - long_sleep
