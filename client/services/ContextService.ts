@@ -186,11 +186,16 @@ export class ContextService {
    */
   public static listEnvironmentVariablesFromContext({
     contextId,
+    pageToken,
   }: {
     /**
      * ID of the context (UUID)
      */
     contextId: string;
+    /**
+     * A token to retrieve the next page of results.
+     */
+    pageToken?: string;
   }): CancelablePromise<{
     items: Array<{
       /**
@@ -216,6 +221,9 @@ export class ContextService {
       url: "/context/{context-id}/environment-variable",
       path: {
         "context-id": contextId,
+      },
+      query: {
+        "page-token": pageToken,
       },
     });
   }
