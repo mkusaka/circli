@@ -207,6 +207,10 @@ export class ContextService {
        */
       created_at: string;
       /**
+       * The date and time the environment variable was updated
+       */
+      updated_at: string;
+      /**
        * The name of the environment variable
        */
       variable: string;
@@ -295,6 +299,10 @@ export class ContextService {
          * The date and time the environment variable was created.
          */
         created_at: string;
+        /**
+         * The date and time the environment variable was updated
+         */
+        updated_at: string;
         /**
          * The name of the environment variable
          */

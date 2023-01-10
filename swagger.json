@@ -406,13 +406,24 @@
                             "format": "date-time",
                             "type": "string"
                           },
+                          "updated_at": {
+                            "description": "The date and time the environment variable was updated",
+                            "example": "2015-09-21T17:29:21.042Z",
+                            "format": "date-time",
+                            "type": "string"
+                          },
                           "variable": {
                             "description": "The name of the environment variable",
                             "example": "POSTGRES_USER",
                             "type": "string"
                           }
                         },
-                        "required": ["variable", "created_at", "context_id"],
+                        "required": [
+                          "variable",
+                          "created_at",
+                          "updated_at",
+                          "context_id"
+                        ],
                         "type": "object"
                       },
                       "type": "array"
@@ -576,13 +587,24 @@
                           "format": "date-time",
                           "type": "string"
                         },
+                        "updated_at": {
+                          "description": "The date and time the environment variable was updated",
+                          "example": "2015-09-21T17:29:21.042Z",
+                          "format": "date-time",
+                          "type": "string"
+                        },
                         "variable": {
                           "description": "The name of the environment variable",
                           "example": "POSTGRES_USER",
                           "type": "string"
                         }
                       },
-                      "required": ["variable", "created_at", "context_id"],
+                      "required": [
+                        "variable",
+                        "created_at",
+                        "updated_at",
+                        "context_id"
+                      ],
                       "type": "object"
                     },
                     {
