@@ -7,9 +7,7 @@ export class InsightsService {
    * Get summary metrics and trends for a project at workflow and branch level.
    * Workflow runs going back at most 90 days are included in the aggregation window.
    * Trends are only supported upto last 30 days.
-   * Metrics are refreshed daily, and thus may not include executions from the last 24 hours.
-   * Please note that Insights is not a real time financial reporting tool and should not be used for credit reporting.
-   * The most up to date credit information can be found in Plan Overview in the CircleCI UI.
+   * Please note that Insights is not a financial reporting tool and should not be used for precise credit reporting.  Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI UI, nor does the underlying data have the same data accuracy guarantees as the billing information in the CircleCI UI.  This may lead to discrepancies between credits reported from Insights and the billing information in the Plan Overview page of the CircleCI UI.  For precise credit reporting, always use the Plan Overview page in the CircleCI UI.
    * @returns any Aggregated summary metrics and trends by workflow and branches
    * @throws ApiError
    */
@@ -752,7 +750,7 @@ export class InsightsService {
   }
   /**
    * Get recent runs of a workflow
-   * Get recent runs of a workflow. Runs going back at most 90 days are returned. Please note that Insights is not a real time financial reporting tool and should not be used for credit reporting. The most up to date credit information can be found in Plan Overview in the CircleCI UI.
+   * Get recent runs of a workflow. Runs going back at most 90 days are returned. Please note that Insights is not a financial reporting tool and should not be used for precise credit reporting.  Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI UI, nor does the underlying data have the same data accuracy guarantees as the billing information in the CircleCI UI.  This may lead to discrepancies between credits reported from Insights and the billing information in the Plan Overview page of the CircleCI UI.  For precise credit reporting, always use the Plan Overview page in the CircleCI UI.
    * @returns any A paginated list of recent workflow runs
    * @throws ApiError
    */
@@ -850,7 +848,7 @@ export class InsightsService {
   }
   /**
    * Get summary metrics for a project workflow's jobs.
-   * Get summary metrics for a project workflow's jobs. Job runs going back at most 90 days are included in the aggregation window. Metrics are refreshed daily, and thus may not include executions from the last 24 hours. Please note that Insights is not a real time financial reporting tool and should not be used for credit reporting. The most up to date credit information can be found in Plan Overview in the CircleCI UI.
+   * Get summary metrics for a project workflow's jobs. Job runs going back at most 90 days are included in the aggregation window. Metrics are refreshed daily, and thus may not include executions from the last 24 hours. Please note that Insights is not a financial reporting tool and should not be used for precise credit reporting.  Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI UI, nor does the underlying data have the same data accuracy guarantees as the billing information in the CircleCI UI.  This may lead to discrepancies between credits reported from Insights and the billing information in the Plan Overview page of the CircleCI UI.  For precise credit reporting, always use the Plan Overview page in the CircleCI UI.
    * @returns any A paginated list of summary metrics by workflow job.
    * @throws ApiError
    */
