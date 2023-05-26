@@ -1,5 +1,391 @@
 {
   "components": {
+    "parameters": {
+      "Claims": {
+        "description": "comma separated list of claims to delete. Valid values are \"audience\" and \"ttl\".",
+        "in": "query",
+        "name": "claims",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Context": {
+        "in": "path",
+        "name": "context",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "DecisionID": {
+        "in": "path",
+        "name": "decisionID",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "OrgID": {
+        "in": "path",
+        "name": "orgID",
+        "required": true,
+        "schema": {
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "OwnerID": {
+        "in": "path",
+        "name": "ownerID",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "ProjectID": {
+        "in": "path",
+        "name": "projectID",
+        "required": true,
+        "schema": {
+          "format": "uuid",
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "error": {
+                  "example": "OwnerID: must be a valid UUID.",
+                  "type": "string"
+                }
+              },
+              "required": ["error"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "The request is malformed (e.g, a given path parameter is invalid)\n"
+      },
+      "Forbidden": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "error": {
+                  "example": "Forbidden",
+                  "type": "string"
+                }
+              },
+              "required": ["error"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "The user is forbidden from making this request\n"
+      },
+      "InternalServerError": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "error": {
+                  "example": "internal server error",
+                  "type": "string"
+                }
+              },
+              "required": ["error"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "Something unexpected happened on the server."
+      },
+      "Unauthenticated": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "error": {
+                  "example": "unauthenticated",
+                  "type": "string"
+                }
+              },
+              "required": ["error"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "The request is unauthenticated\n"
+      },
+      "Unauthorized": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "error": {
+                  "example": "Unauthorized",
+                  "type": "string"
+                }
+              },
+              "required": ["error"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "The request is unauthorized\n"
+      },
+      "UnexpectedServerError": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "error": {
+                  "example": "unexpected server error",
+                  "type": "string"
+                }
+              },
+              "required": ["error"],
+              "type": "object"
+            }
+          }
+        },
+        "description": "Something unexpected happened on the server."
+      }
+    },
+    "schemas": {
+      "BundleDiff": {
+        "properties": {
+          "created": {
+            "items": {
+              "description": "policy names",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "deleted": {
+            "items": {
+              "description": "policy names",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "modified": {
+            "items": {
+              "description": "policy names",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "BundlePayload": {
+        "properties": {
+          "policies": {
+            "additionalProperties": {
+              "description": "policy content",
+              "type": "string"
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "ClaimResponse": {
+        "properties": {
+          "audience": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "audience_updated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "org_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "project_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "ttl": {
+            "$ref": "#/components/schemas/JSONDuration"
+          },
+          "ttl_updated_at": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": ["org_id"],
+        "type": "object"
+      },
+      "Decision": {
+        "properties": {
+          "enabled_rules": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "hard_failures": {
+            "items": {
+              "$ref": "#/components/schemas/Violation"
+            },
+            "type": "array"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "soft_failures": {
+            "items": {
+              "$ref": "#/components/schemas/Violation"
+            },
+            "type": "array"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "required": ["status"],
+        "type": "object"
+      },
+      "DecisionLog": {
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "decision": {
+            "$ref": "#/components/schemas/Decision"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "metadata": {
+            "properties": {
+              "build_number": {
+                "type": "integer"
+              },
+              "project_id": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "ssh_rerun": {
+                "type": "boolean"
+              },
+              "vcs": {
+                "properties": {
+                  "branch": {
+                    "type": "string"
+                  },
+                  "origin_repository_url": {
+                    "type": "string"
+                  },
+                  "release_tag": {
+                    "type": "string"
+                  },
+                  "target_repository_url": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "policies": {
+            "additionalProperties": {
+              "maxLength": 128,
+              "minLength": 128,
+              "type": "string"
+            },
+            "description": "policy-name-to-hash-map",
+            "example": {
+              "policy_name1": "1f40fc92da241694750979ee6cf582f2d5d7d28e18335de05abc54d0560e0f5302860c652bf08d560252aa5e74210546f369fbbbce8c12cfc7957b2652fe9a75",
+              "policy_name2": "5267768822ee624d48fce15ec5ca79cbd602cb7f4c2157a516556991f22ef8c7b5ef7b18d1ff41c59370efb0858651d44a936c11b7b144c48fe04df3c6a3e8da"
+            },
+            "type": "object"
+          },
+          "time_taken_ms": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "DecisionSettings": {
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "JSONDuration": {
+        "pattern": "^([0-9]+(ms|s|m|h|d|w)){1,7}$",
+        "type": "string"
+      },
+      "PatchClaimsRequest": {
+        "properties": {
+          "audience": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "ttl": {
+            "$ref": "#/components/schemas/JSONDuration"
+          }
+        },
+        "type": "object"
+      },
+      "Policy": {
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "PolicyBundle": {
+        "additionalProperties": {
+          "items": {
+            "$ref": "#/components/schemas/Policy"
+          }
+        },
+        "type": "object"
+      },
+      "Violation": {
+        "properties": {
+          "reason": {
+            "type": "string"
+          },
+          "rule": {
+            "type": "string"
+          }
+        },
+        "required": ["rule", "reason"],
+        "type": "object"
+      }
+    },
     "securitySchemes": {
       "api_key_header": {
         "in": "header",
@@ -27,7 +413,7 @@
     "title": "CircleCI API",
     "version": "v2"
   },
-  "openapi": "3.0.0",
+  "openapi": "3.0.3",
   "paths": {
     "/context": {
       "get": {
@@ -3104,6 +3490,823 @@
         "tags": ["User"]
       }
     },
+    "/org/{orgID}/oidc-custom-claims": {
+      "delete": {
+        "description": "Deletes org-level custom claims of OIDC identity tokens",
+        "operationId": "DeleteOrgClaims",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgID"
+          },
+          {
+            "$ref": "#/components/parameters/Claims"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClaimResponse"
+                }
+              }
+            },
+            "description": "Claims successfully deleted."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Delete org-level claims",
+        "tags": ["OIDC Token Management"]
+      },
+      "get": {
+        "description": "Fetches org-level custom claims of OIDC identity tokens",
+        "operationId": "GetOrgClaims",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClaimResponse"
+                }
+              }
+            },
+            "description": "Claims successfully fetched."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Get org-level claims",
+        "tags": ["OIDC Token Management"]
+      },
+      "patch": {
+        "description": "Creates/Updates org-level custom claims of OIDC identity tokens",
+        "operationId": "PatchOrgClaims",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgID"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchClaimsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClaimResponse"
+                }
+              }
+            },
+            "description": "Claims successfully patched."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Patch org-level claims",
+        "tags": ["OIDC Token Management"]
+      }
+    },
+    "/org/{orgID}/project/{projectID}/oidc-custom-claims": {
+      "delete": {
+        "description": "Deletes project-level custom claims of OIDC identity tokens",
+        "operationId": "DeleteProjectClaims",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgID"
+          },
+          {
+            "$ref": "#/components/parameters/ProjectID"
+          },
+          {
+            "$ref": "#/components/parameters/Claims"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClaimResponse"
+                }
+              }
+            },
+            "description": "Claims successfully deleted."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Delete project-level claims",
+        "tags": ["OIDC Token Management"]
+      },
+      "get": {
+        "description": "Fetches project-level custom claims of OIDC identity tokens",
+        "operationId": "GetProjectClaims",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgID"
+          },
+          {
+            "$ref": "#/components/parameters/ProjectID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClaimResponse"
+                }
+              }
+            },
+            "description": "Claims successfully fetched."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Get project-level claims",
+        "tags": ["OIDC Token Management"]
+      },
+      "patch": {
+        "description": "Creates/Updates project-level custom claims of OIDC identity tokens",
+        "operationId": "PatchProjectClaims",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgID"
+          },
+          {
+            "$ref": "#/components/parameters/ProjectID"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchClaimsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClaimResponse"
+                }
+              }
+            },
+            "description": "Claims successfully patched."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Patch project-level claims",
+        "tags": ["OIDC Token Management"]
+      }
+    },
+    "/owner/{ownerID}/context/{context}/decision": {
+      "get": {
+        "description": "This endpoint will return a list of decision audit logs that were made using this owner's policies.",
+        "operationId": "GetDecisionLogs",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OwnerID"
+          },
+          {
+            "$ref": "#/components/parameters/Context"
+          },
+          {
+            "description": "Return decisions matching this decision status.",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Return decisions made after this date.",
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Return decisions made before this date.",
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Return decisions made on this branch.",
+            "in": "query",
+            "name": "branch",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Return decisions made for this project.",
+            "in": "query",
+            "name": "project_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Sets the offset when retrieving the decisions, for paging.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/DecisionLog"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Decision logs successfully retrieved."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/UnexpectedServerError"
+          }
+        },
+        "summary": "Retrieves the owner's decision audit logs.",
+        "tags": ["Policy Management"]
+      },
+      "post": {
+        "description": "This endpoint will evaluate input data (config+metadata) against owner's stored policies and return a decision.",
+        "operationId": "MakeDecision",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OwnerID"
+          },
+          {
+            "$ref": "#/components/parameters/Context"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "input": {
+                    "type": "string"
+                  },
+                  "metadata": {
+                    "type": "object"
+                  }
+                },
+                "required": ["input"],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Decision"
+                }
+              }
+            },
+            "description": "Decision rendered by applying the policy against the provided data. Response will be modeled by the data and rego processed."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "example": "context: must be a valid value.",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The request is malformed\n"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "example": "Unauthorized.",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The request is unauthorized\n"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "example": "There was an error processing your request.",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Something unexpected happened on the server."
+          }
+        },
+        "summary": "Makes a decision",
+        "tags": ["Policy Management"]
+      }
+    },
+    "/owner/{ownerID}/context/{context}/decision/settings": {
+      "get": {
+        "description": "This endpoint retrieves the current decision settings (eg enable/disable policy evaluation)",
+        "operationId": "GetDecisionSettings",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OwnerID"
+          },
+          {
+            "$ref": "#/components/parameters/Context"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DecisionSettings"
+                }
+              }
+            },
+            "description": "Decision settings successfully retrieved."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/UnexpectedServerError"
+          }
+        },
+        "summary": "Get the decision settings",
+        "tags": ["Policy Management"]
+      },
+      "patch": {
+        "description": "This endpoint allows modifying decision settings (eg enable/disable policy evaluation)",
+        "operationId": "SetDecisionSettings",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OwnerID"
+          },
+          {
+            "$ref": "#/components/parameters/Context"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecisionSettings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DecisionSettings"
+                }
+              }
+            },
+            "description": "Decision settings successfully set."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/UnexpectedServerError"
+          }
+        },
+        "summary": "Set the decision settings",
+        "tags": ["Policy Management"]
+      }
+    },
+    "/owner/{ownerID}/context/{context}/decision/{decisionID}": {
+      "get": {
+        "description": "This endpoint will retrieve a decision for a given decision log ID",
+        "operationId": "GetDecisionLog",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OwnerID"
+          },
+          {
+            "$ref": "#/components/parameters/Context"
+          },
+          {
+            "$ref": "#/components/parameters/DecisionID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DecisionLog"
+                }
+              }
+            },
+            "description": "Decision log successfully retrieved."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "example": "decision log not found",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "There was no decision log found for given decision_id, and owner_id.\n"
+          },
+          "500": {
+            "$ref": "#/components/responses/UnexpectedServerError"
+          }
+        },
+        "summary": "Retrieves the owner's decision audit log by given decisionID",
+        "tags": ["Policy Management"]
+      }
+    },
+    "/owner/{ownerID}/context/{context}/decision/{decisionID}/policy-bundle": {
+      "get": {
+        "description": "This endpoint will retrieve a policy bundle for a given decision log ID",
+        "operationId": "GetDecisionLogPolicyBundle",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OwnerID"
+          },
+          {
+            "$ref": "#/components/parameters/Context"
+          },
+          {
+            "$ref": "#/components/parameters/DecisionID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyBundle"
+                }
+              }
+            },
+            "description": "Policy-Bundle retrieved successfully for given decision log ID"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "example": "decision log not found",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "There was no decision log found for given decision_id, and owner_id.\n"
+          },
+          "500": {
+            "$ref": "#/components/responses/UnexpectedServerError"
+          }
+        },
+        "summary": "Retrieves Policy Bundle for a given decision log ID",
+        "tags": ["Policy Management"]
+      }
+    },
+    "/owner/{ownerID}/context/{context}/policy-bundle": {
+      "get": {
+        "description": "This endpoint will retrieve a policy bundle",
+        "operationId": "GetPolicyBundle",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OwnerID"
+          },
+          {
+            "$ref": "#/components/parameters/Context"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyBundle"
+                }
+              }
+            },
+            "description": "Policy-Bundle retrieved successfully."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/UnexpectedServerError"
+          }
+        },
+        "summary": "Retrieves Policy Bundle",
+        "tags": ["Policy Management"]
+      },
+      "post": {
+        "description": "This endpoint replaces the current policy bundle with the provided policy bundle",
+        "operationId": "CreatePolicyBundle",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OwnerID"
+          },
+          {
+            "$ref": "#/components/parameters/Context"
+          },
+          {
+            "in": "query",
+            "name": "dry",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BundlePayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundleDiff"
+                }
+              }
+            },
+            "description": "Policy-Bundle diff successfully returned."
+          },
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundleDiff"
+                }
+              }
+            },
+            "description": "Policy-Bundle successfully created."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "example": "http: request payload too large",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The request exceeds the maximum payload size for policy bundles ~2.5Mib\n"
+          },
+          "500": {
+            "$ref": "#/components/responses/UnexpectedServerError"
+          }
+        },
+        "summary": "Creates policy bundle for the context",
+        "tags": ["Policy Management"]
+      }
+    },
+    "/owner/{ownerID}/context/{context}/policy-bundle/{policyName}": {
+      "get": {
+        "description": "This endpoint will retrieve a policy document.",
+        "operationId": "GetPolicyDocument",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Policy"
+                }
+              }
+            },
+            "description": "Policy retrieved successfully."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "example": "policy not found",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "There was no policy that was found with the given owner_id and policy name.\n"
+          },
+          "500": {
+            "$ref": "#/components/responses/UnexpectedServerError"
+          }
+        },
+        "summary": "Retrieves a policy document",
+        "tags": ["Policy Management"]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/OwnerID"
+        },
+        {
+          "$ref": "#/components/parameters/Context"
+        },
+        {
+          "description": "the policy name set by the rego policy_name rule",
+          "in": "path",
+          "name": "policyName",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
     "/pipeline": {
       "get": {
         "description": "Returns all pipelines for the most recently built projects (max 250) you follow in an organization.",
@@ -4125,6 +5328,7 @@
                   "properties": {
                     "items": {
                       "items": {
+                        "description": "A checkout key",
                         "properties": {
                           "created-at": {
                             "description": "The date and time the checkout key was created.",
@@ -4241,6 +5445,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A checkout key",
                   "properties": {
                     "created-at": {
                       "description": "The date and time the checkout key was created.",
@@ -4402,6 +5607,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A checkout key",
                   "properties": {
                     "created-at": {
                       "description": "The date and time the checkout key was created.",
@@ -4491,7 +5697,13 @@
                   "properties": {
                     "items": {
                       "items": {
+                        "description": "An environment variable is a map containing a value and an optional timestamp.",
                         "properties": {
+                          "created-at": {
+                            "description": "The creation timestamp of the environment variable.",
+                            "example": "#joda/inst 2023-04-14T21:20:14+0000",
+                            "x-nullable": true
+                          },
                           "name": {
                             "description": "The name of the environment variable.",
                             "example": "foo",
@@ -4504,7 +5716,7 @@
                           }
                         },
                         "required": ["name", "value"],
-                        "title": "EnvironmentVariablePair",
+                        "title": "EnvironmentVariable",
                         "type": "object"
                       },
                       "type": "array"
@@ -4562,6 +5774,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "An environment variable request requires a name and a value",
                 "properties": {
                   "name": {
                     "description": "The name of the environment variable.",
@@ -4575,7 +5788,7 @@
                   }
                 },
                 "required": ["name", "value"],
-                "title": "EnvironmentVariablePair",
+                "title": "EnvironmentVariable",
                 "type": "object"
               }
             }
@@ -4586,7 +5799,13 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "An environment variable is a map containing a value and an optional timestamp.",
                   "properties": {
+                    "created-at": {
+                      "description": "The creation timestamp of the environment variable.",
+                      "example": "#joda/inst 2023-04-14T21:20:14+0000",
+                      "x-nullable": true
+                    },
                     "name": {
                       "description": "The name of the environment variable.",
                       "example": "foo",
@@ -4599,7 +5818,7 @@
                     }
                   },
                   "required": ["name", "value"],
-                  "title": "EnvironmentVariablePair",
+                  "title": "EnvironmentVariable",
                   "type": "object"
                 }
               }
@@ -4723,7 +5942,13 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "An environment variable is a map containing a value and an optional timestamp.",
                   "properties": {
+                    "created-at": {
+                      "description": "The creation timestamp of the environment variable.",
+                      "example": "#joda/inst 2023-04-14T21:20:14+0000",
+                      "x-nullable": true
+                    },
                     "name": {
                       "description": "The name of the environment variable.",
                       "example": "foo",
@@ -4736,7 +5961,7 @@
                     }
                   },
                   "required": ["name", "value"],
-                  "title": "EnvironmentVariablePair",
+                  "title": "EnvironmentVariable",
                   "type": "object"
                 }
               }
@@ -9109,6 +10334,14 @@
     },
     {
       "name": "Webhook"
+    },
+    {
+      "description": "Endpoints related to manage oidc identity tokens",
+      "name": "OIDC Token Management"
+    },
+    {
+      "description": "Endpoints related to managing policies and making policy decisions",
+      "name": "Policy Management"
     }
   ]
 }

@@ -240,6 +240,10 @@ export class ProjectService {
   }): CancelablePromise<{
     items: Array<{
       /**
+       * The creation timestamp of the environment variable.
+       */
+      "created-at"?: any;
+      /**
        * The name of the environment variable.
        */
       name: string;
@@ -350,6 +354,10 @@ export class ProjectService {
      */
     name: string;
   }): CancelablePromise<{
+    /**
+     * The creation timestamp of the environment variable.
+     */
+    "created-at"?: any;
     /**
      * The name of the environment variable.
      */
