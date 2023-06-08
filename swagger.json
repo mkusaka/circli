@@ -10319,15 +10319,13 @@
       "name": "Insights"
     },
     {
-      "name": "User",
-      "x-displayName": "User (Preview)"
+      "name": "User"
     },
     {
       "name": "Pipeline"
     },
     {
-      "name": "Job",
-      "x-displayName": "Job (Preview)"
+      "name": "Job"
     },
     {
       "name": "Workflow"
