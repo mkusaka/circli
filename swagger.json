@@ -388,12 +388,13 @@
     },
     "securitySchemes": {
       "api_key_header": {
+        "description": "Project API tokens are not supported for API v2. Use a personal API token.",
         "in": "header",
         "name": "Circle-Token",
         "type": "apiKey"
       },
       "api_key_query": {
-        "description": "DEPRECATED - we will remove this option in the future",
+        "description": "DEPRECATED - we will remove this option in the future. Project API tokens are not supported for API v2. Use a personal API token.",
         "in": "query",
         "name": "circle-token",
         "type": "apiKey"
