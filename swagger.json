@@ -3779,6 +3779,15 @@
             }
           },
           {
+            "description": "Return decisions made for this build number.",
+            "in": "query",
+            "name": "build_number",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "description": "Sets the offset when retrieving the decisions, for paging.",
             "in": "query",
             "name": "offset",
