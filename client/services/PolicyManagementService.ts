@@ -23,6 +23,7 @@ export class PolicyManagementService {
     before,
     branch,
     projectId,
+    buildNumber,
     offset,
   }: {
     ownerId: string;
@@ -48,6 +49,10 @@ export class PolicyManagementService {
      */
     projectId?: string;
     /**
+     * Return decisions made for this build number.
+     */
+    buildNumber?: string;
+    /**
      * Sets the offset when retrieving the decisions, for paging.
      */
     offset?: number;
@@ -65,6 +70,7 @@ export class PolicyManagementService {
         before: before,
         branch: branch,
         project_id: projectId,
+        build_number: buildNumber,
         offset: offset,
       },
       errors: {
