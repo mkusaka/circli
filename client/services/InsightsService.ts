@@ -223,7 +223,7 @@ export class InsightsService {
   }
   /**
    * Job timeseries data
-   * Get timeseries data for all jobs within a workflow.
+   * Get timeseries data for all jobs within a workflow. Hourly granularity data is only retained for 48 hours while daily granularity data is retained for 90 days.
    * @returns any An array of timeseries data, one entry per job.
    * @throws ApiError
    */
@@ -721,11 +721,15 @@ export class InsightsService {
        */
       name: string;
       /**
-       * The end of the aggregation window for workflow metrics.
+       * The unique ID of the project
+       */
+      project_id: any;
+      /**
+       * The timestamp of the last build within the requested reporting window.
        */
       window_end: string;
       /**
-       * The start of the aggregation window for workflow metrics.
+       * The timestamp of the first build within the requested reporting window.
        */
       window_start: string;
     }>;
@@ -816,6 +820,10 @@ export class InsightsService {
        * The unique ID of the workflow.
        */
       id: string;
+      /**
+       * Describes if the job is an approval job or not. Approval jobs are intermediary jobs that are created to pause the workflow until approved.
+       */
+      is_approval: boolean;
       /**
        * Workflow status.
        */
@@ -954,11 +962,11 @@ export class InsightsService {
        */
       name: string;
       /**
-       * The end of the aggregation window for job metrics.
+       * The timestamp of the last build within the requested reporting window.
        */
       window_end: string;
       /**
-       * The start of the aggregation window for job metrics.
+       * The timestamp of the first build within the requested reporting window.
        */
       window_start: string;
     }>;
@@ -1070,11 +1078,11 @@ export class InsightsService {
        */
       total_runs: number;
       /**
-       * The end of the aggregation window for workflow metrics.
+       * The timestamp of the last build within the requested reporting window.
        */
       window_end: string;
       /**
-       * The start of the aggregation window for workflow metrics.
+       * The timestamp of the first build within the requested reporting window.
        */
       window_start: string;
     };
