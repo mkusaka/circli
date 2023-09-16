@@ -1400,7 +1400,7 @@
     },
     "/insights/time-series/{project-slug}/workflows/{workflow-name}/jobs": {
       "get": {
-        "description": "Get timeseries data for all jobs within a workflow.",
+        "description": "Get timeseries data for all jobs within a workflow. Hourly granularity data is only retained for 48 hours while daily granularity data is retained for 90 days.",
         "operationId": "getJobTimeseries",
         "parameters": [
           {
@@ -2290,15 +2290,15 @@
                               }
                             },
                             "required": [
-                              "success_rate",
                               "total_runs",
-                              "failed_runs",
                               "successful_runs",
-                              "throughput",
                               "mttr",
-                              "total_recoveries",
                               "total_credits_used",
-                              "duration_metrics"
+                              "failed_runs",
+                              "success_rate",
+                              "duration_metrics",
+                              "total_recoveries",
+                              "throughput"
                             ],
                             "type": "object"
                           },
@@ -2307,22 +2307,26 @@
                             "example": "build-and-test",
                             "type": "string"
                           },
+                          "project_id": {
+                            "description": "The unique ID of the project"
+                          },
                           "window_end": {
-                            "description": "The end of the aggregation window for workflow metrics.",
+                            "description": "The timestamp of the last build within the requested reporting window.",
                             "format": "date-time",
                             "type": "string"
                           },
                           "window_start": {
-                            "description": "The start of the aggregation window for workflow metrics.",
+                            "description": "The timestamp of the first build within the requested reporting window.",
                             "format": "date-time",
                             "type": "string"
                           }
                         },
                         "required": [
                           "name",
+                          "metrics",
                           "window_start",
                           "window_end",
-                          "metrics"
+                          "project_id"
                         ],
                         "type": "object"
                       },
@@ -2477,6 +2481,11 @@
                             "format": "uuid",
                             "type": "string"
                           },
+                          "is_approval": {
+                            "description": "Describes if the job is an approval job or not. Approval jobs are intermediary jobs that are created to pause the workflow until approved.",
+                            "example": false,
+                            "type": "boolean"
+                          },
                           "status": {
                             "description": "Workflow status.",
                             "enum": [
@@ -2503,7 +2512,8 @@
                           "created_at",
                           "stopped_at",
                           "credits_used",
-                          "status"
+                          "status",
+                          "is_approval"
                         ],
                         "type": "object"
                       },
@@ -2718,13 +2728,13 @@
                               }
                             },
                             "required": [
-                              "success_rate",
                               "total_runs",
                               "failed_runs",
                               "successful_runs",
-                              "throughput",
+                              "duration_metrics",
+                              "success_rate",
                               "total_credits_used",
-                              "duration_metrics"
+                              "throughput"
                             ],
                             "type": "object"
                           },
@@ -2733,21 +2743,21 @@
                             "type": "string"
                           },
                           "window_end": {
-                            "description": "The end of the aggregation window for job metrics.",
+                            "description": "The timestamp of the last build within the requested reporting window.",
                             "format": "date-time",
                             "type": "string"
                           },
                           "window_start": {
-                            "description": "The start of the aggregation window for job metrics.",
+                            "description": "The timestamp of the first build within the requested reporting window.",
                             "format": "date-time",
                             "type": "string"
                           }
                         },
                         "required": [
                           "name",
+                          "metrics",
                           "window_start",
-                          "window_end",
-                          "metrics"
+                          "window_end"
                         ],
                         "type": "object"
                       },
@@ -2939,27 +2949,27 @@
                           "type": "integer"
                         },
                         "window_end": {
-                          "description": "The end of the aggregation window for workflow metrics.",
+                          "description": "The timestamp of the last build within the requested reporting window.",
                           "format": "date-time",
                           "type": "string"
                         },
                         "window_start": {
-                          "description": "The start of the aggregation window for workflow metrics.",
+                          "description": "The timestamp of the first build within the requested reporting window.",
                           "format": "date-time",
                           "type": "string"
                         }
                       },
                       "required": [
-                        "window_start",
                         "total_runs",
-                        "throughput",
-                        "total_credits_used",
-                        "window_end",
                         "successful_runs",
-                        "success_rate",
-                        "duration_metrics",
                         "mttr",
-                        "failed_runs"
+                        "total_credits_used",
+                        "failed_runs",
+                        "success_rate",
+                        "window_start",
+                        "duration_metrics",
+                        "window_end",
+                        "throughput"
                       ],
                       "type": "object"
                     },
