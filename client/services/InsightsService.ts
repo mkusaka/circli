@@ -73,7 +73,7 @@ export class InsightsService {
          */
         total_duration_secs: number;
         /**
-         * The total number of runs.
+         * The total number of runs, including runs that are still on-hold or running.
          */
         total_runs: number;
       };
@@ -129,7 +129,7 @@ export class InsightsService {
          */
         total_credits_used: number;
         /**
-         * The total number of runs.
+         * The total number of runs, including runs that are still on-hold or running.
          */
         total_runs: number;
       };
@@ -177,7 +177,7 @@ export class InsightsService {
          */
         total_credits_used: number;
         /**
-         * The total number of runs.
+         * The total number of runs, including runs that are still on-hold or running.
          */
         total_runs: number;
       };
@@ -318,7 +318,7 @@ export class InsightsService {
          */
         total_credits_used: number;
         /**
-         * The total number of runs.
+         * The total number of runs, including runs that are still on-hold or running.
          */
         total_runs: number;
       };
@@ -411,7 +411,7 @@ export class InsightsService {
          */
         total_duration_secs: number;
         /**
-         * The total number of runs.
+         * The total number of runs, including runs that are still on-hold or running.
          */
         total_runs: number;
       };
@@ -459,7 +459,7 @@ export class InsightsService {
          */
         total_duration_secs: number;
         /**
-         * The total number of runs.
+         * The total number of runs, including runs that are still on-hold or running.
          */
         total_runs: number;
       };
@@ -712,7 +712,7 @@ export class InsightsService {
          */
         total_recoveries: number;
         /**
-         * The total number of runs.
+         * The total number of runs, including runs that are still on-hold or running.
          */
         total_runs: number;
       };
@@ -953,7 +953,7 @@ export class InsightsService {
          */
         total_credits_used: number;
         /**
-         * The total number of runs.
+         * The total number of runs, including runs that are still on-hold or running.
          */
         total_runs: number;
       };
@@ -1024,6 +1024,10 @@ export class InsightsService {
      */
     metrics: {
       /**
+       * The number of runs that ran to completion within the aggregation window
+       */
+      completed_runs: number;
+      /**
        * Metrics relating to the duration of runs for a workflow.
        */
       duration_metrics: {
@@ -1074,7 +1078,7 @@ export class InsightsService {
        */
       total_credits_used: number;
       /**
-       * The total number of runs.
+       * The total number of runs, including runs that are still on-hold or running.
        */
       total_runs: number;
       /**
