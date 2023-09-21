@@ -1141,7 +1141,7 @@
                               "type": "integer"
                             },
                             "total_runs": {
-                              "description": "The total number of runs.",
+                              "description": "The total number of runs, including runs that are still on-hold or running.",
                               "format": "int64",
                               "minimum": 0,
                               "type": "integer"
@@ -1229,7 +1229,7 @@
                                 "type": "integer"
                               },
                               "total_runs": {
-                                "description": "The total number of runs.",
+                                "description": "The total number of runs, including runs that are still on-hold or running.",
                                 "format": "int64",
                                 "minimum": 0,
                                 "type": "integer"
@@ -1314,7 +1314,7 @@
                                 "type": "integer"
                               },
                               "total_runs": {
-                                "description": "The total number of runs.",
+                                "description": "The total number of runs, including runs that are still on-hold or running.",
                                 "format": "int64",
                                 "minimum": 0,
                                 "type": "integer"
@@ -1564,7 +1564,7 @@
                                 "type": "integer"
                               },
                               "total_runs": {
-                                "description": "The total number of runs.",
+                                "description": "The total number of runs, including runs that are still on-hold or running.",
                                 "format": "int64",
                                 "minimum": 0,
                                 "type": "integer"
@@ -1727,7 +1727,7 @@
                               "type": "integer"
                             },
                             "total_runs": {
-                              "description": "The total number of runs.",
+                              "description": "The total number of runs, including runs that are still on-hold or running.",
                               "format": "int64",
                               "minimum": 0,
                               "type": "integer"
@@ -1808,7 +1808,7 @@
                                 "type": "integer"
                               },
                               "total_runs": {
-                                "description": "The total number of runs.",
+                                "description": "The total number of runs, including runs that are still on-hold or running.",
                                 "format": "int64",
                                 "minimum": 0,
                                 "type": "integer"
@@ -2283,7 +2283,7 @@
                                 "x-nullable": true
                               },
                               "total_runs": {
-                                "description": "The total number of runs.",
+                                "description": "The total number of runs, including runs that are still on-hold or running.",
                                 "format": "int64",
                                 "minimum": 0,
                                 "type": "integer"
@@ -2721,7 +2721,7 @@
                                 "type": "integer"
                               },
                               "total_runs": {
-                                "description": "The total number of runs.",
+                                "description": "The total number of runs, including runs that are still on-hold or running.",
                                 "format": "int64",
                                 "minimum": 0,
                                 "type": "integer"
@@ -2852,6 +2852,13 @@
                     "metrics": {
                       "description": "Metrics aggregated across a workflow for a given time window.",
                       "properties": {
+                        "completed_runs": {
+                          "description": "The number of runs that ran to completion within the aggregation window",
+                          "format": "int64",
+                          "minimum": 0,
+                          "type": "integer",
+                          "x-nullable": true
+                        },
                         "duration_metrics": {
                           "description": "Metrics relating to the duration of runs for a workflow.",
                           "properties": {
@@ -2943,7 +2950,7 @@
                           "x-nullable": true
                         },
                         "total_runs": {
-                          "description": "The total number of runs.",
+                          "description": "The total number of runs, including runs that are still on-hold or running.",
                           "format": "int64",
                           "minimum": 0,
                           "type": "integer"
@@ -2969,7 +2976,8 @@
                         "window_start",
                         "duration_metrics",
                         "window_end",
-                        "throughput"
+                        "throughput",
+                        "completed_runs"
                       ],
                       "type": "object"
                     },
