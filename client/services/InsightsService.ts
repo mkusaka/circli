@@ -1000,7 +1000,7 @@ export class InsightsService {
     projectSlug,
     workflowName,
     allBranches,
-    branches,
+    branch,
   }: {
     /**
      * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
@@ -1015,9 +1015,9 @@ export class InsightsService {
      */
     allBranches?: boolean;
     /**
-     * The names of VCS branches to include in branch-level workflow metrics.
+     * The name of a vcs branch. If not passed we will scope the API call to the default branch.
      */
-    branches?: any;
+    branch?: string;
   }): CancelablePromise<{
     /**
      * Metrics aggregated across a workflow for a given time window.
@@ -1141,7 +1141,7 @@ export class InsightsService {
       },
       query: {
         "all-branches": allBranches,
-        branches: branches,
+        branch: branch,
       },
     });
   }

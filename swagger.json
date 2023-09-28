@@ -2832,13 +2832,12 @@
             }
           },
           {
-            "description": "The names of VCS branches to include in branch-level workflow metrics.",
-            "example": "A single branch: ?branches=main or for multiple branches: ?branches=main&branches=feature&branches=dev",
+            "description": "The name of a vcs branch. If not passed we will scope the API call to the default branch.",
             "in": "query",
-            "name": "branches",
+            "name": "branch",
             "required": false,
             "schema": {
-              "type": "object"
+              "type": "string"
             }
           }
         ],
