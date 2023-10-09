@@ -5432,7 +5432,7 @@
         "tags": ["Project"]
       },
       "post": {
-        "description": "Creates a new checkout key. This API request is only usable with a user API token.",
+        "description": "Creates a new checkout key. This API request is only usable with a user API token.\n                           Please ensure that you have authorized your account with GitHub before creating user keys.\n                           This is necessary to give CircleCI the permission to create a user key associated with\n                           your GitHub user account. You can find this page by visiting Project Settings > Checkout SSH Keys",
         "operationId": "createCheckoutKey",
         "parameters": [
           {
