@@ -22,7 +22,7 @@ export class InsightsService {
      */
     projectSlug: string;
     /**
-     * The time window used to calculate summary metrics.
+     * The time window used to calculate summary metrics. If not provided, defaults to last-90-days
      */
     reportingWindow?:
       | "last-7-days"
@@ -372,7 +372,7 @@ export class InsightsService {
      */
     orgSlug: string;
     /**
-     * The time window used to calculate summary metrics.
+     * The time window used to calculate summary metrics. If not provided, defaults to last-90-days
      */
     reportingWindow?:
       | "last-7-days"
@@ -640,7 +640,7 @@ export class InsightsService {
      */
     branch?: string;
     /**
-     * The time window used to calculate summary metrics.
+     * The time window used to calculate summary metrics. If not provided, defaults to last-90-days
      */
     reportingWindow?:
       | "last-7-days"
@@ -889,7 +889,7 @@ export class InsightsService {
      */
     branch?: string;
     /**
-     * The time window used to calculate summary metrics.
+     * The time window used to calculate summary metrics. If not provided, defaults to last-90-days
      */
     reportingWindow?:
       | "last-7-days"
