@@ -1049,7 +1049,7 @@
             }
           },
           {
-            "description": "The time window used to calculate summary metrics.",
+            "description": "The time window used to calculate summary metrics. If not provided, defaults to last-90-days",
             "example": "last-90-days",
             "in": "query",
             "name": "reporting-window",
@@ -1657,7 +1657,7 @@
             }
           },
           {
-            "description": "The time window used to calculate summary metrics.",
+            "description": "The time window used to calculate summary metrics. If not provided, defaults to last-90-days",
             "example": "last-90-days",
             "in": "query",
             "name": "reporting-window",
@@ -2154,7 +2154,7 @@
             }
           },
           {
-            "description": "The time window used to calculate summary metrics.",
+            "description": "The time window used to calculate summary metrics. If not provided, defaults to last-90-days",
             "example": "last-90-days",
             "in": "query",
             "name": "reporting-window",
@@ -2607,7 +2607,7 @@
             }
           },
           {
-            "description": "The time window used to calculate summary metrics.",
+            "description": "The time window used to calculate summary metrics. If not provided, defaults to last-90-days",
             "example": "last-90-days",
             "in": "query",
             "name": "reporting-window",
