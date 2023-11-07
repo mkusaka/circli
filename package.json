@@ -7,8 +7,8 @@
   "author": "mkusaka <hinoshita1992@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^18.15.3",
-    "@types/prettier": "^2.7.2",
+    "@types/node": "^18.18.9",
+    "@types/prettier": "^2.7.3",
     "@vercel/ncc": "^0.34.0",
     "concurrently": "^7.4.0",
     "fast-glob": "^3.2.12",
