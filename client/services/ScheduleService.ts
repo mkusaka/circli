@@ -13,7 +13,7 @@ export class ScheduleService {
     pageToken,
   }: {
     /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     projectSlug: string;
     /**
@@ -164,7 +164,7 @@ export class ScheduleService {
   }
   /**
    * Create a schedule
-   * Creates a schedule and returns the created schedule.
+   * Not yet available to projects that use GitLab or GitHub App. Creates a schedule and returns the created schedule.
    * @returns any Error response.
    * @throws ApiError
    */
@@ -173,7 +173,7 @@ export class ScheduleService {
     requestBody,
   }: {
     /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     projectSlug: string;
     requestBody?: {
@@ -287,7 +287,7 @@ export class ScheduleService {
   }
   /**
    * Delete a schedule
-   * Deletes the schedule by id.
+   * Not yet available to projects that use GitLab or GitHub App. Deletes the schedule by id.
    * @returns any A confirmation message.
    * @throws ApiError
    */
@@ -460,7 +460,7 @@ export class ScheduleService {
   }
   /**
    * Update a schedule
-   * Updates a schedule and returns the updated schedule.
+   * Not yet available to projects that use GitLab or GitHub App. Updates a schedule and returns the updated schedule.
    * @returns any A schedule object.
    * @throws ApiError
    */

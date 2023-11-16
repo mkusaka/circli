@@ -12,7 +12,7 @@ export class ProjectService {
     projectSlug,
   }: {
     /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     projectSlug: string;
   }): CancelablePromise<{
@@ -34,7 +34,7 @@ export class ProjectService {
      */
     organization_slug: string;
     /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     slug: string;
     /**
@@ -70,7 +70,7 @@ export class ProjectService {
     projectSlug,
   }: {
     /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     projectSlug: string;
   }): CancelablePromise<{
@@ -111,7 +111,7 @@ export class ProjectService {
   }
   /**
    * Create a new checkout key
-   * Creates a new checkout key. This API request is only usable with a user API token.
+   * Not available to projects that use GitLab or GitHub App. Creates a new checkout key. This API request is only usable with a user API token.
    * Please ensure that you have authorized your account with GitHub before creating user keys.
    * This is necessary to give CircleCI the permission to create a user key associated with
    * your GitHub user account. You can find this page by visiting Project Settings > Checkout SSH Keys
@@ -123,7 +123,7 @@ export class ProjectService {
     requestBody,
   }: {
     /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     projectSlug: string;
     requestBody?: {
@@ -156,7 +156,7 @@ export class ProjectService {
     fingerprint,
   }: {
     /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     projectSlug: string;
     /**
@@ -189,7 +189,7 @@ export class ProjectService {
     fingerprint,
   }: {
     /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     projectSlug: string;
     /**
@@ -237,7 +237,7 @@ export class ProjectService {
     projectSlug,
   }: {
     /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     projectSlug: string;
   }): CancelablePromise<{
@@ -279,7 +279,7 @@ export class ProjectService {
     requestBody,
   }: {
     /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     projectSlug: string;
     requestBody?: {
@@ -316,7 +316,7 @@ export class ProjectService {
     name,
   }: {
     /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     projectSlug: string;
     /**
@@ -349,7 +349,7 @@ export class ProjectService {
     name,
   }: {
     /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     projectSlug: string;
     /**
