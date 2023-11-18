@@ -14,7 +14,7 @@ export class PipelineService {
     mine,
   }: {
     /**
-     * Org slug in the form `vcs-slug/org-name`
+     * Org slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).
      */
     orgSlug?: string;
     /**
@@ -481,7 +481,7 @@ export class PipelineService {
     pageToken,
   }: {
     /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     projectSlug: string;
     /**
@@ -634,7 +634,7 @@ export class PipelineService {
   }
   /**
    * Trigger a new pipeline
-   * Triggers a new pipeline on the project.
+   * Not yet available to projects that use GitLab or GitHub App. Triggers a new pipeline on the project.
    * @returns any Error response.
    * @throws ApiError
    */
@@ -643,7 +643,7 @@ export class PipelineService {
     requestBody,
   }: {
     /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     projectSlug: string;
     requestBody?: {
@@ -684,7 +684,7 @@ export class PipelineService {
     pageToken,
   }: {
     /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     projectSlug: string;
     /**
@@ -841,7 +841,7 @@ export class PipelineService {
     pipelineNumber,
   }: {
     /**
-     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.
+     * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     projectSlug: string;
     /**

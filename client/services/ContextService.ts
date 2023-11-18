@@ -63,6 +63,7 @@ export class ContextService {
   }
   /**
    * Create a new context
+   * Creates a new context.
    * @returns any The new context
    * @throws ApiError
    */

@@ -4,7 +4,7 @@ import { request as __request } from "../core/request.ts";
 export class WebhookService {
   /**
    * List webhooks
-   * Get a list of webhook that match the given scope-type and scope-id
+   * Get a list of outbound webhooks that match the given scope-type and scope-id
    * @returns any A list of webhooks
    * @throws ApiError
    */
@@ -83,7 +83,8 @@ export class WebhookService {
     });
   }
   /**
-   * Create a webhook
+   * Create an outbound webhook
+   * Creates an outbound webhook.
    * @returns any Error response.
    * @throws ApiError
    */
@@ -136,7 +137,8 @@ export class WebhookService {
     });
   }
   /**
-   * Delete a webhook
+   * Delete an outbound webhook
+   * Deletes an outbound webhook
    * @returns any A confirmation message
    * @throws ApiError
    */
@@ -163,7 +165,7 @@ export class WebhookService {
   }
   /**
    * Get a webhook
-   * Get a webhook by id.
+   * Get an outbound webhook by id.
    * @returns any A webhook
    * @throws ApiError
    */
@@ -230,7 +232,8 @@ export class WebhookService {
     });
   }
   /**
-   * Update a webhook
+   * Update an outbound webhook
+   * Updates an outbound webhook.
    * @returns any A webhook
    * @throws ApiError
    */
