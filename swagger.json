@@ -525,6 +525,7 @@
         "tags": ["Context"]
       },
       "post": {
+        "description": "Creates a new context.",
         "operationId": "createContext",
         "requestBody": {
           "content": {
@@ -1039,7 +1040,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -1405,7 +1406,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -1900,7 +1901,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -1956,7 +1957,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -2116,7 +2117,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -2372,7 +2373,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -2559,7 +2560,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -2803,7 +2804,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -3078,7 +3079,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -4340,7 +4341,7 @@
         "operationId": "listPipelines",
         "parameters": [
           {
-            "description": "Org slug in the form `vcs-slug/org-name`",
+            "description": "Org slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).",
             "example": "gh/CircleCI-Public",
             "in": "query",
             "name": "org-slug",
@@ -5225,7 +5226,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -5268,7 +5269,7 @@
                       "type": "string"
                     },
                     "slug": {
-                      "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+                      "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
                       "example": "gh/CircleCI-Public/api-preview-docs",
                       "type": "string"
                     },
@@ -5337,7 +5338,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -5432,12 +5433,12 @@
         "tags": ["Project"]
       },
       "post": {
-        "description": "Creates a new checkout key. This API request is only usable with a user API token.\n                           Please ensure that you have authorized your account with GitHub before creating user keys.\n                           This is necessary to give CircleCI the permission to create a user key associated with\n                           your GitHub user account. You can find this page by visiting Project Settings > Checkout SSH Keys",
+        "description": "Not available to projects that use GitLab or GitHub App. Creates a new checkout key. This API request is only usable with a user API token.\n                           Please ensure that you have authorized your account with GitHub before creating user keys.\n                           This is necessary to give CircleCI the permission to create a user key associated with\n                           your GitHub user account. You can find this page by visiting Project Settings > Checkout SSH Keys",
         "operationId": "createCheckoutKey",
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -5544,7 +5545,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -5609,7 +5610,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -5706,7 +5707,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -5787,7 +5788,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -5879,7 +5880,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -5944,7 +5945,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -6030,7 +6031,7 @@
           },
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -6204,7 +6205,7 @@
                           "type": "string"
                         },
                         "slug": {
-                          "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+                          "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
                           "example": "gh/CircleCI-Public/api-preview-docs",
                           "type": "string"
                         }
@@ -6314,7 +6315,7 @@
           },
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -6371,7 +6372,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -6663,12 +6664,12 @@
         "tags": ["Pipeline"]
       },
       "post": {
-        "description": "Triggers a new pipeline on the project.",
+        "description": "Not yet available to projects that use GitLab or GitHub App. Triggers a new pipeline on the project.",
         "operationId": "triggerPipeline",
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -6793,7 +6794,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -7082,7 +7083,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -7352,7 +7353,7 @@
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -7654,12 +7655,12 @@
         "tags": ["Schedule"]
       },
       "post": {
-        "description": "Creates a schedule and returns the created schedule.",
+        "description": "Not yet available to projects that use GitLab or GitHub App. Creates a schedule and returns the created schedule.",
         "operationId": "createSchedule",
         "parameters": [
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -8155,7 +8156,7 @@
           },
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -8245,7 +8246,7 @@
           },
           {
             "allowReserved": true,
-            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped.",
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
             "example": "gh/CircleCI-Public/api-preview-docs",
             "in": "path",
             "name": "project-slug",
@@ -8352,7 +8353,7 @@
     },
     "/schedule/{schedule-id}": {
       "delete": {
-        "description": "Deletes the schedule by id.",
+        "description": "Not yet available to projects that use GitLab or GitHub App. Deletes the schedule by id.",
         "operationId": "deleteScheduleById",
         "parameters": [
           {
@@ -8687,7 +8688,7 @@
         "tags": ["Schedule"]
       },
       "patch": {
-        "description": "Updates a schedule and returns the updated schedule.",
+        "description": "Not yet available to projects that use GitLab or GitHub App. Updates a schedule and returns the updated schedule.",
         "operationId": "updateSchedule",
         "parameters": [
           {
@@ -9152,7 +9153,7 @@
     },
     "/webhook": {
       "get": {
-        "description": "Get a list of webhook that match the given scope-type and scope-id",
+        "description": "Get a list of outbound webhooks that match the given scope-type and scope-id",
         "operationId": "getWebhooks",
         "parameters": [
           {
@@ -9293,6 +9294,7 @@
         "tags": ["Webhook"]
       },
       "post": {
+        "description": "Creates an outbound webhook.",
         "operationId": "createWebhook",
         "requestBody": {
           "content": {
@@ -9453,12 +9455,13 @@
             "description": "Error response."
           }
         },
-        "summary": "Create a webhook",
+        "summary": "Create an outbound webhook",
         "tags": ["Webhook"]
       }
     },
     "/webhook/{webhook-id}": {
       "delete": {
+        "description": "Deletes an outbound webhook",
         "operationId": "deleteWebhook",
         "parameters": [
           {
@@ -9508,11 +9511,11 @@
             "description": "Error response."
           }
         },
-        "summary": "Delete a webhook",
+        "summary": "Delete an outbound webhook",
         "tags": ["Webhook"]
       },
       "get": {
-        "description": "Get a webhook by id.",
+        "description": "Get an outbound webhook by id.",
         "operationId": "getWebhookById",
         "parameters": [
           {
@@ -9628,6 +9631,7 @@
         "tags": ["Webhook"]
       },
       "put": {
+        "description": "Updates an outbound webhook.",
         "operationId": "updateWebhook",
         "parameters": [
           {
@@ -9775,7 +9779,7 @@
             "description": "Error response."
           }
         },
-        "summary": "Update a webhook",
+        "summary": "Update an outbound webhook",
         "tags": ["Webhook"]
       }
     },
