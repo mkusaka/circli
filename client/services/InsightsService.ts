@@ -587,7 +587,7 @@ export class InsightsService {
       /**
        * The date and time when workflow was created.
        */
-      "workflow-created-at": any;
+      "workflow-created-at": string;
       /**
        * The ID of the workflow associated with the provided test counts
        */
