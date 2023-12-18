@@ -2049,7 +2049,8 @@
                             "type": "integer"
                           },
                           "workflow-created-at": {
-                            "description": "The date and time when workflow was created."
+                            "description": "The date and time when workflow was created.",
+                            "type": "string"
                           },
                           "workflow-id": {
                             "description": "The ID of the workflow associated with the provided test counts"
