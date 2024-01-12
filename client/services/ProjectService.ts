@@ -68,11 +68,16 @@ export class ProjectService {
    */
   public static listCheckoutKeys({
     projectSlug,
+    digest,
   }: {
     /**
      * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
      */
     projectSlug: string;
+    /**
+     * The fingerprint digest type to return. This may be either `md5` or `sha256`. If not passed, defaults to `md5`.
+     */
+    digest?: "sha256" | "md5";
   }): CancelablePromise<{
     items: Array<{
       /**
@@ -106,6 +111,9 @@ export class ProjectService {
       url: "/project/{project-slug}/checkout-key",
       path: {
         "project-slug": projectSlug,
+      },
+      query: {
+        digest: digest,
       },
     });
   }
@@ -147,7 +155,7 @@ export class ProjectService {
   }
   /**
    * Delete a checkout key
-   * Deletes the checkout key.
+   * Deletes the checkout key via md5 or sha256 fingerprint. sha256 keys should be url-encoded.
    * @returns any A confirmation message.
    * @throws ApiError
    */
@@ -180,7 +188,7 @@ export class ProjectService {
   }
   /**
    * Get a checkout key
-   * Returns an individual checkout key.
+   * Returns an individual checkout key via md5 or sha256 fingerprint. sha256 keys should be url-encoded.
    * @returns any The checkout key.
    * @throws ApiError
    */
