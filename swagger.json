@@ -5347,6 +5347,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "description": "The fingerprint digest type to return. This may be either `md5` or `sha256`. If not passed, defaults to `md5`.",
+            "in": "query",
+            "name": "digest",
+            "required": false,
+            "schema": {
+              "enum": ["sha256", "md5"],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -5541,7 +5551,7 @@
     },
     "/project/{project-slug}/checkout-key/{fingerprint}": {
       "delete": {
-        "description": "Deletes the checkout key.",
+        "description": "Deletes the checkout key via md5 or sha256 fingerprint. sha256 keys should be url-encoded.",
         "operationId": "deleteCheckoutKey",
         "parameters": [
           {
@@ -5606,7 +5616,7 @@
         "tags": ["Project"]
       },
       "get": {
-        "description": "Returns an individual checkout key.",
+        "description": "Returns an individual checkout key via md5 or sha256 fingerprint. sha256 keys should be url-encoded.",
         "operationId": "getCheckoutKey",
         "parameters": [
           {
