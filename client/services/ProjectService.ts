@@ -1,7 +1,142 @@
+import type { project_settings } from "../models/project_settings.ts";
 import type { CancelablePromise } from "../core/CancelablePromise.ts";
 import { OpenAPI } from "../core/OpenAPI.ts";
 import { request as __request } from "../core/request.ts";
 export class ProjectService {
+  /**
+   * 🧪 Create a project
+   * [__EXPERIMENTAL__]  Creates a new CircleCI project, and returns a list of the default advanced settings. Can only be called on a repo with a main branch and an existing config.yml file. Not yet available to projects that use GitLab or GitHub App.
+   * @returns project_settings Successful response.
+   * @throws ApiError
+   */
+  public static createProject({
+    provider,
+    organization,
+    project,
+  }: {
+    /**
+     * The `provider` segment of a project or org slug, the first of the three. This may be a VCS. For projects that use GitLab or GitHub App, use `circleci`.
+     */
+    provider: string;
+    /**
+     * The `organization` segment of a project or org slug, the second of the three. For GitHub OAuth or Bitbucket projects, this is the organization name. For projects that use GitLab or GitHub App, use the organization ID (found in Organization Settings).
+     */
+    organization: string;
+    /**
+     * The `project` segment of a project slug, the third of the three. For GitHub OAuth or Bitbucket projects, this is the repository name. For projects that use GitLab or GitHub App, use the project ID (found in Project Settings).
+     */
+    project: string;
+  }): CancelablePromise<project_settings> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v2/project/{provider}/{organization}/{project}",
+      path: {
+        provider: provider,
+        organization: organization,
+        project: project,
+      },
+      errors: {
+        400: `Unexpected request body provided.`,
+        401: `Credentials provided are invalid.`,
+        403: `None or insufficient credentials provided.`,
+        404: `Either a branch or a project were not found.`,
+        405: `Create projects using the API is currently supported for classic Github OAuth and Bitbucket projects only.`,
+        429: `API rate limits exceeded.`,
+        500: `Internal server error.`,
+      },
+    });
+  }
+  /**
+   * 🧪 Get project settings
+   * [__EXPERIMENTAL__] Returns a list of the advanced settings for a CircleCI project, whether enabled (true) or not (false).
+   * @returns project_settings Successful response.
+   * @throws ApiError
+   */
+  public static getProjectSettings({
+    provider,
+    organization,
+    project,
+  }: {
+    /**
+     * The `provider` segment of a project or org slug, the first of the three. This may be a VCS. For projects that use GitLab or GitHub App, use `circleci`.
+     */
+    provider: string;
+    /**
+     * The `organization` segment of a project or org slug, the second of the three. For GitHub OAuth or Bitbucket projects, this is the organization name. For projects that use GitLab or GitHub App, use the organization ID (found in Organization Settings).
+     */
+    organization: string;
+    /**
+     * The `project` segment of a project slug, the third of the three. For GitHub OAuth or Bitbucket projects, this is the repository name. For projects that use GitLab or GitHub App, use the project ID (found in Project Settings).
+     */
+    project: string;
+  }): CancelablePromise<project_settings> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v2/project/{provider}/{organization}/{project}/settings",
+      path: {
+        provider: provider,
+        organization: organization,
+        project: project,
+      },
+      errors: {
+        401: `Credentials provided are invalid.`,
+        403: `None or insufficient credentials provided.`,
+        404: `Insufficient credentials for a private project, OR the organization, project, or repository does not exist.`,
+        429: `API rate limits exceeded.`,
+        500: `Internal server error.`,
+      },
+    });
+  }
+  /**
+   * 🧪 Update project settings
+   * [__EXPERIMENTAL__] Updates one or more of the advanced settings for a CircleCI project.
+   * @returns project_settings Successful response. Always includes the full advanced settings object. Returned even when the provided updates match the existing settings, but can also be returned when `oss: true` fails to set.
+   * @throws ApiError
+   */
+  public static patchProjectSettings({
+    provider,
+    organization,
+    project,
+    requestBody,
+  }: {
+    /**
+     * The `provider` segment of a project or org slug, the first of the three. This may be a VCS. For projects that use GitLab or GitHub App, use `circleci`.
+     */
+    provider: string;
+    /**
+     * The `organization` segment of a project or org slug, the second of the three. For GitHub OAuth or Bitbucket projects, this is the organization name. For projects that use GitLab or GitHub App, use the organization ID (found in Organization Settings).
+     */
+    organization: string;
+    /**
+     * The `project` segment of a project slug, the third of the three. For GitHub OAuth or Bitbucket projects, this is the repository name. For projects that use GitLab or GitHub App, use the project ID (found in Project Settings).
+     */
+    project: string;
+    /**
+     * The setting(s) to update, including one or more fields in the JSON object. Note that `oss: true` will only be set on projects whose underlying repositories are actually open source.
+     */
+    requestBody: project_settings;
+  }): CancelablePromise<project_settings> {
+    return __request(OpenAPI, {
+      method: "PATCH",
+      url: "/api/v2/project/{provider}/{organization}/{project}/settings",
+      path: {
+        provider: provider,
+        organization: organization,
+        project: project,
+      },
+      body: requestBody,
+      mediaType: "application/json",
+      errors: {
+        400: `Request is malformed, e.g. with improperly encoded JSON`,
+        401: `Credentials provided are invalid.`,
+        403: `None or insufficient credentials provided.`,
+        404: `Insufficient credentials for a private project, OR the organization, project, or repository does not exist.`,
+        422: `One or more settings provided do not exist.`,
+        429: `API rate limits exceeded.`,
+        500: `Internal server error.`,
+      },
+    });
+  }
   /**
    * Get a project
    * Retrieves a project by project slug.
