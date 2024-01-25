@@ -254,29 +254,6 @@
         },
         "description": "Credentials provided are invalid."
       },
-      "401_invalid_token_classic": {
-        "content": {
-          "application/json": {
-            "examples": {
-              "invalid_token": {
-                "summary": "Token is invalid",
-                "value": {
-                  "message": "Invalid token provided."
-                }
-              }
-            },
-            "schema": {
-              "additionalProperties": false,
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "description": "Credentials provided are invalid."
-      },
       "403_permission_denied": {
         "content": {
           "application/json": {
@@ -285,22 +262,6 @@
               "properties": {
                 "message": {
                   "default": "Permission denied.",
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "description": "None or insufficient credentials provided."
-      },
-      "403_permission_denied_classic": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "additionalProperties": false,
-              "properties": {
-                "message": {
-                  "default": "Permission denied",
                   "type": "string"
                 }
               }
@@ -364,22 +325,6 @@
               "properties": {
                 "message": {
                   "default": "Project not found.",
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "description": "Insufficient credentials for a private project, OR the organization, project, or repository does not exist."
-      },
-      "404_project_not_found_classic": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "additionalProperties": false,
-              "properties": {
-                "message": {
-                  "default": "Project not found",
                   "type": "string"
                 }
               }
@@ -499,22 +444,6 @@
               "properties": {
                 "message": {
                   "default": "Rate limit exceeded.",
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "description": "API rate limits exceeded."
-      },
-      "429_rate_limit_exceeded_classic": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "additionalProperties": false,
-              "properties": {
-                "message": {
-                  "default": "Rate limit exceeded",
                   "type": "string"
                 }
               }
