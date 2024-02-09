@@ -378,41 +378,6 @@
         },
         "description": "A conflict has occurred while attempting to create the resource.\n"
       },
-      "422_improper_payload": {
-        "content": {
-          "application/json": {
-            "examples": {
-              "incorrect_type": {
-                "summary": "A field was passed with an incorrect type.",
-                "value": {
-                  "message": "JSON field 'field_name' is of incorrect type."
-                }
-              },
-              "missing_field": {
-                "summary": "A required field was not present.",
-                "value": {
-                  "message": "Missing one or more JSON fields."
-                }
-              },
-              "unexpected_field": {
-                "summary": "An unexpected JSON field was present.",
-                "value": {
-                  "message": "Unexpected JSON field 'field_name'."
-                }
-              }
-            },
-            "schema": {
-              "additionalProperties": false,
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "description": "JSON passed in the request does not adhere to the expected schema."
-      },
       "422_unsupported_org": {
         "content": {
           "application/json": {
