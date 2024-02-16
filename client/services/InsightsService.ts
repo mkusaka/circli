@@ -520,7 +520,20 @@ export class InsightsService {
      * The name of a workflow. If not passed we will scope the API call to the project.
      */
     workflowName?: string;
-  }): CancelablePromise<any> {
+  }): CancelablePromise<{
+    /**
+     * A list of all the branches for a given project.
+     */
+    branches: Array<string>;
+    /**
+     * The unique ID of the organization
+     */
+    org_id: any;
+    /**
+     * The unique ID of the project
+     */
+    project_id: any;
+  }> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/insights/{project-slug}/branches",

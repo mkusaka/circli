@@ -2869,7 +2869,28 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "description": "Project branches response.",
+                  "properties": {
+                    "branches": {
+                      "description": "A list of all the branches for a given project.",
+                      "items": {
+                        "description": "The VCS branch of a workflow's trigger.",
+                        "example": "main",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "org_id": {
+                      "description": "The unique ID of the organization"
+                    },
+                    "project_id": {
+                      "description": "The unique ID of the project"
+                    }
+                  },
+                  "required": ["org_id", "project_id", "branches"],
+                  "type": "object"
+                }
               }
             },
             "description": "A list of branches for a project"
@@ -5578,7 +5599,7 @@
     },
     "/pipeline/continue": {
       "post": {
-        "description": "Continue a pipeline from the setup phase.",
+        "description": "Continue a pipeline from the setup phase. For information on using pipeline parameters with dynamic configuration, see the [Pipeline values and parameters](https://circleci.com/docs/pipeline-variables/#pipeline-parameters-and-dynamic-configuration) docs.",
         "operationId": "continuePipeline",
         "requestBody": {
           "content": {
