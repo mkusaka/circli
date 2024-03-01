@@ -916,450 +916,6 @@
   },
   "openapi": "3.0.3",
   "paths": {
-    "/api/v2/context/{context_id}/restrictions": {
-      "get": {
-        "description": "[__EXPERIMENTAL__] Gets a list of project restrictions associated with a context.",
-        "operationId": "getContextRestrictions",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/context_project_restrictions_list"
-                }
-              }
-            },
-            "description": "Successful response."
-          },
-          "400": {
-            "$ref": "#/components/responses/400_invalid_context_id"
-          },
-          "401": {
-            "$ref": "#/components/responses/401_invalid_token"
-          },
-          "404": {
-            "$ref": "#/components/responses/404_entity_not_found"
-          },
-          "429": {
-            "$ref": "#/components/responses/429_rate_limit_exceeded"
-          },
-          "500": {
-            "$ref": "#/components/responses/500_internal_server_error"
-          }
-        },
-        "summary": "🧪 Get context restrictions",
-        "tags": ["Context"]
-      },
-      "parameters": [
-        {
-          "$ref": "#/components/parameters/context_id"
-        }
-      ],
-      "post": {
-        "description": "[__EXPERIMENTAL__] Creates project restriction on a context.",
-        "operationId": "createContextRestriction",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "example": {
-                "project_id": "405d8375-3514-403b-8c43-83ae74cfe0e9"
-              },
-              "schema": {
-                "additionalProperties": false,
-                "properties": {
-                  "project_id": {
-                    "format": "uuid",
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/restriction_created"
-                }
-              }
-            },
-            "description": "Successful response."
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "examples": {
-                  "invalid_access": {
-                    "summary": "Project doesn't exist, or insufficient credentials",
-                    "value": {
-                      "message": "Project does not exist, or user does not have access to this project."
-                    }
-                  },
-                  "invalid_restriction": {
-                    "summary": "Invalid restriction",
-                    "value": {
-                      "message": "This restriction cannot be applied to this context."
-                    }
-                  }
-                },
-                "schema": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Bad request."
-          },
-          "401": {
-            "$ref": "#/components/responses/401_invalid_token"
-          },
-          "404": {
-            "$ref": "#/components/responses/404_entity_not_found"
-          },
-          "409": {
-            "content": {
-              "application/json": {
-                "examples": {
-                  "restriction_conflict": {
-                    "summary": "Restriction conflict",
-                    "value": {
-                      "message": "The restriction you're trying to add already exists."
-                    }
-                  }
-                },
-                "schema": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Request conflict."
-          },
-          "429": {
-            "$ref": "#/components/responses/429_rate_limit_exceeded"
-          },
-          "500": {
-            "$ref": "#/components/responses/500_internal_server_error"
-          }
-        },
-        "summary": "🧪 Create context restriction",
-        "tags": ["Context"]
-      }
-    },
-    "/api/v2/context/{context_id}/restrictions/{restriction_id}": {
-      "delete": {
-        "description": "[__EXPERIMENTAL__] Deletes a project restriction on a context.",
-        "operationId": "deleteContextRestriction",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "examples": {
-                  "successful_delete": {
-                    "summary": "Successful deletion of restriction",
-                    "value": {
-                      "message": "Context restriction deleted."
-                    }
-                  }
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/restriction_deleted"
-                }
-              }
-            },
-            "description": "Successful response."
-          },
-          "400": {
-            "$ref": "#/components/responses/400_invalid_restriction_id"
-          },
-          "401": {
-            "$ref": "#/components/responses/401_invalid_token"
-          },
-          "404": {
-            "$ref": "#/components/responses/404_entity_not_found"
-          },
-          "429": {
-            "$ref": "#/components/responses/429_rate_limit_exceeded"
-          },
-          "500": {
-            "$ref": "#/components/responses/500_internal_server_error"
-          }
-        },
-        "summary": "🧪 Delete context restriction",
-        "tags": ["Context"]
-      },
-      "parameters": [
-        {
-          "$ref": "#/components/parameters/context_id"
-        },
-        {
-          "$ref": "#/components/parameters/restriction_id"
-        }
-      ]
-    },
-    "/api/v2/project/{provider}/{organization}/{project}": {
-      "parameters": [
-        {
-          "$ref": "#/components/parameters/provider"
-        },
-        {
-          "$ref": "#/components/parameters/organization"
-        },
-        {
-          "$ref": "#/components/parameters/project"
-        }
-      ],
-      "post": {
-        "description": "[__EXPERIMENTAL__]  Creates a new CircleCI project, and returns a list of the default advanced settings. Can only be called on a repo with a main branch and an existing config.yml file. Not yet available to projects that use GitLab or GitHub App.",
-        "operationId": "createProject",
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/project_settings"
-                }
-              }
-            },
-            "description": "Successful response."
-          },
-          "400": {
-            "$ref": "#/components/responses/400_unexpected_request_body"
-          },
-          "401": {
-            "$ref": "#/components/responses/401_invalid_token"
-          },
-          "403": {
-            "$ref": "#/components/responses/403_permission_denied"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "examples": {
-                  "branch_not_found": {
-                    "summary": "Branch not found, unable to trigger pipeline.",
-                    "value": {
-                      "message": "Branch not found."
-                    }
-                  },
-                  "project_not_found": {
-                    "summary": "Project not found, e.g. GitHub repo.",
-                    "value": {
-                      "message": "Project not found."
-                    }
-                  }
-                },
-                "schema": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Either a branch or a project were not found."
-          },
-          "405": {
-            "$ref": "#/components/responses/405_cannot_create_standalone_project"
-          },
-          "429": {
-            "$ref": "#/components/responses/429_rate_limit_exceeded"
-          },
-          "500": {
-            "$ref": "#/components/responses/500_internal_server_error"
-          }
-        },
-        "summary": "🧪 Create a project",
-        "tags": ["Project"]
-      }
-    },
-    "/api/v2/project/{provider}/{organization}/{project}/settings": {
-      "get": {
-        "description": "[__EXPERIMENTAL__] Returns a list of the advanced settings for a CircleCI project, whether enabled (true) or not (false).",
-        "operationId": "getProjectSettings",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/project_settings"
-                }
-              }
-            },
-            "description": "Successful response."
-          },
-          "401": {
-            "$ref": "#/components/responses/401_invalid_token"
-          },
-          "403": {
-            "$ref": "#/components/responses/403_permission_denied"
-          },
-          "404": {
-            "$ref": "#/components/responses/404_project_not_found"
-          },
-          "429": {
-            "$ref": "#/components/responses/429_rate_limit_exceeded"
-          },
-          "500": {
-            "$ref": "#/components/responses/500_internal_server_error"
-          }
-        },
-        "summary": "🧪 Get project settings",
-        "tags": ["Project"]
-      },
-      "parameters": [
-        {
-          "$ref": "#/components/parameters/provider"
-        },
-        {
-          "$ref": "#/components/parameters/organization"
-        },
-        {
-          "$ref": "#/components/parameters/project"
-        }
-      ],
-      "patch": {
-        "description": "[__EXPERIMENTAL__] Updates one or more of the advanced settings for a CircleCI project.",
-        "operationId": "patchProjectSettings",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "example": {
-                "advanced": {
-                  "autocancel_builds": false,
-                  "build_prs_only": true,
-                  "pr_only_branch_overrides": ["main"]
-                }
-              },
-              "schema": {
-                "$ref": "#/components/schemas/project_settings"
-              }
-            }
-          },
-          "description": "The setting(s) to update, including one or more fields in the JSON object. Note that `oss: true` will only be set on projects whose underlying repositories are actually open source.",
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/project_settings"
-                }
-              }
-            },
-            "description": "Successful response. Always includes the full advanced settings object. Returned even when the provided updates match the existing settings, but can also be returned when `oss: true` fails to set."
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "examples": {
-                  "invalid_json": {
-                    "summary": "Invalid JSON body",
-                    "value": {
-                      "message": "Invalid JSON body."
-                    }
-                  },
-                  "too_many_branch_overrides": {
-                    "summary": "More than 100 branches sent for `pr_only_branch_overrides`",
-                    "value": {
-                      "message": "Field 'pr_only_branch_overrides' only supports up to 100 branches."
-                    }
-                  }
-                },
-                "schema": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Request is malformed, e.g. with improperly encoded JSON"
-          },
-          "401": {
-            "$ref": "#/components/responses/401_invalid_token"
-          },
-          "403": {
-            "$ref": "#/components/responses/403_permission_denied"
-          },
-          "404": {
-            "$ref": "#/components/responses/404_project_not_found"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "examples": {
-                  "incorrect_type": {
-                    "summary": "Incorrect setting type",
-                    "value": {
-                      "message": "Setting 'autocancel_builds' must be boolean."
-                    }
-                  },
-                  "no_json": {
-                    "summary": "Empty JSON request body",
-                    "value": {
-                      "message": "No JSON fields found."
-                    }
-                  },
-                  "oss": {
-                    "summary": "Incorrect OSS value for project",
-                    "value": {
-                      "message": "Feature flag 'oss' is not settable for this project."
-                    }
-                  },
-                  "unexpected_field": {
-                    "summary": "Incorrect root field name",
-                    "value": {
-                      "message": "Unexpected JSON field 'incorrect'"
-                    }
-                  },
-                  "unknown_setting": {
-                    "summary": "Incorrect setting name",
-                    "value": {
-                      "message": "Unknown advanced setting 'incorrect'."
-                    }
-                  }
-                },
-                "schema": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "One or more settings provided do not exist."
-          },
-          "429": {
-            "$ref": "#/components/responses/429_rate_limit_exceeded"
-          },
-          "500": {
-            "$ref": "#/components/responses/500_internal_server_error"
-          }
-        },
-        "summary": "🧪 Update project settings",
-        "tags": ["Project"]
-      }
-    },
     "/context": {
       "get": {
         "description": "List all contexts for an owner.",
@@ -1976,6 +1532,199 @@
         "summary": "Add or update an environment variable",
         "tags": ["Context"]
       }
+    },
+    "/context/{context_id}/restrictions": {
+      "get": {
+        "description": "[__EXPERIMENTAL__] Gets a list of project restrictions associated with a context.",
+        "operationId": "getContextRestrictions",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/context_project_restrictions_list"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_invalid_context_id"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "429": {
+            "$ref": "#/components/responses/429_rate_limit_exceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 Get context restrictions",
+        "tags": ["Context"]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/context_id"
+        }
+      ],
+      "post": {
+        "description": "[__EXPERIMENTAL__] Creates project restriction on a context.",
+        "operationId": "createContextRestriction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "project_id": "405d8375-3514-403b-8c43-83ae74cfe0e9"
+              },
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "project_id": {
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/restriction_created"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalid_access": {
+                    "summary": "Project doesn't exist, or insufficient credentials",
+                    "value": {
+                      "message": "Project does not exist, or user does not have access to this project."
+                    }
+                  },
+                  "invalid_restriction": {
+                    "summary": "Invalid restriction",
+                    "value": {
+                      "message": "This restriction cannot be applied to this context."
+                    }
+                  }
+                },
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Bad request."
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "restriction_conflict": {
+                    "summary": "Restriction conflict",
+                    "value": {
+                      "message": "The restriction you're trying to add already exists."
+                    }
+                  }
+                },
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Request conflict."
+          },
+          "429": {
+            "$ref": "#/components/responses/429_rate_limit_exceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 Create context restriction",
+        "tags": ["Context"]
+      }
+    },
+    "/context/{context_id}/restrictions/{restriction_id}": {
+      "delete": {
+        "description": "[__EXPERIMENTAL__] Deletes a project restriction on a context.",
+        "operationId": "deleteContextRestriction",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "successful_delete": {
+                    "summary": "Successful deletion of restriction",
+                    "value": {
+                      "message": "Context restriction deleted."
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/restriction_deleted"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_invalid_restriction_id"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "429": {
+            "$ref": "#/components/responses/429_rate_limit_exceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 Delete context restriction",
+        "tags": ["Context"]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/context_id"
+        },
+        {
+          "$ref": "#/components/parameters/restriction_id"
+        }
+      ]
     },
     "/insights/pages/{project-slug}/summary": {
       "get": {
@@ -9325,6 +9074,257 @@
         },
         "summary": "Get test metadata",
         "tags": ["Job"]
+      }
+    },
+    "/project/{provider}/{organization}/{project}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/provider"
+        },
+        {
+          "$ref": "#/components/parameters/organization"
+        },
+        {
+          "$ref": "#/components/parameters/project"
+        }
+      ],
+      "post": {
+        "description": "[__EXPERIMENTAL__]  Creates a new CircleCI project, and returns a list of the default advanced settings. Can only be called on a repo with a main branch and an existing config.yml file. Not yet available to projects that use GitLab or GitHub App.",
+        "operationId": "createProject",
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/project_settings"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "403": {
+            "$ref": "#/components/responses/403_permission_denied"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "branch_not_found": {
+                    "summary": "Branch not found, unable to trigger pipeline.",
+                    "value": {
+                      "message": "Branch not found."
+                    }
+                  },
+                  "project_not_found": {
+                    "summary": "Project not found, e.g. GitHub repo.",
+                    "value": {
+                      "message": "Project not found."
+                    }
+                  }
+                },
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Either a branch or a project were not found."
+          },
+          "405": {
+            "$ref": "#/components/responses/405_cannot_create_standalone_project"
+          },
+          "429": {
+            "$ref": "#/components/responses/429_rate_limit_exceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 Create a project",
+        "tags": ["Project"]
+      }
+    },
+    "/project/{provider}/{organization}/{project}/settings": {
+      "get": {
+        "description": "[__EXPERIMENTAL__] Returns a list of the advanced settings for a CircleCI project, whether enabled (true) or not (false).",
+        "operationId": "getProjectSettings",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/project_settings"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "403": {
+            "$ref": "#/components/responses/403_permission_denied"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_project_not_found"
+          },
+          "429": {
+            "$ref": "#/components/responses/429_rate_limit_exceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 Get project settings",
+        "tags": ["Project"]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/provider"
+        },
+        {
+          "$ref": "#/components/parameters/organization"
+        },
+        {
+          "$ref": "#/components/parameters/project"
+        }
+      ],
+      "patch": {
+        "description": "[__EXPERIMENTAL__] Updates one or more of the advanced settings for a CircleCI project.",
+        "operationId": "patchProjectSettings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "advanced": {
+                  "autocancel_builds": false,
+                  "build_prs_only": true,
+                  "pr_only_branch_overrides": ["main"]
+                }
+              },
+              "schema": {
+                "$ref": "#/components/schemas/project_settings"
+              }
+            }
+          },
+          "description": "The setting(s) to update, including one or more fields in the JSON object. Note that `oss: true` will only be set on projects whose underlying repositories are actually open source.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/project_settings"
+                }
+              }
+            },
+            "description": "Successful response. Always includes the full advanced settings object. Returned even when the provided updates match the existing settings, but can also be returned when `oss: true` fails to set."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalid_json": {
+                    "summary": "Invalid JSON body",
+                    "value": {
+                      "message": "Invalid JSON body."
+                    }
+                  },
+                  "too_many_branch_overrides": {
+                    "summary": "More than 100 branches sent for `pr_only_branch_overrides`",
+                    "value": {
+                      "message": "Field 'pr_only_branch_overrides' only supports up to 100 branches."
+                    }
+                  }
+                },
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Request is malformed, e.g. with improperly encoded JSON"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "403": {
+            "$ref": "#/components/responses/403_permission_denied"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_project_not_found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "incorrect_type": {
+                    "summary": "Incorrect setting type",
+                    "value": {
+                      "message": "Setting 'autocancel_builds' must be boolean."
+                    }
+                  },
+                  "no_json": {
+                    "summary": "Empty JSON request body",
+                    "value": {
+                      "message": "No JSON fields found."
+                    }
+                  },
+                  "oss": {
+                    "summary": "Incorrect OSS value for project",
+                    "value": {
+                      "message": "Feature flag 'oss' is not settable for this project."
+                    }
+                  },
+                  "unexpected_field": {
+                    "summary": "Incorrect root field name",
+                    "value": {
+                      "message": "Unexpected JSON field 'incorrect'"
+                    }
+                  },
+                  "unknown_setting": {
+                    "summary": "Incorrect setting name",
+                    "value": {
+                      "message": "Unknown advanced setting 'incorrect'."
+                    }
+                  }
+                },
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "One or more settings provided do not exist."
+          },
+          "429": {
+            "$ref": "#/components/responses/429_rate_limit_exceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 Update project settings",
+        "tags": ["Project"]
       }
     },
     "/schedule/{schedule-id}": {
