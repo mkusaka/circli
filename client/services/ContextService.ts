@@ -6,106 +6,6 @@ import { OpenAPI } from "../core/OpenAPI.ts";
 import { request as __request } from "../core/request.ts";
 export class ContextService {
   /**
-   * 🧪 Get context restrictions
-   * [__EXPERIMENTAL__] Gets a list of project restrictions associated with a context.
-   * @returns context_project_restrictions_list Successful response.
-   * @throws ApiError
-   */
-  public static getContextRestrictions({
-    contextId,
-  }: {
-    /**
-     * An opaque identifier of a context.
-     */
-    contextId: string;
-  }): CancelablePromise<context_project_restrictions_list> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/api/v2/context/{context_id}/restrictions",
-      path: {
-        context_id: contextId,
-      },
-      errors: {
-        400: `Context ID provided is invalid.`,
-        401: `Credentials provided are invalid.`,
-        404: `Entity not found.`,
-        429: `API rate limits exceeded.`,
-        500: `Internal server error.`,
-      },
-    });
-  }
-  /**
-   * 🧪 Create context restriction
-   * [__EXPERIMENTAL__] Creates project restriction on a context.
-   * @returns restriction_created Successful response.
-   * @throws ApiError
-   */
-  public static createContextRestriction({
-    contextId,
-    requestBody,
-  }: {
-    /**
-     * An opaque identifier of a context.
-     */
-    contextId: string;
-    requestBody: {
-      project_id?: string;
-    };
-  }): CancelablePromise<restriction_created> {
-    return __request(OpenAPI, {
-      method: "POST",
-      url: "/api/v2/context/{context_id}/restrictions",
-      path: {
-        context_id: contextId,
-      },
-      body: requestBody,
-      mediaType: "application/json",
-      errors: {
-        400: `Bad request.`,
-        401: `Credentials provided are invalid.`,
-        404: `Entity not found.`,
-        409: `Request conflict.`,
-        429: `API rate limits exceeded.`,
-        500: `Internal server error.`,
-      },
-    });
-  }
-  /**
-   * 🧪 Delete context restriction
-   * [__EXPERIMENTAL__] Deletes a project restriction on a context.
-   * @returns restriction_deleted Successful response.
-   * @throws ApiError
-   */
-  public static deleteContextRestriction({
-    contextId,
-    restrictionId,
-  }: {
-    /**
-     * An opaque identifier of a context.
-     */
-    contextId: string;
-    /**
-     * An opaque identifier of a context restriction.
-     */
-    restrictionId: string;
-  }): CancelablePromise<restriction_deleted> {
-    return __request(OpenAPI, {
-      method: "DELETE",
-      url: "/api/v2/context/{context_id}/restrictions/{restriction_id}",
-      path: {
-        context_id: contextId,
-        restriction_id: restrictionId,
-      },
-      errors: {
-        400: `Context restriction ID provided is invalid.`,
-        401: `Credentials provided are invalid.`,
-        404: `Entity not found.`,
-        429: `API rate limits exceeded.`,
-        500: `Internal server error.`,
-      },
-    });
-  }
-  /**
    * List contexts
    * List all contexts for an owner.
    * @returns any A paginated list of contexts
@@ -428,6 +328,118 @@ export class ContextService {
       },
       body: requestBody,
       mediaType: "application/json",
+    });
+  }
+  /**
+   * 🧪 Get context restrictions
+   * [__EXPERIMENTAL__] Gets a list of project restrictions associated with a context.
+   * @returns context_project_restrictions_list Successful response.
+   * @throws ApiError
+   */
+  public static getContextRestrictions({
+    contextId,
+  }: {
+    /**
+     * An opaque identifier of a context.
+     */
+    contextId: string;
+  }): CancelablePromise<context_project_restrictions_list> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/context/{context_id}/restrictions",
+      path: {
+        context_id: contextId,
+      },
+      errors: {
+        400: `Context ID provided is invalid.`,
+        401: `Credentials provided are invalid.`,
+        404: `Entity not found.`,
+        429: `API rate limits exceeded.`,
+        500: `Internal server error.`,
+      },
+    });
+  }
+  /**
+   * 🧪 Create context restriction
+   * [__EXPERIMENTAL__] Creates project restriction on a context.
+   * @returns restriction_created Successful response.
+   * @throws ApiError
+   */
+  public static createContextRestriction({
+    contextId,
+    requestBody,
+  }: {
+    /**
+     * An opaque identifier of a context.
+     */
+    contextId: string;
+    requestBody: {
+      /**
+       * Deprecated - Use "restriction_type" and "restriction_value"
+       * instead.
+       *
+       * The project ID to use for a project restriction. This is
+       * mutually exclusive with restriction_type and restriction_value
+       * and implies restriction_type is "project".
+       *
+       * @deprecated
+       */
+      project_id?: string;
+      restriction_type?: string;
+      restriction_value?: string;
+    };
+  }): CancelablePromise<restriction_created> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/context/{context_id}/restrictions",
+      path: {
+        context_id: contextId,
+      },
+      body: requestBody,
+      mediaType: "application/json",
+      errors: {
+        400: `Bad request.`,
+        401: `Credentials provided are invalid.`,
+        404: `Entity not found.`,
+        409: `Request conflict.`,
+        429: `API rate limits exceeded.`,
+        500: `Internal server error.`,
+      },
+    });
+  }
+  /**
+   * 🧪 Delete context restriction
+   * [__EXPERIMENTAL__] Deletes a project restriction on a context.
+   * @returns restriction_deleted Successful response.
+   * @throws ApiError
+   */
+  public static deleteContextRestriction({
+    contextId,
+    restrictionId,
+  }: {
+    /**
+     * An opaque identifier of a context.
+     */
+    contextId: string;
+    /**
+     * An opaque identifier of a context restriction.
+     */
+    restrictionId: string;
+  }): CancelablePromise<restriction_deleted> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/context/{context_id}/restrictions/{restriction_id}",
+      path: {
+        context_id: contextId,
+        restriction_id: restrictionId,
+      },
+      errors: {
+        400: `Context restriction ID provided is invalid.`,
+        401: `Credentials provided are invalid.`,
+        404: `Entity not found.`,
+        429: `API rate limits exceeded.`,
+        500: `Internal server error.`,
+      },
     });
   }
 }
