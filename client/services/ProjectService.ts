@@ -516,7 +516,6 @@ export class ProjectService {
         401: `Credentials provided are invalid.`,
         403: `None or insufficient credentials provided.`,
         404: `Insufficient credentials for a private project, OR the organization, project, or repository does not exist.`,
-        422: `One or more settings provided do not exist.`,
         429: `API rate limits exceeded.`,
         500: `Internal server error.`,
       },
