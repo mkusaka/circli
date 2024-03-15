@@ -378,29 +378,6 @@
         },
         "description": "A conflict has occurred while attempting to create the resource.\n"
       },
-      "422_unsupported_org": {
-        "content": {
-          "application/json": {
-            "examples": {
-              "group_not_supported": {
-                "summary": "Organization does not support groups",
-                "value": {
-                  "message": "Groups are not supported by this organization."
-                }
-              }
-            },
-            "schema": {
-              "additionalProperties": false,
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "description": "The following organization does not support this feature.\n"
-      },
       "429_rate_limit_exceeded": {
         "content": {
           "application/json": {
@@ -9264,48 +9241,16 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "invalid_json": {
-                    "summary": "Invalid JSON body",
-                    "value": {
-                      "message": "Invalid JSON body."
-                    }
-                  },
-                  "too_many_branch_overrides": {
-                    "summary": "More than 100 branches sent for `pr_only_branch_overrides`",
-                    "value": {
-                      "message": "Field 'pr_only_branch_overrides' only supports up to 100 branches."
-                    }
-                  }
-                },
-                "schema": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Request is malformed, e.g. with improperly encoded JSON"
-          },
-          "401": {
-            "$ref": "#/components/responses/401_invalid_token"
-          },
-          "403": {
-            "$ref": "#/components/responses/403_permission_denied"
-          },
-          "404": {
-            "$ref": "#/components/responses/404_project_not_found"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "examples": {
                   "incorrect_type": {
                     "summary": "Incorrect setting type",
                     "value": {
                       "message": "Setting 'autocancel_builds' must be boolean."
+                    }
+                  },
+                  "invalid_json": {
+                    "summary": "Invalid JSON body",
+                    "value": {
+                      "message": "Invalid JSON body."
                     }
                   },
                   "no_json": {
@@ -9318,6 +9263,12 @@
                     "summary": "Incorrect OSS value for project",
                     "value": {
                       "message": "Feature flag 'oss' is not settable for this project."
+                    }
+                  },
+                  "too_many_branch_overrides": {
+                    "summary": "More than 100 branches sent for `pr_only_branch_overrides`",
+                    "value": {
+                      "message": "Field 'pr_only_branch_overrides' only supports up to 100 branches."
                     }
                   },
                   "unexpected_field": {
@@ -9343,7 +9294,16 @@
                 }
               }
             },
-            "description": "One or more settings provided do not exist."
+            "description": "Request is malformed, e.g. with improperly encoded JSON"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "403": {
+            "$ref": "#/components/responses/403_permission_denied"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_project_not_found"
           },
           "429": {
             "$ref": "#/components/responses/429_rate_limit_exceeded"
