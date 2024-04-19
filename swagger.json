@@ -5384,7 +5384,7 @@
                         }
                       ]
                     },
-                    "description": "An object containing pipeline parameters and their values.",
+                    "description": "An object containing pipeline parameters and their values. Pipeline parameters have the following size limits: 100 max entries, 128 maximum key length, 512 maximum value length.",
                     "example": {
                       "deploy_prod": true
                     },
@@ -7435,7 +7435,7 @@
                         }
                       ]
                     },
-                    "description": "An object containing pipeline parameters and their values.",
+                    "description": "An object containing pipeline parameters and their values. Pipeline parameters have the following size limits: 100 max entries, 128 maximum key length, 512 maximum value length.",
                     "example": {
                       "deploy_prod": true
                     },
