@@ -182,7 +182,7 @@ export class PipelineService {
        */
       "continuation-key": string;
       /**
-       * An object containing pipeline parameters and their values.
+       * An object containing pipeline parameters and their values. Pipeline parameters have the following size limits: 100 max entries, 128 maximum key length, 512 maximum value length.
        */
       parameters?: Record<string, number | string | boolean>;
     };
@@ -652,7 +652,7 @@ export class PipelineService {
        */
       branch?: string;
       /**
-       * An object containing pipeline parameters and their values.
+       * An object containing pipeline parameters and their values. Pipeline parameters have the following size limits: 100 max entries, 128 maximum key length, 512 maximum value length.
        */
       parameters?: Record<string, number | string | boolean>;
       /**
