@@ -5124,6 +5124,7 @@
                                     "timeout",
                                     "permission",
                                     "other",
+                                    "trigger-rule",
                                     "plan"
                                   ],
                                   "type": "string"
@@ -5483,6 +5484,7 @@
                               "timeout",
                               "permission",
                               "other",
+                              "trigger-rule",
                               "plan"
                             ],
                             "type": "string"
@@ -7166,6 +7168,7 @@
                                     "timeout",
                                     "permission",
                                     "other",
+                                    "trigger-rule",
                                     "plan"
                                   ],
                                   "type": "string"
@@ -7578,6 +7581,7 @@
                                     "timeout",
                                     "permission",
                                     "other",
+                                    "trigger-rule",
                                     "plan"
                                   ],
                                   "type": "string"
@@ -7861,6 +7865,7 @@
                               "timeout",
                               "permission",
                               "other",
+                              "trigger-rule",
                               "plan"
                             ],
                             "type": "string"
