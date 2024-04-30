@@ -48,6 +48,7 @@ export class PipelineService {
           | "timeout"
           | "permission"
           | "other"
+          | "trigger-rule"
           | "plan";
       }>;
       /**
@@ -234,6 +235,7 @@ export class PipelineService {
         | "timeout"
         | "permission"
         | "other"
+        | "trigger-rule"
         | "plan";
     }>;
     /**
@@ -515,6 +517,7 @@ export class PipelineService {
           | "timeout"
           | "permission"
           | "other"
+          | "trigger-rule"
           | "plan";
       }>;
       /**
@@ -714,6 +717,7 @@ export class PipelineService {
           | "timeout"
           | "permission"
           | "other"
+          | "trigger-rule"
           | "plan";
       }>;
       /**
@@ -870,6 +874,7 @@ export class PipelineService {
         | "timeout"
         | "permission"
         | "other"
+        | "trigger-rule"
         | "plan";
     }>;
     /**
