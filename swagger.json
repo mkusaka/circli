@@ -6180,7 +6180,7 @@
                       "description": "Information about the VCS that hosts the project source code.",
                       "properties": {
                         "default_branch": {
-                          "example": "master",
+                          "example": "main",
                           "type": "string"
                         },
                         "provider": {
