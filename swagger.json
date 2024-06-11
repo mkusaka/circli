@@ -80,11 +80,42 @@
           "type": "integer"
         }
       },
+      "name": {
+        "description": "The name of the requested Orb.",
+        "example": "node",
+        "in": "query",
+        "name": "name",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "namespace": {
+        "description": "The namespace that the Orb belongs to.",
+        "example": "circleci",
+        "in": "query",
+        "name": "ns",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "next_page_token": {
         "description": "Specify what page of results to fetch.",
         "in": "query",
         "name": "next_page_token",
         "schema": {
+          "type": "string"
+        }
+      },
+      "orb_id": {
+        "description": "An opaque identifier of an orb.",
+        "example": "d8a1f419-e207-40f5-8b31-cbc6486b45d8",
+        "in": "path",
+        "name": "orb_id",
+        "required": true,
+        "schema": {
+          "format": "uuid",
           "type": "string"
         }
       },
@@ -165,6 +196,16 @@
         "in": "path",
         "name": "user_id",
         "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "version": {
+        "description": "The specific version of an Orb.",
+        "example": "3.1.2",
+        "in": "query",
+        "name": "version",
+        "required": false,
         "schema": {
           "type": "string"
         }
@@ -284,6 +325,12 @@
                 "summary": "Group not found.",
                 "value": {
                   "message": "Group does not exist."
+                }
+              },
+              "orb_not_found": {
+                "summary": "Orb not found.",
+                "value": {
+                  "message": "Orb does not exist."
                 }
               },
               "org_not_found": {
