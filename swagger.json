@@ -228,6 +228,22 @@
         },
         "description": "Context ID provided is invalid."
       },
+      "400_invalid_orb_id": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "additionalProperties": false,
+              "properties": {
+                "message": {
+                  "default": "orb_id is invalid.",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "description": "Orb ID provided is invalid."
+      },
       "400_invalid_restriction_id": {
         "content": {
           "application/json": {
