@@ -90,11 +90,31 @@
           "type": "string"
         }
       },
+      "name_path": {
+        "description": "The name of the requested Orb.",
+        "example": "node",
+        "in": "path",
+        "name": "name_path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "namespace": {
         "description": "The namespace that the Orb belongs to.",
         "example": "circleci",
         "in": "query",
         "name": "ns",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "namespace_path": {
+        "description": "The namespace that the Orb belongs to.",
+        "example": "circleci",
+        "in": "path",
+        "name": "namespace_path",
         "required": true,
         "schema": {
           "type": "string"
