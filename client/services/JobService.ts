@@ -187,12 +187,12 @@ export class JobService {
     });
   }
   /**
-   * Cancel job
+   * Cancel job by job number
    * Cancel job with a given job number.
    * @returns any
    * @throws ApiError
    */
-  public static cancelJob({
+  public static cancelJobByJobNumber({
     jobNumber,
     projectSlug,
   }: {
