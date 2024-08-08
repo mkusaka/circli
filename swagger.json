@@ -7299,7 +7299,7 @@
     "/project/{project-slug}/job/{job-number}/cancel": {
       "post": {
         "description": "Cancel job with a given job number.",
-        "operationId": "cancelJob",
+        "operationId": "cancelJobByJobNumber",
         "parameters": [
           {
             "description": "The number of the job.",
@@ -7357,7 +7357,7 @@
             "description": "Error response."
           }
         },
-        "summary": "Cancel job",
+        "summary": "Cancel job by job number",
         "tags": ["Job"]
       }
     },
