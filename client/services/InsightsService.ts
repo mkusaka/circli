@@ -880,6 +880,7 @@ export class InsightsService {
     allBranches,
     branch,
     reportingWindow,
+    jobName,
   }: {
     /**
      * Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
@@ -910,6 +911,10 @@ export class InsightsService {
       | "last-24-hours"
       | "last-30-days"
       | "last-60-days";
+    /**
+     * The name of the jobs you would like to filter from your workflow. If not specified, all workflow jobs will be returned. The job name can either be the full job name or just a substring of the job name.
+     */
+    jobName?: string;
   }): CancelablePromise<{
     /**
      * Job summary metrics.
@@ -1000,6 +1005,7 @@ export class InsightsService {
         "all-branches": allBranches,
         branch: branch,
         "reporting-window": reportingWindow,
+        "job-name": jobName,
       },
     });
   }
