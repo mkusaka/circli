@@ -3,6 +3,39 @@ import { OpenAPI } from "../core/OpenAPI.ts";
 import { request as __request } from "../core/request.ts";
 export class JobService {
   /**
+   * Cancel job by job ID
+   * Cancel job with a given job ID.
+   * @returns any Job cancelled successfully.
+   * @throws ApiError
+   */
+  public static cancelJobByJobId({
+    jobId,
+  }: {
+    /**
+     * The unique ID of the job.
+     */
+    jobId: string;
+  }): CancelablePromise<{
+    /**
+     * A human-readable message
+     */
+    message: string;
+  }> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/jobs/{job-id}/cancel",
+      path: {
+        "job-id": jobId,
+      },
+      errors: {
+        400: `Bad request error.`,
+        401: `Unauthorized error.`,
+        403: `Forbidden error.`,
+        404: `Job not found error.`,
+      },
+    });
+  }
+  /**
    * Get job details
    * Returns job details.
    * @returns any Job details.
