@@ -6175,6 +6175,70 @@
         "tags": ["Pipeline"]
       }
     },
+    "/pipeline/{pipeline-id}/values": {
+      "get": {
+        "description": "Returns a map of pipeline values by pipeline ID. For more information see the [pipeline values reference page](https://circleci.com/docs/variables/#pipeline-values).",
+        "operationId": "getPipelineValuesById",
+        "parameters": [
+          {
+            "description": "The unique ID of the pipeline.",
+            "example": "5034460f-c7c4-4c43-9457-de07e2029e7b",
+            "in": "path",
+            "name": "pipeline-id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ]
+                  },
+                  "description": "The pipeline-values for the pipeline.",
+                  "title": "PipelineValues",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "A JSON object of pipeline values"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "summary": "Get pipeline values for a pipeline",
+        "tags": ["Pipeline"]
+      }
+    },
     "/pipeline/{pipeline-id}/workflow": {
       "get": {
         "description": "Returns a paginated list of workflows by pipeline ID.",
