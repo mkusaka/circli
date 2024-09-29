@@ -384,6 +384,28 @@ export class PipelineService {
     });
   }
   /**
+   * Get pipeline values for a pipeline
+   * Returns a map of pipeline values by pipeline ID. For more information see the [pipeline values reference page](https://circleci.com/docs/variables/#pipeline-values).
+   * @returns any A JSON object of pipeline values
+   * @throws ApiError
+   */
+  public static getPipelineValuesById({
+    pipelineId,
+  }: {
+    /**
+     * The unique ID of the pipeline.
+     */
+    pipelineId: string;
+  }): CancelablePromise<Record<string, string | number | boolean>> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/pipeline/{pipeline-id}/values",
+      path: {
+        "pipeline-id": pipelineId,
+      },
+    });
+  }
+  /**
    * Get a pipeline's workflows
    * Returns a paginated list of workflows by pipeline ID.
    * @returns any A paginated list of workflow objects.
