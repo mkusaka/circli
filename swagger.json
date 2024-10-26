@@ -5548,7 +5548,7 @@
                           },
                           "number": {
                             "description": "The number of the pipeline.",
-                            "example": "25",
+                            "example": 25,
                             "format": "int64",
                             "type": "integer"
                           },
@@ -5908,7 +5908,7 @@
                     },
                     "number": {
                       "description": "The number of the pipeline.",
-                      "example": "25",
+                      "example": 25,
                       "format": "int64",
                       "type": "integer"
                     },
@@ -6309,7 +6309,7 @@
                           },
                           "pipeline_number": {
                             "description": "The number of the pipeline this workflow belongs to.",
-                            "example": "25",
+                            "example": 25,
                             "format": "int64",
                             "type": "integer"
                           },
@@ -7337,6 +7337,7 @@
                     },
                     "number": {
                       "description": "The number of the job.",
+                      "example": 1,
                       "format": "int64",
                       "type": "integer"
                     },
@@ -7656,7 +7657,7 @@
                           },
                           "number": {
                             "description": "The number of the pipeline.",
-                            "example": "25",
+                            "example": 25,
                             "format": "int64",
                             "type": "integer"
                           },
@@ -7946,7 +7947,7 @@
                     },
                     "number": {
                       "description": "The number of the pipeline.",
-                      "example": "25",
+                      "example": 25,
                       "format": "int64",
                       "type": "integer"
                     },
@@ -8069,7 +8070,7 @@
                           },
                           "number": {
                             "description": "The number of the pipeline.",
-                            "example": "25",
+                            "example": 25,
                             "format": "int64",
                             "type": "integer"
                           },
@@ -8353,7 +8354,7 @@
                     },
                     "number": {
                       "description": "The number of the pipeline.",
-                      "example": "25",
+                      "example": 25,
                       "format": "int64",
                       "type": "integer"
                     },
@@ -11277,7 +11278,7 @@
                     },
                     "pipeline_number": {
                       "description": "The number of the pipeline this workflow belongs to.",
-                      "example": "25",
+                      "example": 25,
                       "format": "int64",
                       "type": "integer"
                     },
@@ -11559,6 +11560,7 @@
                           },
                           "job_number": {
                             "description": "The number of the job.",
+                            "example": 1,
                             "format": "int64",
                             "type": "integer"
                           },
