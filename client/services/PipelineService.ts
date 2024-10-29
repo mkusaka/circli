@@ -1,3 +1,5 @@
+import type { pipeline } from "../models/pipeline.ts";
+import type { pipelineRequest } from "../models/pipelineRequest.ts";
 import type { CancelablePromise } from "../core/CancelablePromise.ts";
 import { OpenAPI } from "../core/OpenAPI.ts";
 import { request as __request } from "../core/request.ts";
@@ -659,7 +661,7 @@ export class PipelineService {
   }
   /**
    * Trigger a new pipeline
-   * Not yet available to projects that use GitLab or GitHub App. Triggers a new pipeline on the project.
+   * Not available to projects that use GitLab or GitHub App. Triggers a new pipeline on the project. **GitHub App users should use the [new Trigger Pipeline API](#/triggerPipelineRun)**.
    * @returns any Error response.
    * @throws ApiError
    */
@@ -1003,6 +1005,49 @@ export class PipelineService {
       path: {
         "project-slug": projectSlug,
         "pipeline-number": pipelineNumber,
+      },
+    });
+  }
+  /**
+   * [Recommended] Trigger a new pipeline
+   * Trigger a pipeline given a pipeline definition ID. Supports all integrations except GitLab.
+   * @returns pipeline Successful response.
+   * @throws ApiError
+   */
+  public static triggerPipelineRun({
+    provider,
+    organization,
+    project,
+    requestBody,
+  }: {
+    /**
+     * The `provider` segment of a project or org slug, the first of the three. This may be a VCS. For projects that use GitHub App, use `circleci`.
+     */
+    provider: "github" | "gh" | "bitbucket" | "bb" | "circleci";
+    /**
+     * The `organization` segment of a project or org slug, the second of the three. For GitHub OAuth or Bitbucket projects, this is the organization name. For projects that use GitLab or GitHub App, use the organization ID (found in Organization Settings).
+     */
+    organization: string;
+    /**
+     * The `project` segment of a project slug, the third of the three. For GitHub OAuth or Bitbucket projects, this is the repository name. For projects that use GitLab or GitHub App, use the project ID (found in Project Settings).
+     */
+    project: string;
+    requestBody?: pipelineRequest;
+  }): CancelablePromise<pipeline> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/project/{provider}/{organization}/{project}/pipeline/run",
+      path: {
+        provider: provider,
+        organization: organization,
+        project: project,
+      },
+      body: requestBody,
+      mediaType: "application/json",
+      errors: {
+        400: `Unexpected request body provided.`,
+        401: `Credentials provided are invalid.`,
+        404: `Entity not found.`,
       },
     });
   }
