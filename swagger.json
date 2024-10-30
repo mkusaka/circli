@@ -189,6 +189,17 @@
           "type": "string"
         }
       },
+      "providerNoGitlab": {
+        "description": "The `provider` segment of a project or org slug, the first of the three. This may be a VCS. For projects that use GitHub App, use `circleci`.",
+        "example": "gh",
+        "in": "path",
+        "name": "provider",
+        "required": true,
+        "schema": {
+          "enum": ["github", "gh", "bitbucket", "bb", "circleci"],
+          "type": "string"
+        }
+      },
       "restriction_id": {
         "description": "An opaque identifier of a context restriction.",
         "example": "1c23d2cb-07b1-4a28-8af3-e369732050ed",
@@ -897,6 +908,88 @@
           }
         },
         "required": ["usage_export_job_id", "state", "download_urls"],
+        "type": "object"
+      },
+      "pipeline": {
+        "additionalProperties": false,
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "number": {
+            "example": 25,
+            "type": "integer"
+          },
+          "state": {
+            "enum": ["created", "errored", "setup-pending", "setup", "pending"],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "pipelineRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "checkout": {
+            "additionalProperties": false,
+            "example": {
+              "tag": "v2"
+            },
+            "properties": {
+              "branch": {
+                "description": "The branch that should be used to check out code on a checkout step.\nNote that branch and tag are mutually exclusive.\nTo trigger a pipeline for a PR by number use pull/<number>/head for the PR ref or pull/<number>/merge for the merge ref (GitHub only)\n",
+                "example": "main",
+                "type": "string"
+              },
+              "tag": {
+                "description": "The tag that should be used to check out code on a checkout step.\nThe commit that this tag points to is used for the pipeline. Note that branch and tag are mutually exclusive.\n",
+                "example": "v2",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "config": {
+            "additionalProperties": false,
+            "example": {
+              "branch": "main"
+            },
+            "properties": {
+              "branch": {
+                "description": "The branch that should be used to fetch the config file.\nNote that branch and tag are mutually exclusive.\nTo trigger a pipeline for a PR by number use pull/<number>/head for the PR ref or pull/<number>/merge for the merge ref (GitHub only)\n",
+                "example": "main",
+                "type": "string"
+              },
+              "tag": {
+                "description": "The tag that should be used to fetch the config file.\nThe commit that this tag points to is used for the pipeline.\nNote that branch and tag are mutually exclusive.\n",
+                "example": "v2",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "definition_id": {
+            "description": "The unique id for the pipeline definition. This can be found in the page Project Settings > Pipelines.",
+            "example": "2338d0ae-5541-4bbf-88a2-55e9f7281f80",
+            "format": "uuid",
+            "type": "string"
+          },
+          "parameters": {
+            "additionalProperties": true,
+            "description": "An object containing pipeline parameters and their values.\nPipeline parameters have the following size limits: 100 max entries, 128 maximum key length, 512 maximum value length.\n",
+            "example": {
+              "example_param": "my value",
+              "example_param2": true,
+              "example_param3": 3
+            },
+            "type": "object"
+          }
+        },
         "type": "object"
       },
       "project_settings": {
@@ -7868,7 +7961,7 @@
         "tags": ["Pipeline"]
       },
       "post": {
-        "description": "Not yet available to projects that use GitLab or GitHub App. Triggers a new pipeline on the project.",
+        "description": "Not available to projects that use GitLab or GitHub App. Triggers a new pipeline on the project. **GitHub App users should use the [new Trigger Pipeline API](#tag/Pipeline/operation/triggerPipelineRun)**.",
         "operationId": "triggerPipeline",
         "parameters": [
           {
@@ -9633,6 +9726,55 @@
         },
         "summary": "🧪 Create a project",
         "tags": ["Project"]
+      }
+    },
+    "/project/{provider}/{organization}/{project}/pipeline/run": {
+      "post": {
+        "description": "Trigger a pipeline given a pipeline definition ID. Supports all integrations except GitLab.",
+        "operationId": "triggerPipelineRun",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/providerNoGitlab"
+          },
+          {
+            "$ref": "#/components/parameters/organization"
+          },
+          {
+            "$ref": "#/components/parameters/project"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/pipelineRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pipeline"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          }
+        },
+        "summary": "[Recommended] Trigger a new pipeline",
+        "tags": ["Pipeline"]
       }
     },
     "/project/{provider}/{organization}/{project}/settings": {
