@@ -12,6 +12,8 @@ export type { DecisionSettings } from "./models/DecisionSettings.ts";
 export type { get_usage_export_job_status } from "./models/get_usage_export_job_status.ts";
 export type { JSONDuration } from "./models/JSONDuration.ts";
 export type { PatchClaimsRequest } from "./models/PatchClaimsRequest.ts";
+export type { pipeline } from "./models/pipeline.ts";
+export type { pipelineRequest } from "./models/pipelineRequest.ts";
 export type { Policy } from "./models/Policy.ts";
 export type { PolicyBundle } from "./models/PolicyBundle.ts";
 export type { project_settings } from "./models/project_settings.ts";
