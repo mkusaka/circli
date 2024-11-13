@@ -11927,24 +11927,31 @@
   ],
   "tags": [
     {
+      "description": "Endpoints relating to [contexts](https://circleci.com/docs/contexts/). Use contexts to secure and share environment variables.",
       "name": "Context"
     },
     {
+      "description": "Endpoints relating to [Insights](https://circleci.com/docs/insights/). Use Insights to monitor credit and compute usage for your projects.",
       "name": "Insights"
     },
     {
+      "description": "A set of endpoints you can use to get information about a specific user.",
       "name": "User"
     },
     {
+      "description": "Endpoints relating to [pipelines](https://circleci.com/docs/pipelines/). Get information about your pipelines. Trigger or continue a pipeline.",
       "name": "Pipeline"
     },
     {
+      "description": "Endpoints relating to [jobs](https://circleci.com/docs/jobs-steps/). Get information about your jobs, retrieve job assets, cancel a job.",
       "name": "Job"
     },
     {
+      "description": "Endpoints relating to [workflows](https://circleci.com/docs/workflows/). Get information about your workflows, or interact with them to rerun, cancel or approve a job.",
       "name": "Workflow"
     },
     {
+      "description": "Endpoints relating to [outbound webhooks](https://circleci.com/docs/webhooks/#outbound-webhooks). Use outbound webhooks to integrate your CircleCI builds with external services.",
       "name": "Webhook"
     },
     {
