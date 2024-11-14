@@ -1146,7 +1146,8 @@
   "info": {
     "description": "This describes the resources that make up the CircleCI API v2.",
     "license": {
-      "name": "MIT"
+      "name": "MIT",
+      "url": "https://opensource.org/license/MIT"
     },
     "title": "CircleCI API",
     "version": "v2"
