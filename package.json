@@ -13,7 +13,7 @@
     "concurrently": "^7.4.0",
     "fast-glob": "^3.2.12",
     "openapi-typescript-codegen": "^0.23.0",
-    "prettier": "^2.7.1",
+    "prettier": "^3.1.0",
     "sort-json": "^2.0.1",
     "typescript": "^4.8.4"
   },
