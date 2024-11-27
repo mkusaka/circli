@@ -11716,6 +11716,32 @@
                             "example": "gh/CircleCI-Public/api-preview-docs",
                             "type": "string"
                           },
+                          "requires": {
+                            "additionalProperties": {
+                              "description": "A sequence of statuses that the job must have one of to satisfy a dependency.",
+                              "items": {
+                                "enum": ["success", "failed", "canceled"],
+                                "type": "string"
+                              },
+                              "type": "array"
+                            },
+                            "description": "A sequence of the unique jobs and required statuses that this job depends upon in the workflow.",
+                            "example": {
+                              "74be7583-44de-42a6-be75-8344de52a6f2": [
+                                "failed",
+                                "canceled"
+                              ],
+                              "a3349b77-90f7-4a39-b49b-7790f7da3943": [
+                                "success",
+                                "failed",
+                                "canceled"
+                              ],
+                              "d212e286-9962-4ed7-92e2-8699622ed720": [
+                                "success"
+                              ]
+                            },
+                            "type": "object"
+                          },
                           "started_at": {
                             "description": "The date and time the job started.",
                             "format": "date-time",

@@ -175,6 +175,10 @@ export class WorkflowService {
        */
       project_slug: string;
       /**
+       * A sequence of the unique jobs and required statuses that this job depends upon in the workflow.
+       */
+      requires?: Record<string, Array<"success" | "failed" | "canceled">>;
+      /**
        * The date and time the job started.
        */
       started_at: string;
