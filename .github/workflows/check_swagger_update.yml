@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '16'
           cache: 'yarn'
@@ -25,7 +25,7 @@ jobs:
         id: check
         run: |
           yarn update
-          echo "::set-output name=ok::$(git diff HEAD | grep '^' && exit 1 || echo "ok")"
+          echo "ok=$(git diff HEAD | grep '^' && exit 1 || echo "ok")" >> $GITHUB_OUTPUT
       - name: make pr if diff detected
         if: ${{ steps.check.outputs.ok != 'ok' }}
         run: |
