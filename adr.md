@@ -83,7 +83,7 @@ Okay, let's summarize the decisions made so far as Architecture Decision Records
 
 * **Status:** Accepted
 * **Context:**  The CLI needs to store configuration such as API tokens and default project settings.
-* **Decision:** We will use a YAML file located at `~/.circleci/config.yml` to store the configuration.
+* **Decision:** We will use a YAML file located at `~/.circli/config.yml` to store the configuration.
 * **Consequences:**
     *   A standard location for configuration.
     *   Human-readable and editable configuration file.
@@ -98,6 +98,23 @@ Okay, let's summarize the decisions made so far as Architecture Decision Records
 *   **Consequences:**
     *   Clear and unambiguous naming.
     *   Avoids potential confusion and errors.
+
+---
+
+**ADR-009: Command Completion Support**
+
+* **Status:** Accepted
+* **Context:** Users expect modern CLI tools to provide command completion for better usability. We need to provide intelligent suggestions for command arguments and options.
+* **Decision:** We will use `@cliffy/command`'s `.complete()` method to implement command completion for:
+    * Configuration keys in `config set` command
+    * Common branch names in `pipeline list` command
+    * Project slug prefixes in `pipeline list` command
+* **Consequences:**
+    * Improved user experience with intelligent suggestions
+    * Faster command input with tab completion
+    * Easier discovery of available options
+    * Need to maintain completion suggestions (e.g., common branch names)
+    * Future potential for dynamic completions based on API responses
 
 ---
 
