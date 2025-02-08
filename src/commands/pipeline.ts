@@ -1,9 +1,10 @@
 // src/commands/pipeline.ts
 import { Command } from "@cliffy/command";
-import { createClient } from "../utils/api";
-import { printJson, printYaml, printTable } from "../utils/output";
-import { handleApiError } from "../utils/error";
+import { createClient } from "../utils/api.js";
+import { printJson, printYaml, printTable } from "../utils/output.js";
+import { handleApiError } from "../utils/error.js";
 import { z } from "zod"; // 型チェックをより詳細にするためzodを利用
+import type { paths } from "../types/circleci.js";
 
 export const pipelineCommand = new Command()
   .name("pipeline")
@@ -36,7 +37,7 @@ export const pipelineCommand = new Command()
     const validated = schema.safeParse(options);
     if (!validated.success) {
       console.error(validated.error.message);
-      Deno.exit(1);
+      process.exit(1);
     }
     const { projectSlug, mine, branch, pageToken, limit, json, yaml } =
       validated.data;
@@ -44,13 +45,13 @@ export const pipelineCommand = new Command()
     const clientResult = await createClient();
     if (clientResult.isErr()) {
       console.error(clientResult.error.message);
-      Deno.exit(1); // cliffy は Deno 依存なので
+      process.exit(1);
     }
 
     const client = clientResult.value;
 
     try {
-      const response = await client.get("/project/{project-slug}/pipeline", {
+      const response = await client.GET("/project/{project-slug}/pipeline", {
         params: {
           path: { "project-slug": projectSlug },
           query: {
@@ -72,13 +73,11 @@ export const pipelineCommand = new Command()
       } else {
         // 人間が読みやすい形式で出力
         const headers = ["ID", "Number", "State", "Trigger", "Created At"];
-        const rows = response.data.items.map((p) => [
-          p.id,
-          String(p.number),
-          p.state,
-          p.trigger.type,
-          p.created_at,
-        ]);
+        const rows = response.data.items.map(
+          (
+            p: paths["/project/{project-slug}/pipeline"]["get"]["responses"]["200"]["content"]["application/json"]["items"][number],
+          ) => [p.id, String(p.number), p.state, p.trigger.type, p.created_at],
+        );
         printTable(headers, rows);
       }
     } catch (error) {
@@ -87,6 +86,6 @@ export const pipelineCommand = new Command()
       if (handledError.originalError) {
         console.error(handledError.originalError);
       }
-      Deno.exit(1);
+      process.exit(1);
     }
   });

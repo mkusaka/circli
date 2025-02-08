@@ -3,10 +3,10 @@
   "compilerOptions": {
     "outDir": "dist",
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "resolveJsonModule": true,
-    "module": "ESNext",
-    "target": "ES2022",
+    "module": "NodeNext",
+    "target": "ESNext",
     "strict": true,
     "skipLibCheck": true,
     "sourceMap": true,

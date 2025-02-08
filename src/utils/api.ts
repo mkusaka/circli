@@ -1,11 +1,9 @@
-// src/utils/api.ts
-import OpenAPIClientAxios, { type ClientOptions } from 'openapi-fetch';
-import { type paths } from '../types/circleci';  // 生成された型
-import { loadConfig } from './config';
-import { err, ok, type Result } from 'neverthrow';
+import createCircleClient from "openapi-fetch"; // default export を使う
+import type { paths } from "../types/circleci.js";
+import { loadConfig } from "./config.js";
+import { err, ok, type Result } from "neverthrow";
 
-export type CircleCIClient = OpenAPIClientAxios<paths>; // Corrected type definition
-
+export type CircleCIClient = ReturnType<typeof createCircleClient<paths>>; // Client の型
 
 export async function createClient(): Promise<Result<CircleCIClient, Error>> {
   const configResult = await loadConfig();
@@ -17,17 +15,19 @@ export async function createClient(): Promise<Result<CircleCIClient, Error>> {
   const token = config.apiToken;
 
   if (!token) {
-    return err(new Error("API token not found. Please set it using `circleci config set api-token <token>`"));
+    return err(
+      new Error(
+        "API token not found. Please set it using `circleci config set api-token <token>`",
+      ),
+    );
   }
 
-  const options: ClientOptions = {
-    baseUrl: 'https://circleci.com/api/v2',
-      headers: {
-        'Circle-Token': token,
-      },
-  }
+  const client = createCircleClient<paths>({
+    baseUrl: "https://circleci.com/api/v2",
+    headers: {
+      "Circle-Token": token,
+    },
+  });
 
-  const client = new OpenAPIClientAxios({ definition: 'openapi.json', ...options });
-
-  return ok(client as CircleCIClient);
+  return ok(client);
 }

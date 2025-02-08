@@ -5,7 +5,7 @@ import { homedir } from "node:os";
 import { ok, err, Result } from "neverthrow";
 import { parse, stringify } from "yaml";
 
-const CONFIG_PATH = `${homedir()}/.circleci/config.yml`;
+const CONFIG_PATH = `${homedir()}/.circli/config.yml`;
 
 export interface CircleCIConfig {
   apiToken?: string;
@@ -49,10 +49,6 @@ export async function setConfigValue(
   }
 
   const config = configResult.value;
-
-  if (Object.hasOwn(config, key)) {
-    config[key] = value;
-    return await saveConfig(config);
-  }
-  return err(new Error(`Invalid config key: ${key}`));
+  config[key] = value;
+  return await saveConfig(config);
 }
