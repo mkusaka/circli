@@ -2,17 +2,35 @@
   "name": "circli",
   "description": "cli which implements useful command for circleci",
   "version": "0.0.12",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/mkusaka/circli.git",
   "author": "mkusaka <hinoshita1992@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@tsconfig/node22": "^22.0.0",
+    "@types/node": "^20.12.11",
+    "openapi-typescript": "^7.6.1",
     "prettier": "^2.7.1",
-    "sort-json": "^2.0.1"
+    "sort-json": "^2.0.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
   },
   "scripts": {
     "bump:patch": "npm version patch",
     "update": "curl -o swagger.json https://circleci.com/api/v2/openapi.json && yarn sortswagger",
-    "sortswagger": "sort-json swagger.json && yarn prettier --write swagger.json"
-  }
+    "sortswagger": "sort-json swagger.json && yarn prettier --write swagger.json",
+    "build": "tsc",
+    "start": "node --import tsx src/index.ts",
+    "test": "vitest",
+    "generate-types": "openapi-typescript swagger.json -o src/types/circleci.ts"
+  },
+  "dependencies": {
+    "@cliffy/command": "npm:@jsr/cliffy__command@1.0.0-rc.7",
+    "neverthrow": "^8.1.1",
+    "openapi-fetch": "^0.13.4",
+    "yaml": "^2.4.0",
+    "zod": "^3.24.1"
+  },
+  "type": "module"
 }

@@ -1,0 +1,4 @@
+generator:
+  ignore_not_implemented: 
+    - "complex anyOf"
+    - "any type parameter" 
