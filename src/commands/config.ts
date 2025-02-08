@@ -20,13 +20,14 @@ const SetConfigSchema = z.object({
 export const configCommand = new Command()
   .name("config")
   .description("Manage CircleCI CLI configuration")
-  .command(
-    "set",
+  .command("set")
+  .description(
     `Set configuration values\n\nAvailable keys:\n${Object.entries(CONFIG_KEY_MAP)
       .map(([key, { description }]) => `  ${key}: ${description}`)
       .join("\n")}`,
   )
   .arguments("<key:string> <value:string>")
+  .complete("key", () => Object.keys(CONFIG_KEY_MAP))
   .action(async (options, key: string, value: string) => {
     const result = SetConfigSchema.safeParse({ key, value });
     if (!result.success) {

@@ -6,10 +6,14 @@ import { handleApiError } from "../utils/error.js";
 import { z } from "zod"; // 型チェックをより詳細にするためzodを利用
 import type { paths } from "../types/circleci.js";
 
+// Common branch names for completion
+const COMMON_BRANCHES = ["main", "master", "develop", "staging", "production"];
+
 export const pipelineCommand = new Command()
   .name("pipeline")
   .description("Manage CircleCI pipelines")
-  .command("list", "List pipelines")
+  .command("list")
+  .description("List pipelines")
   .option(
     "--project-slug <slug:string>",
     "Project slug (e.g., gh/CircleCI-Public/api-preview-docs)",
@@ -23,6 +27,8 @@ export const pipelineCommand = new Command()
   })
   .option("--json", "Output in JSON format")
   .option("--yaml", "Output in YAML format")
+  .complete("branch", () => COMMON_BRANCHES)
+  .complete("project-slug", async () => ["gh/", "bb/"])
   .action(async (options) => {
     // バリデーション(Zodを利用)
     const schema = z.object({
