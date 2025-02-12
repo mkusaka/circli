@@ -26,7 +26,7 @@ jobs:
       - name: update & check
         id: check
         run: |
-          yarn update
+          pnpm run update
           echo "ok=$(git diff HEAD | grep '^' && exit 1 || echo "ok")" >> $GITHUB_OUTPUT
       - name: make pr if diff detected
         if: ${{ steps.check.outputs.ok != 'ok' }}
