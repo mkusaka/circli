@@ -18,8 +18,8 @@
   },
   "scripts": {
     "bump:patch": "npm version patch",
-    "update": "curl -o swagger.json https://circleci.com/api/v2/openapi.json && yarn sortswagger",
-    "sortswagger": "sort-json swagger.json && yarn prettier --write swagger.json",
+    "update": "curl -o swagger.json https://circleci.com/api/v2/openapi.json && pnpm run sortswagger",
+    "sortswagger": "sort-json swagger.json && pnpm run prettier --write swagger.json",
     "build": "tsc",
     "start": "node --import tsx src/index.ts",
     "test": "vitest",
