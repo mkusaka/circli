@@ -1,14 +1,6 @@
 {
-  extends: [
-    "config:base",
-    ":onlyNpm",
-    "group:allNonMajor",
-    "group:definitelyTyped",
-  ],
-  rangeStrategy: "bump",
-  prConcurrentLimit: 0,
-  prHourlyLimit: 0,
-  commitBodyTable: true,
-  dependencyDashboard: true,
-  postUpdateOptions: ["yarnDedupeHighest"],
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ]
 }
