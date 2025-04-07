@@ -2,9 +2,6 @@ name: check swagger update
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - devin/1744021498-fix-github-actions-workflow
   schedule:
     - cron: '0 0 * * *'
 permissions: write-all
