@@ -27,9 +27,9 @@ jobs:
         id: check
         run: |
           pnpm run update
-          echo "ok=$(git diff HEAD | grep '^' && exit 1 || echo "ok")" >> $GITHUB_OUTPUT
+          git diff --exit-code > /dev/null 2>&1 || echo "changes=true" >> $GITHUB_OUTPUT
       - name: make pr if diff detected
-        if: ${{ steps.check.outputs.ok != 'ok' }}
+        if: ${{ steps.check.outputs.changes == 'true' }}
         run: |
           d="$(date +"%Y%m%dT%H%M%S")"
           branch=update-"$d"
