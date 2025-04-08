@@ -6737,6 +6737,61 @@
       }
     },
     "/project/{project-slug}": {
+      "delete": {
+        "description": "Deletes a project by project slug",
+        "operationId": "deleteProjectBySlug",
+        "parameters": [
+          {
+            "allowReserved": true,
+            "description": "Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).",
+            "example": "gh/CircleCI-Public/api-preview-docs",
+            "in": "path",
+            "name": "project-slug",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "message response",
+                  "properties": {
+                    "message": {
+                      "description": "A human-readable message",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["message"],
+                  "title": "MessageResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "A confirmation message."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "summary": "Delete a project",
+        "tags": ["Project"]
+      },
       "get": {
         "description": "Retrieves a project by project slug.",
         "operationId": "getProjectBySlug",
