@@ -5074,6 +5074,250 @@
         "tags": ["Organization"]
       }
     },
+    "/organization/{org-slug-or-id}/url-orb-allow-list": {
+      "get": {
+        "description": "List the entries in the org's URL Orb allow-list",
+        "operationId": "listURLOrbAllowListEntries",
+        "parameters": [
+          {
+            "description": "Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).",
+            "example": "gh/CircleCI-Public",
+            "in": "path",
+            "name": "org-slug-or-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "items": {
+                      "items": {
+                        "properties": {
+                          "auth": {
+                            "description": "An authentication method to use for fetching URL orb references that match this allow-list entry's prefix. Allowed values are \"bitbucket-oauth\", \"github-oauth\", \"github-app\", or \"none\".",
+                            "enum": [
+                              "github-oauth",
+                              "none",
+                              "bitbucket-oauth",
+                              "github-app"
+                            ],
+                            "example": "github-app",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "URL orb allow-list entry UUID.",
+                            "example": "ba98990a-5a00-4cad-b55e-b44117b92e0c",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "Name of the URL orb allow-list entry.",
+                            "example": "Allow URL orbs from raw.githubusercontent.com/CircleCI-Public",
+                            "type": "string"
+                          },
+                          "prefix": {
+                            "description": "URL prefix. URL orb references that start with this prefix will be allowed by this allow-list entry.",
+                            "example": "https://raw.githubusercontent.com/CircleCI-Public/orbs/refs/heads/main/"
+                          }
+                        },
+                        "required": ["id", "name", "prefix", "auth"],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": ["items"],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "URL Orb allow-list entries"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "summary": "List the entries in the org's URL Orb allow-list",
+        "tags": ["Organization"]
+      },
+      "post": {
+        "description": "Create a new URL Orb allow-list entry",
+        "operationId": "createURLOrbAllowListEntry",
+        "parameters": [
+          {
+            "description": "Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).",
+            "example": "gh/CircleCI-Public",
+            "in": "path",
+            "name": "org-slug-or-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "auth": {
+                    "description": "An authentication method to use for fetching URL orb references that match this allow-list entry's prefix. Allowed values are \"bitbucket-oauth\", \"github-oauth\", \"github-app\", or \"none\".",
+                    "enum": [
+                      "github-oauth",
+                      "none",
+                      "bitbucket-oauth",
+                      "github-app"
+                    ],
+                    "example": "github-app",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the URL orb allow-list entry.",
+                    "example": "Allow URL orbs from raw.githubusercontent.com/CircleCI-Public",
+                    "type": "string"
+                  },
+                  "prefix": {
+                    "description": "URL prefix. URL orb references that start with this prefix will be allowed by this allow-list entry.",
+                    "example": "https://raw.githubusercontent.com/CircleCI-Public/orbs/refs/heads/main/"
+                  }
+                },
+                "required": ["name", "prefix", "auth"],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "description": "URL orb allow-list entry UUID.",
+                      "example": "ba98990a-5a00-4cad-b55e-b44117b92e0c",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Message describing the outcome of an operation",
+                      "example": "Created.",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["id", "message"],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The ID of the new URL Orb allow-list entry"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "summary": "Create a new URL Orb allow-list entry",
+        "tags": ["Organization"]
+      }
+    },
+    "/organization/{org-slug-or-id}/url-orb-allow-list/{allow-list-entry-id}": {
+      "delete": {
+        "description": "Remove an entry from the org's URL orb allow-list",
+        "operationId": "removeURLOrbAllowListEntry",
+        "parameters": [
+          {
+            "description": "Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).",
+            "example": "gh/CircleCI-Public",
+            "in": "path",
+            "name": "org-slug-or-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "URL orb allow-list entry UUID.",
+            "example": "ba98990a-5a00-4cad-b55e-b44117b92e0c",
+            "in": "path",
+            "name": "allow-list-entry-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "description": "URL orb allow-list entry UUID.",
+                      "example": "ba98990a-5a00-4cad-b55e-b44117b92e0c",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Message describing the outcome of an operation",
+                      "example": "Created.",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["id", "message"],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The ID of the removed URL Orb allow-list entry"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "summary": "Remove an entry from the org's URL orb allow-list",
+        "tags": ["Organization"]
+      }
+    },
     "/organizations/{org_id}/usage_export_job": {
       "parameters": [
         {
