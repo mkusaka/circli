@@ -6094,6 +6094,7 @@
                                   "description": "The type of error.",
                                   "enum": [
                                     "config",
+                                    "invalid-trigger-setup",
                                     "config-fetch",
                                     "timeout",
                                     "permission",
@@ -6249,7 +6250,8 @@
                               "revision": {
                                 "description": "The code revision the pipeline ran.",
                                 "example": "f454a02b5d10fcccfd7d9dd7608a76d6493a98b4",
-                                "type": "string"
+                                "type": "string",
+                                "x-nullable": true
                               },
                               "tag": {
                                 "description": "The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.",
@@ -6454,6 +6456,7 @@
                             "description": "The type of error.",
                             "enum": [
                               "config",
+                              "invalid-trigger-setup",
                               "config-fetch",
                               "timeout",
                               "permission",
@@ -6609,7 +6612,8 @@
                         "revision": {
                           "description": "The code revision the pipeline ran.",
                           "example": "f454a02b5d10fcccfd7d9dd7608a76d6493a98b4",
-                          "type": "string"
+                          "type": "string",
+                          "x-nullable": true
                         },
                         "tag": {
                           "description": "The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.",
@@ -8258,6 +8262,7 @@
                                   "description": "The type of error.",
                                   "enum": [
                                     "config",
+                                    "invalid-trigger-setup",
                                     "config-fetch",
                                     "timeout",
                                     "permission",
@@ -8413,7 +8418,8 @@
                               "revision": {
                                 "description": "The code revision the pipeline ran.",
                                 "example": "f454a02b5d10fcccfd7d9dd7608a76d6493a98b4",
-                                "type": "string"
+                                "type": "string",
+                                "x-nullable": true
                               },
                               "tag": {
                                 "description": "The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.",
@@ -8671,6 +8677,7 @@
                                   "description": "The type of error.",
                                   "enum": [
                                     "config",
+                                    "invalid-trigger-setup",
                                     "config-fetch",
                                     "timeout",
                                     "permission",
@@ -8826,7 +8833,8 @@
                               "revision": {
                                 "description": "The code revision the pipeline ran.",
                                 "example": "f454a02b5d10fcccfd7d9dd7608a76d6493a98b4",
-                                "type": "string"
+                                "type": "string",
+                                "x-nullable": true
                               },
                               "tag": {
                                 "description": "The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.",
@@ -8955,6 +8963,7 @@
                             "description": "The type of error.",
                             "enum": [
                               "config",
+                              "invalid-trigger-setup",
                               "config-fetch",
                               "timeout",
                               "permission",
@@ -9110,7 +9119,8 @@
                         "revision": {
                           "description": "The code revision the pipeline ran.",
                           "example": "f454a02b5d10fcccfd7d9dd7608a76d6493a98b4",
-                          "type": "string"
+                          "type": "string",
+                          "x-nullable": true
                         },
                         "tag": {
                           "description": "The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.",
