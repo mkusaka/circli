@@ -986,6 +986,148 @@
         },
         "type": "object"
       },
+      "createPipelineDefinitionRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "checkout_source": {
+            "additionalProperties": false,
+            "description": "The resource to be used when running the `checkout` command.",
+            "properties": {
+              "provider": {
+                "description": "The integration provider for this resource. Currently `github_app` is the only supported value.",
+                "example": "github_app",
+                "type": "string"
+              },
+              "repo": {
+                "additionalProperties": false,
+                "properties": {
+                  "external_id": {
+                    "description": "External identifier for the repository, as defined by the respective version control provider.",
+                    "example": "some-repo-id",
+                    "type": "string"
+                  }
+                },
+                "required": ["external_id"],
+                "type": "object"
+              }
+            },
+            "required": ["provider", "repo"],
+            "type": "object"
+          },
+          "config_source": {
+            "additionalProperties": false,
+            "description": "The resource that stores the CircleCI config YAML used for this pipeline definition.",
+            "properties": {
+              "file_path": {
+                "description": "Path to CircleCI config YAML file to use for this pipeline definition.",
+                "example": ".circleci/some-pipeline.yml",
+                "type": "string"
+              },
+              "provider": {
+                "description": "The integration provider for this resource. Currently `github_app` is the only supported value.",
+                "example": "github_app",
+                "type": "string"
+              },
+              "repo": {
+                "additionalProperties": false,
+                "properties": {
+                  "external_id": {
+                    "description": "External identifier for the repository, as defined by the respective version control provider.",
+                    "example": "some-repo-id",
+                    "type": "string"
+                  }
+                },
+                "required": ["external_id"],
+                "type": "object"
+              }
+            },
+            "required": ["provider", "repo", "file_path"],
+            "type": "object"
+          },
+          "description": {
+            "description": "The description of the pipeline definition.",
+            "example": "Some pipeline description",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the pipeline definition.",
+            "example": "Some pipeline name",
+            "type": "string"
+          }
+        },
+        "required": ["name", "config_source", "checkout_source"],
+        "type": "object"
+      },
+      "createTriggerRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "checkout_ref": {
+            "description": "The ref to use when checking out code for pipeline runs created from this trigger. Always required when `event_source.provider` is `webhook`. When `event_source.provider` is `github_app`, only expected if the event source repository (identified by `event_source.provider.repo.external_id`) is different to the checkout source repository of the associated Pipeline Definition. Otherwise, must be omitted.",
+            "example": "some-checkout-ref",
+            "type": "string"
+          },
+          "config_ref": {
+            "description": "The ref to use when fetching config for pipeline runs created from this trigger. Always required when `event_source.provider` is `webhook`. When `event_source.provider` is `github_app`, only expected if the event source repository (identified by `event_source.provider.repo.external_id`) is different to the config source repository of the associated Pipeline Definition. Otherwise, must be omitted.",
+            "example": "some-config-ref",
+            "type": "string"
+          },
+          "description": {
+            "description": "The description of the trigger.",
+            "example": "some description",
+            "type": "string"
+          },
+          "event_preset": {
+            "description": "The name of the event preset to use when filtering events for this trigger. Only applicable when `event_source.provider` is `github_app`.",
+            "enum": [
+              "all-pushes",
+              "only-tags",
+              "default-branch-pushes",
+              "only-build-prs",
+              "only-open-prs",
+              "only-labeled-prs",
+              "only-merged-prs",
+              "only-ready-for-review-prs",
+              "only-branch-delete",
+              "only-build-pushes-to-non-draft-prs"
+            ],
+            "example": "all-pushes",
+            "type": "string"
+          },
+          "event_source": {
+            "additionalProperties": false,
+            "description": "The source of events to use for this trigger. The `repo` object must be specified when `provider` is `github_app`. (Omit `repo` when using `webhook` as the `provider`.)",
+            "properties": {
+              "provider": {
+                "description": "The integration provider for this resource. Currently `github_app` and `webhook` are the only supported values.",
+                "example": "github_app",
+                "type": "string"
+              },
+              "repo": {
+                "additionalProperties": false,
+                "description": "Information pertaining to the repository used as a source of events for this trigger, if applicable.",
+                "properties": {
+                  "external_id": {
+                    "description": "External identifier for the repository, as defined by the respective version control provider.",
+                    "example": "some-repo-id",
+                    "type": "string"
+                  }
+                },
+                "required": ["external_id"],
+                "type": "object"
+              }
+            },
+            "required": ["provider"],
+            "type": "object"
+          },
+          "name": {
+            "description": "The name of the trigger.",
+            "example": "some name",
+            "type": "string"
+          }
+        },
+        "required": ["name", "event_source"],
+        "type": "object"
+      },
       "get_usage_export_job_status": {
         "additionalProperties": false,
         "properties": {
@@ -1030,6 +1172,104 @@
           },
           "state": {
             "enum": ["created", "errored", "setup-pending", "setup", "pending"],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "pipelineDefinition": {
+        "additionalProperties": false,
+        "properties": {
+          "checkout_source": {
+            "additionalProperties": false,
+            "description": "The resource to be used when running the `checkout` command.",
+            "properties": {
+              "provider": {
+                "description": "The integration provider for this resource.",
+                "example": "github_app",
+                "type": "string"
+              },
+              "repo": {
+                "$ref": "#/components/schemas/pipelineDefinitionRepo"
+              }
+            },
+            "type": "object"
+          },
+          "config_source": {
+            "additionalProperties": false,
+            "description": "The resource that stores the CircleCI config YAML used for this pipeline definition.",
+            "properties": {
+              "file_path": {
+                "description": "Path to CircleCI config YAML file to use for this pipeline definition.",
+                "example": ".circleci/some-pipeline.yml",
+                "type": "string"
+              },
+              "provider": {
+                "description": "The integration provider for this resource.",
+                "example": "github_app",
+                "type": "string"
+              },
+              "repo": {
+                "$ref": "#/components/schemas/pipelineDefinitionRepo"
+              }
+            },
+            "type": "object"
+          },
+          "created_at": {
+            "description": "The date and time the pipeline definition was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "description": "The description of the pipeline definition.",
+            "example": "some pipeline description",
+            "type": "string"
+          },
+          "id": {
+            "description": "The unique ID of the pipeline definition.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the pipeline definition.",
+            "example": "some pipeline",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "pipelineDefinitionDeleted": {
+        "additionalProperties": false,
+        "properties": {
+          "message": {
+            "description": "Response message",
+            "type": "string"
+          }
+        }
+      },
+      "pipelineDefinitionList": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/pipelineDefinition"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "pipelineDefinitionRepo": {
+        "additionalProperties": false,
+        "properties": {
+          "external_id": {
+            "description": "External identifier for the repository, as defined by the respective version control provider.",
+            "example": "some-repo-id",
+            "type": "string"
+          },
+          "full_name": {
+            "description": "The fully-qualified name of the repository.",
+            "example": "some-org/some-repo-name",
             "type": "string"
           }
         },
@@ -1186,6 +1426,215 @@
             "type": "string"
           }
         }
+      },
+      "trigger": {
+        "additionalProperties": false,
+        "properties": {
+          "checkout_ref": {
+            "description": "The ref to use when checking out code for pipeline runs created from this trigger. If empty, the ref provided in the trigger event is used.",
+            "example": "some-checkout-ref",
+            "type": "string"
+          },
+          "config_ref": {
+            "description": "The ref to use when fetching config for pipeline runs created from this trigger. If empty, the ref provided in the trigger event is used.",
+            "example": "some-config-ref",
+            "type": "string"
+          },
+          "created_at": {
+            "description": "The date and time the trigger was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "description": "The description of the trigger.",
+            "example": "some description",
+            "type": "string"
+          },
+          "event_preset": {
+            "description": "The name of the event preset to use when filtering events for this trigger. Only applicable when `event_source.provider` is `github_app`.",
+            "enum": [
+              "all-pushes",
+              "only-tags",
+              "default-branch-pushes",
+              "only-build-prs",
+              "only-open-prs",
+              "only-labeled-prs",
+              "only-merged-prs",
+              "only-ready-for-review-prs",
+              "only-branch-delete",
+              "only-build-pushes-to-non-draft-prs"
+            ],
+            "example": "all-pushes",
+            "type": "string"
+          },
+          "event_source": {
+            "additionalProperties": false,
+            "description": "The source of events to use for this trigger. Will contain either a `repo` or `webhook` object depending on the `provider`. (The `github_app` provider implies a `repo` and `webhook` implies a `webhook`.)",
+            "properties": {
+              "provider": {
+                "description": "The integration provider for this resource. Currently `github_app` and `webhook` are the only supported values.",
+                "example": "github_app",
+                "type": "string"
+              },
+              "repo": {
+                "additionalProperties": false,
+                "description": "Information pertaining to the repository used as a source of events for this trigger, if applicable.",
+                "properties": {
+                  "external_id": {
+                    "description": "External identifier for the repository, as defined by the respective version control provider.",
+                    "example": "some-repo-id",
+                    "type": "string"
+                  },
+                  "full_name": {
+                    "description": "The fully-qualified name of the repository.",
+                    "example": "some-org/some-repo-name",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "webhook": {
+                "additionalProperties": false,
+                "description": "Information pertaining to the custom webhook used as a source of events for this trigger, if applicable.",
+                "properties": {
+                  "url": {
+                    "description": "The URL to use when triggering this webhook.",
+                    "example": "https://some-webhook.invalid/some-endpoint?secret=some-secret",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "The unique ID of the trigger.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the trigger.",
+            "example": "some name",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "triggerDeleted": {
+        "additionalProperties": false,
+        "properties": {
+          "message": {
+            "description": "Response message",
+            "type": "string"
+          }
+        }
+      },
+      "triggerList": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/trigger"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "updatePipelineDefinitionRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "checkout_source": {
+            "additionalProperties": false,
+            "description": "The resource to be used when running the `checkout` command.",
+            "properties": {
+              "provider": {
+                "description": "The integration provider for this resource. Currently `github_app` is the only supported value.",
+                "example": "github_app",
+                "type": "string"
+              },
+              "repo": {
+                "additionalProperties": false,
+                "properties": {
+                  "external_id": {
+                    "description": "External identifier for the repository, as defined by the respective version control provider.",
+                    "example": "some-repo-id",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "config_source": {
+            "additionalProperties": false,
+            "description": "The resource that stores the CircleCI config YAML used for this pipeline definition.",
+            "properties": {
+              "file_path": {
+                "description": "Path to CircleCI config YAML file to use for this pipeline definition.",
+                "example": ".circleci/some-pipeline.yml",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "description": {
+            "description": "The description of the pipeline definition.",
+            "example": "Some pipeline description",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the pipeline definition.",
+            "example": "Some pipeline name",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "updateTriggerRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "checkout_ref": {
+            "description": "The ref to use when checking out code for pipeline runs created from this trigger.",
+            "example": "some-checkout-ref",
+            "type": "string"
+          },
+          "config_ref": {
+            "description": "The ref to use when fetching config for pipeline runs created from this trigger.",
+            "example": "some-config-ref",
+            "type": "string"
+          },
+          "description": {
+            "description": "The description of the trigger.",
+            "example": "some description",
+            "type": "string"
+          },
+          "event_preset": {
+            "description": "The name of the event preset to use when filtering events for this trigger. Only applicable when `event_source.provider` is `github_app`.",
+            "enum": [
+              "all-pushes",
+              "only-tags",
+              "default-branch-pushes",
+              "only-build-prs",
+              "only-open-prs",
+              "only-labeled-prs",
+              "only-merged-prs",
+              "only-ready-for-review-prs",
+              "only-branch-delete",
+              "only-build-pushes-to-non-draft-prs"
+            ],
+            "example": "all-pushes",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the trigger.",
+            "example": "some name",
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
       "usage_export_job": {
         "additionalProperties": false,
@@ -10474,6 +10923,424 @@
         "tags": ["Project"]
       }
     },
+    "/projects/{project_id}/pipeline-definitions": {
+      "get": {
+        "description": "[__EXPERIMENTAL__] List all pipeline definitions for a given project. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "operationId": "listPipelineDefinitions",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pipelineDefinitionList"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 List pipeline definitions",
+        "tags": ["Pipeline"]
+      },
+      "post": {
+        "description": "[__EXPERIMENTAL__] Create a pipeline definition for a given project. Currently only supported for pipeline definitions where `config_source.provider` is `github_app`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "operationId": "createPipelineDefinition",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createPipelineDefinitionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pipelineDefinition"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 Create pipeline definition",
+        "tags": ["Pipeline"]
+      }
+    },
+    "/projects/{project_id}/pipeline-definitions/{pipeline_definition_id}": {
+      "delete": {
+        "description": "[__EXPERIMENTAL__] Delete pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "operationId": "deletePipelineDefinition",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/pipeline_definition_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pipelineDefinitionDeleted"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 Delete pipeline definition",
+        "tags": ["Pipeline"]
+      },
+      "get": {
+        "description": "[__EXPERIMENTAL__] Get details for a pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "operationId": "getPipelineDefinition",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/pipeline_definition_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pipelineDefinition"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 Get pipeline definition",
+        "tags": ["Pipeline"]
+      },
+      "patch": {
+        "description": "[__EXPERIMENTAL__] Update pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "operationId": "updatePipelineDefinition",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/pipeline_definition_id"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updatePipelineDefinitionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pipelineDefinition"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 Update pipeline definition",
+        "tags": ["Pipeline"]
+      }
+    },
+    "/projects/{project_id}/pipeline-definitions/{pipeline_definition_id}/triggers": {
+      "get": {
+        "description": "[__EXPERIMENTAL__] List all triggers for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "operationId": "listPipelineDefinitionTriggers",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/pipeline_definition_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/triggerList"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 List pipeline definition triggers",
+        "tags": ["Trigger"]
+      },
+      "post": {
+        "description": "[__EXPERIMENTAL__] Create a trigger for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "operationId": "createTrigger",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/pipeline_definition_id"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createTriggerRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trigger"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 Create trigger",
+        "tags": ["Trigger"]
+      }
+    },
+    "/projects/{project_id}/triggers/{trigger_id}": {
+      "delete": {
+        "description": "[__EXPERIMENTAL__] Delete a trigger. Currently only supported for triggers where `event_source.provider` is `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "operationId": "deleteTrigger",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/trigger_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/triggerDeleted"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 Delete trigger",
+        "tags": ["Trigger"]
+      },
+      "get": {
+        "description": "[__EXPERIMENTAL__] Get details for a trigger. Currently only supported for triggers where `event_source.provider` is `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "operationId": "getTrigger",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/trigger_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trigger"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 Get trigger",
+        "tags": ["Trigger"]
+      },
+      "patch": {
+        "description": "[__EXPERIMENTAL__] Update a trigger. Currently only supported for triggers where `event_source.provider` is `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "operationId": "updateTrigger",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/trigger_id"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateTriggerRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trigger"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 Update trigger",
+        "tags": ["Trigger"]
+      }
+    },
     "/schedule/{schedule-id}": {
       "delete": {
         "description": "Not yet available to projects that use GitLab or GitHub App. Deletes the schedule by id.",
@@ -12532,6 +13399,10 @@
     {
       "description": "[__EXPERIMENTAL__] Endpoints related to creating and managing a project.",
       "name": "Project"
+    },
+    {
+      "description": "Endpoints related to creating and managing triggers.",
+      "name": "Trigger"
     },
     {
       "description": "Endpoints related to organization usage exports.\n\nThe Usage API is an API provided by CircleCI to customers to access all of their usage data on CircleCI. It contains all the metadata (org, project, pipeline, workflow, and job dimensions) as well as credit consumption data. It is provided at the near lowest level of granularity (at the job run level).\n\n__Restrictions__\n\n* Max result set size of 100MB\n* Query timeout of 4 hours.\n* Max date window of 32 days\n* 13 months of historical data is available\n* No PII is surfaced in the Usage API (e.g. email address, Github login name)\n* The POST endpoint can only be queried up to (i.e. is rate limited to) 10 times per hour per org\n* The GET endpoint can only be queried up to (i.e. is rate limited to) 10 times per minute per org\n* To increase performance the API can generate multiple CSV files that need to be merged after download\n\n__Requirements__\n\n* organization ID - To get your organization ID go to to Organization Settings tab in the CircleCI app. ie https://app.circleci.com/settings/organization/<vcs>/<org name>/overview\n* API Personal Access Token - https://circleci.com/docs/managing-api-tokens/\n\n__Report Fields__\n\n|                                       | Field                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |\n|---------------------------------------|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n|                                       | organization_id               | The org ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |\n|                                       | organization_name             | The org name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |\n|                                       | organization_created_date     | The date (UTC) that the org was created                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |\n| Project-level attributes              | project_id                    | The project ID / token                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |\n|                                       | project_name                  | The project name. For classic orgs, the project name is inherited from Github. For standalone, the org is set by the user.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |\n|                                       | project_created_date          | The date (UTC) that the project was created. For classic orgs, this is the date that the repo was authorized on CircleCI. For standalone orgs, this is the date that the project was created on CircleCI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |\n|                                       | last_build_finished_at        | The date (UTC) of the last pipeline run on this project                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |\n| Pipeline-level attributes             | vcs_name                      | The name of the VCS connected to the project on which the pipeline was run                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |\n|                                       | vcs_url                       | The URL of the VCS on which the pipeline was run                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |\n|                                       | vcs_branch                    | The branch on which the pipeline was run                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |\n|                                       | pipeline_id                   | The ID of the pipeline instance that was triggered. If a pipeline is re-run, it will share the same pipeline ID as the original pipeline instance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |\n|                                       | pipeline_created_at           | The date (UTC) the pipeline instance was first triggered                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |\n|                                       | pipeline_number               | The pipeline number                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |\n|                                       | is_unregistered_user          | Y/N flag of whether the pipeline was triggered by a CircleCI user or a user not registered on CircleCI. Examples of the latter include users who commit on a connected VCS and consume credits on CircleCI.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |\n|                                       | pipeline_trigger_source       | The source of the pipeline instance trigger (API, webhook, etc.)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |\n|                                       | pipeline_trigger_user_id      | The user ID / token of the user who triggered the pipeline                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |\n| Workflow-level attributes             | workflow_id                   | The ID of the workflow instance that was triggered                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |\n|                                       | workflow_name                 | The name of the workflow                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |\n|                                       | workflow_first_job_queued_at  | The timestamp (UTC) of when the workflow instance started to queue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |\n|                                       | workflow_first_job_started_at | The timestamp (UTC) of when the workflow instance started to run                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |\n|                                       | workflow_stopped_at           | The timestamp (UTC) of when the workflow instance stopped                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |\n|                                       | is_workflow_successful        | Y/N flag of whether all jobs in the workflow were successfully ran                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |\n| Job-level attributes                  | job_name                      | The name of the job (the name the customer sees in the UI)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |\n|                                       | job_id                        | The ID of the job run instance that was triggered                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |\n|                                       | job_run_number                | The number of the job run instance that was triggered                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |\n|                                       | job_run_date                  | The date (UTC) of the job run instance began                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |\n|                                       | job_run_queued_at             | The timestamp (UTC) of when the job started to queue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |\n|                                       | job_run_started_at            | The timestamp (UTC) of when the job started to run                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |\n|                                       | job_run_stopped_at            | The timestamp (UTC) of when the job stopped                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |\n|                                       | job_build_status              | The status of the job run instance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |\n|                                       | resource_class                | The resource class of the job run instance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |\n|                                       | operating_system              | The operating system of the job run instance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |\n|                                       | executor                      | The executor of the job run instance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |\n|                                       | parallelism                   | The parallelism of the job run instance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |\n|                                       | job_run_seconds               | The duration in seconds of the job run instance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |\n|                                       | median_cpu_utilization_pct    | The median CPU utilization calculated over the course of the entire job run instance. CPU utilization is logged every 15 seconds. It will not be available for any jobs under 15 seconds and occasionally will not be available for jobs greater than 15 seconds.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |\n|                                       | max_cpu_utilization_pct       | The max CPU utilization logged over the course of the entire job run instance. CPU utilization is logged every 15 seconds. It will not be available for any jobs under 15 seconds and occasionally will not be available for jobs greater than 15 seconds.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |\n|                                       | median_ram_utilization_pct    | The median RAM utilization calculated over the course of the entire job run instance. RAM utilization is logged every 15 seconds. It will not be available for any jobs under 15 seconds and occasionally will not be available for jobs greater than 15 seconds.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |\n|                                       | max_ram_utilization_pct       | The max RAM utilization logged over the course of the entire job run instance. RAM utilization is logged every 15 seconds. It will not be available for any jobs under 15 seconds and occasionally will not be available for jobs greater than 15 seconds.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |\n| Credit consumption metrics            | compute_credits               | The compute credits consumed by this job run instance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |\n|                                       | dlc_credits                   | The docker-layer caching credits consumed by this job run instance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |\n|                                       | user_credits                  | The user credits consumed by this job run instance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |\n|                                       | storage_credits               | The storage credits consumed by this job run instance. Note: When an organization is below its allocated storage threshold, a job that uses storage will have 0 storage credits applied. The organization's included storage threshold can be found on the [CircleCI web app](https://app.circleci.com/home) by navigating to **Plan > Plan Usage**.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |\n|                                       | network_credits               | The network credits consumed by this job run instance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |\n|                                       | lease_credits                 | The lease credits consumed by this job run instance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |\n|                                       | lease_overage_credits         | The lease overage credits consumed by this job run instance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |\n|                                       | ipranges_credits              | The IP ranges credits consumed by this job run instance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |\n|                                       | total_credits                 | The total credits consumed by this job run instance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |\n",
