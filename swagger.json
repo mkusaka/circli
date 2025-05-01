@@ -1275,6 +1275,17 @@
         },
         "type": "object"
       },
+      "pipelineNotTriggeredResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "message": {
+            "description": "A message indicating the reason why a pipeline was not triggered",
+            "example": "Ignoring pipeline due to CI skip in the commit",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "pipelineRequest": {
         "additionalProperties": false,
         "properties": {
@@ -10743,6 +10754,16 @@
           }
         },
         "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pipelineNotTriggeredResponse"
+                }
+              }
+            },
+            "description": "Successful response with no created pipeline."
+          },
           "201": {
             "content": {
               "application/json": {
@@ -10925,7 +10946,7 @@
     },
     "/projects/{project_id}/pipeline-definitions": {
       "get": {
-        "description": "[__EXPERIMENTAL__] List all pipeline definitions for a given project. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "List all pipeline definitions for a given project. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "listPipelineDefinitions",
         "parameters": [
           {
@@ -10956,11 +10977,11 @@
             "$ref": "#/components/responses/500_internal_server_error"
           }
         },
-        "summary": "🧪 List pipeline definitions",
+        "summary": "List pipeline definitions",
         "tags": ["Pipeline"]
       },
       "post": {
-        "description": "[__EXPERIMENTAL__] Create a pipeline definition for a given project. Currently only supported for pipeline definitions where `config_source.provider` is `github_app`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Create a pipeline definition for a given project. Currently only supported for pipeline definitions where `config_source.provider` is `github_app`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "createPipelineDefinition",
         "parameters": [
           {
@@ -11000,13 +11021,13 @@
             "$ref": "#/components/responses/500_internal_server_error"
           }
         },
-        "summary": "🧪 Create pipeline definition",
+        "summary": "Create pipeline definition",
         "tags": ["Pipeline"]
       }
     },
     "/projects/{project_id}/pipeline-definitions/{pipeline_definition_id}": {
       "delete": {
-        "description": "[__EXPERIMENTAL__] Delete pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Delete pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "deletePipelineDefinition",
         "parameters": [
           {
@@ -11040,11 +11061,11 @@
             "$ref": "#/components/responses/500_internal_server_error"
           }
         },
-        "summary": "🧪 Delete pipeline definition",
+        "summary": "Delete pipeline definition",
         "tags": ["Pipeline"]
       },
       "get": {
-        "description": "[__EXPERIMENTAL__] Get details for a pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Get details for a pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "getPipelineDefinition",
         "parameters": [
           {
@@ -11078,11 +11099,11 @@
             "$ref": "#/components/responses/500_internal_server_error"
           }
         },
-        "summary": "🧪 Get pipeline definition",
+        "summary": "Get pipeline definition",
         "tags": ["Pipeline"]
       },
       "patch": {
-        "description": "[__EXPERIMENTAL__] Update pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Update pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "updatePipelineDefinition",
         "parameters": [
           {
@@ -11125,13 +11146,13 @@
             "$ref": "#/components/responses/500_internal_server_error"
           }
         },
-        "summary": "🧪 Update pipeline definition",
+        "summary": "Update pipeline definition",
         "tags": ["Pipeline"]
       }
     },
     "/projects/{project_id}/pipeline-definitions/{pipeline_definition_id}/triggers": {
       "get": {
-        "description": "[__EXPERIMENTAL__] List all triggers for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "List all triggers for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "listPipelineDefinitionTriggers",
         "parameters": [
           {
@@ -11165,11 +11186,11 @@
             "$ref": "#/components/responses/500_internal_server_error"
           }
         },
-        "summary": "🧪 List pipeline definition triggers",
+        "summary": "List pipeline definition triggers",
         "tags": ["Trigger"]
       },
       "post": {
-        "description": "[__EXPERIMENTAL__] Create a trigger for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Create a trigger for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "createTrigger",
         "parameters": [
           {
@@ -11212,13 +11233,13 @@
             "$ref": "#/components/responses/500_internal_server_error"
           }
         },
-        "summary": "🧪 Create trigger",
+        "summary": "Create trigger",
         "tags": ["Trigger"]
       }
     },
     "/projects/{project_id}/triggers/{trigger_id}": {
       "delete": {
-        "description": "[__EXPERIMENTAL__] Delete a trigger. Currently only supported for triggers where `event_source.provider` is `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Delete a trigger. Currently only supported for triggers where `event_source.provider` is `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "deleteTrigger",
         "parameters": [
           {
@@ -11252,11 +11273,11 @@
             "$ref": "#/components/responses/500_internal_server_error"
           }
         },
-        "summary": "🧪 Delete trigger",
+        "summary": "Delete trigger",
         "tags": ["Trigger"]
       },
       "get": {
-        "description": "[__EXPERIMENTAL__] Get details for a trigger. Currently only supported for triggers where `event_source.provider` is `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Get details for a trigger. Currently only supported for triggers where `event_source.provider` is `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "getTrigger",
         "parameters": [
           {
@@ -11290,11 +11311,11 @@
             "$ref": "#/components/responses/500_internal_server_error"
           }
         },
-        "summary": "🧪 Get trigger",
+        "summary": "Get trigger",
         "tags": ["Trigger"]
       },
       "patch": {
-        "description": "[__EXPERIMENTAL__] Update a trigger. Currently only supported for triggers where `event_source.provider` is `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Update a trigger. Currently only supported for triggers where `event_source.provider` is `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "updateTrigger",
         "parameters": [
           {
@@ -11337,7 +11358,7 @@
             "$ref": "#/components/responses/500_internal_server_error"
           }
         },
-        "summary": "🧪 Update trigger",
+        "summary": "Update trigger",
         "tags": ["Trigger"]
       }
     },
