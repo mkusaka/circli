@@ -2336,7 +2336,7 @@
     },
     "/context/{context_id}/restrictions": {
       "get": {
-        "description": "Gets a list of project restrictions associated with a context.",
+        "description": "Gets a list of project and expression restrictions associated with a context.",
         "operationId": "getContextRestrictions",
         "responses": {
           "200": {
@@ -2374,15 +2374,27 @@
         }
       ],
       "post": {
-        "description": "Creates project restriction on a context.",
+        "description": "Creates project or expression restriction on a context.",
         "operationId": "createContextRestriction",
         "requestBody": {
           "content": {
             "application/json": {
-              "example": {
-                "project_id": "405d8375-3514-403b-8c43-83ae74cfe0e9",
-                "restriction_type": "project",
-                "restriction_value": "405d8375-3514-403b-8c43-83ae74cfe0e9"
+              "examples": {
+                "expression_restriction": {
+                  "summary": "expression restriction",
+                  "value": {
+                    "restriction_type": "expression",
+                    "restriction_value": "pipeline.git.branch == \"main\""
+                  }
+                },
+                "project_restriction": {
+                  "summary": "project restriction",
+                  "value": {
+                    "project_id": "405d8375-3514-403b-8c43-83ae74cfe0e9",
+                    "restriction_type": "project",
+                    "restriction_value": "405d8375-3514-403b-8c43-83ae74cfe0e9"
+                  }
+                }
               },
               "schema": {
                 "additionalProperties": false,
@@ -2394,9 +2406,12 @@
                     "type": "string"
                   },
                   "restriction_type": {
+                    "description": "Type of the restriction.",
+                    "enum": ["project", "expression"],
                     "type": "string"
                   },
                   "restriction_value": {
+                    "description": "Value used to evaluate the restriction. If the `restriction_type`\nis `project`, this will be the project UUID. If the `restriction_type`\nis `expression`, this will be the expression rule.\n",
                     "type": "string"
                   }
                 },
@@ -2410,6 +2425,27 @@
           "201": {
             "content": {
               "application/json": {
+                "examples": {
+                  "expression_restriction": {
+                    "summary": "expression restriction",
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "name": "",
+                      "restriction_type": "expression",
+                      "restriction_value": "pipeline.git.branch == \"main\""
+                    }
+                  },
+                  "project_restriction": {
+                    "summary": "project restriction",
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "name": "project-name",
+                      "project_id": "405d8375-3514-403b-8c43-83ae74cfe0e9",
+                      "restriction_type": "project",
+                      "restriction_value": "405d8375-3514-403b-8c43-83ae74cfe0e9"
+                    }
+                  }
+                },
                 "schema": {
                   "$ref": "#/components/schemas/restriction_created"
                 }
@@ -2488,7 +2524,7 @@
     },
     "/context/{context_id}/restrictions/{restriction_id}": {
       "delete": {
-        "description": "Deletes a project restriction on a context.",
+        "description": "Deletes a project or expression restriction on a context.",
         "operationId": "deleteContextRestriction",
         "responses": {
           "200": {
