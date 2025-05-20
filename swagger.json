@@ -199,7 +199,7 @@
         }
       },
       "organization": {
-        "description": "The `organization` segment of a project or org slug, the second of the three. For GitHub OAuth or Bitbucket projects, this is the organization name. For projects that use GitLab or GitHub App, use the organization ID (found in Organization Settings).",
+        "description": "The second segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the org name (e.g. `my-org`) or an ID (e.g. `43G3lM5RtfFE7v5sa4nWAU`).",
         "example": "CircleCI-Public",
         "in": "path",
         "name": "organization",
@@ -227,7 +227,7 @@
         }
       },
       "project": {
-        "description": "The `project` segment of a project slug, the third of the three. For GitHub OAuth or Bitbucket projects, this is the repository name. For projects that use GitLab or GitHub App, use the project ID (found in Project Settings).",
+        "description": "The third segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the project name (e.g. `my-project`) or an ID (e.g. `44n9wujWcTnVZ2b5S8Fnat`).",
         "example": "api-preview-docs",
         "in": "path",
         "name": "project",
@@ -247,17 +247,18 @@
         }
       },
       "provider": {
-        "description": "The `provider` segment of a project or org slug, the first of the three. This may be a VCS. For projects that use GitLab or GitHub App, use `circleci`.",
+        "description": "The first segment of the slash-separated project slug, as shown in Project Settings > Overview.",
         "example": "gh",
         "in": "path",
         "name": "provider",
         "required": true,
         "schema": {
+          "enum": ["github", "gh", "bitbucket", "bb", "circleci"],
           "type": "string"
         }
       },
       "providerNoGitlab": {
-        "description": "The `provider` segment of a project or org slug, the first of the three. This may be a VCS. For projects that use GitHub App, use `circleci`.",
+        "description": "The first segment of the slash-separated project slug, as shown in Project Settings > Overview.",
         "example": "gh",
         "in": "path",
         "name": "provider",
@@ -10767,7 +10768,7 @@
     },
     "/project/{provider}/{organization}/{project}/pipeline/run": {
       "post": {
-        "description": "Trigger a pipeline given a pipeline definition ID. Supports all integrations except GitLab.",
+        "description": "Trigger a pipeline given a pipeline definition ID. Supports all integrations except GitLab.\n\nThe slash-separated project slug is shown in Project Settings > Overview.\n\nDepending on the organization type, the project slug may have a human-readable format (`vcs_type/org_name/project_name`)\nor be an opaque string (e.g. `circleci/43G3lM5RtfFE7v5sa4nWAU/44n9wujWcTnVZ2b5S8Fnat`).",
         "operationId": "triggerPipelineRun",
         "parameters": [
           {
