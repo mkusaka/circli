@@ -11015,7 +11015,7 @@
           }
         },
         "summary": "List pipeline definitions",
-        "tags": ["Pipeline"]
+        "tags": ["Pipeline Definition"]
       },
       "post": {
         "description": "Create a pipeline definition for a given project. Currently only supported for pipeline definitions where `config_source.provider` is `github_app`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
@@ -11059,7 +11059,7 @@
           }
         },
         "summary": "Create pipeline definition",
-        "tags": ["Pipeline"]
+        "tags": ["Pipeline Definition"]
       }
     },
     "/projects/{project_id}/pipeline-definitions/{pipeline_definition_id}": {
@@ -11099,7 +11099,7 @@
           }
         },
         "summary": "Delete pipeline definition",
-        "tags": ["Pipeline"]
+        "tags": ["Pipeline Definition"]
       },
       "get": {
         "description": "Get details for a pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
@@ -11137,7 +11137,7 @@
           }
         },
         "summary": "Get pipeline definition",
-        "tags": ["Pipeline"]
+        "tags": ["Pipeline Definition"]
       },
       "patch": {
         "description": "Update pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
@@ -11184,7 +11184,7 @@
           }
         },
         "summary": "Update pipeline definition",
-        "tags": ["Pipeline"]
+        "tags": ["Pipeline Definition"]
       }
     },
     "/projects/{project_id}/pipeline-definitions/{pipeline_definition_id}/triggers": {
@@ -13453,6 +13453,10 @@
     {
       "description": "Endpoints related to managing policies and making policy decisions",
       "name": "Policy Management"
+    },
+    {
+      "description": "Endpoints related to creating and managing pipeline definitions.",
+      "name": "Pipeline Definition"
     },
     {
       "description": "[__EXPERIMENTAL__] Endpoints related to creating and managing a project.",
