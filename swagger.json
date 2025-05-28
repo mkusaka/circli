@@ -11314,7 +11314,7 @@
         "tags": ["Trigger"]
       },
       "get": {
-        "description": "Get details for a trigger. Currently only supported for triggers where `event_source.provider` is `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Get details for a trigger. Currently only supported for triggers where `event_source.provider` is `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.  Breaking change [upcoming on May 27, 2025](https://discuss.circleci.com/t/upcoming-changes-1-breaking-to-crud-trigger-v2-apis-may-27-2025/53314).",
         "operationId": "getTrigger",
         "parameters": [
           {
