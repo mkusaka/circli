@@ -1462,6 +1462,11 @@
             "example": "some description",
             "type": "string"
           },
+          "event_name": {
+            "description": "The name of the event that will trigger the pipeline.",
+            "example": "some event name",
+            "type": "string"
+          },
           "event_preset": {
             "description": "The name of the event preset to use when filtering events for this trigger. Only applicable when `event_source.provider` is `github_app`.",
             "enum": [
@@ -1509,6 +1514,11 @@
                 "additionalProperties": false,
                 "description": "Information pertaining to the custom webhook used as a source of events for this trigger, if applicable.",
                 "properties": {
+                  "sender": {
+                    "description": "The name of the webhook sender..",
+                    "example": "datadog",
+                    "type": "string"
+                  },
                   "url": {
                     "description": "The URL to use when triggering this webhook.",
                     "example": "https://some-webhook.invalid/some-endpoint?secret=some-secret",
