@@ -5455,7 +5455,7 @@
     },
     "/organization/{org-slug-or-id}/project": {
       "post": {
-        "description": "Create a new project",
+        "description": "Create a new project. Works for all organization types.",
         "operationId": "createProject",
         "parameters": [
           {
@@ -5578,7 +5578,7 @@
           }
         },
         "summary": "Create a new project",
-        "tags": ["Organization"]
+        "tags": ["Project"]
       }
     },
     "/organization/{org-slug-or-id}/url-orb-allow-list": {
@@ -9005,7 +9005,7 @@
         "tags": ["Pipeline"]
       },
       "post": {
-        "description": "Not available to projects that use GitLab or GitHub App. Triggers a new pipeline on the project. **GitHub App users should use the [new Trigger Pipeline API](#tag/Pipeline/operation/triggerPipelineRun)**.",
+        "description": "**[This endpoint is superseded by the [new Trigger Pipeline API](#tag/Pipeline/operation/triggerPipelineRun), which supports all organization and pipeline types except GitLab.]** Triggers a new pipeline on the project. Does not support triggering pipelines integrated with GitLab or GitHub App.",
         "operationId": "triggerPipeline",
         "parameters": [
           {
@@ -10711,7 +10711,7 @@
         }
       ],
       "post": {
-        "description": "[__EXPERIMENTAL__]  Creates a new CircleCI project, and returns a list of the default advanced settings. Can only be called on a repo with a main branch and an existing config.yml file. Not yet available to projects that use GitLab or GitHub App.",
+        "description": "__[DEPRECATED] This endpoint is replaced by [organization/{org-slug-or-id}/project](https://circleci.com/docs/api/v2/index.html#tag/Project/operation/createProject) and documentation will be removed on August 1st, 2025.__ Creates a new CircleCI project, and returns a list of the default advanced settings. Can only be called on a repo with a main branch and an existing config.yml file. Not yet available to projects that use GitLab or GitHub App.",
         "operationId": "createProject1",
         "responses": {
           "201": {
@@ -10772,7 +10772,7 @@
             "$ref": "#/components/responses/500_internal_server_error"
           }
         },
-        "summary": "🧪 Create a project",
+        "summary": "⚠️ Create a project",
         "tags": ["Project"]
       }
     },
