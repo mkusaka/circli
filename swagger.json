@@ -547,6 +547,22 @@
         },
         "description": "Create projects using the API is currently supported for classic Github OAuth and Bitbucket projects only."
       },
+      "409_entity_conflict": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "additionalProperties": false,
+              "properties": {
+                "message": {
+                  "default": "Conflict creating entity.",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "description": "A conflict has occurred while attempting to create the resource.\n"
+      },
       "409_group_conflict": {
         "content": {
           "application/json": {
@@ -5451,6 +5467,84 @@
         },
         "summary": "Patch project-level claims",
         "tags": ["OIDC Token Management"]
+      }
+    },
+    "/organization": {
+      "post": {
+        "description": "[EXPERIMENTAL] Create a new organization. For VCS providers (GitHub/Bitbucket), this validates access and syncs org data. For standalone orgs, this creates a new CircleCI organization.",
+        "operationId": "createOrganization",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "description": "The name of the organization.",
+                    "type": "string"
+                  },
+                  "vcs_type": {
+                    "description": "The version control system type for the organization.",
+                    "enum": ["github", "bitbucket", "circleci"],
+                    "example": "github",
+                    "type": "string"
+                  }
+                },
+                "required": ["name", "vcs_type"],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "description": "The unique ID of the organization.",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "The name of the organization.",
+                      "type": "string"
+                    },
+                    "slug": {
+                      "description": "Org slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).",
+                      "type": "string"
+                    },
+                    "vcs_type": {
+                      "description": "The version control system type for the organization.",
+                      "enum": ["github", "bitbucket", "circleci"],
+                      "example": "github",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["id", "name", "slug", "vcs_type"],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The newly created organization"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "summary": "🧪 Create a new organization",
+        "tags": ["Organization"]
       }
     },
     "/organization/{org-slug-or-id}/project": {
