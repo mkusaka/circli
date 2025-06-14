@@ -1644,9 +1644,9 @@
             "example": "some-config-ref",
             "type": "string"
           },
-          "description": {
-            "description": "The description of the trigger.",
-            "example": "some description",
+          "event_name": {
+            "description": "The name of the triggering event.",
+            "example": "some event name",
             "type": "string"
           },
           "event_preset": {
@@ -1666,10 +1666,22 @@
             "example": "all-pushes",
             "type": "string"
           },
-          "name": {
-            "description": "The name of the trigger.",
-            "example": "some name",
-            "type": "string"
+          "event_source": {
+            "additionalProperties": false,
+            "properties": {
+              "webhook": {
+                "additionalProperties": false,
+                "properties": {
+                  "sender": {
+                    "description": "The sender of the webhook.",
+                    "example": "some sender",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
           }
         },
         "type": "object"
