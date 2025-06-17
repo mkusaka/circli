@@ -1455,6 +1455,75 @@
           }
         }
       },
+      "rollbackProjectRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "component_name": {
+            "description": "The component name",
+            "example": "frontend",
+            "type": "string",
+            "x-go-name": "ComponentName"
+          },
+          "current_version": {
+            "description": "The current version",
+            "example": "1.0.0",
+            "type": "string",
+            "x-go-name": "CurrentVersion"
+          },
+          "environment_name": {
+            "description": "The environment name",
+            "example": "production",
+            "type": "string",
+            "x-go-name": "EnvironmentName"
+          },
+          "namespace": {
+            "description": "The namespace",
+            "example": "default",
+            "type": "string",
+            "x-go-name": "Namespace"
+          },
+          "parameters": {
+            "additionalProperties": {},
+            "description": "The extra parameters for the rollback pipeline",
+            "example": {
+              "param1": "value1",
+              "param2": "value2"
+            },
+            "type": "object",
+            "x-go-name": "Parameters"
+          },
+          "target_version": {
+            "description": "The target version",
+            "example": "1.0.1",
+            "type": "string",
+            "x-go-name": "TargetVersion"
+          }
+        },
+        "required": [
+          "environment_name",
+          "component_name",
+          "current_version",
+          "target_version"
+        ],
+        "type": "object"
+      },
+      "rollbackProjectResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "description": "The ID of the rollback pipeline or the command created to handle the rollback",
+            "example": "123e4567-e89b-12d3-a456-426614174000",
+            "format": "uuid",
+            "type": "string"
+          },
+          "rollback_type": {
+            "description": "The type of the rollback",
+            "example": "PIPELINE",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "trigger": {
         "additionalProperties": false,
         "properties": {
@@ -5557,6 +5626,40 @@
         },
         "summary": "🧪 Create a new organization",
         "tags": ["Organization"]
+      }
+    },
+    "/organization/{org-slug-or-id}": {
+      "delete": {
+        "parameters": [
+          {
+            "description": "Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).",
+            "example": "gh/CircleCI-Public",
+            "in": "path",
+            "name": "org-slug-or-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "summary": "Delete an organization"
       }
     },
     "/organization/{org-slug-or-id}/project": {
@@ -11390,6 +11493,53 @@
         "tags": ["Trigger"]
       }
     },
+    "/projects/{project_id}/rollback": {
+      "post": {
+        "description": "Performs a rollback operation by triggering a rollback pipeline.",
+        "operationId": "rollbackProject",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/rollbackProjectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rollbackProjectResponse"
+                }
+              }
+            },
+            "description": "Rollback request accepted."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "409": {
+            "$ref": "#/components/responses/409_entity_conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "Rollback a project",
+        "tags": ["Rollback"]
+      }
+    },
     "/projects/{project_id}/triggers/{trigger_id}": {
       "delete": {
         "description": "Delete a trigger. Currently only supported for triggers where `event_source.provider` is `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
@@ -13577,6 +13727,10 @@
     {
       "description": "[__EXPERIMENTAL__] Endpoints related to creating and managing a project.",
       "name": "Project"
+    },
+    {
+      "description": "Endpoints related to creating and managing a rollback.",
+      "name": "Rollback"
     },
     {
       "description": "Endpoints related to creating and managing triggers.",
