@@ -1088,9 +1088,9 @@
             "example": "some-config-ref",
             "type": "string"
           },
-          "description": {
-            "description": "The description of the trigger.",
-            "example": "some description",
+          "event_name": {
+            "description": "The name of the triggering event.",
+            "example": "some-event-name",
             "type": "string"
           },
           "event_preset": {
@@ -1131,18 +1131,25 @@
                 },
                 "required": ["external_id"],
                 "type": "object"
+              },
+              "webhook": {
+                "additionalProperties": false,
+                "description": "Information pertaining to the custom webhook being used as a source of events for this trigger, if applicable.",
+                "properties": {
+                  "sender": {
+                    "description": "The sender of the webhook.",
+                    "example": "some-webhook-sender",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
               }
             },
             "required": ["provider"],
             "type": "object"
-          },
-          "name": {
-            "description": "The name of the trigger.",
-            "example": "some name",
-            "type": "string"
           }
         },
-        "required": ["name", "event_source"],
+        "required": ["event_source"],
         "type": "object"
       },
       "get_usage_export_job_status": {
@@ -5630,6 +5637,8 @@
     },
     "/organization/{org-slug-or-id}": {
       "delete": {
+        "description": "[EXPERIMENTAL] Delete an organization. This action will delete all projects including all build data for the organization.",
+        "operationId": "deleteOrganization",
         "parameters": [
           {
             "description": "Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).",
@@ -5643,6 +5652,25 @@
           }
         ],
         "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "message response",
+                  "properties": {
+                    "message": {
+                      "description": "A human-readable message",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["message"],
+                  "title": "MessageResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "A confirmation message."
+          },
           "default": {
             "content": {
               "application/json": {
@@ -5659,7 +5687,8 @@
             "description": "Error response."
           }
         },
-        "summary": "Delete an organization"
+        "summary": "🧪 Delete an organization",
+        "tags": ["Organization"]
       }
     },
     "/organization/{org-slug-or-id}/project": {
