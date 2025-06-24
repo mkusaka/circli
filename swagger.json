@@ -1089,7 +1089,7 @@
             "type": "string"
           },
           "event_name": {
-            "description": "The name of the triggering event.",
+            "description": "The name of the triggering event. This should only be set for triggers where `provider` is `webhook`.",
             "example": "some-event-name",
             "type": "string"
           },
@@ -1112,7 +1112,7 @@
           },
           "event_source": {
             "additionalProperties": false,
-            "description": "The source of events to use for this trigger. The `repo` object must be specified when `provider` is `github_app`. (Omit `repo` when using `webhook` as the `provider`.)",
+            "description": "The source of events to use for this trigger. The `repo` object must be specified when `provider` is `github_app`, and the `webhook` object may only be specified when `provider` is `webhook`.",
             "properties": {
               "provider": {
                 "description": "The integration provider for this resource. Currently `github_app` and `webhook` are the only supported values.",
@@ -1721,7 +1721,7 @@
             "type": "string"
           },
           "event_name": {
-            "description": "The name of the triggering event.",
+            "description": "The name of the triggering event. This can only be set for triggers where `provider` is `webhook`.",
             "example": "some event name",
             "type": "string"
           },
@@ -1749,7 +1749,7 @@
                 "additionalProperties": false,
                 "properties": {
                   "sender": {
-                    "description": "The sender of the webhook.",
+                    "description": "The sender of the webhook. This can only be set for triggers where `provider` is `webhook`.",
                     "example": "some sender",
                     "type": "string"
                   }
