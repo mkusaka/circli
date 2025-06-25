@@ -1554,6 +1554,11 @@
             "example": "some event name",
             "type": "string"
           },
+          "event_name": {
+            "description": "The name of the event that will trigger the pipeline.",
+            "example": "some event name",
+            "type": "string"
+          },
           "event_preset": {
             "description": "The name of the event preset to use when filtering events for this trigger. Only applicable when `event_source.provider` is `github_app`.",
             "enum": [
