@@ -1499,6 +1499,12 @@
             "type": "object",
             "x-go-name": "Parameters"
           },
+          "reason": {
+            "description": "The reason for the rollback",
+            "example": "The component is down",
+            "type": "string",
+            "x-go-name": "Reason"
+          },
           "target_version": {
             "description": "The target version",
             "example": "1.0.1",
