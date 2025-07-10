@@ -1012,6 +1012,7 @@
             "properties": {
               "provider": {
                 "description": "The integration provider for this resource. Currently `github_app` is the only supported value.",
+                "enum": ["github_app"],
                 "example": "github_app",
                 "type": "string"
               },
@@ -1032,34 +1033,57 @@
             "type": "object"
           },
           "config_source": {
-            "additionalProperties": false,
-            "description": "The resource that stores the CircleCI config YAML used for this pipeline definition.",
-            "properties": {
-              "file_path": {
-                "description": "Path to CircleCI config YAML file to use for this pipeline definition.",
-                "example": ".circleci/some-pipeline.yml",
-                "type": "string"
-              },
-              "provider": {
-                "description": "The integration provider for this resource. Currently `github_app` is the only supported value.",
-                "example": "github_app",
-                "type": "string"
-              },
-              "repo": {
+            "oneOf": [
+              {
                 "additionalProperties": false,
+                "description": "Config source for external providers (repo required)",
                 "properties": {
-                  "external_id": {
-                    "description": "External identifier for the repository, as defined by the respective version control provider.",
-                    "example": "some-repo-id",
+                  "file_path": {
+                    "description": "Path to CircleCI config YAML file to use for this pipeline definition.",
+                    "example": ".circleci/some-pipeline.yml",
+                    "type": "string"
+                  },
+                  "provider": {
+                    "description": "The integration provider for this resource. Currently `github_app` is the only supported external provider.",
+                    "enum": ["github_app"],
+                    "example": "github_app",
+                    "type": "string"
+                  },
+                  "repo": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "external_id": {
+                        "description": "External identifier for the repository, as defined by the respective version control provider.",
+                        "example": "some-repo-id",
+                        "type": "string"
+                      }
+                    },
+                    "required": ["external_id"],
+                    "type": "object"
+                  }
+                },
+                "required": ["provider", "repo", "file_path"],
+                "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "description": "Config source for CircleCI provider (no repo required)",
+                "properties": {
+                  "file_path": {
+                    "description": "Path to CircleCI config YAML file to use for this pipeline definition.",
+                    "example": ".circleci/some-pipeline.yml",
+                    "type": "string"
+                  },
+                  "provider": {
+                    "description": "The integration provider for this resource.",
+                    "enum": ["circleci"],
                     "type": "string"
                   }
                 },
-                "required": ["external_id"],
+                "required": ["provider", "file_path"],
                 "type": "object"
               }
-            },
-            "required": ["provider", "repo", "file_path"],
-            "type": "object"
+            ]
           },
           "description": {
             "description": "The description of the pipeline definition.",
@@ -5211,6 +5235,11 @@
               "application/json": {
                 "schema": {
                   "properties": {
+                    "avatar_url": {
+                      "description": "URL to the user's avatar on the VCS",
+                      "type": "string",
+                      "x-nullable": true
+                    },
                     "id": {
                       "description": "The unique ID of the user.",
                       "format": "uuid",
@@ -5226,7 +5255,7 @@
                       "type": "string"
                     }
                   },
-                  "required": ["id", "login", "name"],
+                  "required": ["avatar_url", "id", "login", "name"],
                   "title": "User",
                   "type": "object"
                 }
@@ -9968,6 +9997,11 @@
                           "actor": {
                             "description": "The attribution actor who will run the scheduled pipeline.",
                             "properties": {
+                              "avatar_url": {
+                                "description": "URL to the user's avatar on the VCS",
+                                "type": "string",
+                                "x-nullable": true
+                              },
                               "id": {
                                 "description": "The unique ID of the user.",
                                 "format": "uuid",
@@ -9983,7 +10017,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": ["id", "login", "name"],
+                            "required": ["avatar_url", "id", "login", "name"],
                             "title": "User",
                             "type": "object"
                           },
@@ -10465,6 +10499,11 @@
                     "actor": {
                       "description": "The attribution actor who will run the scheduled pipeline.",
                       "properties": {
+                        "avatar_url": {
+                          "description": "URL to the user's avatar on the VCS",
+                          "type": "string",
+                          "x-nullable": true
+                        },
                         "id": {
                           "description": "The unique ID of the user.",
                           "format": "uuid",
@@ -10480,7 +10519,7 @@
                           "type": "string"
                         }
                       },
-                      "required": ["id", "login", "name"],
+                      "required": ["avatar_url", "id", "login", "name"],
                       "title": "User",
                       "type": "object"
                     },
@@ -11770,6 +11809,11 @@
                     "actor": {
                       "description": "The attribution actor who will run the scheduled pipeline.",
                       "properties": {
+                        "avatar_url": {
+                          "description": "URL to the user's avatar on the VCS",
+                          "type": "string",
+                          "x-nullable": true
+                        },
                         "id": {
                           "description": "The unique ID of the user.",
                           "format": "uuid",
@@ -11785,7 +11829,7 @@
                           "type": "string"
                         }
                       },
-                      "required": ["id", "login", "name"],
+                      "required": ["avatar_url", "id", "login", "name"],
                       "title": "User",
                       "type": "object"
                     },
@@ -12168,6 +12212,11 @@
                     "actor": {
                       "description": "The attribution actor who will run the scheduled pipeline.",
                       "properties": {
+                        "avatar_url": {
+                          "description": "URL to the user's avatar on the VCS",
+                          "type": "string",
+                          "x-nullable": true
+                        },
                         "id": {
                           "description": "The unique ID of the user.",
                           "format": "uuid",
@@ -12183,7 +12232,7 @@
                           "type": "string"
                         }
                       },
-                      "required": ["id", "login", "name"],
+                      "required": ["avatar_url", "id", "login", "name"],
                       "title": "User",
                       "type": "object"
                     },
@@ -12447,6 +12496,11 @@
               "application/json": {
                 "schema": {
                   "properties": {
+                    "avatar_url": {
+                      "description": "URL to the user's avatar on the VCS",
+                      "type": "string",
+                      "x-nullable": true
+                    },
                     "id": {
                       "description": "The unique ID of the user.",
                       "format": "uuid",
@@ -12462,7 +12516,7 @@
                       "type": "string"
                     }
                   },
-                  "required": ["id", "login", "name"],
+                  "required": ["avatar_url", "id", "login", "name"],
                   "title": "User",
                   "type": "object"
                 }
