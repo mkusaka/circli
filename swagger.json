@@ -7621,6 +7621,13 @@
                       "items": {
                         "description": "A workflow",
                         "properties": {
+                          "auto_rerun_number": {
+                            "description": "Present if this workflow was auto-rerun from a previous workflow. The Nth auto-rerun workflow will have auto_rerun_number N",
+                            "example": 1,
+                            "format": "int64",
+                            "minimum": 1,
+                            "type": "integer"
+                          },
                           "canceled_by": {
                             "format": "uuid",
                             "type": "string"
@@ -7638,6 +7645,13 @@
                             "description": "The unique ID of the workflow.",
                             "format": "uuid",
                             "type": "string"
+                          },
+                          "max_auto_reruns": {
+                            "description": "The maximum number of auto reruns specified for the workflow.",
+                            "example": 5,
+                            "format": "int64",
+                            "minimum": 1,
+                            "type": "integer"
                           },
                           "name": {
                             "description": "The name of the workflow.",
@@ -13200,6 +13214,13 @@
                 "schema": {
                   "description": "A workflow",
                   "properties": {
+                    "auto_rerun_number": {
+                      "description": "Present if this workflow was auto-rerun from a previous workflow. The Nth auto-rerun workflow will have auto_rerun_number N",
+                      "example": 1,
+                      "format": "int64",
+                      "minimum": 1,
+                      "type": "integer"
+                    },
                     "canceled_by": {
                       "format": "uuid",
                       "type": "string"
@@ -13217,6 +13238,13 @@
                       "description": "The unique ID of the workflow.",
                       "format": "uuid",
                       "type": "string"
+                    },
+                    "max_auto_reruns": {
+                      "description": "The maximum number of auto reruns specified for the workflow.",
+                      "example": 5,
+                      "format": "int64",
+                      "minimum": 1,
+                      "type": "integer"
                     },
                     "name": {
                       "description": "The name of the workflow.",
