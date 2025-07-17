@@ -76,7 +76,7 @@
         "description": "Filters pipeline runs before the created date set.",
         "example": "2020-01-01T00:00:00Z",
         "in": "query",
-        "name": "created_before",
+        "name": "created-before",
         "schema": {
           "format": "date-time",
           "type": "string"
@@ -86,7 +86,7 @@
         "description": "The unique id for the pipeline definition. This can be found in the page Project Settings > Pipelines.",
         "example": "2338d0ae-5541-4bbf-88a2-55e9f7281f80",
         "in": "query",
-        "name": "definition_id",
+        "name": "definition-id",
         "schema": {
           "format": "uuid",
           "type": "string"
@@ -169,14 +169,6 @@
           "type": "string"
         }
       },
-      "next_page_token": {
-        "description": "Specify what page of results to fetch.",
-        "in": "query",
-        "name": "next_page_token",
-        "schema": {
-          "type": "string"
-        }
-      },
       "orb_id": {
         "description": "An opaque identifier of an orb.",
         "example": "d8a1f419-e207-40f5-8b31-cbc6486b45d8",
@@ -211,7 +203,7 @@
       "page_token": {
         "description": "Specify what page of results to fetch.",
         "in": "query",
-        "name": "page_token",
+        "name": "page-token",
         "schema": {
           "type": "string"
         }
@@ -282,7 +274,7 @@
         "description": "filter pipielines run by project id.",
         "example": "2338d0ae-5541-4bbf-88a2-55e9f7281f80",
         "in": "query",
-        "name": "project_id",
+        "name": "project-id",
         "schema": {
           "format": "uuid",
           "type": "string"
