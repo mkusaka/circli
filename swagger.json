@@ -190,6 +190,17 @@
           "type": "string"
         }
       },
+      "org_id_query": {
+        "description": "An opaque identifier of an organization used in query parameters.",
+        "example": "b9291e0d-a11e-41fb-8517-c545388b5953",
+        "in": "query",
+        "name": "org-id",
+        "required": true,
+        "schema": {
+          "format": "uuid",
+          "type": "string"
+        }
+      },
       "organization": {
         "description": "The second segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the org name (e.g. `my-org`) or an ID (e.g. `43G3lM5RtfFE7v5sa4nWAU`).",
         "example": "CircleCI-Public",
@@ -198,6 +209,15 @@
         "required": true,
         "schema": {
           "type": "string"
+        }
+      },
+      "page_size": {
+        "description": "The number of results per page.",
+        "in": "query",
+        "name": "page-size",
+        "required": true,
+        "schema": {
+          "type": "integer"
         }
       },
       "page_token": {
