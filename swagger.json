@@ -1167,6 +1167,11 @@
             "example": "some-config-ref",
             "type": "string"
           },
+          "disabled": {
+            "description": "Whether the trigger should be disabled upon creation. Not supported for pipeline definitions where `config_source.provider` is `github_oauth`.",
+            "example": false,
+            "type": "boolean"
+          },
           "event_name": {
             "description": "The name of the triggering event. This should only be set for triggers where `provider` is `webhook`.",
             "example": "some-event-name",
@@ -1194,7 +1199,7 @@
             "description": "The source of events to use for this trigger. The `repo` object must be specified when `provider` is `github_app`, and the `webhook` object may only be specified when `provider` is `webhook`.",
             "properties": {
               "provider": {
-                "description": "The integration provider for this resource. Currently `github_app` and `webhook` are the only supported values.",
+                "description": "The integration provider for this resource. Currently `github_app`, `github_oauth`, and `webhook` are the only supported values.",
                 "example": "github_app",
                 "type": "string"
               },
@@ -1634,6 +1639,11 @@
             "format": "date-time",
             "type": "string"
           },
+          "disabled": {
+            "description": "Whether the trigger is disabled. Not supported for pipeline definitions where `config_source.provider` is `github_oauth`.",
+            "example": false,
+            "type": "boolean"
+          },
           "event_name": {
             "description": "The name of the event that will trigger the pipeline.",
             "example": "some event name",
@@ -1658,10 +1668,10 @@
           },
           "event_source": {
             "additionalProperties": false,
-            "description": "The source of events to use for this trigger. Will contain either a `repo` or `webhook` object depending on the `provider`. (The `github_app` provider implies a `repo` and `webhook` implies a `webhook`.)",
+            "description": "The source of events to use for this trigger. Will contain either a `repo` or `webhook` object depending on the `provider`. (The `github_app` and `github_oauth` providers imply a `repo` and `webhook` implies a `webhook`.)",
             "properties": {
               "provider": {
-                "description": "The integration provider for this resource. Currently `github_app` and `webhook` are the only supported values.",
+                "description": "The integration provider for this resource. Currently `github_app`, `github_oauth`, and `webhook` are the only supported values.",
                 "example": "github_app",
                 "type": "string"
               },
