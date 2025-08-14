@@ -1178,21 +1178,7 @@
             "type": "string"
           },
           "event_preset": {
-            "description": "The name of the event preset to use when filtering events for this trigger. Only applicable when `event_source.provider` is `github_app`.",
-            "enum": [
-              "all-pushes",
-              "only-tags",
-              "default-branch-pushes",
-              "only-build-prs",
-              "only-open-prs",
-              "only-labeled-prs",
-              "only-merged-prs",
-              "only-ready-for-review-prs",
-              "only-branch-delete",
-              "only-build-pushes-to-non-draft-prs"
-            ],
-            "example": "all-pushes",
-            "type": "string"
+            "$ref": "#/components/schemas/trigger_event_preset"
           },
           "event_source": {
             "additionalProperties": false,
@@ -1650,21 +1636,7 @@
             "type": "string"
           },
           "event_preset": {
-            "description": "The name of the event preset to use when filtering events for this trigger. Only applicable when `event_source.provider` is `github_app`.",
-            "enum": [
-              "all-pushes",
-              "only-tags",
-              "default-branch-pushes",
-              "only-build-prs",
-              "only-open-prs",
-              "only-labeled-prs",
-              "only-merged-prs",
-              "only-ready-for-review-prs",
-              "only-branch-delete",
-              "only-build-pushes-to-non-draft-prs"
-            ],
-            "example": "all-pushes",
-            "type": "string"
+            "$ref": "#/components/schemas/trigger_event_preset"
           },
           "event_source": {
             "additionalProperties": false,
@@ -1741,6 +1713,23 @@
         },
         "type": "object"
       },
+      "trigger_event_preset": {
+        "description": "The name of the event preset to use when filtering events for this trigger. Only applicable when `event_source.provider` is `github_app`.",
+        "enum": [
+          "all-pushes",
+          "only-tags",
+          "default-branch-pushes",
+          "only-build-prs",
+          "only-open-prs",
+          "only-labeled-prs",
+          "only-merged-prs",
+          "only-ready-for-review-prs",
+          "only-branch-delete",
+          "only-build-pushes-to-non-draft-prs"
+        ],
+        "example": "all-pushes",
+        "type": "string"
+      },
       "updatePipelineDefinitionRequest": {
         "additionalProperties": false,
         "properties": {
@@ -1805,27 +1794,18 @@
             "example": "some-config-ref",
             "type": "string"
           },
+          "disabled": {
+            "description": "A flag indicating whether the trigger is disabled or not. This can only be set for triggers where `provider` is `webhook`.",
+            "example": false,
+            "type": "boolean"
+          },
           "event_name": {
             "description": "The name of the triggering event. This can only be set for triggers where `provider` is `webhook`.",
             "example": "some event name",
             "type": "string"
           },
           "event_preset": {
-            "description": "The name of the event preset to use when filtering events for this trigger. Only applicable when `event_source.provider` is `github_app`.",
-            "enum": [
-              "all-pushes",
-              "only-tags",
-              "default-branch-pushes",
-              "only-build-prs",
-              "only-open-prs",
-              "only-labeled-prs",
-              "only-merged-prs",
-              "only-ready-for-review-prs",
-              "only-branch-delete",
-              "only-build-pushes-to-non-draft-prs"
-            ],
-            "example": "all-pushes",
-            "type": "string"
+            "$ref": "#/components/schemas/trigger_event_preset"
           },
           "event_source": {
             "additionalProperties": false,
