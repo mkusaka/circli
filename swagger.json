@@ -13877,7 +13877,7 @@
       "name": "Pipeline Definition"
     },
     {
-      "description": "[__EXPERIMENTAL__] Endpoints related to creating and managing a project.",
+      "description": "Endpoints related to creating and managing a project.",
       "name": "Project"
     },
     {
