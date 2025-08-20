@@ -1010,6 +1010,58 @@
         "required": ["rule", "reason"],
         "type": "object"
       },
+      "component": {
+        "additionalProperties": false,
+        "properties": {
+          "created_at": {
+            "description": "The time when the component was created",
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "CreatedAt"
+          },
+          "id": {
+            "description": "The component ID",
+            "example": "123e4127-e89b-12d3-a456-426123417400",
+            "format": "uuid",
+            "type": "string",
+            "x-go-name": "ID"
+          },
+          "labels": {
+            "description": "The labels associated with the component",
+            "items": {
+              "$ref": "#/components/schemas/label"
+            },
+            "type": "array",
+            "x-go-name": "Labels"
+          },
+          "name": {
+            "description": "The component name",
+            "example": "service-a",
+            "type": "string",
+            "x-go-name": "Name"
+          },
+          "project_id": {
+            "description": "The project ID of the component",
+            "example": "123e4127-e89b-12d3-a456-426123417400",
+            "format": "uuid",
+            "type": "string",
+            "x-go-name": "ID"
+          },
+          "release_count": {
+            "description": "The number of releases for this component",
+            "example": 1,
+            "type": "integer",
+            "x-go-name": "ReleaseCount"
+          },
+          "updated_at": {
+            "description": "The time when the component was updated",
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "UpdatedAt"
+          }
+        },
+        "type": "object"
+      },
       "context_project_restrictions_list": {
         "additionalProperties": false,
         "properties": {
@@ -1222,6 +1274,51 @@
         "required": ["event_source"],
         "type": "object"
       },
+      "environment": {
+        "additionalProperties": false,
+        "properties": {
+          "created_at": {
+            "description": "The time when the environment was created",
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "CreatedAt"
+          },
+          "description": {
+            "description": "Short description given to the environment",
+            "example": "some description",
+            "type": "string",
+            "x-go-name": "Description"
+          },
+          "id": {
+            "description": "The environment ID",
+            "example": "123e4127-e89b-12d3-a456-426123417400",
+            "format": "uuid",
+            "type": "string",
+            "x-go-name": "ID"
+          },
+          "labels": {
+            "description": "The labels associated to the environment",
+            "items": {
+              "$ref": "#/components/schemas/label"
+            },
+            "type": "array",
+            "x-go-name": "Labels"
+          },
+          "name": {
+            "description": "The environment name",
+            "example": "prod-app",
+            "type": "string",
+            "x-go-name": "Name"
+          },
+          "updated_at": {
+            "description": "The time when the environment was updated",
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "UpdatedAt"
+          }
+        },
+        "type": "object"
+      },
       "get_usage_export_job_status": {
         "additionalProperties": false,
         "properties": {
@@ -1247,6 +1344,81 @@
           }
         },
         "required": ["usage_export_job_id", "state", "download_urls"],
+        "type": "object"
+      },
+      "label": {
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "description": "The key of the label",
+            "example": "env",
+            "type": "string",
+            "x-go-name": "Key"
+          },
+          "value": {
+            "description": "The value of the label",
+            "example": "prod",
+            "type": "string",
+            "x-go-name": "Value"
+          }
+        },
+        "type": "object"
+      },
+      "paginatedComponentList": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/component"
+            },
+            "type": "array",
+            "x-go-name": "Items"
+          },
+          "next_page_token": {
+            "description": "The pagination token to use when fetching the next page in this result set.",
+            "nullable": true,
+            "type": "string",
+            "x-go-name": "NextPageToken"
+          }
+        },
+        "type": "object"
+      },
+      "paginatedComponentVersionList": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/version"
+            },
+            "type": "array",
+            "x-go-name": "Items"
+          },
+          "next_page_token": {
+            "description": "The pagination token to use when fetching the next page in this result set.",
+            "nullable": true,
+            "type": "string",
+            "x-go-name": "NextPageToken"
+          }
+        },
+        "type": "object"
+      },
+      "paginatedEnvironmentList": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/environment"
+            },
+            "type": "array",
+            "x-go-name": "Items"
+          },
+          "next_page_token": {
+            "description": "The pagination token to use when fetching the next page in this result set.",
+            "nullable": true,
+            "type": "string",
+            "x-go-name": "NextPageToken"
+          }
+        },
         "type": "object"
       },
       "pipeline": {
@@ -1863,6 +2035,70 @@
           "end",
           "download_urls"
         ],
+        "type": "object"
+      },
+      "version": {
+        "additionalProperties": false,
+        "properties": {
+          "environment_id": {
+            "description": "The ID of the environment in which the version has been deployed",
+            "example": "123e4127-e89b-12d3-a456-426123417400",
+            "format": "uuid",
+            "type": "string",
+            "x-go-name": "ID"
+          },
+          "is_live": {
+            "description": "Whether the version is live or not",
+            "example": true,
+            "type": "boolean",
+            "x-go-name": "IsLive"
+          },
+          "job_id": {
+            "description": "The ID of the CircleCI job that deployed the version",
+            "example": "f7e18b53-db27-4706-ad77-b16dc1e6fc53",
+            "format": "uuid",
+            "type": "string",
+            "x-go-name": "JobID"
+          },
+          "job_number": {
+            "description": "The number of the CircleCI job that deployed the version",
+            "example": 123,
+            "type": "integer",
+            "x-go-name": "JobNumber"
+          },
+          "last_deployed_at": {
+            "description": "The time at which the version was last deployed",
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "LastDeployedAt"
+          },
+          "name": {
+            "description": "The version name",
+            "example": "1.0.0",
+            "type": "string",
+            "x-go-name": "Name"
+          },
+          "namespace": {
+            "description": "The namespace in which the version was deployed",
+            "example": "default",
+            "type": "string",
+            "x-go-name": "Namespace"
+          },
+          "pipeline_id": {
+            "description": "The ID of the pipeline that deployed the version",
+            "example": "cc54a110-d03f-4916-96fc-ff36a1221ed7",
+            "format": "uuid",
+            "type": "string",
+            "x-go-name": "ID"
+          },
+          "workflow_id": {
+            "description": "The ID of the CircleCI workflow that deployed the version",
+            "example": "5034460f-c7c4-4c43-9457-de07e2029e7b",
+            "format": "uuid",
+            "type": "string",
+            "x-go-name": "WorkflowID"
+          }
+        },
         "type": "object"
       }
     },
@@ -2752,6 +2988,194 @@
           "$ref": "#/components/parameters/restriction_id"
         }
       ]
+    },
+    "/deploy/components": {
+      "get": {
+        "description": "Allows for listing of components for a given organization ID.",
+        "operationId": "listComponents",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org_id_query"
+          },
+          {
+            "$ref": "#/components/parameters/project_id_query"
+          },
+          {
+            "$ref": "#/components/parameters/page_size"
+          },
+          {
+            "$ref": "#/components/parameters/page_token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/paginatedComponentList"
+                }
+              }
+            },
+            "description": "Paginated components list"
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "List Components",
+        "tags": ["Deploy"]
+      }
+    },
+    "/deploy/components/{component_id}": {
+      "get": {
+        "description": "Get the details of a component by ID.",
+        "operationId": "getComponent",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/component_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/component"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "Get Component",
+        "tags": ["Deploy"]
+      }
+    },
+    "/deploy/components/{component_id}/versions": {
+      "get": {
+        "description": "List the versions for a component.",
+        "operationId": "listComponentVersions",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/component_id"
+          },
+          {
+            "$ref": "#/components/parameters/environment_id_query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/paginatedComponentVersionList"
+                }
+              }
+            },
+            "description": "Paginated component versions list"
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "List Component Versions",
+        "tags": ["Deploy"]
+      }
+    },
+    "/deploy/environments": {
+      "get": {
+        "description": "Allows listing environments for a given organization ID.",
+        "operationId": "listEnvironments",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org_id_query"
+          },
+          {
+            "$ref": "#/components/parameters/page_size"
+          },
+          {
+            "$ref": "#/components/parameters/page_token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/paginatedEnvironmentList"
+                }
+              }
+            },
+            "description": "Paginated environments list"
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "List Environments",
+        "tags": ["Deploy"]
+      }
+    },
+    "/deploy/environments/{environment_id}": {
+      "get": {
+        "description": "Allows getting an environment for a given environment ID.",
+        "operationId": "getEnvironment",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/environment_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/environment"
+                }
+              }
+            },
+            "description": "Environment"
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "Get Environment",
+        "tags": ["Deploy"]
+      }
     },
     "/insights/pages/{project-slug}/summary": {
       "get": {
@@ -13871,6 +14295,10 @@
     {
       "description": "Endpoints related to managing policies and making policy decisions",
       "name": "Policy Management"
+    },
+    {
+      "description": "Endpoints related to deploy management.",
+      "name": "Deploy"
     },
     {
       "description": "Endpoints related to creating and managing pipeline definitions.",
