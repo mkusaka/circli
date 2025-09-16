@@ -1897,7 +1897,8 @@
           "only-merged-prs",
           "only-ready-for-review-prs",
           "only-branch-delete",
-          "only-build-pushes-to-non-draft-prs"
+          "only-build-pushes-to-non-draft-prs",
+          "only-merged-or-closed-prs"
         ],
         "example": "all-pushes",
         "type": "string"
