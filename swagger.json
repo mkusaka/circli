@@ -1091,7 +1091,7 @@
                 },
                 "restriction_type": {
                   "description": "Type of the restriction",
-                  "enum": ["project", "expression"],
+                  "enum": ["project", "expression", "group"],
                   "type": "string"
                 },
                 "restriction_value": {
@@ -1686,7 +1686,7 @@
           },
           "restriction_type": {
             "description": "Type of the restriction",
-            "enum": ["project", "expression"],
+            "enum": ["project", "expression", "group"],
             "type": "string"
           },
           "restriction_value": {
@@ -2804,10 +2804,16 @@
                     "restriction_value": "pipeline.git.branch == \"main\""
                   }
                 },
+                "group_restriction": {
+                  "summary": "group restriction",
+                  "value": {
+                    "restriction_type": "group",
+                    "restriction_value": "30865957-99e1-4b69-8c9f-d83a91756f89"
+                  }
+                },
                 "project_restriction": {
                   "summary": "project restriction",
                   "value": {
-                    "project_id": "405d8375-3514-403b-8c43-83ae74cfe0e9",
                     "restriction_type": "project",
                     "restriction_value": "405d8375-3514-403b-8c43-83ae74cfe0e9"
                   }
@@ -2816,15 +2822,9 @@
               "schema": {
                 "additionalProperties": false,
                 "properties": {
-                  "project_id": {
-                    "deprecated": true,
-                    "description": "Deprecated - Use \"restriction_type\" and \"restriction_value\"\ninstead.\n\nThe project ID to use for a project restriction. This is\nmutually exclusive with restriction_type and restriction_value\nand implies restriction_type is \"project\".\n",
-                    "format": "uuid",
-                    "type": "string"
-                  },
                   "restriction_type": {
                     "description": "Type of the restriction.",
-                    "enum": ["project", "expression"],
+                    "enum": ["project", "expression", "group"],
                     "type": "string"
                   },
                   "restriction_value": {
@@ -2850,6 +2850,15 @@
                       "name": "",
                       "restriction_type": "expression",
                       "restriction_value": "pipeline.git.branch == \"main\""
+                    }
+                  },
+                  "group_restriction": {
+                    "summary": "group restriction",
+                    "value": {
+                      "id": "30865957-99e1-4b69-8c9f-d83a91756f89",
+                      "name": "A Group In My Organization",
+                      "restriction_type": "group",
+                      "restriction_value": "30865957-99e1-4b69-8c9f-d83a91756f89"
                     }
                   },
                   "project_restriction": {
@@ -2941,7 +2950,7 @@
     },
     "/context/{context_id}/restrictions/{restriction_id}": {
       "delete": {
-        "description": "Deletes a project or expression restriction on a context.",
+        "description": "Deletes a project, expression or group restriction from a context.",
         "operationId": "deleteContextRestriction",
         "responses": {
           "200": {
@@ -6054,7 +6063,7 @@
     },
     "/organization": {
       "post": {
-        "description": "[EXPERIMENTAL] Create a new organization. For VCS providers (GitHub/Bitbucket), this validates access and syncs org data. For standalone orgs, this creates a new CircleCI organization.",
+        "description": "Create a new organization. For VCS providers (GitHub/Bitbucket), this validates access and syncs org data. For standalone orgs, this creates a new CircleCI organization.",
         "operationId": "createOrganization",
         "requestBody": {
           "content": {
@@ -6126,13 +6135,13 @@
             "description": "Error response."
           }
         },
-        "summary": "🧪 Create a new organization",
+        "summary": "Create a new organization",
         "tags": ["Organization"]
       }
     },
     "/organization/{org-slug-or-id}": {
       "delete": {
-        "description": "[EXPERIMENTAL] Delete an organization. This action will delete all projects including all build data for the organization.",
+        "description": "Delete an organization. This action will delete all projects including all build data for the organization.",
         "operationId": "deleteOrganization",
         "parameters": [
           {
@@ -6182,7 +6191,7 @@
             "description": "Error response."
           }
         },
-        "summary": "🧪 Delete an organization",
+        "summary": "Delete an organization",
         "tags": ["Organization"]
       }
     },
