@@ -79,6 +79,7 @@
         "name": "context_id",
         "required": true,
         "schema": {
+          "format": "uuid",
           "type": "string"
         }
       },
@@ -99,6 +100,16 @@
         "name": "definition-id",
         "schema": {
           "format": "uuid",
+          "type": "string"
+        }
+      },
+      "env_var_name": {
+        "description": "The name of the environment variable.",
+        "example": "POSTGRES_USER",
+        "in": "path",
+        "name": "env_var_name",
+        "required": true,
+        "schema": {
           "type": "string"
         }
       },
@@ -131,6 +142,7 @@
         "name": "group_id",
         "required": true,
         "schema": {
+          "format": "uuid",
           "type": "string"
         }
       },
@@ -240,6 +252,35 @@
         "name": "organization",
         "required": true,
         "schema": {
+          "type": "string"
+        }
+      },
+      "owner_id_query": {
+        "description": "The unique ID of the owner of the context. Specify either this or owner-slug.",
+        "in": "query",
+        "name": "owner-id",
+        "required": false,
+        "schema": {
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "owner_slug_query": {
+        "description": "A string that represents an organization. Specify either this or owner-id. Cannot be used for accounts.",
+        "in": "query",
+        "name": "owner-slug",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "owner_type_query": {
+        "description": "The type of the owner. Defaults to \"organization\". Accounts are only used as context owners in server.",
+        "in": "query",
+        "name": "owner-type",
+        "required": false,
+        "schema": {
+          "enum": ["account", "organization"],
           "type": "string"
         }
       },
@@ -2134,623 +2175,6 @@
   },
   "openapi": "3.0.3",
   "paths": {
-    "/context": {
-      "get": {
-        "description": "List all contexts for an owner.",
-        "operationId": "listContexts",
-        "parameters": [
-          {
-            "description": "The unique ID of the owner of the context. Specify either this or owner-slug.",
-            "in": "query",
-            "name": "owner-id",
-            "required": false,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "description": "A string that represents an organization. Specify either this or owner-id. Cannot be used for accounts.",
-            "in": "query",
-            "name": "owner-slug",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "The type of the owner. Defaults to \"organization\". Accounts are only used as context owners in server.",
-            "in": "query",
-            "name": "owner-type",
-            "required": false,
-            "schema": {
-              "enum": ["account", "organization"],
-              "type": "string"
-            }
-          },
-          {
-            "allowEmptyValue": true,
-            "description": "A token to retrieve the next page of results.",
-            "in": "query",
-            "name": "page-token",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "items": {
-                      "items": {
-                        "properties": {
-                          "created_at": {
-                            "description": "The date and time the context was created.",
-                            "example": "2015-09-21T17:29:21.042Z",
-                            "format": "date-time",
-                            "type": "string"
-                          },
-                          "id": {
-                            "description": "The unique ID of the context.",
-                            "format": "uuid",
-                            "type": "string"
-                          },
-                          "name": {
-                            "description": "The user defined name of the context.",
-                            "type": "string"
-                          }
-                        },
-                        "required": ["id", "name", "created_at"],
-                        "title": "Context",
-                        "type": "object"
-                      },
-                      "type": "array"
-                    },
-                    "next_page_token": {
-                      "description": "A token to pass as a `page-token` query parameter to return the next page of results.",
-                      "type": "string",
-                      "x-nullable": true
-                    }
-                  },
-                  "required": ["items", "next_page_token"],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "A paginated list of contexts"
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "summary": "List contexts",
-        "tags": ["Context"]
-      },
-      "post": {
-        "description": "Creates a new context.",
-        "operationId": "createContext",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "name": {
-                    "description": "The user defined name of the context.",
-                    "type": "string"
-                  },
-                  "owner": {
-                    "oneOf": [
-                      {
-                        "properties": {
-                          "id": {
-                            "description": "The unique ID of the owner of the context. Specify either this or slug.",
-                            "format": "uuid",
-                            "type": "string"
-                          },
-                          "type": {
-                            "description": "The type of the owner. Defaults to \"organization\". Accounts are only used as context owners in server.",
-                            "enum": ["account", "organization"],
-                            "example": "organization",
-                            "type": "string"
-                          }
-                        },
-                        "required": ["id"],
-                        "type": "object"
-                      },
-                      {
-                        "properties": {
-                          "slug": {
-                            "description": "A string that represents an organization. Specify either this or id. Cannot be used for accounts.",
-                            "type": "string"
-                          },
-                          "type": {
-                            "description": "The type of owner. Defaults to \"organization\". Accounts are only used as context owners in server and must be specified by an id instead of a slug.",
-                            "enum": ["organization"],
-                            "type": "string"
-                          }
-                        },
-                        "required": ["slug"],
-                        "type": "object"
-                      }
-                    ]
-                  }
-                },
-                "required": ["name", "owner"],
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "created_at": {
-                      "description": "The date and time the context was created.",
-                      "example": "2015-09-21T17:29:21.042Z",
-                      "format": "date-time",
-                      "type": "string"
-                    },
-                    "id": {
-                      "description": "The unique ID of the context.",
-                      "format": "uuid",
-                      "type": "string"
-                    },
-                    "name": {
-                      "description": "The user defined name of the context.",
-                      "type": "string"
-                    }
-                  },
-                  "required": ["id", "name", "created_at"],
-                  "title": "Context",
-                  "type": "object"
-                }
-              }
-            },
-            "description": "The new context"
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "summary": "Create a new context",
-        "tags": ["Context"]
-      }
-    },
-    "/context/{context-id}": {
-      "delete": {
-        "operationId": "deleteContext",
-        "parameters": [
-          {
-            "description": "ID of the context (UUID)",
-            "in": "path",
-            "name": "context-id",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "message response",
-                  "properties": {
-                    "message": {
-                      "description": "A human-readable message",
-                      "type": "string"
-                    }
-                  },
-                  "required": ["message"],
-                  "title": "MessageResponse",
-                  "type": "object"
-                }
-              }
-            },
-            "description": "A confirmation message"
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "summary": "Delete a context",
-        "tags": ["Context"]
-      },
-      "get": {
-        "description": "Returns basic information about a context.",
-        "operationId": "getContext",
-        "parameters": [
-          {
-            "description": "ID of the context (UUID)",
-            "in": "path",
-            "name": "context-id",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "created_at": {
-                      "description": "The date and time the context was created.",
-                      "example": "2015-09-21T17:29:21.042Z",
-                      "format": "date-time",
-                      "type": "string"
-                    },
-                    "id": {
-                      "description": "The unique ID of the context.",
-                      "format": "uuid",
-                      "type": "string"
-                    },
-                    "name": {
-                      "description": "The user defined name of the context.",
-                      "type": "string"
-                    }
-                  },
-                  "required": ["id", "name", "created_at"],
-                  "title": "Context",
-                  "type": "object"
-                }
-              }
-            },
-            "description": "The context"
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "summary": "Get a context",
-        "tags": ["Context"]
-      }
-    },
-    "/context/{context-id}/environment-variable": {
-      "get": {
-        "description": "List information about environment variables in a context, not including their values.",
-        "operationId": "listEnvironmentVariablesFromContext",
-        "parameters": [
-          {
-            "description": "ID of the context (UUID)",
-            "in": "path",
-            "name": "context-id",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "allowEmptyValue": true,
-            "description": "A token to retrieve the next page of results.",
-            "in": "query",
-            "name": "page-token",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "items": {
-                      "items": {
-                        "properties": {
-                          "context_id": {
-                            "description": "ID of the context (UUID)",
-                            "format": "uuid",
-                            "type": "string"
-                          },
-                          "created_at": {
-                            "description": "The date and time the environment variable was created.",
-                            "example": "2015-09-21T17:29:21.042Z",
-                            "format": "date-time",
-                            "type": "string"
-                          },
-                          "updated_at": {
-                            "description": "The date and time the environment variable was updated",
-                            "example": "2015-09-21T17:29:21.042Z",
-                            "format": "date-time",
-                            "type": "string"
-                          },
-                          "variable": {
-                            "description": "The name of the environment variable",
-                            "example": "POSTGRES_USER",
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "variable",
-                          "created_at",
-                          "updated_at",
-                          "context_id"
-                        ],
-                        "type": "object"
-                      },
-                      "type": "array"
-                    },
-                    "next_page_token": {
-                      "description": "A token to pass as a `page-token` query parameter to return the next page of results.",
-                      "type": "string",
-                      "x-nullable": true
-                    }
-                  },
-                  "required": ["items", "next_page_token"],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "A paginated list of environment variables"
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "summary": "List environment variables",
-        "tags": ["Context"]
-      }
-    },
-    "/context/{context-id}/environment-variable/{env-var-name}": {
-      "delete": {
-        "description": "Delete an environment variable from a context.",
-        "operationId": "deleteEnvironmentVariableFromContext",
-        "parameters": [
-          {
-            "description": "The name of the environment variable",
-            "example": "POSTGRES_USER",
-            "in": "path",
-            "name": "env-var-name",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "ID of the context (UUID)",
-            "in": "path",
-            "name": "context-id",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "message response",
-                  "properties": {
-                    "message": {
-                      "description": "A human-readable message",
-                      "type": "string"
-                    }
-                  },
-                  "required": ["message"],
-                  "title": "MessageResponse",
-                  "type": "object"
-                }
-              }
-            },
-            "description": "A confirmation message"
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "summary": "Remove an environment variable",
-        "tags": ["Context"]
-      },
-      "put": {
-        "description": "Create or update an environment variable within a context. Returns information about the environment variable, not including its value.",
-        "operationId": "addEnvironmentVariableToContext",
-        "parameters": [
-          {
-            "description": "ID of the context (UUID)",
-            "in": "path",
-            "name": "context-id",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "description": "The name of the environment variable",
-            "example": "POSTGRES_USER",
-            "in": "path",
-            "name": "env-var-name",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "value": {
-                    "description": "The value of the environment variable",
-                    "example": "some-secret-value",
-                    "type": "string"
-                  }
-                },
-                "required": ["value"],
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "anyOf": [
-                    {
-                      "properties": {
-                        "context_id": {
-                          "description": "ID of the context (UUID)",
-                          "format": "uuid",
-                          "type": "string"
-                        },
-                        "created_at": {
-                          "description": "The date and time the environment variable was created.",
-                          "example": "2015-09-21T17:29:21.042Z",
-                          "format": "date-time",
-                          "type": "string"
-                        },
-                        "updated_at": {
-                          "description": "The date and time the environment variable was updated",
-                          "example": "2015-09-21T17:29:21.042Z",
-                          "format": "date-time",
-                          "type": "string"
-                        },
-                        "variable": {
-                          "description": "The name of the environment variable",
-                          "example": "POSTGRES_USER",
-                          "type": "string"
-                        }
-                      },
-                      "required": [
-                        "variable",
-                        "created_at",
-                        "updated_at",
-                        "context_id"
-                      ],
-                      "type": "object"
-                    },
-                    {
-                      "description": "message response",
-                      "properties": {
-                        "message": {
-                          "description": "A human-readable message",
-                          "type": "string"
-                        }
-                      },
-                      "required": ["message"],
-                      "title": "MessageResponse",
-                      "type": "object"
-                    }
-                  ]
-                }
-              }
-            },
-            "description": "The new environment variable"
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "summary": "Add or update an environment variable",
-        "tags": ["Context"]
-      }
-    },
     "/context/{context_id}/restrictions": {
       "get": {
         "description": "Gets a list of project and expression restrictions associated with a context.",
