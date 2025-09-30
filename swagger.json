@@ -1574,6 +1574,44 @@
         "required": ["usage_export_job_id", "state", "download_urls"],
         "type": "object"
       },
+      "group": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "description": "Description field on group",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for group",
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of group",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "groups": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/group"
+            },
+            "type": "array"
+          },
+          "next_page_token": {
+            "nullable": true,
+            "type": "string"
+          },
+          "total_count": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
       "label": {
         "additionalProperties": false,
         "properties": {
@@ -6537,6 +6575,228 @@
         "summary": "Remove an entry from the org's URL orb allow-list",
         "tags": ["Organization"]
       }
+    },
+    "/organizations/{org_id}/groups": {
+      "get": {
+        "description": "Get all the groups in an organization.",
+        "operationId": "getOrganizationGroups",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/page_token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "groups": {
+                    "summary": "A list of sample groups",
+                    "value": {
+                      "items": [
+                        {
+                          "description": "This group has the ability to edit settings on Project B.",
+                          "id": "bdbe5e8d-50a5-4f73-a917-074592949844",
+                          "name": "Project B Editors"
+                        },
+                        {
+                          "description": "This group has the ability to edit settings on ML Ops Projects.",
+                          "id": "70dbc16f-a6b9-4c32-b258-4a61a861c24f",
+                          "name": "Project MLOps Editors"
+                        }
+                      ],
+                      "next_page_token": "CiRkNjVjY2ZiMy04OGFlLTQ3YjUtYWFjNi0wZDRkNDYwNmQ5ZjYQChoDbmls"
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/groups"
+                }
+              }
+            },
+            "description": "Successfully get all the groups in an organization. Results are paginated."
+          },
+          "403": {
+            "$ref": "#/components/responses/403_permission_denied"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "Groups in an organization",
+        "tags": ["Groups"]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/org_id"
+        }
+      ],
+      "post": {
+        "description": "Create a new group under the organization.",
+        "operationId": "createOrganizationGroup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "group": {
+                  "summary": "Create a new group",
+                  "value": {
+                    "description": "Users in this group have edit access to Project A",
+                    "name": "Project A Editors"
+                  }
+                }
+              },
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "description": {
+                    "description": "Description to describe the group",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the group",
+                    "type": "string"
+                  }
+                },
+                "required": ["name"],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "group": {
+                    "summary": "A sample group",
+                    "value": {
+                      "description": "Users in this group have edit access to Project A",
+                      "id": "9e5e5f87-3e87-47ea-be0f-37265b965d6e",
+                      "name": "Project A Editors"
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/group"
+                }
+              }
+            },
+            "description": "Successful creation of a group."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "403": {
+            "$ref": "#/components/responses/403_permission_denied"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "409": {
+            "$ref": "#/components/responses/409_group_conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "Create Groups",
+        "tags": ["Groups"]
+      }
+    },
+    "/organizations/{org_id}/groups/{group_id}": {
+      "delete": {
+        "description": "Delete a group in an organization. This will remove all members from the group as well, and the subsequent role grants tied to the group.",
+        "operationId": "deleteGroup",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "message": {
+                      "default": "Group deleted.",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successful deletion of a group."
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "403": {
+            "$ref": "#/components/responses/403_permission_denied"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "Delete a group",
+        "tags": ["Groups"]
+      },
+      "get": {
+        "description": "Get details for a group in an organization.",
+        "operationId": "getGroup",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "group": {
+                    "summary": "A sample group",
+                    "value": {
+                      "description": "Users can edit Project A settings.",
+                      "id": "bdbe5e8d-50a5-4f73-a917-074592949844",
+                      "name": "Project A Editors"
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/group"
+                }
+              }
+            },
+            "description": "Successfully gets a group. Members not included."
+          },
+          "403": {
+            "$ref": "#/components/responses/403_permission_denied"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "A group in an organization",
+        "tags": ["Groups"]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/org_id"
+        },
+        {
+          "$ref": "#/components/parameters/group_id"
+        }
+      ]
     },
     "/organizations/{org_id}/usage_export_job": {
       "parameters": [
