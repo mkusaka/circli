@@ -364,6 +364,16 @@
           "type": "string"
         }
       },
+      "request_id": {
+        "description": "The request ID returned from the async deploy markers generation.",
+        "in": "path",
+        "name": "request_id",
+        "required": true,
+        "schema": {
+          "format": "uuid",
+          "type": "string"
+        }
+      },
       "restriction_id": {
         "description": "An opaque identifier of a context restriction.",
         "example": "1c23d2cb-07b1-4a28-8af3-e369732050ed",
