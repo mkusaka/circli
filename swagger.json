@@ -256,7 +256,7 @@
         }
       },
       "owner_id_query": {
-        "description": "The unique ID of the owner of the context. Specify either this or owner-slug.",
+        "description": "The unique ID of the owner of the context. This is the organization ID. Specify either owner/organization ID or the owner/organization slug. Find the organization ID and slug in the CircleCI web app (Organization Settings > Overview). Owner/organization slug is not supported for CircleCI server.",
         "in": "query",
         "name": "owner-id",
         "required": false,
@@ -266,7 +266,7 @@
         }
       },
       "owner_slug_query": {
-        "description": "A string that represents an organization. Specify either this or owner-id. Cannot be used for accounts.",
+        "description": "A string that represents an organization. This is the organization slug. Specify either this or organization/owner ID. Find the organization ID and slug in the CircleCI web app (Organization Settings > Overview). Owner/organization slug is not supported for CircleCI server.",
         "in": "query",
         "name": "owner-slug",
         "required": false,
@@ -275,7 +275,7 @@
         }
       },
       "owner_type_query": {
-        "description": "The type of the owner. Defaults to \"organization\". Accounts are only used as context owners in server.",
+        "description": "The type of the owner. Defaults to \"organization\". Use \"account\" if you are using CircleCI server.",
         "in": "query",
         "name": "owner-type",
         "required": false,
@@ -294,7 +294,7 @@
         }
       },
       "page_token": {
-        "description": "Specify what page of results to fetch.",
+        "description": "A token to specify which page of results to fetch.",
         "in": "query",
         "name": "page-token",
         "schema": {
@@ -380,6 +380,14 @@
         "in": "path",
         "name": "restriction_id",
         "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "schemas_page_token": {
+        "description": "Specify what page of results to fetch.",
+        "in": "query",
+        "name": "page-token",
         "schema": {
           "type": "string"
         }
@@ -2533,7 +2541,7 @@
                       "type": "string"
                     },
                     "name": {
-                      "description": "The user defined name of the context.",
+                      "description": "The user-defined name of the context.",
                       "type": "string"
                     }
                   },
