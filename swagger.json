@@ -165,7 +165,7 @@
         }
       },
       "mine": {
-        "description": "filter pipielines run by the current user.",
+        "description": "Filter pipelines run by the current user.",
         "example": true,
         "in": "query",
         "name": "mine",
@@ -385,7 +385,7 @@
         }
       },
       "schemas_page_token": {
-        "description": "Specify what page of results to fetch.",
+        "description": "A token to retrieve the next page of results.",
         "in": "query",
         "name": "page-token",
         "schema": {
@@ -393,7 +393,7 @@
         }
       },
       "schemas_project_id": {
-        "description": "filter pipielines run by project id.",
+        "description": "Filter pipelines run by project ID.",
         "example": "2338d0ae-5541-4bbf-88a2-55e9f7281f80",
         "in": "query",
         "name": "project-id",
@@ -1705,28 +1705,6 @@
         },
         "type": "object"
       },
-      "pipeline": {
-        "additionalProperties": false,
-        "properties": {
-          "created_at": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "number": {
-            "example": 25,
-            "type": "integer"
-          },
-          "state": {
-            "enum": ["created", "errored", "setup-pending", "setup", "pending"],
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
       "pipelineDefinition": {
         "additionalProperties": false,
         "properties": {
@@ -1836,62 +1814,24 @@
         },
         "type": "object"
       },
-      "pipelineRequest": {
+      "pipelineTriggeredResponse": {
         "additionalProperties": false,
         "properties": {
-          "checkout": {
-            "additionalProperties": false,
-            "example": {
-              "tag": "v2"
-            },
-            "properties": {
-              "branch": {
-                "description": "The branch that should be used to check out code on a checkout step.\nNote that branch and tag are mutually exclusive.\nTo trigger a pipeline for a PR by number use pull/<number>/head for the PR ref or pull/<number>/merge for the merge ref (GitHub only)\n",
-                "example": "main",
-                "type": "string"
-              },
-              "tag": {
-                "description": "The tag that should be used to check out code on a checkout step.\nThe commit that this tag points to is used for the pipeline. Note that branch and tag are mutually exclusive.\n",
-                "example": "v2",
-                "type": "string"
-              }
-            },
-            "type": "object"
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
           },
-          "config": {
-            "additionalProperties": false,
-            "example": {
-              "branch": "main"
-            },
-            "properties": {
-              "branch": {
-                "description": "The branch that should be used to fetch the config file.\nNote that branch and tag are mutually exclusive.\nTo trigger a pipeline for a PR by number use pull/<number>/head for the PR ref or pull/<number>/merge for the merge ref (GitHub only)\n",
-                "example": "main",
-                "type": "string"
-              },
-              "tag": {
-                "description": "The tag that should be used to fetch the config file.\nThe commit that this tag points to is used for the pipeline.\nNote that branch and tag are mutually exclusive.\n",
-                "example": "v2",
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "definition_id": {
-            "description": "The unique id for the pipeline definition. This can be found in the page Project Settings > Pipelines.",
-            "example": "2338d0ae-5541-4bbf-88a2-55e9f7281f80",
+          "id": {
             "format": "uuid",
             "type": "string"
           },
-          "parameters": {
-            "additionalProperties": true,
-            "description": "An object containing pipeline parameters and their values.\nPipeline parameters have the following size limits: 100 max entries, 128 maximum key length, 512 maximum value length.\n",
-            "example": {
-              "example_param": "my value",
-              "example_param2": true,
-              "example_param3": 3
-            },
-            "type": "object"
+          "number": {
+            "example": 25,
+            "type": "integer"
+          },
+          "state": {
+            "enum": ["created", "errored", "setup-pending", "setup", "pending"],
+            "type": "string"
           }
         },
         "type": "object"
@@ -2165,6 +2105,66 @@
               "$ref": "#/components/schemas/trigger"
             },
             "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "triggerPipelineRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "checkout": {
+            "additionalProperties": false,
+            "example": {
+              "tag": "v2"
+            },
+            "properties": {
+              "branch": {
+                "description": "The branch that should be used to check out code on a checkout step.\nNote that branch and tag are mutually exclusive.\nTo trigger a pipeline for a PR by number use pull/<number>/head for the PR ref or pull/<number>/merge for the merge ref (GitHub only)\n",
+                "example": "main",
+                "type": "string"
+              },
+              "tag": {
+                "description": "The tag that should be used to check out code on a checkout step.\nThe commit that this tag points to is used for the pipeline. Note that branch and tag are mutually exclusive.\n",
+                "example": "v2",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "config": {
+            "additionalProperties": false,
+            "example": {
+              "branch": "main"
+            },
+            "properties": {
+              "branch": {
+                "description": "The branch that should be used to fetch the config file.\nNote that branch and tag are mutually exclusive.\nTo trigger a pipeline for a PR by number use pull/<number>/head for the PR ref or pull/<number>/merge for the merge ref (GitHub only)\n",
+                "example": "main",
+                "type": "string"
+              },
+              "tag": {
+                "description": "The tag that should be used to fetch the config file.\nThe commit that this tag points to is used for the pipeline.\nNote that branch and tag are mutually exclusive.\n",
+                "example": "v2",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "definition_id": {
+            "description": "The unique id for the pipeline definition. This can be found in the page Project Settings > Pipelines.",
+            "example": "2338d0ae-5541-4bbf-88a2-55e9f7281f80",
+            "format": "uuid",
+            "type": "string"
+          },
+          "parameters": {
+            "additionalProperties": true,
+            "description": "An object containing pipeline parameters and their values.\nPipeline parameters have the following size limits: 100 max entries, 128 maximum key length, 512 maximum value length.\n",
+            "example": {
+              "example_param": "my value",
+              "example_param2": true,
+              "example_param3": 3
+            },
+            "type": "object"
           }
         },
         "type": "object"
@@ -11810,7 +11810,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/pipelineRequest"
+                "$ref": "#/components/schemas/triggerPipelineRequest"
               }
             }
           }
@@ -11830,7 +11830,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/pipeline"
+                  "$ref": "#/components/schemas/pipelineTriggeredResponse"
                 }
               }
             },
