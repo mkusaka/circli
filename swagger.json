@@ -2182,7 +2182,8 @@
           "only-ready-for-review-prs",
           "only-branch-delete",
           "only-build-pushes-to-non-draft-prs",
-          "only-merged-or-closed-prs"
+          "only-merged-or-closed-prs",
+          "pr-comment-equals-run-ci"
         ],
         "example": "all-pushes",
         "type": "string"
