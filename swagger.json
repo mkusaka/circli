@@ -2182,7 +2182,8 @@
           "only-ready-for-review-prs",
           "only-branch-delete",
           "only-build-pushes-to-non-draft-prs",
-          "only-merged-or-closed-prs"
+          "only-merged-or-closed-prs",
+          "pr-comment-equals-run-ci"
         ],
         "example": "all-pushes",
         "type": "string"
@@ -12127,7 +12128,7 @@
         "tags": ["Pipeline Definition"]
       },
       "get": {
-        "description": "Get details for a pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Get details for a pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app`, `github_oauth`, `bitbucket_dc`, `bitbucket_oauth` or `gitlab`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "getPipelineDefinition",
         "parameters": [
           {
