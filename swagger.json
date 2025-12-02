@@ -83,6 +83,16 @@
           "type": "string"
         }
       },
+      "created_after": {
+        "description": "Filters pipeline runs after the created date set.",
+        "example": "2020-01-01T00:00:00Z",
+        "in": "query",
+        "name": "created-after",
+        "schema": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
       "created_before": {
         "description": "Filters pipeline runs before the created date set.",
         "example": "2020-01-01T00:00:00Z",
@@ -132,6 +142,14 @@
         "required": false,
         "schema": {
           "format": "uuid",
+          "type": "string"
+        }
+      },
+      "filter": {
+        "description": "A filter expression to narrow down the results based on pipeline values.",
+        "in": "query",
+        "name": "filter",
+        "schema": {
           "type": "string"
         }
       },
@@ -340,6 +358,22 @@
         "schema": {
           "format": "uuid",
           "type": "string"
+        }
+      },
+      "project_ids": {
+        "description": "Filter pipelines run by project IDs.",
+        "example": [
+          "2338d0ae-5541-4bbf-88a2-55e9f7281f80",
+          "19e0db45-9793-466d-8597-9ff05d62ff51"
+        ],
+        "in": "query",
+        "name": "project-ids",
+        "schema": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "provider": {
