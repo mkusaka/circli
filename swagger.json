@@ -52,16 +52,6 @@
           "type": "string"
         }
       },
-      "branch": {
-        "description": "VCS branch name used to run the pipeline.",
-        "example": "main",
-        "in": "query",
-        "name": "branch",
-        "schema": {
-          "format": "uuid",
-          "type": "string"
-        }
-      },
       "component_id": {
         "description": "An opaque identifier of a component.",
         "example": "b9291e0d-a11e-41fb-8517-c545388b5953",
@@ -78,36 +68,6 @@
         "in": "path",
         "name": "context_id",
         "required": true,
-        "schema": {
-          "format": "uuid",
-          "type": "string"
-        }
-      },
-      "created_after": {
-        "description": "Filters pipeline runs after the created date set.",
-        "example": "2020-01-01T00:00:00Z",
-        "in": "query",
-        "name": "created-after",
-        "schema": {
-          "format": "date-time",
-          "type": "string"
-        }
-      },
-      "created_before": {
-        "description": "Filters pipeline runs before the created date set.",
-        "example": "2020-01-01T00:00:00Z",
-        "in": "query",
-        "name": "created-before",
-        "schema": {
-          "format": "date-time",
-          "type": "string"
-        }
-      },
-      "definition_id": {
-        "description": "The unique id for the pipeline definition. This can be found in the page Project Settings > Pipelines.",
-        "example": "2338d0ae-5541-4bbf-88a2-55e9f7281f80",
-        "in": "query",
-        "name": "definition-id",
         "schema": {
           "format": "uuid",
           "type": "string"
@@ -145,14 +105,6 @@
           "type": "string"
         }
       },
-      "filter": {
-        "description": "A filter expression to narrow down the results based on pipeline values.",
-        "in": "query",
-        "name": "filter",
-        "schema": {
-          "type": "string"
-        }
-      },
       "group_id": {
         "description": "An opaque identifier of a group.",
         "example": "39f660db-f49b-417e-ad79-2769ba29faf7",
@@ -180,15 +132,6 @@
         "name": "limit",
         "schema": {
           "type": "integer"
-        }
-      },
-      "mine": {
-        "description": "Filter pipelines run by the current user.",
-        "example": true,
-        "in": "query",
-        "name": "mine",
-        "schema": {
-          "type": "boolean"
         }
       },
       "name": {
@@ -360,22 +303,6 @@
           "type": "string"
         }
       },
-      "project_ids": {
-        "description": "Filter pipelines run by project IDs.",
-        "example": [
-          "2338d0ae-5541-4bbf-88a2-55e9f7281f80",
-          "19e0db45-9793-466d-8597-9ff05d62ff51"
-        ],
-        "in": "query",
-        "name": "project-ids",
-        "schema": {
-          "items": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
       "provider": {
         "description": "The first segment of the slash-separated project slug, as shown in Project Settings > Overview.",
         "example": "gh",
@@ -415,24 +342,6 @@
         "name": "restriction_id",
         "required": true,
         "schema": {
-          "type": "string"
-        }
-      },
-      "schemas_page_token": {
-        "description": "A token to retrieve the next page of results.",
-        "in": "query",
-        "name": "page-token",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "schemas_project_id": {
-        "description": "Filter pipelines run by project ID.",
-        "example": "2338d0ae-5541-4bbf-88a2-55e9f7281f80",
-        "in": "query",
-        "name": "project-id",
-        "schema": {
-          "format": "uuid",
           "type": "string"
         }
       },
@@ -1439,7 +1348,7 @@
           },
           "event_source": {
             "additionalProperties": false,
-            "description": "The source of events to use for this trigger. The `repo` object must be specified when `provider` is `github_app`, and the `webhook` object may only be specified when `provider` is `webhook`.",
+            "description": "The source of events to use for this trigger. The `repo` object must be specified when `provider` is `github_app` or `github_oauth`, and the `webhook` object may only be specified when `provider` is `webhook`.",
             "properties": {
               "provider": {
                 "description": "The integration provider for this resource. Currently `github_app`, `github_oauth`, and `webhook` are the only supported values.",
@@ -2287,7 +2196,7 @@
             "type": "string"
           },
           "disabled": {
-            "description": "A flag indicating whether the trigger is disabled or not. This can only be set for triggers where `provider` is `webhook`.",
+            "description": "A flag indicating whether the trigger is disabled or not. This can only be set for triggers where `provider` is `github_oauth`, `github_app`, or `webhook`.",
             "example": false,
             "type": "boolean"
           },
@@ -10735,7 +10644,7 @@
     },
     "/project/{project-slug}/schedule": {
       "get": {
-        "description": "Returns all schedules for this project.",
+        "description": "For a given project, returns all schedules associated with GitHub OAuth or Bitbucket Cloud pipeline definitions. Does not return schedule triggers associated with GitHub App pipelines. To fetch schedule triggers associated with GitHub App pipelines, use the [List pipeline definition triggers](https://circleci.com/docs/api/v2/index.html#tag/Trigger/operation/listPipelineDefinitionTriggers] endpoint.",
         "operationId": "listSchedulesForProject",
         "parameters": [
           {
@@ -11043,11 +10952,11 @@
             "description": "Error response."
           }
         },
-        "summary": "Get all schedules",
+        "summary": "List schedule triggers",
         "tags": ["Schedule"]
       },
       "post": {
-        "description": "Not yet available to projects that use GitLab or GitHub App. Creates a schedule and returns the created schedule.",
+        "description": "Creates a schedule and returns the created schedule. Available only on organizations of type `bitbucket` and `github`, and for the latter will exclusively create schedule triggers associated with the GitHub OAuth pipeline definition. For projects of type `circleci`, or to create schedule triggers for GitHub App pipeline definitions, use the [Create trigger](https://circleci.com/docs/api/v2/index.html#tag/Trigger/operation/createTrigger) endpoint.",
         "operationId": "createSchedule",
         "parameters": [
           {
@@ -12249,7 +12158,7 @@
     },
     "/projects/{project_id}/pipeline-definitions/{pipeline_definition_id}/triggers": {
       "get": {
-        "description": "List all triggers for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "List all triggers for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_oauth`, `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "listPipelineDefinitionTriggers",
         "parameters": [
           {
@@ -12287,7 +12196,7 @@
         "tags": ["Trigger"]
       },
       "post": {
-        "description": "Create a trigger for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Create a trigger for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_oauth` or `github_app`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "createTrigger",
         "parameters": [
           {
@@ -12383,7 +12292,7 @@
     },
     "/projects/{project_id}/triggers/{trigger_id}": {
       "delete": {
-        "description": "Delete a trigger. Currently only supported for triggers where `event_source.provider` is `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Delete a trigger. Currently only supported for triggers where `event_source.provider` is `github_oauth`, `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "deleteTrigger",
         "parameters": [
           {
@@ -12421,7 +12330,7 @@
         "tags": ["Trigger"]
       },
       "get": {
-        "description": "Get details for a trigger. Currently only supported for triggers where `event_source.provider` is `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.  Breaking change [upcoming on May 27, 2025](https://discuss.circleci.com/t/upcoming-changes-1-breaking-to-crud-trigger-v2-apis-may-27-2025/53314).",
+        "description": "Get details for a trigger. Currently only supported for triggers where `event_source.provider` is `github_oauth`, `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "getTrigger",
         "parameters": [
           {
@@ -12459,7 +12368,7 @@
         "tags": ["Trigger"]
       },
       "patch": {
-        "description": "Update a trigger. Currently only supported for triggers where `event_source.provider` is `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Update a trigger. Currently only supported for triggers where `event_source.provider` is `github_oauth`, `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "updateTrigger",
         "parameters": [
           {
@@ -12508,7 +12417,7 @@
     },
     "/schedule/{schedule-id}": {
       "delete": {
-        "description": "Not yet available to projects that use GitLab or GitHub App. Deletes the schedule by id.",
+        "description": "Deletes a schedule by ID. Available only on schedules associated with GitHub OAuth or Bitbucket Cloud pipeline definitions.",
         "operationId": "deleteScheduleById",
         "parameters": [
           {
@@ -12844,11 +12753,11 @@
             "description": "Error response."
           }
         },
-        "summary": "Get a schedule",
+        "summary": "Get a schedule by ID. Available only on schedules associated with GitHub OAuth or Bitbucket Cloud pipeline definitions.",
         "tags": ["Schedule"]
       },
       "patch": {
-        "description": "Not yet available to projects that use GitLab or GitHub App. Updates a schedule and returns the updated schedule.",
+        "description": "Updates a schedule and returns the updated schedule. Available only on schedules associated with GitHub OAuth or Bitbucket Cloud pipeline definitions. To update schedule triggers for GitHub App pipeline definitions, use the [Update trigger](https://circleci.com/docs/api/v2/index.html#tag/Trigger/operation/updateTrigger) endpoint.",
         "operationId": "updateSchedule",
         "parameters": [
           {
