@@ -6600,7 +6600,7 @@
         }
       ],
       "post": {
-        "description": "Create a new group under the organization.",
+        "description": "Create a new group under the organization. Currently only supported for standalone organizations.",
         "operationId": "createOrganizationGroup",
         "requestBody": {
           "content": {
@@ -6679,7 +6679,7 @@
     },
     "/organizations/{org_id}/groups/{group_id}": {
       "delete": {
-        "description": "Delete a group in an organization. This will remove all members from the group as well, and the subsequent role grants tied to the group.",
+        "description": "Delete a group in an organization. This will remove all members from the group as well, and the subsequent role grants tied to the group. Currently only supported for standalone organizations.",
         "operationId": "deleteGroup",
         "responses": {
           "200": {
@@ -6715,7 +6715,7 @@
         "tags": ["Groups"]
       },
       "get": {
-        "description": "Get details for a group in an organization.",
+        "description": "Get details for a group in an organization. Currently only supported for standalone organizations.",
         "operationId": "getGroup",
         "responses": {
           "200": {
