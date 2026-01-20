@@ -6164,6 +6164,72 @@
         },
         "summary": "Delete an organization",
         "tags": ["Organization"]
+      },
+      "get": {
+        "description": "Retrieve an organization by slug or ID",
+        "operationId": "getOrganization",
+        "parameters": [
+          {
+            "description": "Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).",
+            "example": "gh/CircleCI-Public",
+            "in": "path",
+            "name": "org-slug-or-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "description": "The unique ID of the organization.",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "The name of the organization.",
+                      "type": "string"
+                    },
+                    "slug": {
+                      "description": "Org slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).",
+                      "type": "string"
+                    },
+                    "vcs_type": {
+                      "description": "The version control system type for the organization.",
+                      "enum": ["github", "bitbucket", "circleci"],
+                      "example": "github",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["id", "name", "slug", "vcs_type"],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "An organization object"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error response."
+          }
+        },
+        "summary": "Get an organization",
+        "tags": ["Organization"]
       }
     },
     "/organization/{org-slug-or-id}/project": {
