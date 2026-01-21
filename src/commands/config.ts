@@ -22,9 +22,7 @@ export const configCommand = new Command()
   .description("Manage CircleCI CLI configuration")
   .command("set")
   .description(
-    `Set configuration values\n\nAvailable keys:\n${Object.entries(
-      CONFIG_KEY_MAP,
-    )
+    `Set configuration values\n\nAvailable keys:\n${Object.entries(CONFIG_KEY_MAP)
       .map(([key, { description }]) => `  ${key}: ${description}`)
       .join("\n")}`,
   )

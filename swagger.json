@@ -1444,12 +1444,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "variable",
-                "created_at",
-                "updated_at",
-                "context_id"
-              ],
+              "required": ["variable", "created_at", "updated_at", "context_id"],
               "type": "object"
             },
             "type": "array"
@@ -1921,12 +1916,7 @@
             "x-go-name": "TargetVersion"
           }
         },
-        "required": [
-          "environment_name",
-          "component_name",
-          "current_version",
-          "target_version"
-        ],
+        "required": ["environment_name", "component_name", "current_version", "target_version"],
         "type": "object"
       },
       "rollbackProjectResponse": {
@@ -2304,13 +2294,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "usage_export_job_id",
-          "state",
-          "start",
-          "end",
-          "download_urls"
-        ],
+        "required": ["usage_export_job_id", "state", "start", "end", "download_urls"],
         "type": "object"
       },
       "version": {
@@ -3407,12 +3391,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "workflow_name",
-                          "branch",
-                          "metrics",
-                          "trends"
-                        ],
+                        "required": ["workflow_name", "branch", "metrics", "trends"],
                         "type": "object"
                       },
                       "type": "array"
@@ -3651,13 +3630,7 @@
                                     "x-nullable": true
                                   }
                                 },
-                                "required": [
-                                  "min",
-                                  "median",
-                                  "max",
-                                  "p95",
-                                  "total"
-                                ],
+                                "required": ["min", "median", "max", "p95", "total"],
                                 "type": "object"
                               },
                               "failed_runs": {
@@ -4469,13 +4442,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "name",
-                          "metrics",
-                          "window_start",
-                          "window_end",
-                          "project_id"
-                        ],
+                        "required": ["name", "metrics", "window_start", "window_end", "project_id"],
                         "type": "object"
                       },
                       "type": "array"
@@ -4636,13 +4603,7 @@
                           },
                           "status": {
                             "description": "Workflow status.",
-                            "enum": [
-                              "success",
-                              "failed",
-                              "error",
-                              "canceled",
-                              "unauthorized"
-                            ],
+                            "enum": ["success", "failed", "error", "canceled", "unauthorized"],
                             "type": "string",
                             "x-nullable": true
                           },
@@ -4911,12 +4872,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "name",
-                          "metrics",
-                          "window_start",
-                          "window_end"
-                        ],
+                        "required": ["name", "metrics", "window_start", "window_end"],
                         "type": "object"
                       },
                       "type": "array"
@@ -5061,14 +5017,7 @@
                               "x-nullable": true
                             }
                           },
-                          "required": [
-                            "min",
-                            "mean",
-                            "median",
-                            "p95",
-                            "max",
-                            "standard_deviation"
-                          ],
+                          "required": ["min", "mean", "median", "p95", "max", "standard_deviation"],
                           "type": "object"
                         },
                         "failed_runs": {
@@ -5478,13 +5427,7 @@
                                 "type": "integer"
                               }
                             },
-                            "required": [
-                              "error",
-                              "failure",
-                              "skipped",
-                              "success",
-                              "total"
-                            ],
+                            "required": ["error", "failure", "skipped", "success", "total"],
                             "type": "object"
                           },
                           "workflow_id": {
@@ -5767,13 +5710,7 @@
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "id",
-                      "vcs-type",
-                      "name",
-                      "avatar_url",
-                      "slug"
-                    ],
+                    "required": ["id", "vcs-type", "name", "avatar_url", "slug"],
                     "title": "Collaboration",
                     "type": "object"
                   },
@@ -6387,12 +6324,7 @@
                         "properties": {
                           "auth": {
                             "description": "An authentication method to use for fetching URL orb references that match this allow-list entry's prefix. Allowed values are \"bitbucket-oauth\", \"github-oauth\", \"github-app\", or \"none\".",
-                            "enum": [
-                              "github-oauth",
-                              "none",
-                              "bitbucket-oauth",
-                              "github-app"
-                            ],
+                            "enum": ["github-oauth", "none", "bitbucket-oauth", "github-app"],
                             "example": "github-app",
                             "type": "string"
                           },
@@ -6465,12 +6397,7 @@
                 "properties": {
                   "auth": {
                     "description": "An authentication method to use for fetching URL orb references that match this allow-list entry's prefix. Allowed values are \"bitbucket-oauth\", \"github-oauth\", \"github-app\", or \"none\".",
-                    "enum": [
-                      "github-oauth",
-                      "none",
-                      "bitbucket-oauth",
-                      "github-app"
-                    ],
+                    "enum": ["github-oauth", "none", "bitbucket-oauth", "github-app"],
                     "example": "github-app",
                     "type": "string"
                   },
@@ -7637,13 +7564,7 @@
                           },
                           "state": {
                             "description": "The current state of the pipeline.",
-                            "enum": [
-                              "created",
-                              "errored",
-                              "setup-pending",
-                              "setup",
-                              "pending"
-                            ],
+                            "enum": ["created", "errored", "setup-pending", "setup", "pending"],
                             "type": "string"
                           },
                           "trigger": {
@@ -7673,12 +7594,7 @@
                               },
                               "type": {
                                 "description": "The type of trigger.",
-                                "enum": [
-                                  "scheduled_pipeline",
-                                  "explicit",
-                                  "api",
-                                  "webhook"
-                                ],
+                                "enum": ["scheduled_pipeline", "explicit", "api", "webhook"],
                                 "type": "string"
                               }
                             },
@@ -7999,13 +7915,7 @@
                     },
                     "state": {
                       "description": "The current state of the pipeline.",
-                      "enum": [
-                        "created",
-                        "errored",
-                        "setup-pending",
-                        "setup",
-                        "pending"
-                      ],
+                      "enum": ["created", "errored", "setup-pending", "setup", "pending"],
                       "type": "string"
                     },
                     "trigger": {
@@ -8035,12 +7945,7 @@
                         },
                         "type": {
                           "description": "The type of trigger.",
-                          "enum": [
-                            "scheduled_pipeline",
-                            "explicit",
-                            "api",
-                            "webhook"
-                          ],
+                          "enum": ["scheduled_pipeline", "explicit", "api", "webhook"],
                           "type": "string"
                         }
                       },
@@ -8856,13 +8761,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "public-key",
-                    "type",
-                    "fingerprint",
-                    "preferred",
-                    "created-at"
-                  ],
+                  "required": ["public-key", "type", "fingerprint", "preferred", "created-at"],
                   "title": "CheckoutKey",
                   "type": "object"
                 }
@@ -9018,13 +8917,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "public-key",
-                    "type",
-                    "fingerprint",
-                    "preferred",
-                    "created-at"
-                  ],
+                  "required": ["public-key", "type", "fingerprint", "preferred", "created-at"],
                   "title": "CheckoutKey",
                   "type": "object"
                 }
@@ -9819,13 +9712,7 @@
                           },
                           "state": {
                             "description": "The current state of the pipeline.",
-                            "enum": [
-                              "created",
-                              "errored",
-                              "setup-pending",
-                              "setup",
-                              "pending"
-                            ],
+                            "enum": ["created", "errored", "setup-pending", "setup", "pending"],
                             "type": "string"
                           },
                           "trigger": {
@@ -9855,12 +9742,7 @@
                               },
                               "type": {
                                 "description": "The type of trigger.",
-                                "enum": [
-                                  "scheduled_pipeline",
-                                  "explicit",
-                                  "api",
-                                  "webhook"
-                                ],
+                                "enum": ["scheduled_pipeline", "explicit", "api", "webhook"],
                                 "type": "string"
                               }
                             },
@@ -10105,13 +9987,7 @@
                     },
                     "state": {
                       "description": "The current state of the pipeline.",
-                      "enum": [
-                        "created",
-                        "errored",
-                        "setup-pending",
-                        "setup",
-                        "pending"
-                      ],
+                      "enum": ["created", "errored", "setup-pending", "setup", "pending"],
                       "type": "string"
                     }
                   },
@@ -10234,13 +10110,7 @@
                           },
                           "state": {
                             "description": "The current state of the pipeline.",
-                            "enum": [
-                              "created",
-                              "errored",
-                              "setup-pending",
-                              "setup",
-                              "pending"
-                            ],
+                            "enum": ["created", "errored", "setup-pending", "setup", "pending"],
                             "type": "string"
                           },
                           "trigger": {
@@ -10270,12 +10140,7 @@
                               },
                               "type": {
                                 "description": "The type of trigger.",
-                                "enum": [
-                                  "scheduled_pipeline",
-                                  "explicit",
-                                  "api",
-                                  "webhook"
-                                ],
+                                "enum": ["scheduled_pipeline", "explicit", "api", "webhook"],
                                 "type": "string"
                               }
                             },
@@ -10520,13 +10385,7 @@
                     },
                     "state": {
                       "description": "The current state of the pipeline.",
-                      "enum": [
-                        "created",
-                        "errored",
-                        "setup-pending",
-                        "setup",
-                        "pending"
-                      ],
+                      "enum": ["created", "errored", "setup-pending", "setup", "pending"],
                       "type": "string"
                     },
                     "trigger": {
@@ -10556,12 +10415,7 @@
                         },
                         "type": {
                           "description": "The type of trigger.",
-                          "enum": [
-                            "scheduled_pipeline",
-                            "explicit",
-                            "api",
-                            "webhook"
-                          ],
+                          "enum": ["scheduled_pipeline", "explicit", "api", "webhook"],
                           "type": "string"
                         }
                       },
@@ -10835,15 +10689,7 @@
                                     "description": "Days in a week in which the schedule triggers.",
                                     "items": {
                                       "description": "Day in a week, in three letters format",
-                                      "enum": [
-                                        "TUE",
-                                        "SAT",
-                                        "SUN",
-                                        "MON",
-                                        "THU",
-                                        "WED",
-                                        "FRI"
-                                      ],
+                                      "enum": ["TUE", "SAT", "SUN", "MON", "THU", "WED", "FRI"],
                                       "type": "string"
                                     },
                                     "type": "array"
@@ -10885,11 +10731,7 @@
                                     "type": "integer"
                                   }
                                 },
-                                "required": [
-                                  "per-hour",
-                                  "hours-of-day",
-                                  "days-of-week"
-                                ],
+                                "required": ["per-hour", "hours-of-day", "days-of-week"],
                                 "type": "object"
                               },
                               {
@@ -10907,15 +10749,7 @@
                                     "description": "Days in a week in which the schedule triggers.",
                                     "items": {
                                       "description": "Day in a week, in three letters format",
-                                      "enum": [
-                                        "TUE",
-                                        "SAT",
-                                        "SUN",
-                                        "MON",
-                                        "THU",
-                                        "WED",
-                                        "FRI"
-                                      ],
+                                      "enum": ["TUE", "SAT", "SUN", "MON", "THU", "WED", "FRI"],
                                       "type": "string"
                                     },
                                     "type": "array"
@@ -10957,11 +10791,7 @@
                                     "type": "integer"
                                   }
                                 },
-                                "required": [
-                                  "per-hour",
-                                  "hours-of-day",
-                                  "days-of-month"
-                                ],
+                                "required": ["per-hour", "hours-of-day", "days-of-month"],
                                 "type": "object"
                               }
                             ],
@@ -11096,15 +10926,7 @@
                             "description": "Days in a week in which the schedule triggers.",
                             "items": {
                               "description": "Day in a week, in three letters format",
-                              "enum": [
-                                "TUE",
-                                "SAT",
-                                "SUN",
-                                "MON",
-                                "THU",
-                                "WED",
-                                "FRI"
-                              ],
+                              "enum": ["TUE", "SAT", "SUN", "MON", "THU", "WED", "FRI"],
                               "type": "string"
                             },
                             "type": "array"
@@ -11146,11 +10968,7 @@
                             "type": "integer"
                           }
                         },
-                        "required": [
-                          "per-hour",
-                          "hours-of-day",
-                          "days-of-week"
-                        ],
+                        "required": ["per-hour", "hours-of-day", "days-of-week"],
                         "type": "object"
                       },
                       {
@@ -11168,15 +10986,7 @@
                             "description": "Days in a week in which the schedule triggers.",
                             "items": {
                               "description": "Day in a week, in three letters format",
-                              "enum": [
-                                "TUE",
-                                "SAT",
-                                "SUN",
-                                "MON",
-                                "THU",
-                                "WED",
-                                "FRI"
-                              ],
+                              "enum": ["TUE", "SAT", "SUN", "MON", "THU", "WED", "FRI"],
                               "type": "string"
                             },
                             "type": "array"
@@ -11218,23 +11028,14 @@
                             "type": "integer"
                           }
                         },
-                        "required": [
-                          "per-hour",
-                          "hours-of-day",
-                          "days-of-month"
-                        ],
+                        "required": ["per-hour", "hours-of-day", "days-of-month"],
                         "type": "object"
                       }
                     ],
                     "description": "Timetable that specifies when a schedule triggers."
                   }
                 },
-                "required": [
-                  "name",
-                  "timetable",
-                  "attribution-actor",
-                  "parameters"
-                ],
+                "required": ["name", "timetable", "attribution-actor", "parameters"],
                 "title": "CreateScheduleParameters",
                 "type": "object"
               }
@@ -11337,15 +11138,7 @@
                               "description": "Days in a week in which the schedule triggers.",
                               "items": {
                                 "description": "Day in a week, in three letters format",
-                                "enum": [
-                                  "TUE",
-                                  "SAT",
-                                  "SUN",
-                                  "MON",
-                                  "THU",
-                                  "WED",
-                                  "FRI"
-                                ],
+                                "enum": ["TUE", "SAT", "SUN", "MON", "THU", "WED", "FRI"],
                                 "type": "string"
                               },
                               "type": "array"
@@ -11387,11 +11180,7 @@
                               "type": "integer"
                             }
                           },
-                          "required": [
-                            "per-hour",
-                            "hours-of-day",
-                            "days-of-week"
-                          ],
+                          "required": ["per-hour", "hours-of-day", "days-of-week"],
                           "type": "object"
                         },
                         {
@@ -11409,15 +11198,7 @@
                               "description": "Days in a week in which the schedule triggers.",
                               "items": {
                                 "description": "Day in a week, in three letters format",
-                                "enum": [
-                                  "TUE",
-                                  "SAT",
-                                  "SUN",
-                                  "MON",
-                                  "THU",
-                                  "WED",
-                                  "FRI"
-                                ],
+                                "enum": ["TUE", "SAT", "SUN", "MON", "THU", "WED", "FRI"],
                                 "type": "string"
                               },
                               "type": "array"
@@ -11459,11 +11240,7 @@
                               "type": "integer"
                             }
                           },
-                          "required": [
-                            "per-hour",
-                            "hours-of-day",
-                            "days-of-month"
-                          ],
+                          "required": ["per-hour", "hours-of-day", "days-of-month"],
                           "type": "object"
                         }
                       ],
@@ -12647,15 +12424,7 @@
                               "description": "Days in a week in which the schedule triggers.",
                               "items": {
                                 "description": "Day in a week, in three letters format",
-                                "enum": [
-                                  "TUE",
-                                  "SAT",
-                                  "SUN",
-                                  "MON",
-                                  "THU",
-                                  "WED",
-                                  "FRI"
-                                ],
+                                "enum": ["TUE", "SAT", "SUN", "MON", "THU", "WED", "FRI"],
                                 "type": "string"
                               },
                               "type": "array"
@@ -12697,11 +12466,7 @@
                               "type": "integer"
                             }
                           },
-                          "required": [
-                            "per-hour",
-                            "hours-of-day",
-                            "days-of-week"
-                          ],
+                          "required": ["per-hour", "hours-of-day", "days-of-week"],
                           "type": "object"
                         },
                         {
@@ -12719,15 +12484,7 @@
                               "description": "Days in a week in which the schedule triggers.",
                               "items": {
                                 "description": "Day in a week, in three letters format",
-                                "enum": [
-                                  "TUE",
-                                  "SAT",
-                                  "SUN",
-                                  "MON",
-                                  "THU",
-                                  "WED",
-                                  "FRI"
-                                ],
+                                "enum": ["TUE", "SAT", "SUN", "MON", "THU", "WED", "FRI"],
                                 "type": "string"
                               },
                               "type": "array"
@@ -12769,11 +12526,7 @@
                               "type": "integer"
                             }
                           },
-                          "required": [
-                            "per-hour",
-                            "hours-of-day",
-                            "days-of-month"
-                          ],
+                          "required": ["per-hour", "hours-of-day", "days-of-month"],
                           "type": "object"
                         }
                       ],
@@ -12895,15 +12648,7 @@
                         "description": "Days in a week in which the schedule triggers.",
                         "items": {
                           "description": "Day in a week, in three letters format",
-                          "enum": [
-                            "TUE",
-                            "SAT",
-                            "SUN",
-                            "MON",
-                            "THU",
-                            "WED",
-                            "FRI"
-                          ],
+                          "enum": ["TUE", "SAT", "SUN", "MON", "THU", "WED", "FRI"],
                           "type": "string"
                         },
                         "type": "array"
@@ -13050,15 +12795,7 @@
                               "description": "Days in a week in which the schedule triggers.",
                               "items": {
                                 "description": "Day in a week, in three letters format",
-                                "enum": [
-                                  "TUE",
-                                  "SAT",
-                                  "SUN",
-                                  "MON",
-                                  "THU",
-                                  "WED",
-                                  "FRI"
-                                ],
+                                "enum": ["TUE", "SAT", "SUN", "MON", "THU", "WED", "FRI"],
                                 "type": "string"
                               },
                               "type": "array"
@@ -13100,11 +12837,7 @@
                               "type": "integer"
                             }
                           },
-                          "required": [
-                            "per-hour",
-                            "hours-of-day",
-                            "days-of-week"
-                          ],
+                          "required": ["per-hour", "hours-of-day", "days-of-week"],
                           "type": "object"
                         },
                         {
@@ -13122,15 +12855,7 @@
                               "description": "Days in a week in which the schedule triggers.",
                               "items": {
                                 "description": "Day in a week, in three letters format",
-                                "enum": [
-                                  "TUE",
-                                  "SAT",
-                                  "SUN",
-                                  "MON",
-                                  "THU",
-                                  "WED",
-                                  "FRI"
-                                ],
+                                "enum": ["TUE", "SAT", "SUN", "MON", "THU", "WED", "FRI"],
                                 "type": "string"
                               },
                               "type": "array"
@@ -13172,11 +12897,7 @@
                               "type": "integer"
                             }
                           },
-                          "required": [
-                            "per-hour",
-                            "hours-of-day",
-                            "days-of-month"
-                          ],
+                          "required": ["per-hour", "hours-of-day", "days-of-month"],
                           "type": "object"
                         }
                       ],
@@ -13489,14 +13210,7 @@
                     "type": "boolean"
                   }
                 },
-                "required": [
-                  "name",
-                  "events",
-                  "url",
-                  "verify-tls",
-                  "signing-secret",
-                  "scope"
-                ],
+                "required": ["name", "events", "url", "verify-tls", "signing-secret", "scope"],
                 "type": "object"
               }
             }
@@ -14303,18 +14017,13 @@
                             },
                             "description": "A sequence of the unique jobs and required statuses that this job depends upon in the workflow.",
                             "example": {
-                              "74be7583-44de-42a6-be75-8344de52a6f2": [
-                                "failed",
-                                "canceled"
-                              ],
+                              "74be7583-44de-42a6-be75-8344de52a6f2": ["failed", "canceled"],
                               "a3349b77-90f7-4a39-b49b-7790f7da3943": [
                                 "success",
                                 "failed",
                                 "canceled"
                               ],
-                              "d212e286-9962-4ed7-92e2-8699622ed720": [
-                                "success"
-                              ]
+                              "d212e286-9962-4ed7-92e2-8699622ed720": ["success"]
                             },
                             "type": "object"
                           },

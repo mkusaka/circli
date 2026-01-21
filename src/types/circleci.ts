@@ -3442,12 +3442,7 @@ export interface operations {
                * @description Workflow status.
                * @enum {string}
                */
-              status:
-                | "success"
-                | "failed"
-                | "error"
-                | "canceled"
-                | "unauthorized";
+              status: "success" | "failed" | "error" | "canceled" | "unauthorized";
               /**
                * Format: date-time
                * @description The date and time the workflow stopped.
@@ -4832,12 +4827,7 @@ export interface operations {
                * @description The current state of the pipeline.
                * @enum {string}
                */
-              state:
-                | "created"
-                | "errored"
-                | "setup-pending"
-                | "setup"
-                | "pending";
+              state: "created" | "errored" | "setup-pending" | "setup" | "pending";
               /** @description A summary of the trigger. */
               trigger: {
                 /** @description The user who triggered the Pipeline. */
@@ -4862,11 +4852,7 @@ export interface operations {
                 type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
               };
               trigger_parameters?: {
-                [key: string]:
-                  | string
-                  | number
-                  | boolean
-                  | Record<string, never>;
+                [key: string]: string | number | boolean | Record<string, never>;
               };
               /**
                * Format: date-time
@@ -5062,12 +5048,7 @@ export interface operations {
              * @description The current state of the pipeline.
              * @enum {string}
              */
-            state:
-              | "created"
-              | "errored"
-              | "setup-pending"
-              | "setup"
-              | "pending";
+            state: "created" | "errored" | "setup-pending" | "setup" | "pending";
             /** @description A summary of the trigger. */
             trigger: {
               /** @description The user who triggered the Pipeline. */
@@ -6233,12 +6214,7 @@ export interface operations {
                * @description The current state of the pipeline.
                * @enum {string}
                */
-              state:
-                | "created"
-                | "errored"
-                | "setup-pending"
-                | "setup"
-                | "pending";
+              state: "created" | "errored" | "setup-pending" | "setup" | "pending";
               /** @description A summary of the trigger. */
               trigger: {
                 /** @description The user who triggered the Pipeline. */
@@ -6263,11 +6239,7 @@ export interface operations {
                 type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
               };
               trigger_parameters?: {
-                [key: string]:
-                  | string
-                  | number
-                  | boolean
-                  | Record<string, never>;
+                [key: string]: string | number | boolean | Record<string, never>;
               };
               /**
                * Format: date-time
@@ -6410,12 +6382,7 @@ export interface operations {
              * @description The current state of the pipeline.
              * @enum {string}
              */
-            state:
-              | "created"
-              | "errored"
-              | "setup-pending"
-              | "setup"
-              | "pending";
+            state: "created" | "errored" | "setup-pending" | "setup" | "pending";
           };
         };
       };
@@ -6501,12 +6468,7 @@ export interface operations {
                * @description The current state of the pipeline.
                * @enum {string}
                */
-              state:
-                | "created"
-                | "errored"
-                | "setup-pending"
-                | "setup"
-                | "pending";
+              state: "created" | "errored" | "setup-pending" | "setup" | "pending";
               /** @description A summary of the trigger. */
               trigger: {
                 /** @description The user who triggered the Pipeline. */
@@ -6531,11 +6493,7 @@ export interface operations {
                 type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
               };
               trigger_parameters?: {
-                [key: string]:
-                  | string
-                  | number
-                  | boolean
-                  | Record<string, never>;
+                [key: string]: string | number | boolean | Record<string, never>;
               };
               /**
                * Format: date-time
@@ -6681,12 +6639,7 @@ export interface operations {
              * @description The current state of the pipeline.
              * @enum {string}
              */
-            state:
-              | "created"
-              | "errored"
-              | "setup-pending"
-              | "setup"
-              | "pending";
+            state: "created" | "errored" | "setup-pending" | "setup" | "pending";
             /** @description A summary of the trigger. */
             trigger: {
               /** @description The user who triggered the Pipeline. */
@@ -6863,15 +6816,7 @@ export interface operations {
                     /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
                     "days-of-month"?: number[];
                     /** @description Days in a week in which the schedule triggers. */
-                    "days-of-week": (
-                      | "TUE"
-                      | "SAT"
-                      | "SUN"
-                      | "MON"
-                      | "THU"
-                      | "WED"
-                      | "FRI"
-                    )[];
+                    "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
                     /** @description Hours in a day in which the schedule triggers. */
                     "hours-of-day": number[];
                     /** @description Months in which the schedule triggers. */
@@ -6899,15 +6844,7 @@ export interface operations {
                     /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
                     "days-of-month": number[];
                     /** @description Days in a week in which the schedule triggers. */
-                    "days-of-week"?: (
-                      | "TUE"
-                      | "SAT"
-                      | "SUN"
-                      | "MON"
-                      | "THU"
-                      | "WED"
-                      | "FRI"
-                    )[];
+                    "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
                     /** @description Hours in a day in which the schedule triggers. */
                     "hours-of-day": number[];
                     /** @description Months in which the schedule triggers. */
@@ -6997,15 +6934,7 @@ export interface operations {
                 /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
                 "days-of-month"?: number[];
                 /** @description Days in a week in which the schedule triggers. */
-                "days-of-week": (
-                  | "TUE"
-                  | "SAT"
-                  | "SUN"
-                  | "MON"
-                  | "THU"
-                  | "WED"
-                  | "FRI"
-                )[];
+                "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
                 /** @description Hours in a day in which the schedule triggers. */
                 "hours-of-day": number[];
                 /** @description Months in which the schedule triggers. */
@@ -7033,15 +6962,7 @@ export interface operations {
                 /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
                 "days-of-month": number[];
                 /** @description Days in a week in which the schedule triggers. */
-                "days-of-week"?: (
-                  | "TUE"
-                  | "SAT"
-                  | "SUN"
-                  | "MON"
-                  | "THU"
-                  | "WED"
-                  | "FRI"
-                )[];
+                "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
                 /** @description Hours in a day in which the schedule triggers. */
                 "hours-of-day": number[];
                 /** @description Months in which the schedule triggers. */
@@ -7129,15 +7050,7 @@ export interface operations {
                   /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
                   "days-of-month"?: number[];
                   /** @description Days in a week in which the schedule triggers. */
-                  "days-of-week": (
-                    | "TUE"
-                    | "SAT"
-                    | "SUN"
-                    | "MON"
-                    | "THU"
-                    | "WED"
-                    | "FRI"
-                  )[];
+                  "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
                   /** @description Hours in a day in which the schedule triggers. */
                   "hours-of-day": number[];
                   /** @description Months in which the schedule triggers. */
@@ -7165,15 +7078,7 @@ export interface operations {
                   /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
                   "days-of-month": number[];
                   /** @description Days in a week in which the schedule triggers. */
-                  "days-of-week"?: (
-                    | "TUE"
-                    | "SAT"
-                    | "SUN"
-                    | "MON"
-                    | "THU"
-                    | "WED"
-                    | "FRI"
-                  )[];
+                  "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
                   /** @description Hours in a day in which the schedule triggers. */
                   "hours-of-day": number[];
                   /** @description Months in which the schedule triggers. */
@@ -7633,15 +7538,7 @@ export interface operations {
                   /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
                   "days-of-month"?: number[];
                   /** @description Days in a week in which the schedule triggers. */
-                  "days-of-week": (
-                    | "TUE"
-                    | "SAT"
-                    | "SUN"
-                    | "MON"
-                    | "THU"
-                    | "WED"
-                    | "FRI"
-                  )[];
+                  "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
                   /** @description Hours in a day in which the schedule triggers. */
                   "hours-of-day": number[];
                   /** @description Months in which the schedule triggers. */
@@ -7669,15 +7566,7 @@ export interface operations {
                   /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
                   "days-of-month": number[];
                   /** @description Days in a week in which the schedule triggers. */
-                  "days-of-week"?: (
-                    | "TUE"
-                    | "SAT"
-                    | "SUN"
-                    | "MON"
-                    | "THU"
-                    | "WED"
-                    | "FRI"
-                  )[];
+                  "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
                   /** @description Hours in a day in which the schedule triggers. */
                   "hours-of-day": number[];
                   /** @description Months in which the schedule triggers. */
@@ -7797,15 +7686,7 @@ export interface operations {
             /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
             "days-of-month"?: number[];
             /** @description Days in a week in which the schedule triggers. */
-            "days-of-week"?: (
-              | "TUE"
-              | "SAT"
-              | "SUN"
-              | "MON"
-              | "THU"
-              | "WED"
-              | "FRI"
-            )[];
+            "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
             /** @description Hours in a day in which the schedule triggers. */
             "hours-of-day"?: number[];
             /** @description Months in which the schedule triggers. */
@@ -7893,15 +7774,7 @@ export interface operations {
                   /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
                   "days-of-month"?: number[];
                   /** @description Days in a week in which the schedule triggers. */
-                  "days-of-week": (
-                    | "TUE"
-                    | "SAT"
-                    | "SUN"
-                    | "MON"
-                    | "THU"
-                    | "WED"
-                    | "FRI"
-                  )[];
+                  "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
                   /** @description Hours in a day in which the schedule triggers. */
                   "hours-of-day": number[];
                   /** @description Months in which the schedule triggers. */
@@ -7929,15 +7802,7 @@ export interface operations {
                   /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
                   "days-of-month": number[];
                   /** @description Days in a week in which the schedule triggers. */
-                  "days-of-week"?: (
-                    | "TUE"
-                    | "SAT"
-                    | "SUN"
-                    | "MON"
-                    | "THU"
-                    | "WED"
-                    | "FRI"
-                  )[];
+                  "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
                   /** @description Hours in a day in which the schedule triggers. */
                   "hours-of-day": number[];
                   /** @description Months in which the schedule triggers. */

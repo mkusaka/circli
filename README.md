@@ -119,7 +119,6 @@ npm install --global circli
 ## Getting Started
 
 1.  **Obtain a CircleCI API Token:**
-
     - Go to your CircleCI User Settings: [https://app.circleci.com/settings/user](https://app.circleci.com/settings/user)
     - Create a new Personal API Token.
 

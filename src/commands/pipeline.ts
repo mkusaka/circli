@@ -22,13 +22,9 @@ export const pipelineCommand = new Command()
   )
   .option("--branch <branch:string>", "Filter by branch")
   .option("--page-token <token:string>", "Next page token")
-  .option(
-    "--limit <number:number>",
-    "Max number of pipelines to display (client-side)",
-    {
-      default: 10,
-    },
-  )
+  .option("--limit <number:number>", "Max number of pipelines to display (client-side)", {
+    default: 10,
+  })
   .option("--json", "Output in JSON format")
   .option("--yaml", "Output in YAML format")
   .complete("branch", () => COMMON_BRANCHES)
@@ -47,8 +43,7 @@ export const pipelineCommand = new Command()
       console.error(validated.error.message);
       process.exit(1);
     }
-    const { projectSlug, branch, pageToken, limit, json, yaml } =
-      validated.data;
+    const { projectSlug, branch, pageToken, limit, json, yaml } = validated.data;
 
     const clientResult = await createClient();
     if (clientResult.isErr()) {
@@ -102,10 +97,7 @@ export const pipelineCommand = new Command()
   .command("get")
   .description("Get a pipeline by ID or number")
   .option("--pipeline-id <pipelineId:string>", "Pipeline ID (UUID)")
-  .option(
-    "--project-slug <projectSlug:string>",
-    "Project slug (for get by number)",
-  )
+  .option("--project-slug <projectSlug:string>", "Project slug (for get by number)")
   .option("--pipeline-number <pipelineNumber:number>", "Pipeline number")
   .option("--json", "Output in JSON format")
   .option("--yaml", "Output in YAML format")
@@ -130,17 +122,14 @@ export const pipelineCommand = new Command()
         }
         data = response.data;
       } else if (options.projectSlug && options.pipelineNumber) {
-        const response = await client.GET(
-          "/project/{project-slug}/pipeline/{pipeline-number}",
-          {
-            params: {
-              path: {
-                "project-slug": options.projectSlug,
-                "pipeline-number": options.pipelineNumber,
-              },
+        const response = await client.GET("/project/{project-slug}/pipeline/{pipeline-number}", {
+          params: {
+            path: {
+              "project-slug": options.projectSlug,
+              "pipeline-number": options.pipelineNumber,
             },
           },
-        );
+        });
         if (response.error) {
           throw new Error(response.error.message);
         }
@@ -179,19 +168,13 @@ export const pipelineCommand = new Command()
   // pipeline trigger
   .command("trigger")
   .description("Trigger a new pipeline")
-  .option(
-    "--project-slug <projectSlug:string>",
-    "Project slug (for GitHub OAuth/Bitbucket)",
-  )
+  .option("--project-slug <projectSlug:string>", "Project slug (for GitHub OAuth/Bitbucket)")
   .option("--provider <provider:string>", "VCS provider (github, bitbucket)")
   .option("--organization <organization:string>", "Organization name")
   .option("--project <project:string>", "Project name")
   .option("--branch <branch:string>", "Branch to build")
   .option("--tag <tag:string>", "Tag to build")
-  .option(
-    "--parameters <parameters:string>",
-    "Pipeline parameters as JSON string",
-  )
+  .option("--parameters <parameters:string>", "Pipeline parameters as JSON string")
   .option("--json", "Output in JSON format")
   .option("--yaml", "Output in YAML format")
   .action(async (options) => {
@@ -232,13 +215,7 @@ export const pipelineCommand = new Command()
         data = response.data;
       } else if (options.provider && options.organization && options.project) {
         // Use the new API for GitHub App
-        const validProviders = [
-          "github",
-          "gh",
-          "bitbucket",
-          "bb",
-          "circleci",
-        ] as const;
+        const validProviders = ["github", "gh", "bitbucket", "bb", "circleci"] as const;
         type Provider = (typeof validProviders)[number];
         if (!validProviders.includes(options.provider as Provider)) {
           console.error(
@@ -441,14 +418,8 @@ export const pipelineCommand = new Command()
   .option("--continuation-key <key:string>", "Continuation key", {
     required: true,
   })
-  .option(
-    "--configuration <configuration:string>",
-    "The configuration string for the pipeline",
-  )
-  .option(
-    "--parameters <parameters:string>",
-    "Pipeline parameters as JSON string",
-  )
+  .option("--configuration <configuration:string>", "The configuration string for the pipeline")
+  .option("--parameters <parameters:string>", "Pipeline parameters as JSON string")
   .option("--json", "Output in JSON format")
   .option("--yaml", "Output in YAML format")
   .action(async (options) => {
@@ -519,15 +490,12 @@ export const pipelineCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET(
-        "/project/{project-slug}/pipeline/mine",
-        {
-          params: {
-            path: { "project-slug": options.projectSlug },
-            query: { "page-token": options.pageToken },
-          },
+      const response = await client.GET("/project/{project-slug}/pipeline/mine", {
+        params: {
+          path: { "project-slug": options.projectSlug },
+          query: { "page-token": options.pageToken },
         },
-      );
+      });
 
       if (response.error) {
         throw new Error(response.error.message);

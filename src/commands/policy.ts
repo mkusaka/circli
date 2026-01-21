@@ -15,10 +15,7 @@ const decisionSubcommand = new Command()
     default: "config",
   })
   .option("--status <status:string>", "Filter by status")
-  .option(
-    "--after <after:string>",
-    "Return decisions after this date (ISO 8601)",
-  )
+  .option("--after <after:string>", "Return decisions after this date (ISO 8601)")
   .option("--branch <branch:string>", "Filter by branch")
   .option("--project-id <projectId:string>", "Filter by project ID")
   .option("--offset <offset:number>", "Page offset")
@@ -33,21 +30,18 @@ const decisionSubcommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET(
-        "/owner/{ownerID}/context/{context}/decision",
-        {
-          params: {
-            path: { ownerID: ownerId, context: options.context },
-            query: {
-              status: options.status,
-              after: options.after,
-              branch: options.branch,
-              project_id: options.projectId,
-              offset: options.offset,
-            },
+      const response = await client.GET("/owner/{ownerID}/context/{context}/decision", {
+        params: {
+          path: { ownerID: ownerId, context: options.context },
+          query: {
+            status: options.status,
+            after: options.after,
+            branch: options.branch,
+            project_id: options.projectId,
+            offset: options.offset,
           },
         },
-      );
+      });
 
       if (response.error) {
         throw new Error(response.error.error);
@@ -59,9 +53,9 @@ const decisionSubcommand = new Command()
         printYaml(response.data);
       } else {
         const headers = ["ID", "Status", "Created At"];
-        const rows = (
-          response.data as { id: string; status: string; created_at: string }[]
-        ).map((d) => [d.id, d.status, d.created_at]);
+        const rows = (response.data as { id: string; status: string; created_at: string }[]).map(
+          (d) => [d.id, d.status, d.created_at],
+        );
         printTable(headers, rows);
       }
     } catch (error) {
@@ -156,18 +150,15 @@ const decisionSubcommand = new Command()
         }
       }
 
-      const response = await client.POST(
-        "/owner/{ownerID}/context/{context}/decision",
-        {
-          params: {
-            path: { ownerID: ownerId, context: options.context },
-          },
-          body: {
-            input: options.input,
-            metadata,
-          },
+      const response = await client.POST("/owner/{ownerID}/context/{context}/decision", {
+        params: {
+          path: { ownerID: ownerId, context: options.context },
         },
-      );
+        body: {
+          input: options.input,
+          metadata,
+        },
+      });
 
       if (response.error) {
         throw new Error(response.error.error);
@@ -179,28 +170,19 @@ const decisionSubcommand = new Command()
         printYaml(response.data);
       } else {
         console.log(`Status: ${response.data.status}`);
-        if (
-          response.data.enabled_rules &&
-          response.data.enabled_rules.length > 0
-        ) {
+        if (response.data.enabled_rules && response.data.enabled_rules.length > 0) {
           console.log("\nEnabled Rules:");
           for (const rule of response.data.enabled_rules) {
             console.log(`  - ${rule}`);
           }
         }
-        if (
-          response.data.soft_failures &&
-          response.data.soft_failures.length > 0
-        ) {
+        if (response.data.soft_failures && response.data.soft_failures.length > 0) {
           console.log("\nSoft Failures:");
           for (const f of response.data.soft_failures) {
             console.log(`  - ${f.rule}: ${f.reason}`);
           }
         }
-        if (
-          response.data.hard_failures &&
-          response.data.hard_failures.length > 0
-        ) {
+        if (response.data.hard_failures && response.data.hard_failures.length > 0) {
           console.log("\nHard Failures:");
           for (const f of response.data.hard_failures) {
             console.log(`  - ${f.rule}: ${f.reason}`);
@@ -233,14 +215,11 @@ const settingsSubcommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET(
-        "/owner/{ownerID}/context/{context}/decision/settings",
-        {
-          params: {
-            path: { ownerID: ownerId, context: options.context },
-          },
+      const response = await client.GET("/owner/{ownerID}/context/{context}/decision/settings", {
+        params: {
+          path: { ownerID: ownerId, context: options.context },
         },
-      );
+      });
 
       if (response.error) {
         throw new Error(response.error.error);
@@ -279,17 +258,14 @@ const settingsSubcommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.PATCH(
-        "/owner/{ownerID}/context/{context}/decision/settings",
-        {
-          params: {
-            path: { ownerID: ownerId, context: options.context },
-          },
-          body: {
-            enabled: options.enabled,
-          },
+      const response = await client.PATCH("/owner/{ownerID}/context/{context}/decision/settings", {
+        params: {
+          path: { ownerID: ownerId, context: options.context },
         },
-      );
+        body: {
+          enabled: options.enabled,
+        },
+      });
 
       if (response.error) {
         throw new Error(response.error.error);
@@ -300,9 +276,7 @@ const settingsSubcommand = new Command()
       } else if (options.yaml) {
         printYaml(response.data);
       } else {
-        console.log(
-          `Decision settings updated. Enabled: ${response.data.enabled}`,
-        );
+        console.log(`Decision settings updated. Enabled: ${response.data.enabled}`);
       }
     } catch (error) {
       const handledError = handleApiError(error);
@@ -330,14 +304,11 @@ const bundleSubcommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET(
-        "/owner/{ownerID}/context/{context}/policy-bundle",
-        {
-          params: {
-            path: { ownerID: ownerId, context: options.context },
-          },
+      const response = await client.GET("/owner/{ownerID}/context/{context}/policy-bundle", {
+        params: {
+          path: { ownerID: ownerId, context: options.context },
         },
-      );
+      });
 
       if (response.error) {
         throw new Error(response.error.error);
@@ -362,11 +333,9 @@ const bundleSubcommand = new Command()
   .description("Create (replace) a policy bundle")
   .arguments("<owner-id:string>")
   .option("--context <context:string>", "Policy context", { default: "config" })
-  .option(
-    "--policies <policies:string>",
-    "Policy bundle as JSON object mapping name to content",
-    { required: true },
-  )
+  .option("--policies <policies:string>", "Policy bundle as JSON object mapping name to content", {
+    required: true,
+  })
   .option("--dry-run", "Validate without creating")
   .option("--json", "Output in JSON format")
   .option("--yaml", "Output in YAML format")
@@ -387,16 +356,13 @@ const bundleSubcommand = new Command()
         process.exit(1);
       }
 
-      const response = await client.POST(
-        "/owner/{ownerID}/context/{context}/policy-bundle",
-        {
-          params: {
-            path: { ownerID: ownerId, context: options.context },
-            query: { dry: options.dryRun },
-          },
-          body: { policies },
+      const response = await client.POST("/owner/{ownerID}/context/{context}/policy-bundle", {
+        params: {
+          path: { ownerID: ownerId, context: options.context },
+          query: { dry: options.dryRun },
         },
-      );
+        body: { policies },
+      });
 
       if (response.error) {
         throw new Error(response.error.error);

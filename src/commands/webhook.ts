@@ -116,11 +116,7 @@ export const webhookCommand = new Command()
     { required: true },
   )
   .option("--verify-tls", "Verify TLS certificate", { default: true })
-  .option(
-    "--signing-secret <secret:string>",
-    "Signing secret for verification",
-    { required: true },
-  )
+  .option("--signing-secret <secret:string>", "Signing secret for verification", { required: true })
   .option("--json", "Output in JSON format")
   .option("--yaml", "Output in YAML format")
   .action(async (options) => {
@@ -199,9 +195,7 @@ export const webhookCommand = new Command()
       if (options.name) body.name = options.name;
       if (options.url) body.url = options.url;
       if (options.events) {
-        body.events = options.events
-          .split(",")
-          .map((e: string) => e.trim()) as (
+        body.events = options.events.split(",").map((e: string) => e.trim()) as (
           | "workflow-completed"
           | "job-completed"
         )[];

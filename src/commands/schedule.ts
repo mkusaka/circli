@@ -39,13 +39,7 @@ export const scheduleCommand = new Command()
       } else if (options.yaml) {
         printYaml(response.data);
       } else {
-        const headers = [
-          "ID",
-          "Name",
-          "Description",
-          "Timetable",
-          "Created At",
-        ];
+        const headers = ["ID", "Name", "Description", "Timetable", "Created At"];
         const rows = response.data.items.map((s) => [
           s.id,
           s.name,
@@ -110,9 +104,7 @@ export const scheduleCommand = new Command()
         console.log(
           `  Days of Month: ${(response.data.timetable["days-of-month"] || []).join(", ")}`,
         );
-        console.log(
-          `  Months: ${(response.data.timetable["months"] || []).join(", ")}`,
-        );
+        console.log(`  Months: ${(response.data.timetable["months"] || []).join(", ")}`);
       }
     } catch (error) {
       const handledError = handleApiError(error);
@@ -132,16 +124,10 @@ export const scheduleCommand = new Command()
     required: true,
   })
   .option("--hours-of-day <hours:string>", "Comma-separated hours (0-23)")
-  .option(
-    "--days-of-week <days:string>",
-    "Comma-separated days (SUN,MON,TUE,WED,THU,FRI,SAT)",
-  )
+  .option("--days-of-week <days:string>", "Comma-separated days (SUN,MON,TUE,WED,THU,FRI,SAT)")
   .option("--days-of-month <days:string>", "Comma-separated days (1-31)")
   .option("--months <months:string>", "Comma-separated months (JAN,FEB,...)")
-  .option(
-    "--parameters <parameters:string>",
-    "Pipeline parameters as JSON string",
-  )
+  .option("--parameters <parameters:string>", "Pipeline parameters as JSON string")
   .option("--json", "Output in JSON format")
   .option("--yaml", "Output in YAML format")
   .action(async (options, projectSlug) => {
@@ -218,15 +204,15 @@ export const scheduleCommand = new Command()
       // Need to have either days-of-week or days-of-month
       // If neither is set, default to days-of-week with all days
       if (!timetable["days-of-week"] && !timetable["days-of-month"]) {
-        timetable["days-of-week"] = [
-          "MON",
-          "TUE",
-          "WED",
-          "THU",
-          "FRI",
-          "SAT",
-          "SUN",
-        ] as ("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT")[];
+        timetable["days-of-week"] = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"] as (
+          | "SUN"
+          | "MON"
+          | "TUE"
+          | "WED"
+          | "THU"
+          | "FRI"
+          | "SAT"
+        )[];
       }
       // Need hours-of-day
       if (!timetable["hours-of-day"]) {
@@ -243,15 +229,7 @@ export const scheduleCommand = new Command()
           "attribution-actor": "current",
           parameters: params || {},
           timetable: timetable as {
-            "days-of-week": (
-              | "TUE"
-              | "SAT"
-              | "SUN"
-              | "MON"
-              | "THU"
-              | "WED"
-              | "FRI"
-            )[];
+            "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
             "hours-of-day": number[];
             "per-hour": number;
             months?: (
@@ -301,10 +279,7 @@ export const scheduleCommand = new Command()
   .option("--per-hour <perHour:number>", "Triggers per hour (1-60)")
   .option("--hours-of-day <hours:string>", "Comma-separated hours (0-23)")
   .option("--days-of-week <days:string>", "Comma-separated days")
-  .option(
-    "--parameters <parameters:string>",
-    "Pipeline parameters as JSON string",
-  )
+  .option("--parameters <parameters:string>", "Pipeline parameters as JSON string")
   .option("--json", "Output in JSON format")
   .option("--yaml", "Output in YAML format")
   .action(async (options, scheduleId) => {

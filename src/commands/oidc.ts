@@ -42,10 +42,7 @@ const orgSubcommand = new Command()
         for (const a of response.data.audience || []) {
           console.log(`  - ${a}`);
         }
-        console.log(
-          "\nAudience Updated At:",
-          response.data.audience_updated_at || "-",
-        );
+        console.log("\nAudience Updated At:", response.data.audience_updated_at || "-");
       }
     } catch (error) {
       const handledError = handleApiError(error);
@@ -154,14 +151,11 @@ const projectSubcommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET(
-        "/org/{orgID}/project/{projectID}/oidc-custom-claims",
-        {
-          params: {
-            path: { orgID: orgId, projectID: projectId },
-          },
+      const response = await client.GET("/org/{orgID}/project/{projectID}/oidc-custom-claims", {
+        params: {
+          path: { orgID: orgId, projectID: projectId },
         },
-      );
+      });
 
       if (response.error) {
         throw new Error(response.error.error);
@@ -178,10 +172,7 @@ const projectSubcommand = new Command()
         for (const a of response.data.audience || []) {
           console.log(`  - ${a}`);
         }
-        console.log(
-          "\nAudience Updated At:",
-          response.data.audience_updated_at || "-",
-        );
+        console.log("\nAudience Updated At:", response.data.audience_updated_at || "-");
       }
     } catch (error) {
       const handledError = handleApiError(error);
@@ -210,15 +201,12 @@ const projectSubcommand = new Command()
         ? options.audience.split(",").map((a: string) => a.trim())
         : [];
 
-      const response = await client.PATCH(
-        "/org/{orgID}/project/{projectID}/oidc-custom-claims",
-        {
-          params: {
-            path: { orgID: orgId, projectID: projectId },
-          },
-          body: { audience },
+      const response = await client.PATCH("/org/{orgID}/project/{projectID}/oidc-custom-claims", {
+        params: {
+          path: { orgID: orgId, projectID: projectId },
         },
-      );
+        body: { audience },
+      });
 
       if (response.error) {
         throw new Error(response.error.error);
@@ -257,15 +245,12 @@ const projectSubcommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.DELETE(
-        "/org/{orgID}/project/{projectID}/oidc-custom-claims",
-        {
-          params: {
-            path: { orgID: orgId, projectID: projectId },
-            query: { claims: "audience" },
-          },
+      const response = await client.DELETE("/org/{orgID}/project/{projectID}/oidc-custom-claims", {
+        params: {
+          path: { orgID: orgId, projectID: projectId },
+          query: { claims: "audience" },
         },
-      );
+      });
 
       if (response.error) {
         throw new Error(response.error.error);

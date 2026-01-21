@@ -24,9 +24,7 @@ describe("usage command", () => {
     });
 
     it("should have correct description", () => {
-      expect(usageCommand.getDescription()).toBe(
-        "Manage CircleCI usage export",
-      );
+      expect(usageCommand.getDescription()).toBe("Manage CircleCI usage export");
     });
   });
 });

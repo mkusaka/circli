@@ -26,23 +26,20 @@ const workflowSubcommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET(
-        "/insights/{project-slug}/workflows/{workflow-name}",
-        {
-          params: {
-            path: {
-              "project-slug": projectSlug,
-              "workflow-name": workflowName,
-            },
-            query: {
-              branch: options.branch,
-              "start-date": options.startDate,
-              "end-date": options.endDate,
-              "page-token": options.pageToken,
-            },
+      const response = await client.GET("/insights/{project-slug}/workflows/{workflow-name}", {
+        params: {
+          path: {
+            "project-slug": projectSlug,
+            "workflow-name": workflowName,
+          },
+          query: {
+            branch: options.branch,
+            "start-date": options.startDate,
+            "end-date": options.endDate,
+            "page-token": options.pageToken,
           },
         },
-      );
+      });
 
       if (response.error) {
         throw new Error(response.error.message);
@@ -87,21 +84,18 @@ const workflowSubcommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET(
-        "/insights/{project-slug}/workflows/{workflow-name}/jobs",
-        {
-          params: {
-            path: {
-              "project-slug": projectSlug,
-              "workflow-name": workflowName,
-            },
-            query: {
-              branch: options.branch,
-              "page-token": options.pageToken,
-            },
+      const response = await client.GET("/insights/{project-slug}/workflows/{workflow-name}/jobs", {
+        params: {
+          path: {
+            "project-slug": projectSlug,
+            "workflow-name": workflowName,
+          },
+          query: {
+            branch: options.branch,
+            "page-token": options.pageToken,
           },
         },
-      );
+      });
 
       if (response.error) {
         throw new Error(response.error.message);
@@ -112,13 +106,7 @@ const workflowSubcommand = new Command()
       } else if (options.yaml) {
         printYaml(response.data);
       } else {
-        const headers = [
-          "Name",
-          "Success Rate",
-          "Throughput",
-          "Avg Duration",
-          "Total Runs",
-        ];
+        const headers = ["Name", "Success Rate", "Throughput", "Avg Duration", "Total Runs"];
         const rows = response.data.items.map((j) => [
           j.name,
           j.metrics?.success_rate !== undefined
@@ -265,10 +253,7 @@ export const insightsCommand = new Command()
   // insights summary (project)
   .command("summary")
   .description("Get project or organization summary")
-  .option(
-    "--project-slug <projectSlug:string>",
-    "Project slug for project summary",
-  )
+  .option("--project-slug <projectSlug:string>", "Project slug for project summary")
   .option("--org-slug <orgSlug:string>", "Organization slug for org summary")
   .option(
     "--reporting-window <window:string>",
@@ -286,23 +271,20 @@ export const insightsCommand = new Command()
 
     try {
       if (options.projectSlug) {
-        const response = await client.GET(
-          "/insights/pages/{project-slug}/summary",
-          {
-            params: {
-              path: { "project-slug": options.projectSlug },
-              query: {
-                "reporting-window": options.reportingWindow as
-                  | "last-7-days"
-                  | "last-24-hours"
-                  | "last-30-days"
-                  | "last-60-days"
-                  | "last-90-days"
-                  | undefined,
-              },
+        const response = await client.GET("/insights/pages/{project-slug}/summary", {
+          params: {
+            path: { "project-slug": options.projectSlug },
+            query: {
+              "reporting-window": options.reportingWindow as
+                | "last-7-days"
+                | "last-24-hours"
+                | "last-30-days"
+                | "last-60-days"
+                | "last-90-days"
+                | undefined,
             },
           },
-        );
+        });
 
         if (response.error) {
           throw new Error(response.error.message);
@@ -419,14 +401,11 @@ export const insightsCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET(
-        "/insights/{project-slug}/flaky-tests",
-        {
-          params: {
-            path: { "project-slug": projectSlug },
-          },
+      const response = await client.GET("/insights/{project-slug}/flaky-tests", {
+        params: {
+          path: { "project-slug": projectSlug },
         },
-      );
+      });
 
       if (response.error) {
         throw new Error(response.error.message);
@@ -437,13 +416,7 @@ export const insightsCommand = new Command()
       } else if (options.yaml) {
         printYaml(response.data);
       } else {
-        const headers = [
-          "Test Name",
-          "Classname",
-          "File",
-          "Source",
-          "Times Flaked",
-        ];
+        const headers = ["Test Name", "Classname", "File", "Source", "Times Flaked"];
         const rows =
           response.data["flaky-tests"]?.map((t) => [
             t["test-name"] || "-",
@@ -455,9 +428,7 @@ export const insightsCommand = new Command()
         if (rows.length === 0) {
           console.log("No flaky tests found.");
         } else {
-          console.log(
-            `Total Flaky Tests: ${response.data["total-flaky-tests"] || 0}`,
-          );
+          console.log(`Total Flaky Tests: ${response.data["total-flaky-tests"] || 0}`);
           printTable(headers, rows);
         }
       }
@@ -504,13 +475,7 @@ export const insightsCommand = new Command()
       } else if (options.yaml) {
         printYaml(response.data);
       } else {
-        const headers = [
-          "Name",
-          "Success Rate",
-          "Total Runs",
-          "Avg Duration",
-          "Total Credits",
-        ];
+        const headers = ["Name", "Success Rate", "Total Runs", "Avg Duration", "Total Credits"];
         const rows = response.data.items.map((w) => [
           w.name,
           w.metrics?.success_rate !== undefined
@@ -562,10 +527,7 @@ export const insightsCommand = new Command()
               branch: options.branch,
               "start-date": options.startDate,
               "end-date": options.endDate,
-              granularity: options.granularity as
-                | "daily"
-                | "hourly"
-                | undefined,
+              granularity: options.granularity as "daily" | "hourly" | undefined,
             },
           },
         },

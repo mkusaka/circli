@@ -24,15 +24,12 @@ const envCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET(
-        "/context/{context-id}/environment-variable",
-        {
-          params: {
-            path: { "context-id": contextId },
-            query: { "page-token": options.pageToken },
-          },
+      const response = await client.GET("/context/{context-id}/environment-variable", {
+        params: {
+          path: { "context-id": contextId },
+          query: { "page-token": options.pageToken },
         },
-      );
+      });
 
       if (response.error) {
         throw new Error(response.error.message);
@@ -127,9 +124,7 @@ const envCommand = new Command()
         throw new Error(response.error.message);
       }
 
-      console.log(
-        `Environment variable '${name}' deleted from context ${contextId}.`,
-      );
+      console.log(`Environment variable '${name}' deleted from context ${contextId}.`);
     } catch (error) {
       const handledError = handleApiError(error);
       console.error(handledError.message);
@@ -192,11 +187,9 @@ const restrictionCommand = new Command()
   .description("Create a context restriction")
   .arguments("<context-id:string>")
   .option("--project-id <projectId:string>", "Project ID to restrict to")
-  .option(
-    "--restriction-type <type:string>",
-    "Restriction type (e.g., project)",
-    { default: "project" },
-  )
+  .option("--restriction-type <type:string>", "Restriction type (e.g., project)", {
+    default: "project",
+  })
   .option("--restriction-value <value:string>", "Restriction value (UUID)")
   .option("--json", "Output in JSON format")
   .option("--yaml", "Output in YAML format")
@@ -251,22 +244,17 @@ const restrictionCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.DELETE(
-        "/context/{context_id}/restrictions/{restriction_id}",
-        {
-          params: {
-            path: { context_id: contextId, restriction_id: restrictionId },
-          },
+      const response = await client.DELETE("/context/{context_id}/restrictions/{restriction_id}", {
+        params: {
+          path: { context_id: contextId, restriction_id: restrictionId },
         },
-      );
+      });
 
       if (response.error) {
         throw new Error(response.error.message);
       }
 
-      console.log(
-        `Restriction ${restrictionId} deleted from context ${contextId}.`,
-      );
+      console.log(`Restriction ${restrictionId} deleted from context ${contextId}.`);
     } catch (error) {
       const handledError = handleApiError(error);
       console.error(handledError.message);
@@ -315,9 +303,7 @@ export const contextCommand = new Command()
         params: {
           query: {
             "owner-id": validated.data.ownerId,
-            "owner-type": validated.data.ownerType as
-              | "account"
-              | "organization",
+            "owner-type": validated.data.ownerType as "account" | "organization",
             "page-token": validated.data.pageToken,
           },
         },
@@ -333,11 +319,7 @@ export const contextCommand = new Command()
         printYaml(response.data);
       } else {
         const headers = ["ID", "Name", "Created At"];
-        const rows = response.data.items.map((c) => [
-          c.id,
-          c.name,
-          c.created_at,
-        ]);
+        const rows = response.data.items.map((c) => [c.id, c.name, c.created_at]);
         printTable(headers, rows);
       }
     } catch (error) {

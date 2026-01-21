@@ -56,9 +56,7 @@ describe("insights command", () => {
     it("should have --reporting-window option", () => {
       const summaryCommand = insightsCommand.getCommand("summary");
       const options = summaryCommand?.getOptions();
-      const reportingWindowOption = options?.find(
-        (o) => o.name === "reporting-window",
-      );
+      const reportingWindowOption = options?.find((o) => o.name === "reporting-window");
       expect(reportingWindowOption).toBeDefined();
     });
   });

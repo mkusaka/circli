@@ -31,7 +31,10 @@ jobs:
         run: pnpm build
 
       - name: Format check
-        run: pnpm prettier --check .
+        run: pnpm format:check
+
+      - name: Lint
+        run: pnpm lint
 
       - name: Test
         run: pnpm test run

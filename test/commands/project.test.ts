@@ -47,13 +47,9 @@ describe("project command", () => {
     it("should have list, create, get, delete subcommands", () => {
       const checkoutKeyCommand = projectCommand.getCommand("checkout-key");
       expect(checkoutKeyCommand?.getCommand("list")?.getName()).toBe("list");
-      expect(checkoutKeyCommand?.getCommand("create")?.getName()).toBe(
-        "create",
-      );
+      expect(checkoutKeyCommand?.getCommand("create")?.getName()).toBe("create");
       expect(checkoutKeyCommand?.getCommand("get")?.getName()).toBe("get");
-      expect(checkoutKeyCommand?.getCommand("delete")?.getName()).toBe(
-        "delete",
-      );
+      expect(checkoutKeyCommand?.getCommand("delete")?.getName()).toBe("delete");
     });
   });
 
@@ -71,13 +67,9 @@ describe("project command", () => {
       const updateCommand = settingsCommand?.getCommand("update");
       const options = updateCommand?.getOptions();
       expect(options?.find((o) => o.name === "build-fork-prs")).toBeDefined();
-      expect(
-        options?.find((o) => o.name === "autocancel-builds"),
-      ).toBeDefined();
+      expect(options?.find((o) => o.name === "autocancel-builds")).toBeDefined();
       expect(options?.find((o) => o.name === "oss")).toBeDefined();
-      expect(
-        options?.find((o) => o.name === "set-github-status"),
-      ).toBeDefined();
+      expect(options?.find((o) => o.name === "set-github-status")).toBeDefined();
     });
   });
 });

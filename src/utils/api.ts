@@ -1,9 +1,9 @@
-import createCircleClient from "openapi-fetch"; // default export を使う
+import createCircleClient from "openapi-fetch"; // using default export
 import type { paths } from "../types/circleci.js";
 import { loadConfig } from "./config.js";
 import { err, ok, type Result } from "neverthrow";
 
-export type CircleCIClient = ReturnType<typeof createCircleClient<paths>>; // Client の型
+export type CircleCIClient = ReturnType<typeof createCircleClient<paths>>; // Client type
 
 export async function createClient(): Promise<Result<CircleCIClient, Error>> {
   const configResult = await loadConfig();
@@ -16,9 +16,7 @@ export async function createClient(): Promise<Result<CircleCIClient, Error>> {
 
   if (!token) {
     return err(
-      new Error(
-        "API token not found. Please set it using `circleci config set api-token <token>`",
-      ),
+      new Error("API token not found. Please set it using `circleci config set api-token <token>`"),
     );
   }
 

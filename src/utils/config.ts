@@ -9,7 +9,7 @@ const CONFIG_PATH = `${homedir()}/.circli/config.yml`;
 
 export interface CircleCIConfig {
   apiToken?: string;
-  defaultProjectSlug?: string; // 例: gh/CircleCI-Public/api-preview-docs
+  defaultProjectSlug?: string; // e.g., gh/CircleCI-Public/api-preview-docs
 }
 
 export async function loadConfig(): Promise<Result<CircleCIConfig, Error>> {
@@ -18,16 +18,14 @@ export async function loadConfig(): Promise<Result<CircleCIConfig, Error>> {
     return ok(parse(configContent) as CircleCIConfig);
   } catch (error: any) {
     if (error.code === "ENOENT") {
-      // 設定ファイルがない場合は空の設定を返す
+      // Return empty config if config file doesn't exist
       return ok({});
     }
     return err(error);
   }
 }
 
-export async function saveConfig(
-  config: CircleCIConfig,
-): Promise<Result<null, Error>> {
+export async function saveConfig(config: CircleCIConfig): Promise<Result<null, Error>> {
   try {
     const dir = dirname(CONFIG_PATH);
     await mkdir(dir, { recursive: true });

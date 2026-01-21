@@ -22,14 +22,11 @@ export const jobCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET(
-        "/project/{project-slug}/job/{job-number}",
-        {
-          params: {
-            path: { "project-slug": projectSlug, "job-number": jobNumber },
-          },
+      const response = await client.GET("/project/{project-slug}/job/{job-number}", {
+        params: {
+          path: { "project-slug": projectSlug, "job-number": jobNumber },
         },
-      );
+      });
 
       if (response.error) {
         throw new Error(response.error.message);
@@ -49,9 +46,7 @@ export const jobCommand = new Command()
         console.log(`Web URL: ${response.data.web_url}`);
         if (response.data.executor) {
           console.log(`Executor Type: ${response.data.executor.type || "-"}`);
-          console.log(
-            `Resource Class: ${response.data.executor.resource_class || "-"}`,
-          );
+          console.log(`Resource Class: ${response.data.executor.resource_class || "-"}`);
         }
       }
     } catch (error) {
@@ -65,14 +60,8 @@ export const jobCommand = new Command()
   .command("cancel")
   .description("Cancel a job")
   .option("--job-id <jobId:string>", "Cancel by job ID (UUID)")
-  .option(
-    "--project-slug <projectSlug:string>",
-    "Project slug (for cancel by job number)",
-  )
-  .option(
-    "--job-number <jobNumber:number>",
-    "Job number (for cancel by job number)",
-  )
+  .option("--project-slug <projectSlug:string>", "Project slug (for cancel by job number)")
+  .option("--job-number <jobNumber:number>", "Job number (for cancel by job number)")
   .action(async (options) => {
     const clientResult = await createClient();
     if (clientResult.isErr()) {
@@ -97,29 +86,22 @@ export const jobCommand = new Command()
         console.log(`Job ${options.jobId} cancelled.`);
       } else if (options.projectSlug && options.jobNumber) {
         // Cancel by project slug and job number
-        const response = await client.POST(
-          "/project/{project-slug}/job/{job-number}/cancel",
-          {
-            params: {
-              path: {
-                "project-slug": options.projectSlug,
-                "job-number": options.jobNumber,
-              },
+        const response = await client.POST("/project/{project-slug}/job/{job-number}/cancel", {
+          params: {
+            path: {
+              "project-slug": options.projectSlug,
+              "job-number": options.jobNumber,
             },
           },
-        );
+        });
 
         if (response.error) {
           throw new Error(response.error.message);
         }
 
-        console.log(
-          `Job #${options.jobNumber} in ${options.projectSlug} cancelled.`,
-        );
+        console.log(`Job #${options.jobNumber} in ${options.projectSlug} cancelled.`);
       } else {
-        console.error(
-          "Please provide either --job-id or both --project-slug and --job-number",
-        );
+        console.error("Please provide either --job-id or both --project-slug and --job-number");
         process.exit(1);
       }
     } catch (error) {
@@ -144,14 +126,11 @@ export const jobCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET(
-        "/project/{project-slug}/{job-number}/artifacts",
-        {
-          params: {
-            path: { "project-slug": projectSlug, "job-number": jobNumber },
-          },
+      const response = await client.GET("/project/{project-slug}/{job-number}/artifacts", {
+        params: {
+          path: { "project-slug": projectSlug, "job-number": jobNumber },
         },
-      );
+      });
 
       if (response.error) {
         throw new Error(response.error.message);
@@ -192,14 +171,11 @@ export const jobCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET(
-        "/project/{project-slug}/{job-number}/tests",
-        {
-          params: {
-            path: { "project-slug": projectSlug, "job-number": jobNumber },
-          },
+      const response = await client.GET("/project/{project-slug}/{job-number}/tests", {
+        params: {
+          path: { "project-slug": projectSlug, "job-number": jobNumber },
         },
-      );
+      });
 
       if (response.error) {
         throw new Error(response.error.message);

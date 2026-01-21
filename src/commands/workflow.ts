@@ -83,14 +83,7 @@ export const workflowCommand = new Command()
       } else if (options.yaml) {
         printYaml(response.data);
       } else {
-        const headers = [
-          "ID",
-          "Name",
-          "Type",
-          "Status",
-          "Job Number",
-          "Started At",
-        ];
+        const headers = ["ID", "Name", "Type", "Status", "Job Number", "Started At"];
         const rows = response.data.items.map((j) => [
           j.id,
           j.name,
@@ -215,14 +208,11 @@ export const workflowCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.POST(
-        "/workflow/{id}/approve/{approval_request_id}",
-        {
-          params: {
-            path: { id: workflowId, approval_request_id: approvalRequestId },
-          },
+      const response = await client.POST("/workflow/{id}/approve/{approval_request_id}", {
+        params: {
+          path: { id: workflowId, approval_request_id: approvalRequestId },
         },
-      );
+      });
 
       if (response.error) {
         throw new Error(response.error.message);
@@ -233,9 +223,7 @@ export const workflowCommand = new Command()
       } else if (options.yaml) {
         printYaml(response.data);
       } else {
-        console.log(
-          `Approval request ${approvalRequestId} approved in workflow ${workflowId}.`,
-        );
+        console.log(`Approval request ${approvalRequestId} approved in workflow ${workflowId}.`);
       }
     } catch (error) {
       const handledError = handleApiError(error);

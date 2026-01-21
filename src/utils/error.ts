@@ -1,6 +1,6 @@
 // src/utils/error.ts
 
-// 共通のエラー処理や、特定のエラーメッセージの定義
+// Common error handling and error message definitions
 
 export class APIError extends Error {
   constructor(
@@ -14,7 +14,7 @@ export class APIError extends Error {
 }
 
 export function handleApiError(error: unknown): APIError {
-  // AxiosError などの型をチェックして、適切なエラーメッセージを生成
+  // Check error type and generate appropriate error message
   if (error instanceof Error) {
     return new APIError(error.message, undefined, error);
   }
