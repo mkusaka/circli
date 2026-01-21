@@ -41,11 +41,11 @@ describe("webhook command", () => {
       expect(scopeIdOption?.required).toBe(true);
     });
 
-    it("should have --scope-type option with default", () => {
+    it("should not have --scope-type option (API only supports project)", () => {
       const listCommand = webhookCommand.getCommand("list");
       const options = listCommand?.getOptions();
       const scopeTypeOption = options?.find((o) => o.name === "scope-type");
-      expect(scopeTypeOption?.default).toBe("project");
+      expect(scopeTypeOption).toBeUndefined();
     });
   });
 

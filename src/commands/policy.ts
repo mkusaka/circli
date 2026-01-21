@@ -126,15 +126,15 @@ const decisionSubcommand = new Command()
     const client = clientResult.value;
 
     try {
-      let input: unknown;
+      // Validate that input is valid JSON, but pass the string directly to API
       try {
-        input = JSON.parse(options.input);
+        JSON.parse(options.input);
       } catch {
         console.error("Invalid JSON for --input");
         process.exit(1);
       }
 
-      let metadata: unknown;
+      let metadata: Record<string, unknown> | undefined;
       if (options.metadata) {
         try {
           metadata = JSON.parse(options.metadata);
@@ -149,8 +149,8 @@ const decisionSubcommand = new Command()
           path: { ownerID: ownerId, context: options.context },
         },
         body: {
-          input: input as string,
-          metadata: metadata as Record<string, never> | undefined,
+          input: options.input,
+          metadata,
         },
       });
 

@@ -45,7 +45,7 @@ export const pipelineCommand = new Command()
       console.error(validated.error.message);
       process.exit(1);
     }
-    const { projectSlug, mine, branch, pageToken, json, yaml } = validated.data;
+    const { projectSlug, mine, branch, pageToken, limit, json, yaml } = validated.data;
 
     const clientResult = await createClient();
     if (clientResult.isErr()) {
@@ -70,13 +70,16 @@ export const pipelineCommand = new Command()
         throw new Error(response.error.message);
       }
 
+      // Apply client-side limit (API doesn't support limit parameter)
+      const items = response.data.items.slice(0, limit);
+
       if (json) {
-        printJson(response.data);
+        printJson({ ...response.data, items });
       } else if (yaml) {
-        printYaml(response.data);
+        printYaml({ ...response.data, items });
       } else {
         const headers = ["ID", "Number", "State", "Trigger", "Created At"];
-        const rows = response.data.items.map(
+        const rows = items.map(
           (
             p: paths["/project/{project-slug}/pipeline"]["get"]["responses"]["200"]["content"]["application/json"]["items"][number]
           ) => [p.id, String(p.number), p.state, p.trigger.type, p.created_at]
