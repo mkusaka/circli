@@ -216,7 +216,7 @@ const checkoutKeyCommand = new Command()
   .command("create")
   .description("Create a checkout key")
   .arguments("<project-slug:string>")
-  .option("--type <type:string>", "Key type (deploy-key or github-user-key)", {
+  .option("--type <type:string>", "Key type (deploy-key or user-key)", {
     required: true,
   })
   .option("--json", "Output in JSON format")
