@@ -14,16 +14,15 @@ export const pipelineCommand = new Command()
   .description("Manage CircleCI pipelines")
   // pipeline list
   .command("list")
-  .description("List pipelines")
+  .description("List pipelines (use 'pipeline mine' for your own pipelines)")
   .option(
     "--project-slug <slug:string>",
     "Project slug (e.g., gh/CircleCI-Public/api-preview-docs)",
     { required: true }
   )
-  .option("--mine", "Show only my pipelines")
   .option("--branch <branch:string>", "Filter by branch")
   .option("--page-token <token:string>", "Next page token")
-  .option("--limit <number:number>", "Max number of pipelines to fetch", {
+  .option("--limit <number:number>", "Max number of pipelines to display (client-side)", {
     default: 10,
   })
   .option("--json", "Output in JSON format")
@@ -33,7 +32,6 @@ export const pipelineCommand = new Command()
   .action(async (options) => {
     const schema = z.object({
       projectSlug: z.string(),
-      mine: z.boolean().optional(),
       branch: z.string().optional(),
       pageToken: z.string().optional(),
       limit: z.number().int().positive(),
@@ -45,7 +43,7 @@ export const pipelineCommand = new Command()
       console.error(validated.error.message);
       process.exit(1);
     }
-    const { projectSlug, mine, branch, pageToken, limit, json, yaml } = validated.data;
+    const { projectSlug, branch, pageToken, limit, json, yaml } = validated.data;
 
     const clientResult = await createClient();
     if (clientResult.isErr()) {
@@ -59,7 +57,6 @@ export const pipelineCommand = new Command()
         params: {
           path: { "project-slug": projectSlug },
           query: {
-            mine: mine,
             branch: branch,
             "page-token": pageToken,
           },

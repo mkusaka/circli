@@ -21,9 +21,8 @@
     *   List jobs within a workflow.
     *   View job details.
     *   View job artifacts.
-    *    View job test metadata
+    *   View job test metadata.
     *   Cancel jobs.
-    *   View job logs (streaming supported).
 * **Context Management:**
     * List, create, show, delete contexts
     * List, create, update and delete environment variables
@@ -110,7 +109,11 @@ circli <command> <subcommand> [options] [args]
 *   `project`: Manage Projects.
 *  `insights`: Retrieve insights data.
 * `policy`: Manage policies.
-* `webhook`: Manage webhooks
+* `webhook`: Manage webhooks.
+* `schedule`: Manage scheduled pipelines.
+* `user`: View user information.
+* `oidc`: Manage OIDC custom claims.
+* `usage`: Manage usage exports.
 *   `help`: Display help information.
 *   `version`: Display the CLI version.
 
@@ -127,7 +130,7 @@ Use `circli <command> --help` or `circli <command> <subcommand> --help` to see a
 *   Trigger a new pipeline on the `main` branch:
 
     ```bash
-    circli pipeline trigger gh/CircleCI-Public/api-preview-docs --branch main
+    circli pipeline trigger --project-slug gh/CircleCI-Public/api-preview-docs --branch main
     ```
 
 *   Rerun a workflow from the failed job:
@@ -136,19 +139,10 @@ Use `circli <command> --help` or `circli <command> <subcommand> --help` to see a
     circli workflow rerun <workflow-id> --from-failed
     ```
 
-*   View job logs:
+*   List contexts:
 
     ```bash
-    circli job logs <job-number> --project-slug <project-slug>
-    ```
-
-*   Stream job logs:
-    ```bash
-    circli job logs <job-number> --project-slug <project-slug> --follow
-    ```
-* List contexts
-    ```
-    circli context list --owner-slug <owner-slug>
+    circli context list --owner-id <owner-id>
     ```
 
 ## Development

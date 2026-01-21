@@ -56,11 +56,11 @@ describe("pipeline command", () => {
       expect(projectSlugOption?.required).toBe(true);
     });
 
-    it("should have --mine option", () => {
+    it("should not have --mine option (use 'pipeline mine' subcommand)", () => {
       const listCommand = pipelineCommand.getCommand("list");
       const options = listCommand?.getOptions();
       const mineOption = options?.find((o) => o.name === "mine");
-      expect(mineOption).toBeDefined();
+      expect(mineOption).toBeUndefined();
     });
 
     it("should have --branch option", () => {
