@@ -1,5 +1,6 @@
 // src/commands/policy.ts
 import { Command } from "@cliffy/command";
+import { z } from "zod";
 import { createClient } from "../utils/api.js";
 import { printJson, printYaml, printTable } from "../utils/output.js";
 import { handleApiError } from "../utils/error.js";
@@ -140,10 +141,16 @@ const decisionSubcommand = new Command()
         process.exit(1);
       }
 
-      let metadata: Record<string, unknown> | undefined;
+      let metadata: Record<string, never> | undefined;
       if (options.metadata) {
         try {
-          metadata = JSON.parse(options.metadata);
+          const metadataSchema = z.record(z.string(), z.unknown());
+          const parseResult = metadataSchema.safeParse(JSON.parse(options.metadata));
+          if (!parseResult.success) {
+            console.error(`Invalid metadata: ${parseResult.error.message}`);
+            process.exit(1);
+          }
+          metadata = parseResult.data as Record<string, never>;
         } catch {
           console.error("Invalid JSON for --metadata");
           process.exit(1);
