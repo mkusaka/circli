@@ -1,9 +1,8 @@
-```markdown
 # circli - Unofficial CircleCI CLI
 
 `circli` is an unofficial command-line interface for [CircleCI](https://circleci.com/), designed to be intuitive and efficient, inspired by the GitHub CLI (`gh`). It allows you to interact with CircleCI projects, pipelines, workflows, and jobs directly from your terminal.
 
-**Note:** This CLI is under active development and is not yet feature-complete. It is not officially supported by CircleCI.
+**Note:** This CLI is under active development. It is not officially supported by CircleCI.
 
 ## Features
 
@@ -26,12 +25,14 @@
 * **Context Management:**
     * List, create, show, delete contexts
     * List, create, update and delete environment variables
-* **Project Management**
+* **Project Management:**
     * Create project
     * Show project details
     * List, create, show, delete checkout keys
     * List, create, show, delete environment variables
     * Get, update project settings.
+* **Schedule Management:**
+    * List, create, get, update, delete scheduled pipelines
 * **Insights:**
     * Get project summary metrics
     * Get workflows metrics
@@ -45,6 +46,16 @@
     * Get, create, update, and delete policies.
     * Get decision logs.
     * Get/Set decision settings.
+* **Webhook:**
+    * List, create, get, update, delete webhooks
+* **User:**
+    * Get current user info
+    * Get collaborations
+    * Get user by ID
+* **OIDC:**
+    * Get, set, delete org/project OIDC custom claims
+* **Usage:**
+    * Create and get usage exports
 *   **Configuration:**
     *   Easy setup and management of API tokens and default settings.
 *   **Output:**
@@ -53,20 +64,56 @@
 
 ## Installation
 
-### Prerequisites
-
-*   Node.js (version 20 or later)
-*   npm or pnpm
-
-### Using pnpm (Recommended)
+### Using install script (Recommended)
 
 ```bash
+curl -fsSL https://raw.githubusercontent.com/mkusaka/circli/main/install.sh | bash
+```
+
+This will automatically detect your OS and architecture and install the appropriate binary.
+
+#### Options
+
+```bash
+# Install specific version
+curl -fsSL https://raw.githubusercontent.com/mkusaka/circli/main/install.sh | bash -s -- -v v0.0.13
+
+# Install to custom directory
+curl -fsSL https://raw.githubusercontent.com/mkusaka/circli/main/install.sh | bash -s -- -d ~/.local/bin
+```
+
+### Download binary manually
+
+Download the appropriate binary for your platform from the [Releases page](https://github.com/mkusaka/circli/releases):
+
+| Platform | Architecture | Download |
+|----------|--------------|----------|
+| Linux | x64 | `circli-linux-x64.tar.gz` |
+| Linux | x64 (older CPUs) | `circli-linux-x64-baseline.tar.gz` |
+| Linux | arm64 | `circli-linux-arm64.tar.gz` |
+| macOS | Intel | `circli-darwin-x64.tar.gz` |
+| macOS | Apple Silicon | `circli-darwin-arm64.tar.gz` |
+| Windows | x64 | `circli-windows-x64.zip` |
+
+```bash
+# Linux/macOS example
+tar -xzf circli-linux-x64.tar.gz
+chmod +x circli-linux-x64
+sudo mv circli-linux-x64 /usr/local/bin/circli
+```
+
+### Using npm/pnpm
+
+```bash
+# Using pnpm
 pnpm install --global circli
-```
-### Using npm
-```
+
+# Using npm
 npm install --global circli
 ```
+
+**Prerequisites for npm/pnpm installation:**
+*   Node.js (version 20 or later)
 
 ## Getting Started
 
@@ -106,14 +153,14 @@ circli <command> <subcommand> [options] [args]
 *   `workflow`: Interact with workflows.
 *   `job`: Interact with jobs.
 *   `context`: Manage contexts.
-*   `project`: Manage Projects.
-*  `insights`: Retrieve insights data.
-* `policy`: Manage policies.
-* `webhook`: Manage webhooks.
-* `schedule`: Manage scheduled pipelines.
-* `user`: View user information.
-* `oidc`: Manage OIDC custom claims.
-* `usage`: Manage usage exports.
+*   `project`: Manage projects.
+*   `schedule`: Manage scheduled pipelines.
+*   `insights`: Retrieve insights data.
+*   `policy`: Manage policies.
+*   `webhook`: Manage webhooks.
+*   `user`: View user information.
+*   `oidc`: Manage OIDC custom claims.
+*   `usage`: Manage usage exports.
 *   `help`: Display help information.
 *   `version`: Display the CLI version.
 
@@ -145,17 +192,24 @@ Use `circli <command> --help` or `circli <command> <subcommand> --help` to see a
     circli context list --owner-id <owner-id>
     ```
 
+*   View current user:
+
+    ```bash
+    circli user me
+    ```
+
 ## Development
 
 To contribute to `circli`, you'll need:
 
 *   Node.js 20+
 *   pnpm
+*   Bun (for building binaries)
 
 1.  Clone the repository:
 
     ```bash
-    git clone https://github.com/mkusaka/circli.git  # Replace with your fork
+    git clone https://github.com/mkusaka/circli.git
     cd circli
     ```
 
@@ -164,8 +218,10 @@ To contribute to `circli`, you'll need:
     ```bash
     pnpm install
     ```
-3.  Generate types from CircleCI OpenAPI Spec
-    ```
+
+3.  Generate types from CircleCI OpenAPI Spec:
+
+    ```bash
     pnpm run generate-types
     ```
 
@@ -180,37 +236,29 @@ To contribute to `circli`, you'll need:
     ```bash
     pnpm start -- <command> <subcommand> ...
     ```
+
     or
-    ```
+
+    ```bash
     node --import tsx src/index.ts -- <command> <subcommand> ...
     ```
 
 6.  Run tests:
+
+    ```bash
+    pnpm test
     ```
-     pnpm test
+
+7.  Build standalone binary (using Bun):
+
+    ```bash
+    bun build --compile --minify ./src/index.ts --outfile circli
     ```
+
 ## Contributing
 
-Contributions are welcome! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) (to be created) for guidelines.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
 MIT License
-```
-
-**Key improvements and explanations in the README:**
-
-*   **Clear Introduction:**  States the purpose of the CLI, mentions it's unofficial, and highlights its inspiration.
-*   **Features:**  Provides a concise overview of the CLI's capabilities, organized by functional area.
-*   **Installation:**  Gives clear instructions for installation using both `pnpm` (recommended) and `npm`.
-*   **Getting Started:**  Walks the user through the essential steps of obtaining an API token and configuring the CLI.
-*   **Usage:** Explains the general command structure and provides examples.
-*   **Available Commands:** Lists the main commands, making it easy to discover functionality.
-*   **Examples:**  Includes concrete examples of common commands, making it easier for users to get started.
-*   **Development:** Provides clear instructions for setting up a development environment, building, running, and testing the CLI.  This encourages contributions.
-*   **Contributing:**  Indicates that contributions are welcome and points to a (future) `CONTRIBUTING.md`.
-*   **License:** Specifies the license (MIT).
-* **Executable:** includes how to run executable locally
-* **pnpm dlx:** removed redundant `pnpm dlx`
-
-This README provides a solid foundation for users and contributors to understand, use, and develop the `circli` CLI. Remember to create a `CONTRIBUTING.md` file with more detailed contribution guidelines.
