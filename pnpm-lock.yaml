@@ -26,7 +26,7 @@ importers:
     devDependencies:
       '@tsconfig/node22':
         specifier: ^22.0.0
-        version: 22.0.0
+        version: 22.0.5
       '@types/node':
         specifier: ^22.0.0
         version: 22.13.4
@@ -613,8 +613,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@tsconfig/node22@22.0.0':
-    resolution: {integrity: sha512-twLQ77zevtxobBOD4ToAtVmuYrpeYUh3qh+TEp+08IWhpsrIflVHqQ1F1CiPxQGL7doCdBIOOCF+1Tm833faNg==}
+  '@tsconfig/node22@22.0.5':
+    resolution: {integrity: sha512-hLf2ld+sYN/BtOJjHUWOk568dvjFQkHnLNa6zce25GIH+vxKfvTgm3qpaH6ToF5tu/NN0IH66s+Bb5wElHrLcw==}
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
@@ -1506,7 +1506,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.34.6':
     optional: true
 
-  '@tsconfig/node22@22.0.0': {}
+  '@tsconfig/node22@22.0.5': {}
 
   '@types/estree@1.0.6': {}
 
