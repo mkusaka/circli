@@ -51,8 +51,12 @@ describe("context command", () => {
     it("should have list, create, delete subcommands", () => {
       const restrictionCommand = contextCommand.getCommand("restriction");
       expect(restrictionCommand?.getCommand("list")?.getName()).toBe("list");
-      expect(restrictionCommand?.getCommand("create")?.getName()).toBe("create");
-      expect(restrictionCommand?.getCommand("delete")?.getName()).toBe("delete");
+      expect(restrictionCommand?.getCommand("create")?.getName()).toBe(
+        "create",
+      );
+      expect(restrictionCommand?.getCommand("delete")?.getName()).toBe(
+        "delete",
+      );
     });
   });
 });

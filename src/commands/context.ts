@@ -31,7 +31,7 @@ const envCommand = new Command()
             path: { "context-id": contextId },
             query: { "page-token": options.pageToken },
           },
-        }
+        },
       );
 
       if (response.error) {
@@ -80,7 +80,7 @@ const envCommand = new Command()
             path: { "context-id": contextId, "env-var-name": name },
           },
           body: { value },
-        }
+        },
       );
 
       if (response.error) {
@@ -120,7 +120,7 @@ const envCommand = new Command()
           params: {
             path: { "context-id": contextId, "env-var-name": name },
           },
-        }
+        },
       );
 
       if (response.error) {
@@ -128,7 +128,7 @@ const envCommand = new Command()
       }
 
       console.log(
-        `Environment variable '${name}' deleted from context ${contextId}.`
+        `Environment variable '${name}' deleted from context ${contextId}.`,
       );
     } catch (error) {
       const handledError = handleApiError(error);
@@ -195,7 +195,7 @@ const restrictionCommand = new Command()
   .option(
     "--restriction-type <type:string>",
     "Restriction type (e.g., project)",
-    { default: "project" }
+    { default: "project" },
   )
   .option("--restriction-value <value:string>", "Restriction value (UUID)")
   .option("--json", "Output in JSON format")
@@ -209,19 +209,16 @@ const restrictionCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.POST(
-        "/context/{context_id}/restrictions",
-        {
-          params: {
-            path: { context_id: contextId },
-          },
-          body: {
-            project_id: options.projectId,
-            restriction_type: options.restrictionType,
-            restriction_value: options.restrictionValue,
-          },
-        }
-      );
+      const response = await client.POST("/context/{context_id}/restrictions", {
+        params: {
+          path: { context_id: contextId },
+        },
+        body: {
+          project_id: options.projectId,
+          restriction_type: options.restrictionType,
+          restriction_value: options.restrictionValue,
+        },
+      });
 
       if (response.error) {
         throw new Error(response.error.message);
@@ -260,7 +257,7 @@ const restrictionCommand = new Command()
           params: {
             path: { context_id: contextId, restriction_id: restrictionId },
           },
-        }
+        },
       );
 
       if (response.error) {
@@ -268,7 +265,7 @@ const restrictionCommand = new Command()
       }
 
       console.log(
-        `Restriction ${restrictionId} deleted from context ${contextId}.`
+        `Restriction ${restrictionId} deleted from context ${contextId}.`,
       );
     } catch (error) {
       const handledError = handleApiError(error);
@@ -318,7 +315,9 @@ export const contextCommand = new Command()
         params: {
           query: {
             "owner-id": validated.data.ownerId,
-            "owner-type": validated.data.ownerType as "account" | "organization",
+            "owner-type": validated.data.ownerType as
+              | "account"
+              | "organization",
             "page-token": validated.data.pageToken,
           },
         },

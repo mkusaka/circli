@@ -31,16 +31,19 @@ export const usageCommand = new Command()
         ? options.sharedOrgIds.split(",").map((id: string) => id.trim())
         : undefined;
 
-      const response = await client.POST("/organizations/{org_id}/usage_export_job", {
-        params: {
-          path: { org_id: orgId },
+      const response = await client.POST(
+        "/organizations/{org_id}/usage_export_job",
+        {
+          params: {
+            path: { org_id: orgId },
+          },
+          body: {
+            start: options.start,
+            end: options.end,
+            shared_org_ids: sharedOrgIds,
+          },
         },
-        body: {
-          start: options.start,
-          end: options.end,
-          shared_org_ids: sharedOrgIds,
-        },
-      });
+      );
 
       if (response.error) {
         throw new Error(response.error.message);
@@ -85,7 +88,7 @@ export const usageCommand = new Command()
           params: {
             path: { org_id: orgId, usage_export_job_id: jobId },
           },
-        }
+        },
       );
 
       if (response.error) {
@@ -99,7 +102,10 @@ export const usageCommand = new Command()
       } else {
         console.log(`Job ID: ${response.data.usage_export_job_id}`);
         console.log(`State: ${response.data.state}`);
-        if (response.data.download_urls && response.data.download_urls.length > 0) {
+        if (
+          response.data.download_urls &&
+          response.data.download_urls.length > 0
+        ) {
           console.log("\nDownload URLs:");
           for (const url of response.data.download_urls) {
             console.log(`  - ${url}`);

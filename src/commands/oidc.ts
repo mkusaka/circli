@@ -42,7 +42,10 @@ const orgSubcommand = new Command()
         for (const a of response.data.audience || []) {
           console.log(`  - ${a}`);
         }
-        console.log("\nAudience Updated At:", response.data.audience_updated_at || "-");
+        console.log(
+          "\nAudience Updated At:",
+          response.data.audience_updated_at || "-",
+        );
       }
     } catch (error) {
       const handledError = handleApiError(error);
@@ -157,7 +160,7 @@ const projectSubcommand = new Command()
           params: {
             path: { orgID: orgId, projectID: projectId },
           },
-        }
+        },
       );
 
       if (response.error) {
@@ -175,7 +178,10 @@ const projectSubcommand = new Command()
         for (const a of response.data.audience || []) {
           console.log(`  - ${a}`);
         }
-        console.log("\nAudience Updated At:", response.data.audience_updated_at || "-");
+        console.log(
+          "\nAudience Updated At:",
+          response.data.audience_updated_at || "-",
+        );
       }
     } catch (error) {
       const handledError = handleApiError(error);
@@ -211,7 +217,7 @@ const projectSubcommand = new Command()
             path: { orgID: orgId, projectID: projectId },
           },
           body: { audience },
-        }
+        },
       );
 
       if (response.error) {
@@ -258,7 +264,7 @@ const projectSubcommand = new Command()
             path: { orgID: orgId, projectID: projectId },
             query: { claims: "audience" },
           },
-        }
+        },
       );
 
       if (response.error) {

@@ -83,7 +83,14 @@ export const workflowCommand = new Command()
       } else if (options.yaml) {
         printYaml(response.data);
       } else {
-        const headers = ["ID", "Name", "Type", "Status", "Job Number", "Started At"];
+        const headers = [
+          "ID",
+          "Name",
+          "Type",
+          "Status",
+          "Job Number",
+          "Started At",
+        ];
         const rows = response.data.items.map((j) => [
           j.id,
           j.name,
@@ -214,7 +221,7 @@ export const workflowCommand = new Command()
           params: {
             path: { id: workflowId, approval_request_id: approvalRequestId },
           },
-        }
+        },
       );
 
       if (response.error) {
@@ -226,7 +233,9 @@ export const workflowCommand = new Command()
       } else if (options.yaml) {
         printYaml(response.data);
       } else {
-        console.log(`Approval request ${approvalRequestId} approved in workflow ${workflowId}.`);
+        console.log(
+          `Approval request ${approvalRequestId} approved in workflow ${workflowId}.`,
+        );
       }
     } catch (error) {
       const handledError = handleApiError(error);

@@ -15,9 +15,11 @@ vi.spyOn(console, "log").mockImplementation(() => {});
 vi.spyOn(console, "error").mockImplementation(() => {});
 
 // Mock process.exit to prevent tests from exiting
-vi.spyOn(process, "exit").mockImplementation((code?: number | string | null | undefined) => {
-  throw new Error(`process.exit(${code})`);
-});
+vi.spyOn(process, "exit").mockImplementation(
+  (code?: number | string | null | undefined) => {
+    throw new Error(`process.exit(${code})`);
+  },
+);
 
 // Mock the config module to provide a test API token
 vi.mock("../src/utils/config.js", () => ({

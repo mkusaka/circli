@@ -39,7 +39,13 @@ export const scheduleCommand = new Command()
       } else if (options.yaml) {
         printYaml(response.data);
       } else {
-        const headers = ["ID", "Name", "Description", "Timetable", "Created At"];
+        const headers = [
+          "ID",
+          "Name",
+          "Description",
+          "Timetable",
+          "Created At",
+        ];
         const rows = response.data.items.map((s) => [
           s.id,
           s.name,
@@ -95,10 +101,18 @@ export const scheduleCommand = new Command()
         console.log(`Updated At: ${response.data["updated-at"]}`);
         console.log("\nTimetable:");
         console.log(`  Per Hour: ${response.data.timetable["per-hour"]}`);
-        console.log(`  Hours of Day: ${(response.data.timetable["hours-of-day"] || []).join(", ")}`);
-        console.log(`  Days of Week: ${(response.data.timetable["days-of-week"] || []).join(", ")}`);
-        console.log(`  Days of Month: ${(response.data.timetable["days-of-month"] || []).join(", ")}`);
-        console.log(`  Months: ${(response.data.timetable["months"] || []).join(", ")}`);
+        console.log(
+          `  Hours of Day: ${(response.data.timetable["hours-of-day"] || []).join(", ")}`,
+        );
+        console.log(
+          `  Days of Week: ${(response.data.timetable["days-of-week"] || []).join(", ")}`,
+        );
+        console.log(
+          `  Days of Month: ${(response.data.timetable["days-of-month"] || []).join(", ")}`,
+        );
+        console.log(
+          `  Months: ${(response.data.timetable["months"] || []).join(", ")}`,
+        );
       }
     } catch (error) {
       const handledError = handleApiError(error);
@@ -114,12 +128,20 @@ export const scheduleCommand = new Command()
   .option("--name <name:string>", "Schedule name", { required: true })
   .option("--description <description:string>", "Schedule description")
   .option("--branch <branch:string>", "Branch to run on", { required: true })
-  .option("--per-hour <perHour:number>", "Triggers per hour (1-60)", { required: true })
+  .option("--per-hour <perHour:number>", "Triggers per hour (1-60)", {
+    required: true,
+  })
   .option("--hours-of-day <hours:string>", "Comma-separated hours (0-23)")
-  .option("--days-of-week <days:string>", "Comma-separated days (SUN,MON,TUE,WED,THU,FRI,SAT)")
+  .option(
+    "--days-of-week <days:string>",
+    "Comma-separated days (SUN,MON,TUE,WED,THU,FRI,SAT)",
+  )
   .option("--days-of-month <days:string>", "Comma-separated days (1-31)")
   .option("--months <months:string>", "Comma-separated months (JAN,FEB,...)")
-  .option("--parameters <parameters:string>", "Pipeline parameters as JSON string")
+  .option(
+    "--parameters <parameters:string>",
+    "Pipeline parameters as JSON string",
+  )
   .option("--json", "Output in JSON format")
   .option("--yaml", "Output in YAML format")
   .action(async (options, projectSlug) => {
@@ -136,22 +158,51 @@ export const scheduleCommand = new Command()
         "hours-of-day"?: number[];
         "days-of-week"?: string[];
         "days-of-month"?: number[];
-        "months"?: string[];
+        months?: string[];
       } = {
         "per-hour": options.perHour,
       };
 
       if (options.hoursOfDay) {
-        timetable["hours-of-day"] = options.hoursOfDay.split(",").map((h: string) => Number.parseInt(h.trim(), 10));
+        timetable["hours-of-day"] = options.hoursOfDay
+          .split(",")
+          .map((h: string) => Number.parseInt(h.trim(), 10));
       }
       if (options.daysOfWeek) {
-        timetable["days-of-week"] = options.daysOfWeek.split(",").map((d: string) => d.trim().toUpperCase()) as ("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT")[];
+        timetable["days-of-week"] = options.daysOfWeek
+          .split(",")
+          .map((d: string) => d.trim().toUpperCase()) as (
+          | "SUN"
+          | "MON"
+          | "TUE"
+          | "WED"
+          | "THU"
+          | "FRI"
+          | "SAT"
+        )[];
       }
       if (options.daysOfMonth) {
-        timetable["days-of-month"] = options.daysOfMonth.split(",").map((d: string) => Number.parseInt(d.trim(), 10));
+        timetable["days-of-month"] = options.daysOfMonth
+          .split(",")
+          .map((d: string) => Number.parseInt(d.trim(), 10));
       }
       if (options.months) {
-        timetable["months"] = options.months.split(",").map((m: string) => m.trim().toUpperCase()) as ("JAN" | "FEB" | "MAR" | "APR" | "MAY" | "JUN" | "JUL" | "AUG" | "SEP" | "OCT" | "NOV" | "DEC")[];
+        timetable["months"] = options.months
+          .split(",")
+          .map((m: string) => m.trim().toUpperCase()) as (
+          | "JAN"
+          | "FEB"
+          | "MAR"
+          | "APR"
+          | "MAY"
+          | "JUN"
+          | "JUL"
+          | "AUG"
+          | "SEP"
+          | "OCT"
+          | "NOV"
+          | "DEC"
+        )[];
       }
 
       let params: { [key: string]: string | number | boolean } | undefined;
@@ -167,7 +218,15 @@ export const scheduleCommand = new Command()
       // Need to have either days-of-week or days-of-month
       // If neither is set, default to days-of-week with all days
       if (!timetable["days-of-week"] && !timetable["days-of-month"]) {
-        timetable["days-of-week"] = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"] as ("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT")[];
+        timetable["days-of-week"] = [
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI",
+          "SAT",
+          "SUN",
+        ] as ("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT")[];
       }
       // Need hours-of-day
       if (!timetable["hours-of-day"]) {
@@ -183,7 +242,33 @@ export const scheduleCommand = new Command()
           description: options.description,
           "attribution-actor": "current",
           parameters: params || {},
-          timetable: timetable as { "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[]; "hours-of-day": number[]; "per-hour": number; months?: ("MAR" | "NOV" | "DEC" | "JUN" | "MAY" | "OCT" | "FEB" | "APR" | "JAN" | "AUG" | "SEP" | "JUL")[] },
+          timetable: timetable as {
+            "days-of-week": (
+              | "TUE"
+              | "SAT"
+              | "SUN"
+              | "MON"
+              | "THU"
+              | "WED"
+              | "FRI"
+            )[];
+            "hours-of-day": number[];
+            "per-hour": number;
+            months?: (
+              | "MAR"
+              | "NOV"
+              | "DEC"
+              | "JUN"
+              | "MAY"
+              | "OCT"
+              | "FEB"
+              | "APR"
+              | "JAN"
+              | "AUG"
+              | "SEP"
+              | "JUL"
+            )[];
+          },
         },
       });
 
@@ -216,7 +301,10 @@ export const scheduleCommand = new Command()
   .option("--per-hour <perHour:number>", "Triggers per hour (1-60)")
   .option("--hours-of-day <hours:string>", "Comma-separated hours (0-23)")
   .option("--days-of-week <days:string>", "Comma-separated days")
-  .option("--parameters <parameters:string>", "Pipeline parameters as JSON string")
+  .option(
+    "--parameters <parameters:string>",
+    "Pipeline parameters as JSON string",
+  )
   .option("--json", "Output in JSON format")
   .option("--yaml", "Output in YAML format")
   .action(async (options, scheduleId) => {
@@ -242,10 +330,14 @@ export const scheduleCommand = new Command()
         timetable["per-hour"] = options.perHour;
       }
       if (options.hoursOfDay) {
-        timetable["hours-of-day"] = options.hoursOfDay.split(",").map((h: string) => Number.parseInt(h.trim(), 10));
+        timetable["hours-of-day"] = options.hoursOfDay
+          .split(",")
+          .map((h: string) => Number.parseInt(h.trim(), 10));
       }
       if (options.daysOfWeek) {
-        timetable["days-of-week"] = options.daysOfWeek.split(",").map((d: string) => d.trim().toUpperCase());
+        timetable["days-of-week"] = options.daysOfWeek
+          .split(",")
+          .map((d: string) => d.trim().toUpperCase());
       }
       if (Object.keys(timetable).length > 0) {
         body.timetable = timetable;

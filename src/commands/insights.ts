@@ -30,7 +30,10 @@ const workflowSubcommand = new Command()
         "/insights/{project-slug}/workflows/{workflow-name}",
         {
           params: {
-            path: { "project-slug": projectSlug, "workflow-name": workflowName },
+            path: {
+              "project-slug": projectSlug,
+              "workflow-name": workflowName,
+            },
             query: {
               branch: options.branch,
               "start-date": options.startDate,
@@ -38,7 +41,7 @@ const workflowSubcommand = new Command()
               "page-token": options.pageToken,
             },
           },
-        }
+        },
       );
 
       if (response.error) {
@@ -88,13 +91,16 @@ const workflowSubcommand = new Command()
         "/insights/{project-slug}/workflows/{workflow-name}/jobs",
         {
           params: {
-            path: { "project-slug": projectSlug, "workflow-name": workflowName },
+            path: {
+              "project-slug": projectSlug,
+              "workflow-name": workflowName,
+            },
             query: {
               branch: options.branch,
               "page-token": options.pageToken,
             },
           },
-        }
+        },
       );
 
       if (response.error) {
@@ -106,12 +112,22 @@ const workflowSubcommand = new Command()
       } else if (options.yaml) {
         printYaml(response.data);
       } else {
-        const headers = ["Name", "Success Rate", "Throughput", "Avg Duration", "Total Runs"];
+        const headers = [
+          "Name",
+          "Success Rate",
+          "Throughput",
+          "Avg Duration",
+          "Total Runs",
+        ];
         const rows = response.data.items.map((j) => [
           j.name,
-          j.metrics?.success_rate !== undefined ? `${(j.metrics.success_rate * 100).toFixed(1)}%` : "-",
+          j.metrics?.success_rate !== undefined
+            ? `${(j.metrics.success_rate * 100).toFixed(1)}%`
+            : "-",
           String(j.metrics?.throughput || 0),
-          j.metrics?.duration_metrics?.mean !== undefined ? `${j.metrics.duration_metrics.mean.toFixed(0)}s` : "-",
+          j.metrics?.duration_metrics?.mean !== undefined
+            ? `${j.metrics.duration_metrics.mean.toFixed(0)}s`
+            : "-",
           String(j.metrics?.total_runs || 0),
         ]);
         printTable(headers, rows);
@@ -143,10 +159,13 @@ const workflowSubcommand = new Command()
         "/insights/{project-slug}/workflows/{workflow-name}/summary",
         {
           params: {
-            path: { "project-slug": projectSlug, "workflow-name": workflowName },
+            path: {
+              "project-slug": projectSlug,
+              "workflow-name": workflowName,
+            },
             query: { branch: options.branch },
           },
-        }
+        },
       );
 
       if (response.error) {
@@ -164,7 +183,9 @@ const workflowSubcommand = new Command()
         console.log(`  Total Runs: ${metrics.total_runs || 0}`);
         console.log(`  Successful Runs: ${metrics.successful_runs || 0}`);
         console.log(`  Failed Runs: ${metrics.failed_runs || 0}`);
-        console.log(`  Success Rate: ${metrics.success_rate !== undefined ? (metrics.success_rate * 100).toFixed(1) + "%" : "-"}`);
+        console.log(
+          `  Success Rate: ${metrics.success_rate !== undefined ? (metrics.success_rate * 100).toFixed(1) + "%" : "-"}`,
+        );
         console.log(`  Throughput: ${metrics.throughput || 0}`);
         console.log(`  MTTR: ${metrics.mttr || "-"}`);
         console.log(`  Total Credits: ${metrics.total_credits_used || 0}`);
@@ -200,10 +221,13 @@ const workflowSubcommand = new Command()
         "/insights/{project-slug}/workflows/{workflow-name}/test-metrics",
         {
           params: {
-            path: { "project-slug": projectSlug, "workflow-name": workflowName },
+            path: {
+              "project-slug": projectSlug,
+              "workflow-name": workflowName,
+            },
             query: { branch: options.branch },
           },
-        }
+        },
       );
 
       if (response.error) {
@@ -222,7 +246,9 @@ const workflowSubcommand = new Command()
           console.log("  No failed tests");
         } else {
           for (const t of tests.slice(0, 10)) {
-            console.log(`  - ${t.test_name} (${t.classname || "no class"}): ${t.failed_runs || 0} failures`);
+            console.log(
+              `  - ${t.test_name} (${t.classname || "no class"}): ${t.failed_runs || 0} failures`,
+            );
           }
         }
       }
@@ -239,9 +265,15 @@ export const insightsCommand = new Command()
   // insights summary (project)
   .command("summary")
   .description("Get project or organization summary")
-  .option("--project-slug <projectSlug:string>", "Project slug for project summary")
+  .option(
+    "--project-slug <projectSlug:string>",
+    "Project slug for project summary",
+  )
   .option("--org-slug <orgSlug:string>", "Organization slug for org summary")
-  .option("--reporting-window <window:string>", "Reporting window (last-7-days, last-30-days, etc.)")
+  .option(
+    "--reporting-window <window:string>",
+    "Reporting window (last-7-days, last-30-days, etc.)",
+  )
   .option("--json", "Output in JSON format")
   .option("--yaml", "Output in YAML format")
   .action(async (options) => {
@@ -260,10 +292,16 @@ export const insightsCommand = new Command()
             params: {
               path: { "project-slug": options.projectSlug },
               query: {
-                "reporting-window": options.reportingWindow as "last-7-days" | "last-24-hours" | "last-30-days" | "last-60-days" | "last-90-days" | undefined,
+                "reporting-window": options.reportingWindow as
+                  | "last-7-days"
+                  | "last-24-hours"
+                  | "last-30-days"
+                  | "last-60-days"
+                  | "last-90-days"
+                  | undefined,
               },
             },
-          }
+          },
         );
 
         if (response.error) {
@@ -282,7 +320,13 @@ export const insightsCommand = new Command()
           params: {
             path: { "org-slug": options.orgSlug },
             query: {
-              "reporting-window": options.reportingWindow as "last-7-days" | "last-24-hours" | "last-30-days" | "last-60-days" | "last-90-days" | undefined,
+              "reporting-window": options.reportingWindow as
+                | "last-7-days"
+                | "last-24-hours"
+                | "last-30-days"
+                | "last-60-days"
+                | "last-90-days"
+                | undefined,
             },
           },
         });
@@ -300,7 +344,9 @@ export const insightsCommand = new Command()
           const metrics = data.org_data?.metrics || {};
           console.log("Organization Summary:");
           console.log(`  Total Runs: ${metrics.total_runs || 0}`);
-          console.log(`  Success Rate: ${metrics.success_rate !== undefined ? (metrics.success_rate * 100).toFixed(1) + "%" : "-"}`);
+          console.log(
+            `  Success Rate: ${metrics.success_rate !== undefined ? (metrics.success_rate * 100).toFixed(1) + "%" : "-"}`,
+          );
           console.log(`  Total Credits: ${metrics.total_credits_used || 0}`);
         }
       } else {
@@ -373,11 +419,14 @@ export const insightsCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET("/insights/{project-slug}/flaky-tests", {
-        params: {
-          path: { "project-slug": projectSlug },
+      const response = await client.GET(
+        "/insights/{project-slug}/flaky-tests",
+        {
+          params: {
+            path: { "project-slug": projectSlug },
+          },
         },
-      });
+      );
 
       if (response.error) {
         throw new Error(response.error.message);
@@ -388,18 +437,27 @@ export const insightsCommand = new Command()
       } else if (options.yaml) {
         printYaml(response.data);
       } else {
-        const headers = ["Test Name", "Classname", "File", "Source", "Times Flaked"];
-        const rows = response.data["flaky-tests"]?.map((t) => [
-          t["test-name"] || "-",
-          t.classname || "-",
-          t.file || "-",
-          t.source || "-",
-          String(t["times-flaked"] || 0),
-        ]) || [];
+        const headers = [
+          "Test Name",
+          "Classname",
+          "File",
+          "Source",
+          "Times Flaked",
+        ];
+        const rows =
+          response.data["flaky-tests"]?.map((t) => [
+            t["test-name"] || "-",
+            t.classname || "-",
+            t.file || "-",
+            t.source || "-",
+            String(t["times-flaked"] || 0),
+          ]) || [];
         if (rows.length === 0) {
           console.log("No flaky tests found.");
         } else {
-          console.log(`Total Flaky Tests: ${response.data["total-flaky-tests"] || 0}`);
+          console.log(
+            `Total Flaky Tests: ${response.data["total-flaky-tests"] || 0}`,
+          );
           printTable(headers, rows);
         }
       }
@@ -446,12 +504,22 @@ export const insightsCommand = new Command()
       } else if (options.yaml) {
         printYaml(response.data);
       } else {
-        const headers = ["Name", "Success Rate", "Total Runs", "Avg Duration", "Total Credits"];
+        const headers = [
+          "Name",
+          "Success Rate",
+          "Total Runs",
+          "Avg Duration",
+          "Total Credits",
+        ];
         const rows = response.data.items.map((w) => [
           w.name,
-          w.metrics?.success_rate !== undefined ? `${(w.metrics.success_rate * 100).toFixed(1)}%` : "-",
+          w.metrics?.success_rate !== undefined
+            ? `${(w.metrics.success_rate * 100).toFixed(1)}%`
+            : "-",
           String(w.metrics?.total_runs || 0),
-          w.metrics?.duration_metrics?.mean !== undefined ? `${w.metrics.duration_metrics.mean.toFixed(0)}s` : "-",
+          w.metrics?.duration_metrics?.mean !== undefined
+            ? `${w.metrics.duration_metrics.mean.toFixed(0)}s`
+            : "-",
           String(w.metrics?.total_credits_used || 0),
         ]);
         printTable(headers, rows);
@@ -486,15 +554,21 @@ export const insightsCommand = new Command()
         "/insights/time-series/{project-slug}/workflows/{workflow-name}/jobs",
         {
           params: {
-            path: { "project-slug": projectSlug, "workflow-name": workflowName },
+            path: {
+              "project-slug": projectSlug,
+              "workflow-name": workflowName,
+            },
             query: {
               branch: options.branch,
               "start-date": options.startDate,
               "end-date": options.endDate,
-              granularity: options.granularity as "daily" | "hourly" | undefined,
+              granularity: options.granularity as
+                | "daily"
+                | "hourly"
+                | undefined,
             },
           },
-        }
+        },
       );
 
       if (response.error) {

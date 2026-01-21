@@ -110,9 +110,17 @@ export const webhookCommand = new Command()
   .option("--name <name:string>", "Webhook name", { required: true })
   .option("--url <url:string>", "Webhook URL", { required: true })
   .option("--scope-id <scopeId:string>", "Project ID", { required: true })
-  .option("--events <events:string>", "Comma-separated events (workflow-completed, job-completed)", { required: true })
+  .option(
+    "--events <events:string>",
+    "Comma-separated events (workflow-completed, job-completed)",
+    { required: true },
+  )
   .option("--verify-tls", "Verify TLS certificate", { default: true })
-  .option("--signing-secret <secret:string>", "Signing secret for verification", { required: true })
+  .option(
+    "--signing-secret <secret:string>",
+    "Signing secret for verification",
+    { required: true },
+  )
   .option("--json", "Output in JSON format")
   .option("--yaml", "Output in YAML format")
   .action(async (options) => {
@@ -191,7 +199,12 @@ export const webhookCommand = new Command()
       if (options.name) body.name = options.name;
       if (options.url) body.url = options.url;
       if (options.events) {
-        body.events = options.events.split(",").map((e: string) => e.trim()) as ("workflow-completed" | "job-completed")[];
+        body.events = options.events
+          .split(",")
+          .map((e: string) => e.trim()) as (
+          | "workflow-completed"
+          | "job-completed"
+        )[];
       }
       if (options.verifyTls !== undefined) {
         body["verify-tls"] = options.verifyTls;

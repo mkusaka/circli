@@ -22,7 +22,9 @@ export const configCommand = new Command()
   .description("Manage CircleCI CLI configuration")
   .command("set")
   .description(
-    `Set configuration values\n\nAvailable keys:\n${Object.entries(CONFIG_KEY_MAP)
+    `Set configuration values\n\nAvailable keys:\n${Object.entries(
+      CONFIG_KEY_MAP,
+    )
       .map(([key, { description }]) => `  ${key}: ${description}`)
       .join("\n")}`,
   )
@@ -37,11 +39,11 @@ export const configCommand = new Command()
 
     const configKey = CONFIG_KEY_MAP[result.data.key].configKey;
     const setResult = await setConfigValue(configKey, result.data.value);
-    
+
     if (setResult.isErr()) {
       console.error(`Failed to set ${key}: ${setResult.error.message}`);
       process.exit(1);
     }
-    
+
     console.log(`${key} has been set successfully`);
   });

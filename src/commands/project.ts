@@ -64,11 +64,14 @@ const envCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET("/project/{project-slug}/envvar/{name}", {
-        params: {
-          path: { "project-slug": projectSlug, name },
+      const response = await client.GET(
+        "/project/{project-slug}/envvar/{name}",
+        {
+          params: {
+            path: { "project-slug": projectSlug, name },
+          },
         },
-      });
+      );
 
       if (response.error) {
         throw new Error(response.error.message);
@@ -142,11 +145,14 @@ const envCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.DELETE("/project/{project-slug}/envvar/{name}", {
-        params: {
-          path: { "project-slug": projectSlug, name },
+      const response = await client.DELETE(
+        "/project/{project-slug}/envvar/{name}",
+        {
+          params: {
+            path: { "project-slug": projectSlug, name },
+          },
         },
-      });
+      );
 
       if (response.error) {
         throw new Error(response.error.message);
@@ -180,12 +186,15 @@ const checkoutKeyCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET("/project/{project-slug}/checkout-key", {
-        params: {
-          path: { "project-slug": projectSlug },
-          query: { digest: options.digest as "sha256" | "md5" | undefined },
+      const response = await client.GET(
+        "/project/{project-slug}/checkout-key",
+        {
+          params: {
+            path: { "project-slug": projectSlug },
+            query: { digest: options.digest as "sha256" | "md5" | undefined },
+          },
         },
-      });
+      );
 
       if (response.error) {
         throw new Error(response.error.message);
@@ -230,14 +239,17 @@ const checkoutKeyCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.POST("/project/{project-slug}/checkout-key", {
-        params: {
-          path: { "project-slug": projectSlug },
+      const response = await client.POST(
+        "/project/{project-slug}/checkout-key",
+        {
+          params: {
+            path: { "project-slug": projectSlug },
+          },
+          body: {
+            type: options.type as "deploy-key" | "user-key",
+          },
         },
-        body: {
-          type: options.type as "deploy-key" | "user-key",
-        },
-      });
+      );
 
       if (response.error) {
         throw new Error(response.error.message);
@@ -283,7 +295,7 @@ const checkoutKeyCommand = new Command()
           params: {
             path: { "project-slug": projectSlug, fingerprint },
           },
-        }
+        },
       );
 
       if (response.error) {
@@ -329,7 +341,7 @@ const checkoutKeyCommand = new Command()
           params: {
             path: { "project-slug": projectSlug, fingerprint },
           },
-        }
+        },
       );
 
       if (response.error) {
@@ -369,7 +381,7 @@ const settingsCommand = new Command()
           params: {
             path: { provider, organization, project },
           },
-        }
+        },
       );
 
       if (response.error) {
@@ -384,13 +396,17 @@ const settingsCommand = new Command()
         const advanced = response.data.advanced || {};
         console.log("Advanced Settings:");
         console.log(`  Build Fork PRs: ${advanced.build_fork_prs}`);
-        console.log(`  Fork PR Runs On Self-Hosted: ${advanced.forks_receive_secret_env_vars}`);
+        console.log(
+          `  Fork PR Runs On Self-Hosted: ${advanced.forks_receive_secret_env_vars}`,
+        );
         console.log(`  Build PRs: ${advanced.build_prs_only}`);
         console.log(`  Autocancel Builds: ${advanced.autocancel_builds}`);
         console.log(`  OSS: ${advanced.oss}`);
         console.log(`  Set GitHub Status: ${advanced.set_github_status}`);
         console.log(`  Setup Workflows: ${advanced.setup_workflows}`);
-        console.log(`  Write Settings Required: ${advanced.write_settings_requires_admin}`);
+        console.log(
+          `  Write Settings Required: ${advanced.write_settings_requires_admin}`,
+        );
         if (advanced.disable_ssh !== undefined) {
           console.log(`  Disable SSH: ${advanced.disable_ssh}`);
         }
@@ -442,7 +458,7 @@ const settingsCommand = new Command()
             path: { provider, organization, project },
           },
           body: { advanced },
-        }
+        },
       );
 
       if (response.error) {
@@ -505,7 +521,9 @@ export const projectCommand = new Command()
         if (response.data.vcs_info) {
           console.log(`VCS URL: ${response.data.vcs_info.vcs_url}`);
           console.log(`Provider: ${response.data.vcs_info.provider}`);
-          console.log(`Default Branch: ${response.data.vcs_info.default_branch}`);
+          console.log(
+            `Default Branch: ${response.data.vcs_info.default_branch}`,
+          );
         }
       }
     } catch (error) {
@@ -536,7 +554,7 @@ export const projectCommand = new Command()
           params: {
             path: { provider, organization, project },
           },
-        }
+        },
       );
 
       if (response.error) {

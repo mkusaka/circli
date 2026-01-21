@@ -92,7 +92,9 @@ describe("pipeline command", () => {
       const getCommand = pipelineCommand.getCommand("get");
       const options = getCommand?.getOptions();
       const projectSlugOption = options?.find((o) => o.name === "project-slug");
-      const pipelineNumberOption = options?.find((o) => o.name === "pipeline-number");
+      const pipelineNumberOption = options?.find(
+        (o) => o.name === "pipeline-number",
+      );
       expect(projectSlugOption).toBeDefined();
       expect(pipelineNumberOption).toBeDefined();
     });

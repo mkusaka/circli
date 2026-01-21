@@ -81,7 +81,9 @@ describe("webhook command", () => {
     it("should require --signing-secret option", () => {
       const createCommand = webhookCommand.getCommand("create");
       const options = createCommand?.getOptions();
-      const signingSecretOption = options?.find((o) => o.name === "signing-secret");
+      const signingSecretOption = options?.find(
+        (o) => o.name === "signing-secret",
+      );
       expect(signingSecretOption?.required).toBe(true);
     });
   });
