@@ -13,7 +13,7 @@ importers:
         version: '@jsr/cliffy__command@1.0.0-rc.7'
       neverthrow:
         specifier: ^8.1.1
-        version: 8.1.1
+        version: 8.2.0
       openapi-fetch:
         specifier: ^0.13.4
         version: 0.13.4
@@ -593,6 +593,11 @@ packages:
     cpu: [x64]
     os: [linux]
 
+  '@rollup/rollup-linux-x64-gnu@4.55.3':
+    resolution: {integrity: sha512-+fgJE12FZMIgBaKIAGd45rxf+5ftcycANJRWk8Vz0NnMTM5rADPGuRFTYar+Mqs560xuART7XsX2lSACa1iOmQ==}
+    cpu: [x64]
+    os: [linux]
+
   '@rollup/rollup-linux-x64-musl@4.34.6':
     resolution: {integrity: sha512-zmmpOQh8vXc2QITsnCiODCDGXFC8LMi64+/oPpPx5qz3pqv0s6x46ps4xoycfUiVZps5PFn1gksZzo4RGTKT+A==}
     cpu: [x64]
@@ -854,8 +859,8 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  neverthrow@8.1.1:
-    resolution: {integrity: sha512-DpbZ/UDI0B+TxJB1JysXSfi1++3YK2xLBqQLTlRN0b4zxlZ2MoiB+dKKV8dMRzt1fAFjRKDknXOVJgpl+a4Amw==}
+  neverthrow@8.2.0:
+    resolution: {integrity: sha512-kOCT/1MCPAxY5iUV3wytNFUMUolzuwd/VF/1KCx7kf6CutrOsTie+84zTGTpgQycjvfLdBBdvBvFLqFD2c0wkQ==}
     engines: {node: '>=18'}
 
   openapi-fetch@0.13.4:
@@ -1494,6 +1499,9 @@ snapshots:
   '@rollup/rollup-linux-x64-gnu@4.34.6':
     optional: true
 
+  '@rollup/rollup-linux-x64-gnu@4.55.3':
+    optional: true
+
   '@rollup/rollup-linux-x64-musl@4.34.6':
     optional: true
 
@@ -1769,9 +1777,9 @@ snapshots:
 
   nanoid@3.3.8: {}
 
-  neverthrow@8.1.1:
+  neverthrow@8.2.0:
     optionalDependencies:
-      '@rollup/rollup-linux-x64-gnu': 4.34.6
+      '@rollup/rollup-linux-x64-gnu': 4.55.3
 
   openapi-fetch@0.13.4:
     dependencies:
