@@ -20,6 +20,7 @@ pnpm update         # Update CircleCI OpenAPI spec
 ```
 
 **Running a single test:**
+
 ```bash
 pnpm test src/commands/pipeline  # Run tests matching path
 pnpm test -t "test name"         # Run tests matching name
@@ -32,6 +33,7 @@ pnpm test -t "test name"         # Run tests matching name
 **CLI Framework:** `@cliffy/command` - Commands are registered in `src/cli.ts` and implemented in `src/commands/`.
 
 **API Layer:**
+
 - `src/types/circleci.ts` - Auto-generated types from CircleCI OpenAPI spec (`swagger.json`)
 - `src/utils/api.ts` - Type-safe API client using `openapi-fetch`
 
@@ -55,5 +57,6 @@ pnpm test -t "test name"         # Run tests matching name
 ## Type Generation
 
 When the CircleCI API changes:
+
 1. Run `pnpm update` to fetch latest OpenAPI spec
 2. Run `pnpm generate-types` to regenerate `src/types/circleci.ts`

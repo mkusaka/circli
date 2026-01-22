@@ -4,1912 +4,3202 @@
  */
 
 export interface paths {
-    "/context": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List contexts
-         * @description List all contexts for an owner.
-         */
-        get: operations["listContexts"];
-        put?: never;
-        /**
-         * Create a new context
-         * @description Creates a new context in the specified organization.
-         */
-        post: operations["createContext"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/context/{context_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get a context
-         * @description Returns basic information about a context.
-         */
-        get: operations["getContext"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete a context
-         * @description Delete a context by its ID. Will also delete all environment variables inside the context.
-         */
-        delete: operations["deleteContext"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/context/{context_id}/environment-variable": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List environment variables
-         * @description List information about environment variables in a context, not including their values.
-         */
-        get: operations["listEnvironmentVariablesFromContext"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/context/{context_id}/environment-variable/{env_var_name}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        /**
-         * Add or update an environment variable
-         * @description Create or update an environment variable within a context. Returns information about the environment variable, not including its value.
-         */
-        put: operations["addEnvironmentVariableToContext"];
-        post?: never;
-        /**
-         * Remove an environment variable
-         * @description Delete an environment variable from a context.
-         */
-        delete: operations["deleteEnvironmentVariableFromContext"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/context/{context_id}/restrictions": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a context.
-                 * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
-                 */
-                context_id: components["parameters"]["context_id"];
-            };
-            cookie?: never;
-        };
-        /**
-         * Get context restrictions
-         * @description Gets a list of project and expression restrictions associated with a context.
-         */
-        get: operations["getContextRestrictions"];
-        put?: never;
-        /**
-         * Create context restriction
-         * @description Creates project or expression restriction on a context.
-         */
-        post: operations["createContextRestriction"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/context/{context_id}/restrictions/{restriction_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a context.
-                 * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
-                 */
-                context_id: components["parameters"]["context_id"];
-                /**
-                 * @description An opaque identifier of a context restriction.
-                 * @example 1c23d2cb-07b1-4a28-8af3-e369732050ed
-                 */
-                restriction_id: components["parameters"]["restriction_id"];
-            };
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        /**
-         * Delete context restriction
-         * @description Deletes a project, expression or group restriction from a context.
-         */
-        delete: operations["deleteContextRestriction"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/deploy/components": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List Components
-         * @description Allows for listing of components for a given organization ID.
-         */
-        get: operations["listComponents"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/deploy/components/{component_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Component
-         * @description Get the details of a component by ID.
-         */
-        get: operations["getComponent"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/deploy/components/{component_id}/versions": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List Component Versions
-         * @description List the versions for a component.
-         */
-        get: operations["listComponentVersions"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/deploy/environments": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List Environments
-         * @description Allows listing environments for a given organization ID.
-         */
-        get: operations["listEnvironments"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/deploy/environments/{environment_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Environment
-         * @description Allows getting an environment for a given environment ID.
-         */
-        get: operations["getEnvironment"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/insights/pages/{project-slug}/summary": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get summary metrics and trends for a project across it's workflows and branches
-         * @description Get summary metrics and trends for a project at workflow and branch level.
-         *                  Workflow runs going back at most 90 days are included in the aggregation window.
-         *                  Trends are only supported upto last 30 days.
-         *                  Please note that Insights is not a financial reporting tool and should not be used for precise credit reporting.  Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI UI, nor does the underlying data have the same data accuracy guarantees as the billing information in the CircleCI UI.  This may lead to discrepancies between credits reported from Insights and the billing information in the Plan Overview page of the CircleCI UI.  For precise credit reporting, always use the Plan Overview page in the CircleCI UI.
-         */
-        get: operations["getProjectWorkflowsPageData"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/insights/time-series/{project-slug}/workflows/{workflow-name}/jobs": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Job timeseries data
-         * @description Get timeseries data for all jobs within a workflow. Hourly granularity data is only retained for 48 hours while daily granularity data is retained for 90 days.
-         */
-        get: operations["getJobTimeseries"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/insights/{org-slug}/summary": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get summary metrics with trends for the entire org, and for each project.
-         * @description Gets aggregated summary metrics with trends for the entire org.
-         *                   Also gets aggregated metrics and trends for each project belonging to the org.
-         */
-        get: operations["getOrgSummaryData"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/insights/{project-slug}/branches": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get all branches for a project
-         * @description Get a list of all branches for a specified project. The list will only contain branches currently available within Insights. The maximum number of branches returned by this endpoint is 5,000.
-         */
-        get: operations["getAllInsightsBranches"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/insights/{project-slug}/flaky-tests": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get flaky tests for a project
-         * @description Get a list of flaky tests for a given project. Flaky tests are branch agnostic.
-         *                  A flaky test is a test that passed and failed in the same commit.
-         */
-        get: operations["getFlakyTests"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/insights/{project-slug}/workflows": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get summary metrics for a project's workflows
-         * @description Get summary metrics for a project's workflows.  Workflow runs going back at most 90 days are included in the aggregation window. Metrics are refreshed daily, and thus may not include executions from the last 24 hours.  Please note that Insights is not a financial reporting tool and should not be used for precise credit reporting.  Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI UI, nor does the underlying data have the same data accuracy guarantees as the billing information in the CircleCI UI.  This may lead to discrepancies between credits reported from Insights and the billing information in the Plan Overview page of the CircleCI UI.  For precise credit reporting, always use the Plan Overview page in the CircleCI UI.
-         */
-        get: operations["getProjectWorkflowMetrics"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/insights/{project-slug}/workflows/{workflow-name}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get recent runs of a workflow
-         * @description Get recent runs of a workflow. Runs going back at most 90 days are returned. Please note that Insights is not a financial reporting tool and should not be used for precise credit reporting.  Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI UI, nor does the underlying data have the same data accuracy guarantees as the billing information in the CircleCI UI.  This may lead to discrepancies between credits reported from Insights and the billing information in the Plan Overview page of the CircleCI UI.  For precise credit reporting, always use the Plan Overview page in the CircleCI UI.
-         */
-        get: operations["getProjectWorkflowRuns"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/insights/{project-slug}/workflows/{workflow-name}/jobs": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get summary metrics for a project workflow's jobs.
-         * @description Get summary metrics for a project workflow's jobs. Job runs going back at most 90 days are included in the aggregation window. Metrics are refreshed daily, and thus may not include executions from the last 24 hours. Please note that Insights is not a financial reporting tool and should not be used for precise credit reporting.  Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI UI, nor does the underlying data have the same data accuracy guarantees as the billing information in the CircleCI UI.  This may lead to discrepancies between credits reported from Insights and the billing information in the Plan Overview page of the CircleCI UI.  For precise credit reporting, always use the Plan Overview page in the CircleCI UI.
-         */
-        get: operations["getProjectWorkflowJobMetrics"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/insights/{project-slug}/workflows/{workflow-name}/summary": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get metrics and trends for workflows
-         * @description Get the metrics and trends for a particular workflow on a single branch or all branches
-         */
-        get: operations["getWorkflowSummary"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/insights/{project-slug}/workflows/{workflow-name}/test-metrics": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get test metrics for a project's workflows
-         * @description Get test metrics for a project's workflows. Currently tests metrics are calculated based on 10 most recent workflow runs.
-         */
-        get: operations["getProjectWorkflowTestMetrics"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/jobs/{job-id}/cancel": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Cancel job by job ID
-         * @description Cancel job with a given job ID.
-         */
-        post: operations["cancelJobByJobID"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/me": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * User Information
-         * @description Provides information about the user that is currently signed in.
-         */
-        get: operations["getCurrentUser"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/me/collaborations": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Collaborations
-         * @description Provides the set of organizations of which a user is a member or a collaborator.
-         *
-         *     The set of organizations that a user can collaborate on is composed of:
-         *
-         *     * Organizations that the current user belongs to across VCS types (e.g. BitBucket, GitHub)
-         *     * The parent organization of repository that the user can collaborate on, but is not necessarily a member of
-         *     * The organization of the current user's account
-         */
-        get: operations["getCollaborations"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/org/{orgID}/oidc-custom-claims": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get org-level claims
-         * @description Fetches org-level custom claims of OIDC identity tokens
-         */
-        get: operations["GetOrgClaims"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete org-level claims
-         * @description Deletes org-level custom claims of OIDC identity tokens
-         */
-        delete: operations["DeleteOrgClaims"];
-        options?: never;
-        head?: never;
-        /**
-         * Patch org-level claims
-         * @description Creates/Updates org-level custom claims of OIDC identity tokens
-         */
-        patch: operations["PatchOrgClaims"];
-        trace?: never;
-    };
-    "/org/{orgID}/project/{projectID}/oidc-custom-claims": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get project-level claims
-         * @description Fetches project-level custom claims of OIDC identity tokens
-         */
-        get: operations["GetProjectClaims"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete project-level claims
-         * @description Deletes project-level custom claims of OIDC identity tokens
-         */
-        delete: operations["DeleteProjectClaims"];
-        options?: never;
-        head?: never;
-        /**
-         * Patch project-level claims
-         * @description Creates/Updates project-level custom claims of OIDC identity tokens
-         */
-        patch: operations["PatchProjectClaims"];
-        trace?: never;
-    };
-    "/organization": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Create a new organization
-         * @description Create a new organization. For VCS providers (GitHub/Bitbucket), this validates access and syncs org data. For standalone orgs, this creates a new CircleCI organization.
-         */
-        post: operations["createOrganization"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/organization/{org-slug-or-id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get an organization
-         * @description Retrieve an organization by slug or ID
-         */
-        get: operations["getOrganization"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete an organization
-         * @description Delete an organization. This action will delete all projects including all build data for the organization.
-         */
-        delete: operations["deleteOrganization"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/organization/{org-slug-or-id}/project": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Create a new project
-         * @description Create a new project. Works for all organization types.
-         */
-        post: operations["createProject"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/organization/{org-slug-or-id}/url-orb-allow-list": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List the entries in the org's URL Orb allow-list
-         * @description List the entries in the org's URL Orb allow-list
-         */
-        get: operations["listURLOrbAllowListEntries"];
-        put?: never;
-        /**
-         * Create a new URL Orb allow-list entry
-         * @description Create a new URL Orb allow-list entry
-         */
-        post: operations["createURLOrbAllowListEntry"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/organization/{org-slug-or-id}/url-orb-allow-list/{allow-list-entry-id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        /**
-         * Remove an entry from the org's URL orb allow-list
-         * @description Remove an entry from the org's URL orb allow-list
-         */
-        delete: operations["removeURLOrbAllowListEntry"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/organizations/{org_id}/groups": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of an organization.
-                 * @example b9291e0d-a11e-41fb-8517-c545388b5953
-                 */
-                org_id: components["parameters"]["org_id"];
-            };
-            cookie?: never;
-        };
-        /**
-         * Groups in an organization
-         * @description Get all the groups in an organization.
-         */
-        get: operations["getOrganizationGroups"];
-        put?: never;
-        /**
-         * Create Groups
-         * @description Create a new group under the organization. Currently only supported for standalone organizations.
-         */
-        post: operations["createOrganizationGroup"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/organizations/{org_id}/groups/{group_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of an organization.
-                 * @example b9291e0d-a11e-41fb-8517-c545388b5953
-                 */
-                org_id: components["parameters"]["org_id"];
-                /**
-                 * @description An opaque identifier of a group.
-                 * @example 39f660db-f49b-417e-ad79-2769ba29faf7
-                 */
-                group_id: components["parameters"]["group_id"];
-            };
-            cookie?: never;
-        };
-        /**
-         * A group in an organization
-         * @description Get details for a group in an organization. Currently only supported for standalone organizations.
-         */
-        get: operations["getGroup"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete a group
-         * @description Delete a group in an organization. This will remove all members from the group as well, and the subsequent role grants tied to the group. Currently only supported for standalone organizations.
-         */
-        delete: operations["deleteGroup"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/organizations/{org_id}/usage_export_job": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of an organization.
-                 * @example b9291e0d-a11e-41fb-8517-c545388b5953
-                 */
-                org_id: components["parameters"]["org_id"];
-            };
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Create a usage export
-         * @description Submits a request to create a usage export for an organization.
-         */
-        post: operations["createUsageExport"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/organizations/{org_id}/usage_export_job/{usage_export_job_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of an organization.
-                 * @example b9291e0d-a11e-41fb-8517-c545388b5953
-                 */
-                org_id: components["parameters"]["org_id"];
-                /**
-                 * @description An opaque identifier of a usage export job.
-                 * @example e8235eed-f121-4ae3-9c72-2719d6572818
-                 */
-                usage_export_job_id: components["parameters"]["usage_export_job_id"];
-            };
-            cookie?: never;
-        };
-        /**
-         * Get a usage export
-         * @description Gets a usage export for an organization.
-         */
-        get: operations["getUsageExport"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/owner/{ownerID}/context/{context}/decision": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Retrieves the owner's decision audit logs.
-         * @description This endpoint will return a list of decision audit logs that were made using this owner's policies.
-         */
-        get: operations["GetDecisionLogs"];
-        put?: never;
-        /**
-         * Makes a decision
-         * @description This endpoint will evaluate input data (config+metadata) against owner's stored policies and return a decision.
-         */
-        post: operations["MakeDecision"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/owner/{ownerID}/context/{context}/decision/settings": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get the decision settings
-         * @description This endpoint retrieves the current decision settings (eg enable/disable policy evaluation)
-         */
-        get: operations["GetDecisionSettings"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        /**
-         * Set the decision settings
-         * @description This endpoint allows modifying decision settings (eg enable/disable policy evaluation)
-         */
-        patch: operations["SetDecisionSettings"];
-        trace?: never;
-    };
-    "/owner/{ownerID}/context/{context}/decision/{decisionID}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Retrieves the owner's decision audit log by given decisionID
-         * @description This endpoint will retrieve a decision for a given decision log ID
-         */
-        get: operations["GetDecisionLog"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/owner/{ownerID}/context/{context}/decision/{decisionID}/policy-bundle": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Retrieves Policy Bundle for a given decision log ID
-         * @description This endpoint will retrieve a policy bundle for a given decision log ID
-         */
-        get: operations["GetDecisionLogPolicyBundle"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/owner/{ownerID}/context/{context}/policy-bundle": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Retrieves Policy Bundle
-         * @description This endpoint will retrieve a policy bundle
-         */
-        get: operations["GetPolicyBundle"];
-        put?: never;
-        /**
-         * Creates policy bundle for the context
-         * @description This endpoint replaces the current policy bundle with the provided policy bundle
-         */
-        post: operations["CreatePolicyBundle"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/owner/{ownerID}/context/{context}/policy-bundle/{policyName}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                ownerID: components["parameters"]["OwnerID"];
-                context: components["parameters"]["Context"];
-                /** @description the policy name set by the rego policy_name rule */
-                policyName: string;
-            };
-            cookie?: never;
-        };
-        /**
-         * Retrieves a policy document
-         * @description This endpoint will retrieve a policy document.
-         */
-        get: operations["GetPolicyDocument"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/pipeline": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get a list of pipelines
-         * @description Returns all pipelines for the most recently built projects (max 250) you follow in an organization.
-         */
-        get: operations["listPipelines"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/pipeline/continue": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Continue a pipeline
-         * @description Continue a pipeline from the setup phase. For information on using pipeline parameters with dynamic configuration, see the [Pipeline values and parameters](https://circleci.com/docs/pipeline-variables/#pipeline-parameters-and-dynamic-configuration) docs.
-         */
-        post: operations["continuePipeline"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/pipeline/{pipeline-id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get a pipeline by ID
-         * @description Returns a pipeline by the pipeline ID.
-         */
-        get: operations["getPipelineById"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/pipeline/{pipeline-id}/config": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get a pipeline's configuration
-         * @description Returns a pipeline's configuration by ID.
-         */
-        get: operations["getPipelineConfigById"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/pipeline/{pipeline-id}/values": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get pipeline values for a pipeline
-         * @description Returns a map of pipeline values by pipeline ID. For more information see the [pipeline values reference page](https://circleci.com/docs/variables/#pipeline-values).
-         */
-        get: operations["getPipelineValuesById"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/pipeline/{pipeline-id}/workflow": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get a pipeline's workflows
-         * @description Returns a paginated list of workflows by pipeline ID.
-         */
-        get: operations["listWorkflowsByPipelineId"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/project/{project-slug}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get a project
-         * @description Retrieves a project by project slug.
-         */
-        get: operations["getProjectBySlug"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete a project
-         * @description Deletes a project by project slug
-         */
-        delete: operations["deleteProjectBySlug"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/project/{project-slug}/checkout-key": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get all checkout keys
-         * @description Returns a sequence of checkout keys for `:project`.
-         */
-        get: operations["listCheckoutKeys"];
-        put?: never;
-        /**
-         * Create a new checkout key
-         * @description Not available to projects that use GitLab or GitHub App. Creates a new checkout key. This API request is only usable with a user API token.
-         *                                Please ensure that you have authorized your account with GitHub before creating user keys.
-         *                                This is necessary to give CircleCI the permission to create a user key associated with
-         *                                your GitHub user account. You can find this page by visiting Project Settings > Checkout SSH Keys
-         */
-        post: operations["createCheckoutKey"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/project/{project-slug}/checkout-key/{fingerprint}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get a checkout key
-         * @description Returns an individual checkout key via md5 or sha256 fingerprint. sha256 keys should be url-encoded.
-         */
-        get: operations["getCheckoutKey"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete a checkout key
-         * @description Deletes the checkout key via md5 or sha256 fingerprint. sha256 keys should be url-encoded.
-         */
-        delete: operations["deleteCheckoutKey"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/project/{project-slug}/envvar": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List all environment variables
-         * @description Returns four 'x' characters, in addition to the last four ASCII characters of the value, consistent with the display of environment variable values on the CircleCI website.
-         */
-        get: operations["listEnvVars"];
-        put?: never;
-        /**
-         * Create an environment variable
-         * @description Creates a new environment variable.
-         */
-        post: operations["createEnvVar"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/project/{project-slug}/envvar/{name}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get a masked environment variable
-         * @description Returns the masked value of environment variable :name.
-         */
-        get: operations["getEnvVar"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete an environment variable
-         * @description Deletes the environment variable named :name.
-         */
-        delete: operations["deleteEnvVar"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/project/{project-slug}/job/{job-number}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get job details
-         * @description Returns job details.
-         */
-        get: operations["getJobDetails"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/project/{project-slug}/job/{job-number}/cancel": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Cancel job by job number
-         * @description Cancel job with a given job number.
-         */
-        post: operations["cancelJobByJobNumber"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/project/{project-slug}/pipeline": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get all pipelines
-         * @description Returns all pipelines for this project.
-         */
-        get: operations["listPipelinesForProject"];
-        put?: never;
-        /**
-         * Trigger a new pipeline
-         * @description **[This endpoint is superseded by the [new Trigger Pipeline API](#tag/Pipeline/operation/triggerPipelineRun), which supports all organization and pipeline types except GitLab.]** Triggers a new pipeline on the project. Does not support triggering pipelines integrated with GitLab or GitHub App.
-         */
-        post: operations["triggerPipeline"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/project/{project-slug}/pipeline/mine": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get your pipelines
-         * @description Returns a sequence of all pipelines for this project triggered by the user.
-         */
-        get: operations["listMyPipelines"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/project/{project-slug}/pipeline/{pipeline-number}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get a pipeline by pipeline number
-         * @description Returns a pipeline by the pipeline number.
-         */
-        get: operations["getPipelineByNumber"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/project/{project-slug}/schedule": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List schedule triggers
-         * @description For a given project, returns all schedules associated with GitHub OAuth or Bitbucket Cloud pipeline definitions. Does not return schedule triggers associated with GitHub App pipelines. To fetch schedule triggers associated with GitHub App pipelines, use the [List pipeline definition triggers](https://circleci.com/docs/api/v2/index.html#tag/Trigger/operation/listPipelineDefinitionTriggers] endpoint.
-         */
-        get: operations["listSchedulesForProject"];
-        put?: never;
-        /**
-         * Create a schedule
-         * @description Creates a schedule and returns the created schedule. Available only on organizations of type `bitbucket` and `github`, and for the latter will exclusively create schedule triggers associated with the GitHub OAuth pipeline definition. For projects of type `circleci`, or to create schedule triggers for GitHub App pipeline definitions, use the [Create trigger](https://circleci.com/docs/api/v2/index.html#tag/Trigger/operation/createTrigger) endpoint.
-         */
-        post: operations["createSchedule"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/project/{project-slug}/{job-number}/artifacts": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get a job's artifacts
-         * @description Returns a job's artifacts.
-         */
-        get: operations["getJobArtifacts"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/project/{project-slug}/{job-number}/tests": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get test metadata
-         * @description Get test metadata for a build. In the rare case where there is more than 250MB of test data on the job, no results will be returned.
-         */
-        get: operations["getTests"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/project/{provider}/{organization}/{project}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The first segment of the slash-separated project slug, as shown in Project Settings > Overview.
-                 * @example gh
-                 */
-                provider: components["parameters"]["provider"];
-                /**
-                 * @description The second segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the org name (e.g. `my-org`) or an ID (e.g. `43G3lM5RtfFE7v5sa4nWAU`).
-                 * @example CircleCI-Public
-                 */
-                organization: components["parameters"]["organization"];
-                /**
-                 * @description The third segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the project name (e.g. `my-project`) or an ID (e.g. `44n9wujWcTnVZ2b5S8Fnat`).
-                 * @example api-preview-docs
-                 */
-                project: components["parameters"]["project"];
-            };
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * ⚠️ Create a project
-         * @description __[DEPRECATED] This endpoint is replaced by [organization/{org-slug-or-id}/project](https://circleci.com/docs/api/v2/index.html#tag/Project/operation/createProject) and documentation will be removed on August 1st, 2025.__ Creates a new CircleCI project, and returns a list of the default advanced settings. Can only be called on a repo with a main branch and an existing config.yml file. Not yet available to projects that use GitLab or GitHub App.
-         */
-        post: operations["createProject1"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/project/{provider}/{organization}/{project}/pipeline/run": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * [Recommended] Trigger a new pipeline
-         * @description Trigger a pipeline given a pipeline definition ID. Supports all integrations except GitLab.
-         *
-         *     The slash-separated project slug is shown in Project Settings > Overview.
-         *
-         *     Depending on the organization type, the project slug may have a human-readable format (`vcs_type/org_name/project_name`)
-         *     or be an opaque string (e.g. `circleci/43G3lM5RtfFE7v5sa4nWAU/44n9wujWcTnVZ2b5S8Fnat`).
-         */
-        post: operations["triggerPipelineRun"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/project/{provider}/{organization}/{project}/settings": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The first segment of the slash-separated project slug, as shown in Project Settings > Overview.
-                 * @example gh
-                 */
-                provider: components["parameters"]["provider"];
-                /**
-                 * @description The second segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the org name (e.g. `my-org`) or an ID (e.g. `43G3lM5RtfFE7v5sa4nWAU`).
-                 * @example CircleCI-Public
-                 */
-                organization: components["parameters"]["organization"];
-                /**
-                 * @description The third segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the project name (e.g. `my-project`) or an ID (e.g. `44n9wujWcTnVZ2b5S8Fnat`).
-                 * @example api-preview-docs
-                 */
-                project: components["parameters"]["project"];
-            };
-            cookie?: never;
-        };
-        /**
-         * 🧪 Get project settings
-         * @description [__EXPERIMENTAL__] Returns a list of the advanced settings for a CircleCI project, whether enabled (true) or not (false).
-         */
-        get: operations["getProjectSettings"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        /**
-         * 🧪 Update project settings
-         * @description [__EXPERIMENTAL__] Updates one or more of the advanced settings for a CircleCI project.
-         */
-        patch: operations["patchProjectSettings"];
-        trace?: never;
-    };
-    "/projects/{project_id}/pipeline-definitions": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List pipeline definitions
-         * @description List all pipeline definitions for a given project. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
-         */
-        get: operations["listPipelineDefinitions"];
-        put?: never;
-        /**
-         * Create pipeline definition
-         * @description Create a pipeline definition for a given project. Currently only supported for pipeline definitions where `config_source.provider` is `github_app`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
-         */
-        post: operations["createPipelineDefinition"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/projects/{project_id}/pipeline-definitions/{pipeline_definition_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get pipeline definition
-         * @description Get details for a pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app`, `github_oauth`, `bitbucket_dc`, `bitbucket_oauth` or `gitlab`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
-         */
-        get: operations["getPipelineDefinition"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete pipeline definition
-         * @description Delete pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
-         */
-        delete: operations["deletePipelineDefinition"];
-        options?: never;
-        head?: never;
-        /**
-         * Update pipeline definition
-         * @description Update pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
-         */
-        patch: operations["updatePipelineDefinition"];
-        trace?: never;
-    };
-    "/projects/{project_id}/pipeline-definitions/{pipeline_definition_id}/triggers": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List pipeline definition triggers
-         * @description List all triggers for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_oauth`, `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
-         */
-        get: operations["listPipelineDefinitionTriggers"];
-        put?: never;
-        /**
-         * Create trigger
-         * @description Create a trigger for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_oauth` or `github_app`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
-         */
-        post: operations["createTrigger"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/projects/{project_id}/rollback": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Rollback a project
-         * @description Performs a rollback operation by triggering a rollback pipeline.
-         */
-        post: operations["rollbackProject"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/projects/{project_id}/triggers/{trigger_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get trigger
-         * @description Get details for a trigger. Currently only supported for triggers where `event_source.provider` is `github_oauth`, `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
-         */
-        get: operations["getTrigger"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete trigger
-         * @description Delete a trigger. Currently only supported for triggers where `event_source.provider` is `github_oauth`, `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
-         */
-        delete: operations["deleteTrigger"];
-        options?: never;
-        head?: never;
-        /**
-         * Update trigger
-         * @description Update a trigger. Currently only supported for triggers where `event_source.provider` is `github_oauth`, `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
-         */
-        patch: operations["updateTrigger"];
-        trace?: never;
-    };
-    "/schedule/{schedule-id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get a schedule by ID. Available only on schedules associated with GitHub OAuth or Bitbucket Cloud pipeline definitions.
-         * @description Get a schedule by id.
-         */
-        get: operations["getScheduleById"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete a schedule
-         * @description Deletes a schedule by ID. Available only on schedules associated with GitHub OAuth or Bitbucket Cloud pipeline definitions.
-         */
-        delete: operations["deleteScheduleById"];
-        options?: never;
-        head?: never;
-        /**
-         * Update a schedule
-         * @description Updates a schedule and returns the updated schedule. Available only on schedules associated with GitHub OAuth or Bitbucket Cloud pipeline definitions. To update schedule triggers for GitHub App pipeline definitions, use the [Update trigger](https://circleci.com/docs/api/v2/index.html#tag/Trigger/operation/updateTrigger) endpoint.
-         */
-        patch: operations["updateSchedule"];
-        trace?: never;
-    };
-    "/user/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * User Information
-         * @description Provides information about the user with the given ID.
-         */
-        get: operations["getUser"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/webhook": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List webhooks
-         * @description Get a list of outbound webhooks that match the given scope-type and scope-id
-         */
-        get: operations["getWebhooks"];
-        put?: never;
-        /**
-         * Create an outbound webhook
-         * @description Creates an outbound webhook.
-         */
-        post: operations["createWebhook"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/webhook/{webhook-id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get a webhook
-         * @description Get an outbound webhook by id.
-         */
-        get: operations["getWebhookById"];
-        /**
-         * Update an outbound webhook
-         * @description Updates an outbound webhook.
-         */
-        put: operations["updateWebhook"];
-        post?: never;
-        /**
-         * Delete an outbound webhook
-         * @description Deletes an outbound webhook
-         */
-        delete: operations["deleteWebhook"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/workflow/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get a workflow
-         * @description Returns summary fields of a workflow by ID.
-         */
-        get: operations["getWorkflowById"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/workflow/{id}/approve/{approval_request_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Approve a job
-         * @description Approves a pending approval job in a workflow.
-         */
-        post: operations["approvePendingApprovalJobById"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/workflow/{id}/cancel": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Cancel a workflow
-         * @description Cancels a running workflow.
-         */
-        post: operations["cancelWorkflow"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/workflow/{id}/job": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get a workflow's jobs
-         * @description Returns a sequence of jobs for a workflow.
-         */
-        get: operations["listWorkflowJobs"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/workflow/{id}/rerun": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Rerun a workflow
-         * @description Reruns a workflow.
-         */
-        post: operations["rerunWorkflow"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
+  "/context": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List contexts
+     * @description List all contexts for an owner.
+     */
+    get: operations["listContexts"];
+    put?: never;
+    /**
+     * Create a new context
+     * @description Creates a new context in the specified organization.
+     */
+    post: operations["createContext"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/context/{context_id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get a context
+     * @description Returns basic information about a context.
+     */
+    get: operations["getContext"];
+    put?: never;
+    post?: never;
+    /**
+     * Delete a context
+     * @description Delete a context by its ID. Will also delete all environment variables inside the context.
+     */
+    delete: operations["deleteContext"];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/context/{context_id}/environment-variable": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List environment variables
+     * @description List information about environment variables in a context, not including their values.
+     */
+    get: operations["listEnvironmentVariablesFromContext"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/context/{context_id}/environment-variable/{env_var_name}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    /**
+     * Add or update an environment variable
+     * @description Create or update an environment variable within a context. Returns information about the environment variable, not including its value.
+     */
+    put: operations["addEnvironmentVariableToContext"];
+    post?: never;
+    /**
+     * Remove an environment variable
+     * @description Delete an environment variable from a context.
+     */
+    delete: operations["deleteEnvironmentVariableFromContext"];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/context/{context_id}/restrictions": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a context.
+         * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
+         */
+        context_id: components["parameters"]["context_id"];
+      };
+      cookie?: never;
+    };
+    /**
+     * Get context restrictions
+     * @description Gets a list of project and expression restrictions associated with a context.
+     */
+    get: operations["getContextRestrictions"];
+    put?: never;
+    /**
+     * Create context restriction
+     * @description Creates project or expression restriction on a context.
+     */
+    post: operations["createContextRestriction"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/context/{context_id}/restrictions/{restriction_id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a context.
+         * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
+         */
+        context_id: components["parameters"]["context_id"];
+        /**
+         * @description An opaque identifier of a context restriction.
+         * @example 1c23d2cb-07b1-4a28-8af3-e369732050ed
+         */
+        restriction_id: components["parameters"]["restriction_id"];
+      };
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    /**
+     * Delete context restriction
+     * @description Deletes a project, expression or group restriction from a context.
+     */
+    delete: operations["deleteContextRestriction"];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/deploy/components": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List Components
+     * @description Allows for listing of components for a given organization ID.
+     */
+    get: operations["listComponents"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/deploy/components/{component_id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get Component
+     * @description Get the details of a component by ID.
+     */
+    get: operations["getComponent"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/deploy/components/{component_id}/versions": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List Component Versions
+     * @description List the versions for a component.
+     */
+    get: operations["listComponentVersions"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/deploy/environments": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List Environments
+     * @description Allows listing environments for a given organization ID.
+     */
+    get: operations["listEnvironments"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/deploy/environments/{environment_id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get Environment
+     * @description Allows getting an environment for a given environment ID.
+     */
+    get: operations["getEnvironment"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/insights/pages/{project-slug}/summary": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get summary metrics and trends for a project across it's workflows and branches
+     * @description Get summary metrics and trends for a project at workflow and branch level.
+     *                  Workflow runs going back at most 90 days are included in the aggregation window.
+     *                  Trends are only supported upto last 30 days.
+     *                  Please note that Insights is not a financial reporting tool and should not be used for precise credit reporting.  Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI UI, nor does the underlying data have the same data accuracy guarantees as the billing information in the CircleCI UI.  This may lead to discrepancies between credits reported from Insights and the billing information in the Plan Overview page of the CircleCI UI.  For precise credit reporting, always use the Plan Overview page in the CircleCI UI.
+     */
+    get: operations["getProjectWorkflowsPageData"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/insights/time-series/{project-slug}/workflows/{workflow-name}/jobs": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Job timeseries data
+     * @description Get timeseries data for all jobs within a workflow. Hourly granularity data is only retained for 48 hours while daily granularity data is retained for 90 days.
+     */
+    get: operations["getJobTimeseries"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/insights/{org-slug}/summary": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get summary metrics with trends for the entire org, and for each project.
+     * @description Gets aggregated summary metrics with trends for the entire org.
+     *                   Also gets aggregated metrics and trends for each project belonging to the org.
+     */
+    get: operations["getOrgSummaryData"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/insights/{project-slug}/branches": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get all branches for a project
+     * @description Get a list of all branches for a specified project. The list will only contain branches currently available within Insights. The maximum number of branches returned by this endpoint is 5,000.
+     */
+    get: operations["getAllInsightsBranches"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/insights/{project-slug}/flaky-tests": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get flaky tests for a project
+     * @description Get a list of flaky tests for a given project. Flaky tests are branch agnostic.
+     *                  A flaky test is a test that passed and failed in the same commit.
+     */
+    get: operations["getFlakyTests"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/insights/{project-slug}/workflows": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get summary metrics for a project's workflows
+     * @description Get summary metrics for a project's workflows.  Workflow runs going back at most 90 days are included in the aggregation window. Metrics are refreshed daily, and thus may not include executions from the last 24 hours.  Please note that Insights is not a financial reporting tool and should not be used for precise credit reporting.  Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI UI, nor does the underlying data have the same data accuracy guarantees as the billing information in the CircleCI UI.  This may lead to discrepancies between credits reported from Insights and the billing information in the Plan Overview page of the CircleCI UI.  For precise credit reporting, always use the Plan Overview page in the CircleCI UI.
+     */
+    get: operations["getProjectWorkflowMetrics"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/insights/{project-slug}/workflows/{workflow-name}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get recent runs of a workflow
+     * @description Get recent runs of a workflow. Runs going back at most 90 days are returned. Please note that Insights is not a financial reporting tool and should not be used for precise credit reporting.  Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI UI, nor does the underlying data have the same data accuracy guarantees as the billing information in the CircleCI UI.  This may lead to discrepancies between credits reported from Insights and the billing information in the Plan Overview page of the CircleCI UI.  For precise credit reporting, always use the Plan Overview page in the CircleCI UI.
+     */
+    get: operations["getProjectWorkflowRuns"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/insights/{project-slug}/workflows/{workflow-name}/jobs": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get summary metrics for a project workflow's jobs.
+     * @description Get summary metrics for a project workflow's jobs. Job runs going back at most 90 days are included in the aggregation window. Metrics are refreshed daily, and thus may not include executions from the last 24 hours. Please note that Insights is not a financial reporting tool and should not be used for precise credit reporting.  Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI UI, nor does the underlying data have the same data accuracy guarantees as the billing information in the CircleCI UI.  This may lead to discrepancies between credits reported from Insights and the billing information in the Plan Overview page of the CircleCI UI.  For precise credit reporting, always use the Plan Overview page in the CircleCI UI.
+     */
+    get: operations["getProjectWorkflowJobMetrics"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/insights/{project-slug}/workflows/{workflow-name}/summary": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get metrics and trends for workflows
+     * @description Get the metrics and trends for a particular workflow on a single branch or all branches
+     */
+    get: operations["getWorkflowSummary"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/insights/{project-slug}/workflows/{workflow-name}/test-metrics": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get test metrics for a project's workflows
+     * @description Get test metrics for a project's workflows. Currently tests metrics are calculated based on 10 most recent workflow runs.
+     */
+    get: operations["getProjectWorkflowTestMetrics"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/jobs/{job-id}/cancel": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Cancel job by job ID
+     * @description Cancel job with a given job ID.
+     */
+    post: operations["cancelJobByJobID"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/me": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * User Information
+     * @description Provides information about the user that is currently signed in.
+     */
+    get: operations["getCurrentUser"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/me/collaborations": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Collaborations
+     * @description Provides the set of organizations of which a user is a member or a collaborator.
+     *
+     *     The set of organizations that a user can collaborate on is composed of:
+     *
+     *     * Organizations that the current user belongs to across VCS types (e.g. BitBucket, GitHub)
+     *     * The parent organization of repository that the user can collaborate on, but is not necessarily a member of
+     *     * The organization of the current user's account
+     */
+    get: operations["getCollaborations"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/org/{orgID}/oidc-custom-claims": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get org-level claims
+     * @description Fetches org-level custom claims of OIDC identity tokens
+     */
+    get: operations["GetOrgClaims"];
+    put?: never;
+    post?: never;
+    /**
+     * Delete org-level claims
+     * @description Deletes org-level custom claims of OIDC identity tokens
+     */
+    delete: operations["DeleteOrgClaims"];
+    options?: never;
+    head?: never;
+    /**
+     * Patch org-level claims
+     * @description Creates/Updates org-level custom claims of OIDC identity tokens
+     */
+    patch: operations["PatchOrgClaims"];
+    trace?: never;
+  };
+  "/org/{orgID}/project/{projectID}/oidc-custom-claims": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get project-level claims
+     * @description Fetches project-level custom claims of OIDC identity tokens
+     */
+    get: operations["GetProjectClaims"];
+    put?: never;
+    post?: never;
+    /**
+     * Delete project-level claims
+     * @description Deletes project-level custom claims of OIDC identity tokens
+     */
+    delete: operations["DeleteProjectClaims"];
+    options?: never;
+    head?: never;
+    /**
+     * Patch project-level claims
+     * @description Creates/Updates project-level custom claims of OIDC identity tokens
+     */
+    patch: operations["PatchProjectClaims"];
+    trace?: never;
+  };
+  "/organization": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Create a new organization
+     * @description Create a new organization. For VCS providers (GitHub/Bitbucket), this validates access and syncs org data. For standalone orgs, this creates a new CircleCI organization.
+     */
+    post: operations["createOrganization"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/organization/{org-slug-or-id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get an organization
+     * @description Retrieve an organization by slug or ID
+     */
+    get: operations["getOrganization"];
+    put?: never;
+    post?: never;
+    /**
+     * Delete an organization
+     * @description Delete an organization. This action will delete all projects including all build data for the organization.
+     */
+    delete: operations["deleteOrganization"];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/organization/{org-slug-or-id}/project": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Create a new project
+     * @description Create a new project. Works for all organization types.
+     */
+    post: operations["createProject"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/organization/{org-slug-or-id}/url-orb-allow-list": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List the entries in the org's URL Orb allow-list
+     * @description List the entries in the org's URL Orb allow-list
+     */
+    get: operations["listURLOrbAllowListEntries"];
+    put?: never;
+    /**
+     * Create a new URL Orb allow-list entry
+     * @description Create a new URL Orb allow-list entry
+     */
+    post: operations["createURLOrbAllowListEntry"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/organization/{org-slug-or-id}/url-orb-allow-list/{allow-list-entry-id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    /**
+     * Remove an entry from the org's URL orb allow-list
+     * @description Remove an entry from the org's URL orb allow-list
+     */
+    delete: operations["removeURLOrbAllowListEntry"];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/organizations/{org_id}/groups": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of an organization.
+         * @example b9291e0d-a11e-41fb-8517-c545388b5953
+         */
+        org_id: components["parameters"]["org_id"];
+      };
+      cookie?: never;
+    };
+    /**
+     * Groups in an organization
+     * @description Get all the groups in an organization.
+     */
+    get: operations["getOrganizationGroups"];
+    put?: never;
+    /**
+     * Create Groups
+     * @description Create a new group under the organization. Currently only supported for standalone organizations.
+     */
+    post: operations["createOrganizationGroup"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/organizations/{org_id}/groups/{group_id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of an organization.
+         * @example b9291e0d-a11e-41fb-8517-c545388b5953
+         */
+        org_id: components["parameters"]["org_id"];
+        /**
+         * @description An opaque identifier of a group.
+         * @example 39f660db-f49b-417e-ad79-2769ba29faf7
+         */
+        group_id: components["parameters"]["group_id"];
+      };
+      cookie?: never;
+    };
+    /**
+     * A group in an organization
+     * @description Get details for a group in an organization. Currently only supported for standalone organizations.
+     */
+    get: operations["getGroup"];
+    put?: never;
+    post?: never;
+    /**
+     * Delete a group
+     * @description Delete a group in an organization. This will remove all members from the group as well, and the subsequent role grants tied to the group. Currently only supported for standalone organizations.
+     */
+    delete: operations["deleteGroup"];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/organizations/{org_id}/usage_export_job": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of an organization.
+         * @example b9291e0d-a11e-41fb-8517-c545388b5953
+         */
+        org_id: components["parameters"]["org_id"];
+      };
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Create a usage export
+     * @description Submits a request to create a usage export for an organization.
+     */
+    post: operations["createUsageExport"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/organizations/{org_id}/usage_export_job/{usage_export_job_id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of an organization.
+         * @example b9291e0d-a11e-41fb-8517-c545388b5953
+         */
+        org_id: components["parameters"]["org_id"];
+        /**
+         * @description An opaque identifier of a usage export job.
+         * @example e8235eed-f121-4ae3-9c72-2719d6572818
+         */
+        usage_export_job_id: components["parameters"]["usage_export_job_id"];
+      };
+      cookie?: never;
+    };
+    /**
+     * Get a usage export
+     * @description Gets a usage export for an organization.
+     */
+    get: operations["getUsageExport"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/owner/{ownerID}/context/{context}/decision": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Retrieves the owner's decision audit logs.
+     * @description This endpoint will return a list of decision audit logs that were made using this owner's policies.
+     */
+    get: operations["GetDecisionLogs"];
+    put?: never;
+    /**
+     * Makes a decision
+     * @description This endpoint will evaluate input data (config+metadata) against owner's stored policies and return a decision.
+     */
+    post: operations["MakeDecision"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/owner/{ownerID}/context/{context}/decision/settings": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get the decision settings
+     * @description This endpoint retrieves the current decision settings (eg enable/disable policy evaluation)
+     */
+    get: operations["GetDecisionSettings"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    /**
+     * Set the decision settings
+     * @description This endpoint allows modifying decision settings (eg enable/disable policy evaluation)
+     */
+    patch: operations["SetDecisionSettings"];
+    trace?: never;
+  };
+  "/owner/{ownerID}/context/{context}/decision/{decisionID}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Retrieves the owner's decision audit log by given decisionID
+     * @description This endpoint will retrieve a decision for a given decision log ID
+     */
+    get: operations["GetDecisionLog"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/owner/{ownerID}/context/{context}/decision/{decisionID}/policy-bundle": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Retrieves Policy Bundle for a given decision log ID
+     * @description This endpoint will retrieve a policy bundle for a given decision log ID
+     */
+    get: operations["GetDecisionLogPolicyBundle"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/owner/{ownerID}/context/{context}/policy-bundle": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Retrieves Policy Bundle
+     * @description This endpoint will retrieve a policy bundle
+     */
+    get: operations["GetPolicyBundle"];
+    put?: never;
+    /**
+     * Creates policy bundle for the context
+     * @description This endpoint replaces the current policy bundle with the provided policy bundle
+     */
+    post: operations["CreatePolicyBundle"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/owner/{ownerID}/context/{context}/policy-bundle/{policyName}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        ownerID: components["parameters"]["OwnerID"];
+        context: components["parameters"]["Context"];
+        /** @description the policy name set by the rego policy_name rule */
+        policyName: string;
+      };
+      cookie?: never;
+    };
+    /**
+     * Retrieves a policy document
+     * @description This endpoint will retrieve a policy document.
+     */
+    get: operations["GetPolicyDocument"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/pipeline": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get a list of pipelines
+     * @description Returns all pipelines for the most recently built projects (max 250) you follow in an organization.
+     */
+    get: operations["listPipelines"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/pipeline/continue": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Continue a pipeline
+     * @description Continue a pipeline from the setup phase. For information on using pipeline parameters with dynamic configuration, see the [Pipeline values and parameters](https://circleci.com/docs/pipeline-variables/#pipeline-parameters-and-dynamic-configuration) docs.
+     */
+    post: operations["continuePipeline"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/pipeline/{pipeline-id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get a pipeline by ID
+     * @description Returns a pipeline by the pipeline ID.
+     */
+    get: operations["getPipelineById"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/pipeline/{pipeline-id}/config": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get a pipeline's configuration
+     * @description Returns a pipeline's configuration by ID.
+     */
+    get: operations["getPipelineConfigById"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/pipeline/{pipeline-id}/values": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get pipeline values for a pipeline
+     * @description Returns a map of pipeline values by pipeline ID. For more information see the [pipeline values reference page](https://circleci.com/docs/variables/#pipeline-values).
+     */
+    get: operations["getPipelineValuesById"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/pipeline/{pipeline-id}/workflow": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get a pipeline's workflows
+     * @description Returns a paginated list of workflows by pipeline ID.
+     */
+    get: operations["listWorkflowsByPipelineId"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/project/{project-slug}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get a project
+     * @description Retrieves a project by project slug.
+     */
+    get: operations["getProjectBySlug"];
+    put?: never;
+    post?: never;
+    /**
+     * Delete a project
+     * @description Deletes a project by project slug
+     */
+    delete: operations["deleteProjectBySlug"];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/project/{project-slug}/checkout-key": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get all checkout keys
+     * @description Returns a sequence of checkout keys for `:project`.
+     */
+    get: operations["listCheckoutKeys"];
+    put?: never;
+    /**
+     * Create a new checkout key
+     * @description Not available to projects that use GitLab or GitHub App. Creates a new checkout key. This API request is only usable with a user API token.
+     *                                Please ensure that you have authorized your account with GitHub before creating user keys.
+     *                                This is necessary to give CircleCI the permission to create a user key associated with
+     *                                your GitHub user account. You can find this page by visiting Project Settings > Checkout SSH Keys
+     */
+    post: operations["createCheckoutKey"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/project/{project-slug}/checkout-key/{fingerprint}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get a checkout key
+     * @description Returns an individual checkout key via md5 or sha256 fingerprint. sha256 keys should be url-encoded.
+     */
+    get: operations["getCheckoutKey"];
+    put?: never;
+    post?: never;
+    /**
+     * Delete a checkout key
+     * @description Deletes the checkout key via md5 or sha256 fingerprint. sha256 keys should be url-encoded.
+     */
+    delete: operations["deleteCheckoutKey"];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/project/{project-slug}/envvar": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List all environment variables
+     * @description Returns four 'x' characters, in addition to the last four ASCII characters of the value, consistent with the display of environment variable values on the CircleCI website.
+     */
+    get: operations["listEnvVars"];
+    put?: never;
+    /**
+     * Create an environment variable
+     * @description Creates a new environment variable.
+     */
+    post: operations["createEnvVar"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/project/{project-slug}/envvar/{name}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get a masked environment variable
+     * @description Returns the masked value of environment variable :name.
+     */
+    get: operations["getEnvVar"];
+    put?: never;
+    post?: never;
+    /**
+     * Delete an environment variable
+     * @description Deletes the environment variable named :name.
+     */
+    delete: operations["deleteEnvVar"];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/project/{project-slug}/job/{job-number}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get job details
+     * @description Returns job details.
+     */
+    get: operations["getJobDetails"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/project/{project-slug}/job/{job-number}/cancel": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Cancel job by job number
+     * @description Cancel job with a given job number.
+     */
+    post: operations["cancelJobByJobNumber"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/project/{project-slug}/pipeline": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get all pipelines
+     * @description Returns all pipelines for this project.
+     */
+    get: operations["listPipelinesForProject"];
+    put?: never;
+    /**
+     * Trigger a new pipeline
+     * @description **[This endpoint is superseded by the [new Trigger Pipeline API](#tag/Pipeline/operation/triggerPipelineRun), which supports all organization and pipeline types except GitLab.]** Triggers a new pipeline on the project. Does not support triggering pipelines integrated with GitLab or GitHub App.
+     */
+    post: operations["triggerPipeline"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/project/{project-slug}/pipeline/mine": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get your pipelines
+     * @description Returns a sequence of all pipelines for this project triggered by the user.
+     */
+    get: operations["listMyPipelines"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/project/{project-slug}/pipeline/{pipeline-number}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get a pipeline by pipeline number
+     * @description Returns a pipeline by the pipeline number.
+     */
+    get: operations["getPipelineByNumber"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/project/{project-slug}/schedule": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List schedule triggers
+     * @description For a given project, returns all schedules associated with GitHub OAuth or Bitbucket Cloud pipeline definitions. Does not return schedule triggers associated with GitHub App pipelines. To fetch schedule triggers associated with GitHub App pipelines, use the [List pipeline definition triggers](https://circleci.com/docs/api/v2/index.html#tag/Trigger/operation/listPipelineDefinitionTriggers] endpoint.
+     */
+    get: operations["listSchedulesForProject"];
+    put?: never;
+    /**
+     * Create a schedule
+     * @description Creates a schedule and returns the created schedule. Available only on organizations of type `bitbucket` and `github`, and for the latter will exclusively create schedule triggers associated with the GitHub OAuth pipeline definition. For projects of type `circleci`, or to create schedule triggers for GitHub App pipeline definitions, use the [Create trigger](https://circleci.com/docs/api/v2/index.html#tag/Trigger/operation/createTrigger) endpoint.
+     */
+    post: operations["createSchedule"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/project/{project-slug}/{job-number}/artifacts": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get a job's artifacts
+     * @description Returns a job's artifacts.
+     */
+    get: operations["getJobArtifacts"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/project/{project-slug}/{job-number}/tests": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get test metadata
+     * @description Get test metadata for a build. In the rare case where there is more than 250MB of test data on the job, no results will be returned.
+     */
+    get: operations["getTests"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/project/{provider}/{organization}/{project}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description The first segment of the slash-separated project slug, as shown in Project Settings > Overview.
+         * @example gh
+         */
+        provider: components["parameters"]["provider"];
+        /**
+         * @description The second segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the org name (e.g. `my-org`) or an ID (e.g. `43G3lM5RtfFE7v5sa4nWAU`).
+         * @example CircleCI-Public
+         */
+        organization: components["parameters"]["organization"];
+        /**
+         * @description The third segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the project name (e.g. `my-project`) or an ID (e.g. `44n9wujWcTnVZ2b5S8Fnat`).
+         * @example api-preview-docs
+         */
+        project: components["parameters"]["project"];
+      };
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * ⚠️ Create a project
+     * @description __[DEPRECATED] This endpoint is replaced by [organization/{org-slug-or-id}/project](https://circleci.com/docs/api/v2/index.html#tag/Project/operation/createProject) and documentation will be removed on August 1st, 2025.__ Creates a new CircleCI project, and returns a list of the default advanced settings. Can only be called on a repo with a main branch and an existing config.yml file. Not yet available to projects that use GitLab or GitHub App.
+     */
+    post: operations["createProject1"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/project/{provider}/{organization}/{project}/pipeline/run": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * [Recommended] Trigger a new pipeline
+     * @description Trigger a pipeline given a pipeline definition ID. Supports all integrations except GitLab.
+     *
+     *     The slash-separated project slug is shown in Project Settings > Overview.
+     *
+     *     Depending on the organization type, the project slug may have a human-readable format (`vcs_type/org_name/project_name`)
+     *     or be an opaque string (e.g. `circleci/43G3lM5RtfFE7v5sa4nWAU/44n9wujWcTnVZ2b5S8Fnat`).
+     */
+    post: operations["triggerPipelineRun"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/project/{provider}/{organization}/{project}/settings": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description The first segment of the slash-separated project slug, as shown in Project Settings > Overview.
+         * @example gh
+         */
+        provider: components["parameters"]["provider"];
+        /**
+         * @description The second segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the org name (e.g. `my-org`) or an ID (e.g. `43G3lM5RtfFE7v5sa4nWAU`).
+         * @example CircleCI-Public
+         */
+        organization: components["parameters"]["organization"];
+        /**
+         * @description The third segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the project name (e.g. `my-project`) or an ID (e.g. `44n9wujWcTnVZ2b5S8Fnat`).
+         * @example api-preview-docs
+         */
+        project: components["parameters"]["project"];
+      };
+      cookie?: never;
+    };
+    /**
+     * 🧪 Get project settings
+     * @description [__EXPERIMENTAL__] Returns a list of the advanced settings for a CircleCI project, whether enabled (true) or not (false).
+     */
+    get: operations["getProjectSettings"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    /**
+     * 🧪 Update project settings
+     * @description [__EXPERIMENTAL__] Updates one or more of the advanced settings for a CircleCI project.
+     */
+    patch: operations["patchProjectSettings"];
+    trace?: never;
+  };
+  "/projects/{project_id}/pipeline-definitions": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List pipeline definitions
+     * @description List all pipeline definitions for a given project. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
+     */
+    get: operations["listPipelineDefinitions"];
+    put?: never;
+    /**
+     * Create pipeline definition
+     * @description Create a pipeline definition for a given project. Currently only supported for pipeline definitions where `config_source.provider` is `github_app`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
+     */
+    post: operations["createPipelineDefinition"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/projects/{project_id}/pipeline-definitions/{pipeline_definition_id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get pipeline definition
+     * @description Get details for a pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app`, `github_oauth`, `bitbucket_dc`, `bitbucket_oauth` or `gitlab`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
+     */
+    get: operations["getPipelineDefinition"];
+    put?: never;
+    post?: never;
+    /**
+     * Delete pipeline definition
+     * @description Delete pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
+     */
+    delete: operations["deletePipelineDefinition"];
+    options?: never;
+    head?: never;
+    /**
+     * Update pipeline definition
+     * @description Update pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
+     */
+    patch: operations["updatePipelineDefinition"];
+    trace?: never;
+  };
+  "/projects/{project_id}/pipeline-definitions/{pipeline_definition_id}/triggers": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List pipeline definition triggers
+     * @description List all triggers for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_oauth`, `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
+     */
+    get: operations["listPipelineDefinitionTriggers"];
+    put?: never;
+    /**
+     * Create trigger
+     * @description Create a trigger for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_oauth` or `github_app`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
+     */
+    post: operations["createTrigger"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/projects/{project_id}/rollback": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Rollback a project
+     * @description Performs a rollback operation by triggering a rollback pipeline.
+     */
+    post: operations["rollbackProject"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/projects/{project_id}/triggers/{trigger_id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get trigger
+     * @description Get details for a trigger. Currently only supported for triggers where `event_source.provider` is `github_oauth`, `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
+     */
+    get: operations["getTrigger"];
+    put?: never;
+    post?: never;
+    /**
+     * Delete trigger
+     * @description Delete a trigger. Currently only supported for triggers where `event_source.provider` is `github_oauth`, `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
+     */
+    delete: operations["deleteTrigger"];
+    options?: never;
+    head?: never;
+    /**
+     * Update trigger
+     * @description Update a trigger. Currently only supported for triggers where `event_source.provider` is `github_oauth`, `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.
+     */
+    patch: operations["updateTrigger"];
+    trace?: never;
+  };
+  "/schedule/{schedule-id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get a schedule by ID. Available only on schedules associated with GitHub OAuth or Bitbucket Cloud pipeline definitions.
+     * @description Get a schedule by id.
+     */
+    get: operations["getScheduleById"];
+    put?: never;
+    post?: never;
+    /**
+     * Delete a schedule
+     * @description Deletes a schedule by ID. Available only on schedules associated with GitHub OAuth or Bitbucket Cloud pipeline definitions.
+     */
+    delete: operations["deleteScheduleById"];
+    options?: never;
+    head?: never;
+    /**
+     * Update a schedule
+     * @description Updates a schedule and returns the updated schedule. Available only on schedules associated with GitHub OAuth or Bitbucket Cloud pipeline definitions. To update schedule triggers for GitHub App pipeline definitions, use the [Update trigger](https://circleci.com/docs/api/v2/index.html#tag/Trigger/operation/updateTrigger) endpoint.
+     */
+    patch: operations["updateSchedule"];
+    trace?: never;
+  };
+  "/user/{id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * User Information
+     * @description Provides information about the user with the given ID.
+     */
+    get: operations["getUser"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/webhook": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List webhooks
+     * @description Get a list of outbound webhooks that match the given scope-type and scope-id
+     */
+    get: operations["getWebhooks"];
+    put?: never;
+    /**
+     * Create an outbound webhook
+     * @description Creates an outbound webhook.
+     */
+    post: operations["createWebhook"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/webhook/{webhook-id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get a webhook
+     * @description Get an outbound webhook by id.
+     */
+    get: operations["getWebhookById"];
+    /**
+     * Update an outbound webhook
+     * @description Updates an outbound webhook.
+     */
+    put: operations["updateWebhook"];
+    post?: never;
+    /**
+     * Delete an outbound webhook
+     * @description Deletes an outbound webhook
+     */
+    delete: operations["deleteWebhook"];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/workflow/{id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get a workflow
+     * @description Returns summary fields of a workflow by ID.
+     */
+    get: operations["getWorkflowById"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/workflow/{id}/approve/{approval_request_id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Approve a job
+     * @description Approves a pending approval job in a workflow.
+     */
+    post: operations["approvePendingApprovalJobById"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/workflow/{id}/cancel": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Cancel a workflow
+     * @description Cancels a running workflow.
+     */
+    post: operations["cancelWorkflow"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/workflow/{id}/job": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get a workflow's jobs
+     * @description Returns a sequence of jobs for a workflow.
+     */
+    get: operations["listWorkflowJobs"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/workflow/{id}/rerun": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Rerun a workflow
+     * @description Reruns a workflow.
+     */
+    post: operations["rerunWorkflow"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: {
-        BundleDiff: {
-            created?: string[];
-            deleted?: string[];
-            modified?: string[];
+  schemas: {
+    BundleDiff: {
+      created?: string[];
+      deleted?: string[];
+      modified?: string[];
+    };
+    BundlePayload: {
+      policies?: {
+        [key: string]: string;
+      };
+    };
+    ClaimResponse: {
+      audience?: string[];
+      /** Format: date-time */
+      audience_updated_at?: string;
+      /** Format: uuid */
+      org_id: string;
+      /** Format: uuid */
+      project_id?: string;
+      ttl?: components["schemas"]["JSONDuration"];
+      /** Format: date-time */
+      ttl_updated_at?: string;
+    };
+    Decision: {
+      enabled_rules?: string[];
+      hard_failures?: components["schemas"]["Violation"][];
+      reason?: string;
+      soft_failures?: components["schemas"]["Violation"][];
+      status: string;
+    };
+    DecisionLog: {
+      /** Format: date-time */
+      created_at?: string;
+      decision?: components["schemas"]["Decision"];
+      /** Format: uuid */
+      id?: string;
+      metadata?: {
+        build_number?: number;
+        /** Format: uuid */
+        project_id?: string;
+        ssh_rerun?: boolean;
+        vcs?: {
+          branch?: string;
+          origin_repository_url?: string;
+          release_tag?: string;
+          target_repository_url?: string;
         };
-        BundlePayload: {
-            policies?: {
-                [key: string]: string;
-            };
-        };
-        ClaimResponse: {
-            audience?: string[];
-            /** Format: date-time */
-            audience_updated_at?: string;
-            /** Format: uuid */
-            org_id: string;
-            /** Format: uuid */
-            project_id?: string;
-            ttl?: components["schemas"]["JSONDuration"];
-            /** Format: date-time */
-            ttl_updated_at?: string;
-        };
-        Decision: {
-            enabled_rules?: string[];
-            hard_failures?: components["schemas"]["Violation"][];
-            reason?: string;
-            soft_failures?: components["schemas"]["Violation"][];
-            status: string;
-        };
-        DecisionLog: {
-            /** Format: date-time */
-            created_at?: string;
-            decision?: components["schemas"]["Decision"];
-            /** Format: uuid */
-            id?: string;
-            metadata?: {
-                build_number?: number;
-                /** Format: uuid */
-                project_id?: string;
-                ssh_rerun?: boolean;
-                vcs?: {
-                    branch?: string;
-                    origin_repository_url?: string;
-                    release_tag?: string;
-                    target_repository_url?: string;
-                };
-            };
-            /**
-             * @description policy-name-to-hash-map
-             * @example {
-             *       "policy_name1": "1f40fc92da241694750979ee6cf582f2d5d7d28e18335de05abc54d0560e0f5302860c652bf08d560252aa5e74210546f369fbbbce8c12cfc7957b2652fe9a75",
-             *       "policy_name2": "5267768822ee624d48fce15ec5ca79cbd602cb7f4c2157a516556991f22ef8c7b5ef7b18d1ff41c59370efb0858651d44a936c11b7b144c48fe04df3c6a3e8da"
-             *     }
-             */
-            policies?: {
-                [key: string]: string;
-            };
-            time_taken_ms?: number;
-        };
-        DecisionSettings: {
-            enabled?: boolean;
-        };
-        JSONDuration: string;
-        PatchClaimsRequest: {
-            audience?: string[];
-            ttl?: components["schemas"]["JSONDuration"];
-        };
-        Policy: {
-            content?: string;
-            /** Format: date-time */
-            created_at?: string;
-            created_by?: string;
-            name?: string;
-        };
-        PolicyBundle: {
-            [key: string]: unknown;
-        };
-        Violation: {
-            reason: string;
-            rule: string;
-        };
-        component: {
-            /**
-             * Format: date-time
-             * @description The time when the component was created
-             */
-            created_at?: string;
+      };
+      /**
+       * @description policy-name-to-hash-map
+       * @example {
+       *       "policy_name1": "1f40fc92da241694750979ee6cf582f2d5d7d28e18335de05abc54d0560e0f5302860c652bf08d560252aa5e74210546f369fbbbce8c12cfc7957b2652fe9a75",
+       *       "policy_name2": "5267768822ee624d48fce15ec5ca79cbd602cb7f4c2157a516556991f22ef8c7b5ef7b18d1ff41c59370efb0858651d44a936c11b7b144c48fe04df3c6a3e8da"
+       *     }
+       */
+      policies?: {
+        [key: string]: string;
+      };
+      time_taken_ms?: number;
+    };
+    DecisionSettings: {
+      enabled?: boolean;
+    };
+    JSONDuration: string;
+    PatchClaimsRequest: {
+      audience?: string[];
+      ttl?: components["schemas"]["JSONDuration"];
+    };
+    Policy: {
+      content?: string;
+      /** Format: date-time */
+      created_at?: string;
+      created_by?: string;
+      name?: string;
+    };
+    PolicyBundle: {
+      [key: string]: unknown;
+    };
+    Violation: {
+      reason: string;
+      rule: string;
+    };
+    component: {
+      /**
+       * Format: date-time
+       * @description The time when the component was created
+       */
+      created_at?: string;
+      /**
+       * Format: uuid
+       * @description The component ID
+       * @example 123e4127-e89b-12d3-a456-426123417400
+       */
+      id?: string;
+      /** @description The labels associated with the component */
+      labels?: components["schemas"]["label"][];
+      /**
+       * @description The component name
+       * @example service-a
+       */
+      name?: string;
+      /**
+       * Format: uuid
+       * @description The project ID of the component
+       * @example 123e4127-e89b-12d3-a456-426123417400
+       */
+      project_id?: string;
+      /**
+       * @description The number of releases for this component
+       * @example 1
+       */
+      release_count?: number;
+      /**
+       * Format: date-time
+       * @description The time when the component was updated
+       */
+      updated_at?: string;
+    };
+    /** Context */
+    context: {
+      /**
+       * Format: date-time
+       * @description The date and time the context was created.
+       * @example 2015-09-21T17:29:21.042Z
+       */
+      created_at: string;
+      /**
+       * Format: uuid
+       * @description The unique ID of the context.
+       */
+      id: string;
+      /** @description The user defined name of the context. */
+      name: string;
+    };
+    context_created: {
+      /** @description The user defined name of the context. */
+      name: string;
+      owner:
+        | {
             /**
              * Format: uuid
-             * @description The component ID
-             * @example 123e4127-e89b-12d3-a456-426123417400
+             * @description The unique ID of the owner of the context. This is the organization ID. Specify either owner/organization ID or the owner/organization slug. Find the organization ID and slug in the CircleCI web app (Organization Settings > Overview). Owner/organization slug is not supported for CircleCI server.
              */
-            id?: string;
-            /** @description The labels associated with the component */
-            labels?: components["schemas"]["label"][];
+            id: string;
             /**
-             * @description The component name
-             * @example service-a
+             * @description The type of the owner. Defaults to "organization". Use "account" if you are using CircleCI server.
+             * @example organization
+             * @enum {string}
              */
-            name?: string;
+            type?: "account" | "organization";
+          }
+        | {
+            /** @description A string that represents an organization. This is the organization slug. Specify either this or organization/owner ID. Find the organization ID and slug in the CircleCI web app (Organization Settings > Overview). Owner/organization slug is not supported for CircleCI server. */
+            slug: string;
             /**
-             * Format: uuid
-             * @description The project ID of the component
-             * @example 123e4127-e89b-12d3-a456-426123417400
+             * @description The type of owner. Defaults to "organization". Accounts are only used as context owners in server and must be specified by an id instead of a slug.
+             * @enum {string}
              */
-            project_id?: string;
-            /**
-             * @description The number of releases for this component
-             * @example 1
-             */
-            release_count?: number;
-            /**
-             * Format: date-time
-             * @description The time when the component was updated
-             */
-            updated_at?: string;
+            type?: "organization";
+          };
+    };
+    context_list: {
+      items: {
+        /**
+         * Format: date-time
+         * @description The date and time the context was created.
+         * @example 2015-09-21T17:29:21.042Z
+         */
+        created_at: string;
+        /**
+         * Format: uuid
+         * @description The unique ID of the context.
+         */
+        id: string;
+        /** @description The user defined name of the context. */
+        name: string;
+      }[];
+      /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+      next_page_token: string | null;
+    };
+    context_project_restrictions_list: {
+      items?: {
+        /**
+         * Format: uuid
+         * @description UUID of the context
+         */
+        context_id?: string;
+        /**
+         * Format: uuid
+         * @description UUID of the restriction
+         */
+        id?: string;
+        /**
+         * @description Contains a human-readable reference for the restriction. For
+         *     "project" restrictions this is the name of the project.
+         *
+         *     May be null.
+         */
+        name?: string;
+        /**
+         * Format: uuid
+         * @deprecated
+         * @description Deprecated - For "project" restrictions read the project ID from
+         *     "restriction_value" instead.
+         *
+         *     UUID of the project used in a project restriction.
+         */
+        project_id?: string;
+        /**
+         * @description Type of the restriction
+         * @enum {string}
+         */
+        restriction_type?: "project" | "expression" | "group";
+        /** @description Value used to evaluate the restriction */
+        restriction_value?: string;
+      }[];
+      /** @description Token that can be used to retrieve next page of results */
+      next_page_token?: string | null;
+    };
+    createPipelineDefinitionRequest: {
+      /** @description The resource to be used when running the `checkout` command. */
+      checkout_source: {
+        /**
+         * @description The integration provider for this resource. Currently `github_app` is the only supported value.
+         * @example github_app
+         * @enum {string}
+         */
+        provider: "github_app";
+        repo: {
+          /**
+           * @description External identifier for the repository, as defined by the respective version control provider.
+           * @example some-repo-id
+           */
+          external_id: string;
         };
-        /** Context */
-        context: {
+      };
+      config_source:
+        | {
+            /**
+             * @description Path to CircleCI config YAML file to use for this pipeline definition.
+             * @example .circleci/some-pipeline.yml
+             */
+            file_path: string;
+            /**
+             * @description The integration provider for this resource. Currently `github_app` is the only supported external provider.
+             * @example github_app
+             * @enum {string}
+             */
+            provider: "github_app";
+            repo: {
+              /**
+               * @description External identifier for the repository, as defined by the respective version control provider.
+               * @example some-repo-id
+               */
+              external_id: string;
+            };
+          }
+        | {
+            /**
+             * @description Path to CircleCI config YAML file to use for this pipeline definition.
+             * @example .circleci/some-pipeline.yml
+             */
+            file_path: string;
+            /**
+             * @description The integration provider for this resource.
+             * @enum {string}
+             */
+            provider: "circleci";
+          };
+      /**
+       * @description The description of the pipeline definition.
+       * @example Some pipeline description
+       */
+      description?: string;
+      /**
+       * @description The name of the pipeline definition.
+       * @example Some pipeline name
+       */
+      name: string;
+    };
+    createTriggerRequest: {
+      /**
+       * @description The ref to use when checking out code for pipeline runs created from this trigger. Always required when `event_source.provider` is `webhook`. When `event_source.provider` is `github_app`, only expected if the event source repository (identified by `event_source.provider.repo.external_id`) is different to the checkout source repository of the associated Pipeline Definition. Otherwise, must be omitted.
+       * @example some-checkout-ref
+       */
+      checkout_ref?: string;
+      /**
+       * @description The ref to use when fetching config for pipeline runs created from this trigger. Always required when `event_source.provider` is `webhook`. When `event_source.provider` is `github_app`, only expected if the event source repository (identified by `event_source.provider.repo.external_id`) is different to the config source repository of the associated Pipeline Definition. Otherwise, must be omitted.
+       * @example some-config-ref
+       */
+      config_ref?: string;
+      /**
+       * @description Whether the trigger should be disabled upon creation. Not supported for pipeline definitions where `config_source.provider` is `github_oauth`.
+       * @example false
+       */
+      disabled?: boolean;
+      /**
+       * @description The name of the triggering event. This should only be set for triggers where `provider` is `webhook`.
+       * @example some-event-name
+       */
+      event_name?: string;
+      event_preset?: components["schemas"]["trigger_event_preset"];
+      /** @description The source of events to use for this trigger. The `repo` object must be specified when `provider` is `github_app` or `github_oauth`, and the `webhook` object may only be specified when `provider` is `webhook`. */
+      event_source: {
+        /**
+         * @description The integration provider for this resource. Currently `github_app`, `github_oauth`, and `webhook` are the only supported values.
+         * @example github_app
+         */
+        provider: string;
+        /** @description Information pertaining to the repository used as a source of events for this trigger, if applicable. */
+        repo?: {
+          /**
+           * @description External identifier for the repository, as defined by the respective version control provider.
+           * @example some-repo-id
+           */
+          external_id: string;
+        };
+        /** @description Information pertaining to the custom webhook being used as a source of events for this trigger, if applicable. */
+        webhook?: {
+          /**
+           * @description The sender of the webhook.
+           * @example some-webhook-sender
+           */
+          sender?: string;
+        };
+      };
+    };
+    /**
+     * MessageResponse
+     * @description message response
+     */
+    delete_context_response: {
+      /** @description A human-readable message */
+      message: string;
+    };
+    /**
+     * MessageResponse
+     * @description message response
+     */
+    delete_env_var: {
+      /** @description A human-readable message */
+      message: string;
+    };
+    env_var_list: {
+      items: {
+        /**
+         * Format: uuid
+         * @description ID of the context (UUID)
+         */
+        context_id: string;
+        /**
+         * Format: date-time
+         * @description The date and time the environment variable was created.
+         * @example 2015-09-21T17:29:21.042Z
+         */
+        created_at: string;
+        /**
+         * Format: date-time
+         * @description The date and time the environment variable was updated
+         * @example 2015-09-21T17:29:21.042Z
+         */
+        updated_at: string;
+        /**
+         * @description The name of the environment variable
+         * @example POSTGRES_USER
+         */
+        variable: string;
+      }[];
+      /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+      next_page_token: string | null;
+    };
+    environment: {
+      /**
+       * Format: date-time
+       * @description The time when the environment was created
+       */
+      created_at?: string;
+      /**
+       * @description Short description given to the environment
+       * @example some description
+       */
+      description?: string;
+      /**
+       * Format: uuid
+       * @description The environment ID
+       * @example 123e4127-e89b-12d3-a456-426123417400
+       */
+      id?: string;
+      /** @description The labels associated to the environment */
+      labels?: components["schemas"]["label"][];
+      /**
+       * @description The environment name
+       * @example prod-app
+       */
+      name?: string;
+      /**
+       * Format: date-time
+       * @description The time when the environment was updated
+       */
+      updated_at?: string;
+    };
+    get_usage_export_job_status: {
+      /** @description A list of pre signed urls that the client can use to download the results of a Usage Export. */
+      download_urls: string[];
+      error_reason?: string;
+      /** @enum {string} */
+      state: "created" | "processing" | "failed" | "completed";
+      /** Format: uuid */
+      usage_export_job_id: string;
+    };
+    group: {
+      /** @description Description field on group */
+      description?: string;
+      /**
+       * Format: uuid
+       * @description Unique identifier for group
+       */
+      id?: string;
+      /** @description Name of group */
+      name?: string;
+    };
+    groups: {
+      items?: components["schemas"]["group"][];
+      next_page_token?: string | null;
+      total_count?: number;
+    };
+    label: {
+      /**
+       * @description The key of the label
+       * @example env
+       */
+      key?: string;
+      /**
+       * @description The value of the label
+       * @example prod
+       */
+      value?: string;
+    };
+    paginatedComponentList: {
+      items?: components["schemas"]["component"][];
+      /** @description The pagination token to use when fetching the next page in this result set. */
+      next_page_token?: string | null;
+    };
+    paginatedComponentVersionList: {
+      items?: components["schemas"]["version"][];
+      /** @description The pagination token to use when fetching the next page in this result set. */
+      next_page_token?: string | null;
+    };
+    paginatedEnvironmentList: {
+      items?: components["schemas"]["environment"][];
+      /** @description The pagination token to use when fetching the next page in this result set. */
+      next_page_token?: string | null;
+    };
+    pipelineDefinition: {
+      /** @description The resource to be used when running the `checkout` command. */
+      checkout_source?: {
+        /**
+         * @description The integration provider for this resource.
+         * @example github_app
+         */
+        provider?: string;
+        repo?: components["schemas"]["pipelineDefinitionRepo"];
+      };
+      /** @description The resource that stores the CircleCI config YAML used for this pipeline definition. */
+      config_source?: {
+        /**
+         * @description Path to CircleCI config YAML file to use for this pipeline definition.
+         * @example .circleci/some-pipeline.yml
+         */
+        file_path?: string;
+        /**
+         * @description The integration provider for this resource.
+         * @example github_app
+         */
+        provider?: string;
+        repo?: components["schemas"]["pipelineDefinitionRepo"];
+      };
+      /**
+       * Format: date-time
+       * @description The date and time the pipeline definition was created.
+       */
+      created_at?: string;
+      /**
+       * @description The description of the pipeline definition.
+       * @example some pipeline description
+       */
+      description?: string;
+      /**
+       * Format: uuid
+       * @description The unique ID of the pipeline definition.
+       */
+      id?: string;
+      /**
+       * @description The name of the pipeline definition.
+       * @example some pipeline
+       */
+      name?: string;
+    };
+    pipelineDefinitionDeleted: {
+      /** @description Response message */
+      message?: string;
+    };
+    pipelineDefinitionList: {
+      items?: components["schemas"]["pipelineDefinition"][];
+    };
+    pipelineDefinitionRepo: {
+      /**
+       * @description External identifier for the repository, as defined by the respective version control provider.
+       * @example some-repo-id
+       */
+      external_id?: string;
+      /**
+       * @description The fully-qualified name of the repository.
+       * @example some-org/some-repo-name
+       */
+      full_name?: string;
+    };
+    pipelineNotTriggeredResponse: {
+      /**
+       * @description A message indicating the reason why a pipeline was not triggered
+       * @example Ignoring pipeline due to CI skip in the commit
+       */
+      message?: string;
+    };
+    pipelineTriggeredResponse: {
+      /** Format: date-time */
+      created_at?: string;
+      /** Format: uuid */
+      id?: string;
+      /** @example 25 */
+      number?: number;
+      /** @enum {string} */
+      state?: "created" | "errored" | "setup-pending" | "setup" | "pending";
+    };
+    project_settings: {
+      advanced?: {
+        /** @description Except for the default branch, cancel running pipelines on a branch when a new pipeline starts on that branch. */
+        autocancel_builds?: boolean;
+        /** @description Run builds for pull requests from forks. */
+        build_fork_prs?: boolean;
+        /** @description Once enabled, we will only build branches that have associated pull requests open. */
+        build_prs_only?: boolean;
+        /** @description When set to true, job re-runs with SSH debugging access will be disabled for the project. */
+        disable_ssh?: boolean;
+        /** @description Run builds for forked pull requests with this project's configuration, environment variables, and secrets. */
+        forks_receive_secret_env_vars?: boolean;
+        /** @description Free and Open Source. Enabling this grants additional credits, and lets others see your builds, both through the web UI and the API. */
+        oss?: boolean;
+        /** @description This field is used in conjunction with the `build_prs_only`, it allows you to specify a list of branches that will always triger a build. The value passed will overwrite the existing value. */
+        pr_only_branch_overrides?: string[];
+        /** @description Report the status of every pushed commit to GitHub's status API. Updates reported per job. */
+        set_github_status?: boolean;
+        /** @description Enabling allows you to conditionally trigger configurations outside of the primary `.circleci` parent directory. */
+        setup_workflows?: boolean;
+        /** @description Whether updating these settings requires a user to be an organization administrator. When disabled, updating settings can be done by any member. */
+        write_settings_requires_admin?: boolean;
+      };
+    };
+    restriction_created: {
+      /**
+       * Format: uuid
+       * @description UUID of the project restriction
+       */
+      id?: string;
+      /**
+       * @description Contains a human-readable reference for the restriction. For
+       *     "project" restrictions this is the name of the project.
+       *
+       *     May be null.
+       */
+      name?: string;
+      /**
+       * Format: uuid
+       * @description Deprecated - For "project" restrictions read the project ID from
+       *     "restriction_value" instead.
+       *
+       *     UUID of the project used in a project restriction.
+       */
+      project_id?: string;
+      /**
+       * @description Type of the restriction
+       * @enum {string}
+       */
+      restriction_type?: "project" | "expression" | "group";
+      /** @description Value used to evaluate the restriction */
+      restriction_value?: string;
+    };
+    restriction_deleted: {
+      /** @description Response message */
+      message?: string;
+    };
+    rollbackProjectRequest: {
+      /**
+       * @description The component name
+       * @example frontend
+       */
+      component_name: string;
+      /**
+       * @description The current version
+       * @example 1.0.0
+       */
+      current_version: string;
+      /**
+       * @description The environment name
+       * @example production
+       */
+      environment_name: string;
+      /**
+       * @description The namespace
+       * @example default
+       */
+      namespace?: string;
+      /**
+       * @description The extra parameters for the rollback pipeline
+       * @example {
+       *       "param1": "value1",
+       *       "param2": "value2"
+       *     }
+       */
+      parameters?: {
+        [key: string]: unknown;
+      };
+      /**
+       * @description The reason for the rollback
+       * @example The component is down
+       */
+      reason?: string;
+      /**
+       * @description The target version
+       * @example 1.0.1
+       */
+      target_version: string;
+    };
+    rollbackProjectResponse: {
+      /**
+       * Format: uuid
+       * @description The ID of the rollback pipeline or the command created to handle the rollback
+       * @example 123e4567-e89b-12d3-a456-426614174000
+       */
+      id?: string;
+      /**
+       * @description The type of the rollback
+       * @example PIPELINE
+       */
+      rollback_type?: string;
+    };
+    trigger: {
+      /**
+       * @description The ref to use when checking out code for pipeline runs created from this trigger. If empty, the ref provided in the trigger event is used.
+       * @example some-checkout-ref
+       */
+      checkout_ref?: string;
+      /**
+       * @description The ref to use when fetching config for pipeline runs created from this trigger. If empty, the ref provided in the trigger event is used.
+       * @example some-config-ref
+       */
+      config_ref?: string;
+      /**
+       * Format: date-time
+       * @description The date and time the trigger was created.
+       */
+      created_at?: string;
+      /**
+       * @description Whether the trigger is disabled. Not supported for pipeline definitions where `config_source.provider` is `github_oauth`.
+       * @example false
+       */
+      disabled?: boolean;
+      /**
+       * @description The name of the event that will trigger the pipeline.
+       * @example some event name
+       */
+      event_name?: string;
+      event_preset?: components["schemas"]["trigger_event_preset"];
+      /** @description The source of events to use for this trigger. Will contain either a `repo` or `webhook` object depending on the `provider`. (The `github_app` and `github_oauth` providers imply a `repo` and `webhook` implies a `webhook`.) */
+      event_source?: {
+        /**
+         * @description The integration provider for this resource. Currently `github_app`, `github_oauth`, and `webhook` are the only supported values.
+         * @example github_app
+         */
+        provider?: string;
+        /** @description Information pertaining to the repository used as a source of events for this trigger, if applicable. */
+        repo?: {
+          /**
+           * @description External identifier for the repository, as defined by the respective version control provider.
+           * @example some-repo-id
+           */
+          external_id?: string;
+          /**
+           * @description The fully-qualified name of the repository.
+           * @example some-org/some-repo-name
+           */
+          full_name?: string;
+        };
+        /** @description Information pertaining to the custom webhook used as a source of events for this trigger, if applicable. */
+        webhook?: {
+          /**
+           * @description The name of the webhook sender..
+           * @example datadog
+           */
+          sender?: string;
+          /**
+           * @description The URL to use when triggering this webhook.
+           * @example https://some-webhook.invalid/some-endpoint?secret=some-secret
+           */
+          url?: string;
+        };
+      };
+      /**
+       * Format: uuid
+       * @description The unique ID of the trigger.
+       */
+      id?: string;
+    };
+    triggerDeleted: {
+      /** @description Response message */
+      message?: string;
+    };
+    triggerList: {
+      items?: components["schemas"]["trigger"][];
+    };
+    triggerPipelineRequest: {
+      /**
+       * @example {
+       *       "tag": "v2"
+       *     }
+       */
+      checkout?: {
+        /**
+         * @description The branch that should be used to check out code on a checkout step.
+         *     Note that branch and tag are mutually exclusive.
+         *     To trigger a pipeline for a PR by number use pull/<number>/head for the PR ref or pull/<number>/merge for the merge ref (GitHub only)
+         * @example main
+         */
+        branch?: string;
+        /**
+         * @description The tag that should be used to check out code on a checkout step.
+         *     The commit that this tag points to is used for the pipeline. Note that branch and tag are mutually exclusive.
+         * @example v2
+         */
+        tag?: string;
+      };
+      /**
+       * @example {
+       *       "branch": "main"
+       *     }
+       */
+      config?: {
+        /**
+         * @description The branch that should be used to fetch the config file.
+         *     Note that branch and tag are mutually exclusive.
+         *     To trigger a pipeline for a PR by number use pull/<number>/head for the PR ref or pull/<number>/merge for the merge ref (GitHub only)
+         * @example main
+         */
+        branch?: string;
+        /**
+         * @description The tag that should be used to fetch the config file.
+         *     The commit that this tag points to is used for the pipeline.
+         *     Note that branch and tag are mutually exclusive.
+         * @example v2
+         */
+        tag?: string;
+      };
+      /**
+       * Format: uuid
+       * @description The unique id for the pipeline definition. This can be found in the page Project Settings > Pipelines.
+       * @example 2338d0ae-5541-4bbf-88a2-55e9f7281f80
+       */
+      definition_id?: string;
+      /**
+       * @description An object containing pipeline parameters and their values.
+       *     Pipeline parameters have the following size limits: 100 max entries, 128 maximum key length, 512 maximum value length.
+       * @example {
+       *       "example_param": "my value",
+       *       "example_param2": true,
+       *       "example_param3": 3
+       *     }
+       */
+      parameters?: {
+        [key: string]: unknown;
+      };
+    };
+    /**
+     * @description The name of the event preset to use when filtering events for this trigger. Only applicable when `event_source.provider` is `github_app`.
+     * @example all-pushes
+     * @enum {string}
+     */
+    trigger_event_preset:
+      | "all-pushes"
+      | "only-tags"
+      | "default-branch-pushes"
+      | "only-build-prs"
+      | "only-open-prs"
+      | "only-labeled-prs"
+      | "only-merged-prs"
+      | "only-ready-for-review-prs"
+      | "only-branch-delete"
+      | "only-build-pushes-to-non-draft-prs"
+      | "only-merged-or-closed-prs"
+      | "pr-comment-equals-run-ci";
+    updatePipelineDefinitionRequest: {
+      /** @description The resource to be used when running the `checkout` command. */
+      checkout_source?: {
+        /**
+         * @description The integration provider for this resource. Currently `github_app` is the only supported value.
+         * @example github_app
+         */
+        provider?: string;
+        repo?: {
+          /**
+           * @description External identifier for the repository, as defined by the respective version control provider.
+           * @example some-repo-id
+           */
+          external_id?: string;
+        };
+      };
+      /** @description The resource that stores the CircleCI config YAML used for this pipeline definition. */
+      config_source?: {
+        /**
+         * @description Path to CircleCI config YAML file to use for this pipeline definition.
+         * @example .circleci/some-pipeline.yml
+         */
+        file_path?: string;
+      };
+      /**
+       * @description The description of the pipeline definition.
+       * @example Some pipeline description
+       */
+      description?: string;
+      /**
+       * @description The name of the pipeline definition.
+       * @example Some pipeline name
+       */
+      name?: string;
+    };
+    updateTriggerRequest: {
+      /**
+       * @description The ref to use when checking out code for pipeline runs created from this trigger.
+       * @example some-checkout-ref
+       */
+      checkout_ref?: string;
+      /**
+       * @description The ref to use when fetching config for pipeline runs created from this trigger.
+       * @example some-config-ref
+       */
+      config_ref?: string;
+      /**
+       * @description A flag indicating whether the trigger is disabled or not. This can only be set for triggers where `provider` is `github_oauth`, `github_app`, or `webhook`.
+       * @example false
+       */
+      disabled?: boolean;
+      /**
+       * @description The name of the triggering event. This can only be set for triggers where `provider` is `webhook`.
+       * @example some event name
+       */
+      event_name?: string;
+      event_preset?: components["schemas"]["trigger_event_preset"];
+      event_source?: {
+        webhook?: {
+          /**
+           * @description The sender of the webhook. This can only be set for triggers where `provider` is `webhook`.
+           * @example some sender
+           */
+          sender?: string;
+        };
+      };
+    };
+    update_env_var:
+      | {
+          /**
+           * Format: uuid
+           * @description ID of the context (UUID)
+           */
+          context_id: string;
+          /**
+           * Format: date-time
+           * @description The date and time the environment variable was created.
+           * @example 2015-09-21T17:29:21.042Z
+           */
+          created_at: string;
+          /**
+           * Format: date-time
+           * @description The date and time the environment variable was updated
+           * @example 2015-09-21T17:29:21.042Z
+           */
+          updated_at: string;
+          /**
+           * @description The name of the environment variable
+           * @example POSTGRES_USER
+           */
+          variable: string;
+        }
+      | {
+          /** @description A human-readable message */
+          message: string;
+        };
+    usage_export_job: {
+      /** @description A list of pre signed urls that the client can use to download the results of a Usage Export. */
+      download_urls: string[];
+      /** Format: date-time */
+      end: string;
+      /** Format: date-time */
+      start: string;
+      /** @enum {string} */
+      state: "created" | "processing" | "failed" | "completed";
+      /** Format: uuid */
+      usage_export_job_id: string;
+    };
+    version: {
+      /**
+       * Format: uuid
+       * @description The ID of the environment in which the version has been deployed
+       * @example 123e4127-e89b-12d3-a456-426123417400
+       */
+      environment_id?: string;
+      /**
+       * @description Whether the version is live or not
+       * @example true
+       */
+      is_live?: boolean;
+      /**
+       * Format: uuid
+       * @description The ID of the CircleCI job that deployed the version
+       * @example f7e18b53-db27-4706-ad77-b16dc1e6fc53
+       */
+      job_id?: string;
+      /**
+       * @description The number of the CircleCI job that deployed the version
+       * @example 123
+       */
+      job_number?: number;
+      /**
+       * Format: date-time
+       * @description The time at which the version was last deployed
+       */
+      last_deployed_at?: string;
+      /**
+       * @description The version name
+       * @example 1.0.0
+       */
+      name?: string;
+      /**
+       * @description The namespace in which the version was deployed
+       * @example default
+       */
+      namespace?: string;
+      /**
+       * Format: uuid
+       * @description The ID of the pipeline that deployed the version
+       * @example cc54a110-d03f-4916-96fc-ff36a1221ed7
+       */
+      pipeline_id?: string;
+      /**
+       * Format: uuid
+       * @description The ID of the CircleCI workflow that deployed the version
+       * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+       */
+      workflow_id?: string;
+    };
+  };
+  responses: {
+    /** @description Context ID provided is invalid. */
+    "400_invalid_context_id": {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @default context_id is invalid. */
+          message: string;
+        };
+      };
+    };
+    /** @description Lock ID provided is invalid. */
+    "400_invalid_job_id": {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @default job_id is invalid. */
+          message: string;
+        };
+      };
+    };
+    /** @description Orb ID provided is invalid. */
+    "400_invalid_orb_id": {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @default orb_id is invalid. */
+          message: string;
+        };
+      };
+    };
+    /** @description Context restriction ID provided is invalid. */
+    "400_invalid_restriction_id": {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @default restriction_id is invalid. */
+          message: string;
+        };
+      };
+    };
+    /** @description Unexpected request body provided. */
+    "400_unexpected_request_body": {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @default Unexpected request body provided. */
+          message: string;
+        };
+      };
+    };
+    /** @description Credentials provided are invalid. */
+    "401_invalid_token": {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          message?: string;
+        };
+      };
+    };
+    /** @description None or insufficient credentials provided. */
+    "403_permission_denied": {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @default Permission denied. */
+          message: string;
+        };
+      };
+    };
+    /** @description Entity not found. */
+    "404_entity_not_found": {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          message?: string;
+        };
+      };
+    };
+    /** @description Insufficient credentials for a private project, OR the organization, project, or repository does not exist. */
+    "404_project_not_found": {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @default Project not found. */
+          message: string;
+        };
+      };
+    };
+    /** @description Create projects using the API is currently supported for classic Github OAuth and Bitbucket projects only. */
+    "405_cannot_create_standalone_project": {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @default Create projects using the API is currently supported for classic Github OAuth and Bitbucket projects only. */
+          message: string;
+        };
+      };
+    };
+    /** @description A conflict has occurred while attempting to create the resource. */
+    "409_entity_conflict": {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @default Conflict creating entity. */
+          message: string;
+        };
+      };
+    };
+    /** @description A conflict has occurred while attempting to create the resource. */
+    "409_group_conflict": {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          message?: string;
+        };
+      };
+    };
+    /** @description API rate limits exceeded. */
+    "429_rate_limit_exceeded": {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @default Rate limit exceeded. */
+          message: string;
+        };
+      };
+    };
+    /** @description Internal server error. */
+    "500_internal_server_error": {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @default Internal server error. */
+          message: string;
+        };
+      };
+    };
+    /** @description The request is malformed (e.g, a given path parameter is invalid) */
+    BadRequest: {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @example OwnerID: must be a valid UUID. */
+          error: string;
+        };
+      };
+    };
+    /** @description The user is forbidden from making this request */
+    Forbidden: {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @example Forbidden */
+          error: string;
+        };
+      };
+    };
+    /** @description Something unexpected happened on the server. */
+    InternalServerError: {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @example internal server error */
+          error: string;
+        };
+      };
+    };
+    /** @description The request is unauthenticated */
+    Unauthenticated: {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @example unauthenticated */
+          error: string;
+        };
+      };
+    };
+    /** @description The request is unauthorized */
+    Unauthorized: {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @example Unauthorized */
+          error: string;
+        };
+      };
+    };
+    /** @description Something unexpected happened on the server. */
+    UnexpectedServerError: {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @example unexpected server error */
+          error: string;
+        };
+      };
+    };
+  };
+  parameters: {
+    /** @description comma separated list of claims to delete. Valid values are "audience" and "ttl". */
+    Claims: string;
+    Context: string;
+    DecisionID: string;
+    OrgID: string;
+    OwnerID: string;
+    ProjectID: string;
+    /**
+     * @description An opaque identifier of a component.
+     * @example b9291e0d-a11e-41fb-8517-c545388b5953
+     */
+    component_id: string;
+    /**
+     * @description An opaque identifier of a context.
+     * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
+     */
+    context_id: string;
+    /**
+     * @description The name of the environment variable.
+     * @example POSTGRES_USER
+     */
+    env_var_name: string;
+    /**
+     * @description An opaque identifier of an environment.
+     * @example 1c23d2cb-07b1-4a28-8af3-e369732050ed
+     */
+    environment_id: string;
+    /**
+     * @description An opaque identifier of an environment used in query parameters.
+     * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+     */
+    environment_id_query: string;
+    /**
+     * @description An opaque identifier of a group.
+     * @example 39f660db-f49b-417e-ad79-2769ba29faf7
+     */
+    group_id: string;
+    /**
+     * @description An opaque identifier of a job.
+     * @example fbb79891-2e30-4f51-b447-ce3a32f349fc
+     */
+    job_id: string;
+    /** @description The number of results per page. */
+    limit: number;
+    /**
+     * @description The name of the requested Orb.
+     * @example node
+     */
+    name: string;
+    /**
+     * @description The name of the requested Orb.
+     * @example node
+     */
+    name_path: string;
+    /**
+     * @description The namespace that the Orb belongs to.
+     * @example circleci
+     */
+    namespace: string;
+    /**
+     * @description The namespace that the Orb belongs to.
+     * @example circleci
+     */
+    namespace_path: string;
+    /**
+     * @description An opaque identifier of an orb.
+     * @example d8a1f419-e207-40f5-8b31-cbc6486b45d8
+     */
+    orb_id: string;
+    /**
+     * @description An opaque identifier of an organization.
+     * @example b9291e0d-a11e-41fb-8517-c545388b5953
+     */
+    org_id: string;
+    /**
+     * @description An opaque identifier of an organization used in query parameters.
+     * @example b9291e0d-a11e-41fb-8517-c545388b5953
+     */
+    org_id_query: string;
+    /**
+     * @description The second segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the org name (e.g. `my-org`) or an ID (e.g. `43G3lM5RtfFE7v5sa4nWAU`).
+     * @example CircleCI-Public
+     */
+    organization: string;
+    /** @description The unique ID of the owner of the context. This is the organization ID. Specify either owner/organization ID or the owner/organization slug. Find the organization ID and slug in the CircleCI web app (Organization Settings > Overview). Owner/organization slug is not supported for CircleCI server. */
+    owner_id_query: string;
+    /** @description A string that represents an organization. This is the organization slug. Specify either this or organization/owner ID. Find the organization ID and slug in the CircleCI web app (Organization Settings > Overview). Owner/organization slug is not supported for CircleCI server. */
+    owner_slug_query: string;
+    /** @description The type of the owner. Defaults to "organization". Use "account" if you are using CircleCI server. */
+    owner_type_query: "account" | "organization";
+    /** @description The number of results per page. */
+    page_size: number;
+    /** @description A token to specify which page of results to fetch. */
+    page_token: string;
+    /**
+     * @description An opaque identifier of a pipeline definition.
+     * @example 6cb29b00-8e02-4357-8bc0-313983bf1f46
+     */
+    pipeline_definition_id: string;
+    /**
+     * @description The third segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the project name (e.g. `my-project`) or an ID (e.g. `44n9wujWcTnVZ2b5S8Fnat`).
+     * @example api-preview-docs
+     */
+    project: string;
+    /**
+     * @description An opaque identifier of a project.
+     * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+     */
+    project_id: string;
+    /**
+     * @description An opaque identifier of an project used in query parameters.
+     * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+     */
+    project_id_query: string;
+    /**
+     * @description The first segment of the slash-separated project slug, as shown in Project Settings > Overview.
+     * @example gh
+     */
+    provider: "github" | "gh" | "bitbucket" | "bb" | "circleci";
+    /**
+     * @description The first segment of the slash-separated project slug, as shown in Project Settings > Overview.
+     * @example gh
+     */
+    providerNoGitlab: "github" | "gh" | "bitbucket" | "bb" | "circleci";
+    /** @description The request ID returned from the async deploy markers generation. */
+    request_id: string;
+    /**
+     * @description An opaque identifier of a context restriction.
+     * @example 1c23d2cb-07b1-4a28-8af3-e369732050ed
+     */
+    restriction_id: string;
+    /**
+     * @description An opaque identifier of a trigger.
+     * @example bbea3a3d-4686-48b6-8d2d-2a14ace3913c
+     */
+    trigger_id: string;
+    /**
+     * @description An opaque identifier of a usage export job.
+     * @example e8235eed-f121-4ae3-9c72-2719d6572818
+     */
+    usage_export_job_id: string;
+    /**
+     * @description An opaque identifier of a user.
+     * @example a68942a8-c217-4d92-96e5-3b47f9a2f0d9
+     */
+    user_id: string;
+    /**
+     * @description The specific version of an Orb.
+     * @example 3.1.2
+     */
+    version: string;
+  };
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
+}
+export type $defs = Record<string, never>;
+export interface operations {
+  listContexts: {
+    parameters: {
+      query?: {
+        /** @description The unique ID of the owner of the context. This is the organization ID. Specify either owner/organization ID or the owner/organization slug. Find the organization ID and slug in the CircleCI web app (Organization Settings > Overview). Owner/organization slug is not supported for CircleCI server. */
+        "owner-id"?: components["parameters"]["owner_id_query"];
+        /** @description A string that represents an organization. This is the organization slug. Specify either this or organization/owner ID. Find the organization ID and slug in the CircleCI web app (Organization Settings > Overview). Owner/organization slug is not supported for CircleCI server. */
+        "owner-slug"?: components["parameters"]["owner_slug_query"];
+        /** @description The type of the owner. Defaults to "organization". Use "account" if you are using CircleCI server. */
+        "owner-type"?: components["parameters"]["owner_type_query"];
+        /** @description A token to specify which page of results to fetch. */
+        "page-token"?: components["parameters"]["page_token"];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A paginated list of contexts */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["context_list"];
+        };
+      };
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      429: components["responses"]["429_rate_limit_exceeded"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  createContext: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": components["schemas"]["context_created"];
+      };
+    };
+    responses: {
+      /** @description The new context */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
             /**
              * Format: date-time
              * @description The date and time the context was created.
@@ -1921,8647 +3211,7634 @@ export interface components {
              * @description The unique ID of the context.
              */
             id: string;
-            /** @description The user defined name of the context. */
+            /** @description The user-defined name of the context. */
             name: string;
+          };
         };
-        context_created: {
-            /** @description The user defined name of the context. */
-            name: string;
-            owner: {
-                /**
-                 * Format: uuid
-                 * @description The unique ID of the owner of the context. This is the organization ID. Specify either owner/organization ID or the owner/organization slug. Find the organization ID and slug in the CircleCI web app (Organization Settings > Overview). Owner/organization slug is not supported for CircleCI server.
-                 */
-                id: string;
-                /**
-                 * @description The type of the owner. Defaults to "organization". Use "account" if you are using CircleCI server.
-                 * @example organization
-                 * @enum {string}
-                 */
-                type?: "account" | "organization";
-            } | {
-                /** @description A string that represents an organization. This is the organization slug. Specify either this or organization/owner ID. Find the organization ID and slug in the CircleCI web app (Organization Settings > Overview). Owner/organization slug is not supported for CircleCI server. */
-                slug: string;
-                /**
-                 * @description The type of owner. Defaults to "organization". Accounts are only used as context owners in server and must be specified by an id instead of a slug.
-                 * @enum {string}
-                 */
-                type?: "organization";
-            };
-        };
-        context_list: {
-            items: {
-                /**
-                 * Format: date-time
-                 * @description The date and time the context was created.
-                 * @example 2015-09-21T17:29:21.042Z
-                 */
-                created_at: string;
-                /**
-                 * Format: uuid
-                 * @description The unique ID of the context.
-                 */
-                id: string;
-                /** @description The user defined name of the context. */
-                name: string;
-            }[];
-            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-            next_page_token: string | null;
-        };
-        context_project_restrictions_list: {
-            items?: {
-                /**
-                 * Format: uuid
-                 * @description UUID of the context
-                 */
-                context_id?: string;
-                /**
-                 * Format: uuid
-                 * @description UUID of the restriction
-                 */
-                id?: string;
-                /**
-                 * @description Contains a human-readable reference for the restriction. For
-                 *     "project" restrictions this is the name of the project.
-                 *
-                 *     May be null.
-                 */
-                name?: string;
-                /**
-                 * Format: uuid
-                 * @deprecated
-                 * @description Deprecated - For "project" restrictions read the project ID from
-                 *     "restriction_value" instead.
-                 *
-                 *     UUID of the project used in a project restriction.
-                 */
-                project_id?: string;
-                /**
-                 * @description Type of the restriction
-                 * @enum {string}
-                 */
-                restriction_type?: "project" | "expression" | "group";
-                /** @description Value used to evaluate the restriction */
-                restriction_value?: string;
-            }[];
-            /** @description Token that can be used to retrieve next page of results */
-            next_page_token?: string | null;
-        };
-        createPipelineDefinitionRequest: {
-            /** @description The resource to be used when running the `checkout` command. */
-            checkout_source: {
-                /**
-                 * @description The integration provider for this resource. Currently `github_app` is the only supported value.
-                 * @example github_app
-                 * @enum {string}
-                 */
-                provider: "github_app";
-                repo: {
-                    /**
-                     * @description External identifier for the repository, as defined by the respective version control provider.
-                     * @example some-repo-id
-                     */
-                    external_id: string;
-                };
-            };
-            config_source: {
-                /**
-                 * @description Path to CircleCI config YAML file to use for this pipeline definition.
-                 * @example .circleci/some-pipeline.yml
-                 */
-                file_path: string;
-                /**
-                 * @description The integration provider for this resource. Currently `github_app` is the only supported external provider.
-                 * @example github_app
-                 * @enum {string}
-                 */
-                provider: "github_app";
-                repo: {
-                    /**
-                     * @description External identifier for the repository, as defined by the respective version control provider.
-                     * @example some-repo-id
-                     */
-                    external_id: string;
-                };
-            } | {
-                /**
-                 * @description Path to CircleCI config YAML file to use for this pipeline definition.
-                 * @example .circleci/some-pipeline.yml
-                 */
-                file_path: string;
-                /**
-                 * @description The integration provider for this resource.
-                 * @enum {string}
-                 */
-                provider: "circleci";
-            };
-            /**
-             * @description The description of the pipeline definition.
-             * @example Some pipeline description
-             */
-            description?: string;
-            /**
-             * @description The name of the pipeline definition.
-             * @example Some pipeline name
-             */
-            name: string;
-        };
-        createTriggerRequest: {
-            /**
-             * @description The ref to use when checking out code for pipeline runs created from this trigger. Always required when `event_source.provider` is `webhook`. When `event_source.provider` is `github_app`, only expected if the event source repository (identified by `event_source.provider.repo.external_id`) is different to the checkout source repository of the associated Pipeline Definition. Otherwise, must be omitted.
-             * @example some-checkout-ref
-             */
-            checkout_ref?: string;
-            /**
-             * @description The ref to use when fetching config for pipeline runs created from this trigger. Always required when `event_source.provider` is `webhook`. When `event_source.provider` is `github_app`, only expected if the event source repository (identified by `event_source.provider.repo.external_id`) is different to the config source repository of the associated Pipeline Definition. Otherwise, must be omitted.
-             * @example some-config-ref
-             */
-            config_ref?: string;
-            /**
-             * @description Whether the trigger should be disabled upon creation. Not supported for pipeline definitions where `config_source.provider` is `github_oauth`.
-             * @example false
-             */
-            disabled?: boolean;
-            /**
-             * @description The name of the triggering event. This should only be set for triggers where `provider` is `webhook`.
-             * @example some-event-name
-             */
-            event_name?: string;
-            event_preset?: components["schemas"]["trigger_event_preset"];
-            /** @description The source of events to use for this trigger. The `repo` object must be specified when `provider` is `github_app` or `github_oauth`, and the `webhook` object may only be specified when `provider` is `webhook`. */
-            event_source: {
-                /**
-                 * @description The integration provider for this resource. Currently `github_app`, `github_oauth`, and `webhook` are the only supported values.
-                 * @example github_app
-                 */
-                provider: string;
-                /** @description Information pertaining to the repository used as a source of events for this trigger, if applicable. */
-                repo?: {
-                    /**
-                     * @description External identifier for the repository, as defined by the respective version control provider.
-                     * @example some-repo-id
-                     */
-                    external_id: string;
-                };
-                /** @description Information pertaining to the custom webhook being used as a source of events for this trigger, if applicable. */
-                webhook?: {
-                    /**
-                     * @description The sender of the webhook.
-                     * @example some-webhook-sender
-                     */
-                    sender?: string;
-                };
-            };
-        };
-        /**
-         * MessageResponse
-         * @description message response
-         */
-        delete_context_response: {
-            /** @description A human-readable message */
-            message: string;
-        };
-        /**
-         * MessageResponse
-         * @description message response
-         */
-        delete_env_var: {
-            /** @description A human-readable message */
-            message: string;
-        };
-        env_var_list: {
-            items: {
-                /**
-                 * Format: uuid
-                 * @description ID of the context (UUID)
-                 */
-                context_id: string;
-                /**
-                 * Format: date-time
-                 * @description The date and time the environment variable was created.
-                 * @example 2015-09-21T17:29:21.042Z
-                 */
-                created_at: string;
-                /**
-                 * Format: date-time
-                 * @description The date and time the environment variable was updated
-                 * @example 2015-09-21T17:29:21.042Z
-                 */
-                updated_at: string;
-                /**
-                 * @description The name of the environment variable
-                 * @example POSTGRES_USER
-                 */
-                variable: string;
-            }[];
-            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-            next_page_token: string | null;
-        };
-        environment: {
-            /**
-             * Format: date-time
-             * @description The time when the environment was created
-             */
-            created_at?: string;
-            /**
-             * @description Short description given to the environment
-             * @example some description
-             */
-            description?: string;
-            /**
-             * Format: uuid
-             * @description The environment ID
-             * @example 123e4127-e89b-12d3-a456-426123417400
-             */
-            id?: string;
-            /** @description The labels associated to the environment */
-            labels?: components["schemas"]["label"][];
-            /**
-             * @description The environment name
-             * @example prod-app
-             */
-            name?: string;
-            /**
-             * Format: date-time
-             * @description The time when the environment was updated
-             */
-            updated_at?: string;
-        };
-        get_usage_export_job_status: {
-            /** @description A list of pre signed urls that the client can use to download the results of a Usage Export. */
-            download_urls: string[];
-            error_reason?: string;
-            /** @enum {string} */
-            state: "created" | "processing" | "failed" | "completed";
-            /** Format: uuid */
-            usage_export_job_id: string;
-        };
-        group: {
-            /** @description Description field on group */
-            description?: string;
-            /**
-             * Format: uuid
-             * @description Unique identifier for group
-             */
-            id?: string;
-            /** @description Name of group */
-            name?: string;
-        };
-        groups: {
-            items?: components["schemas"]["group"][];
-            next_page_token?: string | null;
-            total_count?: number;
-        };
-        label: {
-            /**
-             * @description The key of the label
-             * @example env
-             */
-            key?: string;
-            /**
-             * @description The value of the label
-             * @example prod
-             */
-            value?: string;
-        };
-        paginatedComponentList: {
-            items?: components["schemas"]["component"][];
-            /** @description The pagination token to use when fetching the next page in this result set. */
-            next_page_token?: string | null;
-        };
-        paginatedComponentVersionList: {
-            items?: components["schemas"]["version"][];
-            /** @description The pagination token to use when fetching the next page in this result set. */
-            next_page_token?: string | null;
-        };
-        paginatedEnvironmentList: {
-            items?: components["schemas"]["environment"][];
-            /** @description The pagination token to use when fetching the next page in this result set. */
-            next_page_token?: string | null;
-        };
-        pipelineDefinition: {
-            /** @description The resource to be used when running the `checkout` command. */
-            checkout_source?: {
-                /**
-                 * @description The integration provider for this resource.
-                 * @example github_app
-                 */
-                provider?: string;
-                repo?: components["schemas"]["pipelineDefinitionRepo"];
-            };
-            /** @description The resource that stores the CircleCI config YAML used for this pipeline definition. */
-            config_source?: {
-                /**
-                 * @description Path to CircleCI config YAML file to use for this pipeline definition.
-                 * @example .circleci/some-pipeline.yml
-                 */
-                file_path?: string;
-                /**
-                 * @description The integration provider for this resource.
-                 * @example github_app
-                 */
-                provider?: string;
-                repo?: components["schemas"]["pipelineDefinitionRepo"];
-            };
-            /**
-             * Format: date-time
-             * @description The date and time the pipeline definition was created.
-             */
-            created_at?: string;
-            /**
-             * @description The description of the pipeline definition.
-             * @example some pipeline description
-             */
-            description?: string;
-            /**
-             * Format: uuid
-             * @description The unique ID of the pipeline definition.
-             */
-            id?: string;
-            /**
-             * @description The name of the pipeline definition.
-             * @example some pipeline
-             */
-            name?: string;
-        };
-        pipelineDefinitionDeleted: {
-            /** @description Response message */
-            message?: string;
-        };
-        pipelineDefinitionList: {
-            items?: components["schemas"]["pipelineDefinition"][];
-        };
-        pipelineDefinitionRepo: {
-            /**
-             * @description External identifier for the repository, as defined by the respective version control provider.
-             * @example some-repo-id
-             */
-            external_id?: string;
-            /**
-             * @description The fully-qualified name of the repository.
-             * @example some-org/some-repo-name
-             */
-            full_name?: string;
-        };
-        pipelineNotTriggeredResponse: {
-            /**
-             * @description A message indicating the reason why a pipeline was not triggered
-             * @example Ignoring pipeline due to CI skip in the commit
-             */
-            message?: string;
-        };
-        pipelineTriggeredResponse: {
-            /** Format: date-time */
-            created_at?: string;
-            /** Format: uuid */
-            id?: string;
-            /** @example 25 */
-            number?: number;
-            /** @enum {string} */
-            state?: "created" | "errored" | "setup-pending" | "setup" | "pending";
-        };
-        project_settings: {
-            advanced?: {
-                /** @description Except for the default branch, cancel running pipelines on a branch when a new pipeline starts on that branch. */
-                autocancel_builds?: boolean;
-                /** @description Run builds for pull requests from forks. */
-                build_fork_prs?: boolean;
-                /** @description Once enabled, we will only build branches that have associated pull requests open. */
-                build_prs_only?: boolean;
-                /** @description When set to true, job re-runs with SSH debugging access will be disabled for the project. */
-                disable_ssh?: boolean;
-                /** @description Run builds for forked pull requests with this project's configuration, environment variables, and secrets. */
-                forks_receive_secret_env_vars?: boolean;
-                /** @description Free and Open Source. Enabling this grants additional credits, and lets others see your builds, both through the web UI and the API. */
-                oss?: boolean;
-                /** @description This field is used in conjunction with the `build_prs_only`, it allows you to specify a list of branches that will always triger a build. The value passed will overwrite the existing value. */
-                pr_only_branch_overrides?: string[];
-                /** @description Report the status of every pushed commit to GitHub's status API. Updates reported per job. */
-                set_github_status?: boolean;
-                /** @description Enabling allows you to conditionally trigger configurations outside of the primary `.circleci` parent directory. */
-                setup_workflows?: boolean;
-                /** @description Whether updating these settings requires a user to be an organization administrator. When disabled, updating settings can be done by any member. */
-                write_settings_requires_admin?: boolean;
-            };
-        };
-        restriction_created: {
-            /**
-             * Format: uuid
-             * @description UUID of the project restriction
-             */
-            id?: string;
-            /**
-             * @description Contains a human-readable reference for the restriction. For
-             *     "project" restrictions this is the name of the project.
-             *
-             *     May be null.
-             */
-            name?: string;
-            /**
-             * Format: uuid
-             * @description Deprecated - For "project" restrictions read the project ID from
-             *     "restriction_value" instead.
-             *
-             *     UUID of the project used in a project restriction.
-             */
-            project_id?: string;
-            /**
-             * @description Type of the restriction
-             * @enum {string}
-             */
-            restriction_type?: "project" | "expression" | "group";
-            /** @description Value used to evaluate the restriction */
-            restriction_value?: string;
-        };
-        restriction_deleted: {
-            /** @description Response message */
-            message?: string;
-        };
-        rollbackProjectRequest: {
-            /**
-             * @description The component name
-             * @example frontend
-             */
-            component_name: string;
-            /**
-             * @description The current version
-             * @example 1.0.0
-             */
-            current_version: string;
-            /**
-             * @description The environment name
-             * @example production
-             */
-            environment_name: string;
-            /**
-             * @description The namespace
-             * @example default
-             */
-            namespace?: string;
-            /**
-             * @description The extra parameters for the rollback pipeline
-             * @example {
-             *       "param1": "value1",
-             *       "param2": "value2"
-             *     }
-             */
-            parameters?: {
-                [key: string]: unknown;
-            };
-            /**
-             * @description The reason for the rollback
-             * @example The component is down
-             */
-            reason?: string;
-            /**
-             * @description The target version
-             * @example 1.0.1
-             */
-            target_version: string;
-        };
-        rollbackProjectResponse: {
-            /**
-             * Format: uuid
-             * @description The ID of the rollback pipeline or the command created to handle the rollback
-             * @example 123e4567-e89b-12d3-a456-426614174000
-             */
-            id?: string;
-            /**
-             * @description The type of the rollback
-             * @example PIPELINE
-             */
-            rollback_type?: string;
-        };
-        trigger: {
-            /**
-             * @description The ref to use when checking out code for pipeline runs created from this trigger. If empty, the ref provided in the trigger event is used.
-             * @example some-checkout-ref
-             */
-            checkout_ref?: string;
-            /**
-             * @description The ref to use when fetching config for pipeline runs created from this trigger. If empty, the ref provided in the trigger event is used.
-             * @example some-config-ref
-             */
-            config_ref?: string;
-            /**
-             * Format: date-time
-             * @description The date and time the trigger was created.
-             */
-            created_at?: string;
-            /**
-             * @description Whether the trigger is disabled. Not supported for pipeline definitions where `config_source.provider` is `github_oauth`.
-             * @example false
-             */
-            disabled?: boolean;
-            /**
-             * @description The name of the event that will trigger the pipeline.
-             * @example some event name
-             */
-            event_name?: string;
-            event_preset?: components["schemas"]["trigger_event_preset"];
-            /** @description The source of events to use for this trigger. Will contain either a `repo` or `webhook` object depending on the `provider`. (The `github_app` and `github_oauth` providers imply a `repo` and `webhook` implies a `webhook`.) */
-            event_source?: {
-                /**
-                 * @description The integration provider for this resource. Currently `github_app`, `github_oauth`, and `webhook` are the only supported values.
-                 * @example github_app
-                 */
-                provider?: string;
-                /** @description Information pertaining to the repository used as a source of events for this trigger, if applicable. */
-                repo?: {
-                    /**
-                     * @description External identifier for the repository, as defined by the respective version control provider.
-                     * @example some-repo-id
-                     */
-                    external_id?: string;
-                    /**
-                     * @description The fully-qualified name of the repository.
-                     * @example some-org/some-repo-name
-                     */
-                    full_name?: string;
-                };
-                /** @description Information pertaining to the custom webhook used as a source of events for this trigger, if applicable. */
-                webhook?: {
-                    /**
-                     * @description The name of the webhook sender..
-                     * @example datadog
-                     */
-                    sender?: string;
-                    /**
-                     * @description The URL to use when triggering this webhook.
-                     * @example https://some-webhook.invalid/some-endpoint?secret=some-secret
-                     */
-                    url?: string;
-                };
-            };
-            /**
-             * Format: uuid
-             * @description The unique ID of the trigger.
-             */
-            id?: string;
-        };
-        triggerDeleted: {
-            /** @description Response message */
-            message?: string;
-        };
-        triggerList: {
-            items?: components["schemas"]["trigger"][];
-        };
-        triggerPipelineRequest: {
-            /**
-             * @example {
-             *       "tag": "v2"
-             *     }
-             */
-            checkout?: {
-                /**
-                 * @description The branch that should be used to check out code on a checkout step.
-                 *     Note that branch and tag are mutually exclusive.
-                 *     To trigger a pipeline for a PR by number use pull/<number>/head for the PR ref or pull/<number>/merge for the merge ref (GitHub only)
-                 * @example main
-                 */
-                branch?: string;
-                /**
-                 * @description The tag that should be used to check out code on a checkout step.
-                 *     The commit that this tag points to is used for the pipeline. Note that branch and tag are mutually exclusive.
-                 * @example v2
-                 */
-                tag?: string;
-            };
-            /**
-             * @example {
-             *       "branch": "main"
-             *     }
-             */
-            config?: {
-                /**
-                 * @description The branch that should be used to fetch the config file.
-                 *     Note that branch and tag are mutually exclusive.
-                 *     To trigger a pipeline for a PR by number use pull/<number>/head for the PR ref or pull/<number>/merge for the merge ref (GitHub only)
-                 * @example main
-                 */
-                branch?: string;
-                /**
-                 * @description The tag that should be used to fetch the config file.
-                 *     The commit that this tag points to is used for the pipeline.
-                 *     Note that branch and tag are mutually exclusive.
-                 * @example v2
-                 */
-                tag?: string;
-            };
-            /**
-             * Format: uuid
-             * @description The unique id for the pipeline definition. This can be found in the page Project Settings > Pipelines.
-             * @example 2338d0ae-5541-4bbf-88a2-55e9f7281f80
-             */
-            definition_id?: string;
-            /**
-             * @description An object containing pipeline parameters and their values.
-             *     Pipeline parameters have the following size limits: 100 max entries, 128 maximum key length, 512 maximum value length.
-             * @example {
-             *       "example_param": "my value",
-             *       "example_param2": true,
-             *       "example_param3": 3
-             *     }
-             */
-            parameters?: {
-                [key: string]: unknown;
-            };
-        };
-        /**
-         * @description The name of the event preset to use when filtering events for this trigger. Only applicable when `event_source.provider` is `github_app`.
-         * @example all-pushes
-         * @enum {string}
-         */
-        trigger_event_preset: "all-pushes" | "only-tags" | "default-branch-pushes" | "only-build-prs" | "only-open-prs" | "only-labeled-prs" | "only-merged-prs" | "only-ready-for-review-prs" | "only-branch-delete" | "only-build-pushes-to-non-draft-prs" | "only-merged-or-closed-prs" | "pr-comment-equals-run-ci";
-        updatePipelineDefinitionRequest: {
-            /** @description The resource to be used when running the `checkout` command. */
-            checkout_source?: {
-                /**
-                 * @description The integration provider for this resource. Currently `github_app` is the only supported value.
-                 * @example github_app
-                 */
-                provider?: string;
-                repo?: {
-                    /**
-                     * @description External identifier for the repository, as defined by the respective version control provider.
-                     * @example some-repo-id
-                     */
-                    external_id?: string;
-                };
-            };
-            /** @description The resource that stores the CircleCI config YAML used for this pipeline definition. */
-            config_source?: {
-                /**
-                 * @description Path to CircleCI config YAML file to use for this pipeline definition.
-                 * @example .circleci/some-pipeline.yml
-                 */
-                file_path?: string;
-            };
-            /**
-             * @description The description of the pipeline definition.
-             * @example Some pipeline description
-             */
-            description?: string;
-            /**
-             * @description The name of the pipeline definition.
-             * @example Some pipeline name
-             */
-            name?: string;
-        };
-        updateTriggerRequest: {
-            /**
-             * @description The ref to use when checking out code for pipeline runs created from this trigger.
-             * @example some-checkout-ref
-             */
-            checkout_ref?: string;
-            /**
-             * @description The ref to use when fetching config for pipeline runs created from this trigger.
-             * @example some-config-ref
-             */
-            config_ref?: string;
-            /**
-             * @description A flag indicating whether the trigger is disabled or not. This can only be set for triggers where `provider` is `github_oauth`, `github_app`, or `webhook`.
-             * @example false
-             */
-            disabled?: boolean;
-            /**
-             * @description The name of the triggering event. This can only be set for triggers where `provider` is `webhook`.
-             * @example some event name
-             */
-            event_name?: string;
-            event_preset?: components["schemas"]["trigger_event_preset"];
-            event_source?: {
-                webhook?: {
-                    /**
-                     * @description The sender of the webhook. This can only be set for triggers where `provider` is `webhook`.
-                     * @example some sender
-                     */
-                    sender?: string;
-                };
-            };
-        };
-        update_env_var: {
-            /**
-             * Format: uuid
-             * @description ID of the context (UUID)
-             */
-            context_id: string;
-            /**
-             * Format: date-time
-             * @description The date and time the environment variable was created.
-             * @example 2015-09-21T17:29:21.042Z
-             */
-            created_at: string;
-            /**
-             * Format: date-time
-             * @description The date and time the environment variable was updated
-             * @example 2015-09-21T17:29:21.042Z
-             */
-            updated_at: string;
-            /**
-             * @description The name of the environment variable
-             * @example POSTGRES_USER
-             */
-            variable: string;
-        } | {
-            /** @description A human-readable message */
-            message: string;
-        };
-        usage_export_job: {
-            /** @description A list of pre signed urls that the client can use to download the results of a Usage Export. */
-            download_urls: string[];
-            /** Format: date-time */
-            end: string;
-            /** Format: date-time */
-            start: string;
-            /** @enum {string} */
-            state: "created" | "processing" | "failed" | "completed";
-            /** Format: uuid */
-            usage_export_job_id: string;
-        };
-        version: {
-            /**
-             * Format: uuid
-             * @description The ID of the environment in which the version has been deployed
-             * @example 123e4127-e89b-12d3-a456-426123417400
-             */
-            environment_id?: string;
-            /**
-             * @description Whether the version is live or not
-             * @example true
-             */
-            is_live?: boolean;
-            /**
-             * Format: uuid
-             * @description The ID of the CircleCI job that deployed the version
-             * @example f7e18b53-db27-4706-ad77-b16dc1e6fc53
-             */
-            job_id?: string;
-            /**
-             * @description The number of the CircleCI job that deployed the version
-             * @example 123
-             */
-            job_number?: number;
-            /**
-             * Format: date-time
-             * @description The time at which the version was last deployed
-             */
-            last_deployed_at?: string;
-            /**
-             * @description The version name
-             * @example 1.0.0
-             */
-            name?: string;
-            /**
-             * @description The namespace in which the version was deployed
-             * @example default
-             */
-            namespace?: string;
-            /**
-             * Format: uuid
-             * @description The ID of the pipeline that deployed the version
-             * @example cc54a110-d03f-4916-96fc-ff36a1221ed7
-             */
-            pipeline_id?: string;
-            /**
-             * Format: uuid
-             * @description The ID of the CircleCI workflow that deployed the version
-             * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-             */
-            workflow_id?: string;
-        };
+      };
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      429: components["responses"]["429_rate_limit_exceeded"];
+      500: components["responses"]["500_internal_server_error"];
     };
-    responses: {
-        /** @description Context ID provided is invalid. */
-        "400_invalid_context_id": {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @default context_id is invalid. */
-                    message: string;
-                };
-            };
-        };
-        /** @description Lock ID provided is invalid. */
-        "400_invalid_job_id": {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @default job_id is invalid. */
-                    message: string;
-                };
-            };
-        };
-        /** @description Orb ID provided is invalid. */
-        "400_invalid_orb_id": {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @default orb_id is invalid. */
-                    message: string;
-                };
-            };
-        };
-        /** @description Context restriction ID provided is invalid. */
-        "400_invalid_restriction_id": {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @default restriction_id is invalid. */
-                    message: string;
-                };
-            };
-        };
-        /** @description Unexpected request body provided. */
-        "400_unexpected_request_body": {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @default Unexpected request body provided. */
-                    message: string;
-                };
-            };
-        };
-        /** @description Credentials provided are invalid. */
-        "401_invalid_token": {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    message?: string;
-                };
-            };
-        };
-        /** @description None or insufficient credentials provided. */
-        "403_permission_denied": {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @default Permission denied. */
-                    message: string;
-                };
-            };
-        };
-        /** @description Entity not found. */
-        "404_entity_not_found": {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    message?: string;
-                };
-            };
-        };
-        /** @description Insufficient credentials for a private project, OR the organization, project, or repository does not exist. */
-        "404_project_not_found": {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @default Project not found. */
-                    message: string;
-                };
-            };
-        };
-        /** @description Create projects using the API is currently supported for classic Github OAuth and Bitbucket projects only. */
-        "405_cannot_create_standalone_project": {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @default Create projects using the API is currently supported for classic Github OAuth and Bitbucket projects only. */
-                    message: string;
-                };
-            };
-        };
-        /** @description A conflict has occurred while attempting to create the resource. */
-        "409_entity_conflict": {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @default Conflict creating entity. */
-                    message: string;
-                };
-            };
-        };
-        /** @description A conflict has occurred while attempting to create the resource. */
-        "409_group_conflict": {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    message?: string;
-                };
-            };
-        };
-        /** @description API rate limits exceeded. */
-        "429_rate_limit_exceeded": {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @default Rate limit exceeded. */
-                    message: string;
-                };
-            };
-        };
-        /** @description Internal server error. */
-        "500_internal_server_error": {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @default Internal server error. */
-                    message: string;
-                };
-            };
-        };
-        /** @description The request is malformed (e.g, a given path parameter is invalid) */
-        BadRequest: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @example OwnerID: must be a valid UUID. */
-                    error: string;
-                };
-            };
-        };
-        /** @description The user is forbidden from making this request */
-        Forbidden: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @example Forbidden */
-                    error: string;
-                };
-            };
-        };
-        /** @description Something unexpected happened on the server. */
-        InternalServerError: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @example internal server error */
-                    error: string;
-                };
-            };
-        };
-        /** @description The request is unauthenticated */
-        Unauthenticated: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @example unauthenticated */
-                    error: string;
-                };
-            };
-        };
-        /** @description The request is unauthorized */
-        Unauthorized: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @example Unauthorized */
-                    error: string;
-                };
-            };
-        };
-        /** @description Something unexpected happened on the server. */
-        UnexpectedServerError: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @example unexpected server error */
-                    error: string;
-                };
-            };
-        };
-    };
+  };
+  getContext: {
     parameters: {
-        /** @description comma separated list of claims to delete. Valid values are "audience" and "ttl". */
-        Claims: string;
-        Context: string;
-        DecisionID: string;
-        OrgID: string;
-        OwnerID: string;
-        ProjectID: string;
-        /**
-         * @description An opaque identifier of a component.
-         * @example b9291e0d-a11e-41fb-8517-c545388b5953
-         */
-        component_id: string;
+      query?: never;
+      header?: never;
+      path: {
         /**
          * @description An opaque identifier of a context.
          * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
          */
-        context_id: string;
+        context_id: components["parameters"]["context_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description The context */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["context"];
+        };
+      };
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      429: components["responses"]["429_rate_limit_exceeded"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  deleteContext: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a context.
+         * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
+         */
+        context_id: components["parameters"]["context_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A confirmation message */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["delete_context_response"];
+        };
+      };
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      429: components["responses"]["429_rate_limit_exceeded"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  listEnvironmentVariablesFromContext: {
+    parameters: {
+      query?: {
+        /** @description A token to specify which page of results to fetch. */
+        "page-token"?: components["parameters"]["page_token"];
+      };
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a context.
+         * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
+         */
+        context_id: components["parameters"]["context_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A paginated list of environment variables */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["env_var_list"];
+        };
+      };
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      429: components["responses"]["429_rate_limit_exceeded"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  addEnvironmentVariableToContext: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a context.
+         * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
+         */
+        context_id: components["parameters"]["context_id"];
         /**
          * @description The name of the environment variable.
          * @example POSTGRES_USER
          */
-        env_var_name: string;
+        env_var_name: components["parameters"]["env_var_name"];
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": {
+          /**
+           * @description The value of the environment variable
+           * @example some-secret-value
+           */
+          value: string;
+        };
+      };
+    };
+    responses: {
+      /** @description The new environment variable */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["update_env_var"];
+        };
+      };
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      429: components["responses"]["429_rate_limit_exceeded"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  deleteEnvironmentVariableFromContext: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
         /**
-         * @description An opaque identifier of an environment.
-         * @example 1c23d2cb-07b1-4a28-8af3-e369732050ed
+         * @description An opaque identifier of a context.
+         * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
          */
-        environment_id: string;
+        context_id: components["parameters"]["context_id"];
         /**
-         * @description An opaque identifier of an environment used in query parameters.
-         * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+         * @description The name of the environment variable.
+         * @example POSTGRES_USER
          */
-        environment_id_query: string;
+        env_var_name: components["parameters"]["env_var_name"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A confirmation message */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["delete_env_var"];
+        };
+      };
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      429: components["responses"]["429_rate_limit_exceeded"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  getContextRestrictions: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
         /**
-         * @description An opaque identifier of a group.
-         * @example 39f660db-f49b-417e-ad79-2769ba29faf7
+         * @description An opaque identifier of a context.
+         * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
          */
-        group_id: string;
+        context_id: components["parameters"]["context_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful response. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["context_project_restrictions_list"];
+        };
+      };
+      400: components["responses"]["400_invalid_context_id"];
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      429: components["responses"]["429_rate_limit_exceeded"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  createContextRestriction: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
         /**
-         * @description An opaque identifier of a job.
-         * @example fbb79891-2e30-4f51-b447-ce3a32f349fc
+         * @description An opaque identifier of a context.
+         * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
          */
-        job_id: string;
-        /** @description The number of results per page. */
-        limit: number;
+        context_id: components["parameters"]["context_id"];
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
+          /**
+           * @description Type of the restriction.
+           * @enum {string}
+           */
+          restriction_type?: "project" | "expression" | "group";
+          /**
+           * @description Value used to evaluate the restriction. If the `restriction_type`
+           *     is `project`, this will be the project UUID. If the `restriction_type`
+           *     is `expression`, this will be the expression rule.
+           */
+          restriction_value?: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response. */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["restriction_created"];
+        };
+      };
+      /** @description Bad request. */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      /** @description Request conflict. */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+      429: components["responses"]["429_rate_limit_exceeded"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  deleteContextRestriction: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
         /**
-         * @description The name of the requested Orb.
-         * @example node
+         * @description An opaque identifier of a context.
+         * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
          */
-        name: string;
-        /**
-         * @description The name of the requested Orb.
-         * @example node
-         */
-        name_path: string;
-        /**
-         * @description The namespace that the Orb belongs to.
-         * @example circleci
-         */
-        namespace: string;
-        /**
-         * @description The namespace that the Orb belongs to.
-         * @example circleci
-         */
-        namespace_path: string;
-        /**
-         * @description An opaque identifier of an orb.
-         * @example d8a1f419-e207-40f5-8b31-cbc6486b45d8
-         */
-        orb_id: string;
-        /**
-         * @description An opaque identifier of an organization.
-         * @example b9291e0d-a11e-41fb-8517-c545388b5953
-         */
-        org_id: string;
-        /**
-         * @description An opaque identifier of an organization used in query parameters.
-         * @example b9291e0d-a11e-41fb-8517-c545388b5953
-         */
-        org_id_query: string;
-        /**
-         * @description The second segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the org name (e.g. `my-org`) or an ID (e.g. `43G3lM5RtfFE7v5sa4nWAU`).
-         * @example CircleCI-Public
-         */
-        organization: string;
-        /** @description The unique ID of the owner of the context. This is the organization ID. Specify either owner/organization ID or the owner/organization slug. Find the organization ID and slug in the CircleCI web app (Organization Settings > Overview). Owner/organization slug is not supported for CircleCI server. */
-        owner_id_query: string;
-        /** @description A string that represents an organization. This is the organization slug. Specify either this or organization/owner ID. Find the organization ID and slug in the CircleCI web app (Organization Settings > Overview). Owner/organization slug is not supported for CircleCI server. */
-        owner_slug_query: string;
-        /** @description The type of the owner. Defaults to "organization". Use "account" if you are using CircleCI server. */
-        owner_type_query: "account" | "organization";
-        /** @description The number of results per page. */
-        page_size: number;
-        /** @description A token to specify which page of results to fetch. */
-        page_token: string;
-        /**
-         * @description An opaque identifier of a pipeline definition.
-         * @example 6cb29b00-8e02-4357-8bc0-313983bf1f46
-         */
-        pipeline_definition_id: string;
-        /**
-         * @description The third segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the project name (e.g. `my-project`) or an ID (e.g. `44n9wujWcTnVZ2b5S8Fnat`).
-         * @example api-preview-docs
-         */
-        project: string;
-        /**
-         * @description An opaque identifier of a project.
-         * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
-         */
-        project_id: string;
-        /**
-         * @description An opaque identifier of an project used in query parameters.
-         * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
-         */
-        project_id_query: string;
-        /**
-         * @description The first segment of the slash-separated project slug, as shown in Project Settings > Overview.
-         * @example gh
-         */
-        provider: "github" | "gh" | "bitbucket" | "bb" | "circleci";
-        /**
-         * @description The first segment of the slash-separated project slug, as shown in Project Settings > Overview.
-         * @example gh
-         */
-        providerNoGitlab: "github" | "gh" | "bitbucket" | "bb" | "circleci";
-        /** @description The request ID returned from the async deploy markers generation. */
-        request_id: string;
+        context_id: components["parameters"]["context_id"];
         /**
          * @description An opaque identifier of a context restriction.
          * @example 1c23d2cb-07b1-4a28-8af3-e369732050ed
          */
-        restriction_id: string;
+        restriction_id: components["parameters"]["restriction_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful response. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["restriction_deleted"];
+        };
+      };
+      400: components["responses"]["400_invalid_restriction_id"];
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      429: components["responses"]["429_rate_limit_exceeded"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  listComponents: {
+    parameters: {
+      query: {
         /**
-         * @description An opaque identifier of a trigger.
-         * @example bbea3a3d-4686-48b6-8d2d-2a14ace3913c
+         * @description An opaque identifier of an organization used in query parameters.
+         * @example b9291e0d-a11e-41fb-8517-c545388b5953
          */
-        trigger_id: string;
+        "org-id": components["parameters"]["org_id_query"];
+        /**
+         * @description An opaque identifier of an project used in query parameters.
+         * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+         */
+        "project-id"?: components["parameters"]["project_id_query"];
+        /** @description The number of results per page. */
+        "page-size": components["parameters"]["page_size"];
+        /** @description A token to specify which page of results to fetch. */
+        "page-token"?: components["parameters"]["page_token"];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Paginated components list */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["paginatedComponentList"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  getComponent: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a component.
+         * @example b9291e0d-a11e-41fb-8517-c545388b5953
+         */
+        component_id: components["parameters"]["component_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful response. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["component"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  listComponentVersions: {
+    parameters: {
+      query?: {
+        /**
+         * @description An opaque identifier of an environment used in query parameters.
+         * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+         */
+        "environment-id"?: components["parameters"]["environment_id_query"];
+      };
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a component.
+         * @example b9291e0d-a11e-41fb-8517-c545388b5953
+         */
+        component_id: components["parameters"]["component_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Paginated component versions list */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["paginatedComponentVersionList"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  listEnvironments: {
+    parameters: {
+      query: {
+        /**
+         * @description An opaque identifier of an organization used in query parameters.
+         * @example b9291e0d-a11e-41fb-8517-c545388b5953
+         */
+        "org-id": components["parameters"]["org_id_query"];
+        /** @description The number of results per page. */
+        "page-size": components["parameters"]["page_size"];
+        /** @description A token to specify which page of results to fetch. */
+        "page-token"?: components["parameters"]["page_token"];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Paginated environments list */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["paginatedEnvironmentList"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  getEnvironment: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of an environment.
+         * @example 1c23d2cb-07b1-4a28-8af3-e369732050ed
+         */
+        environment_id: components["parameters"]["environment_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Environment */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["environment"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  getProjectWorkflowsPageData: {
+    parameters: {
+      query?: {
+        /**
+         * @description The time window used to calculate summary metrics. If not provided, defaults to last-90-days
+         * @example last-90-days
+         */
+        "reporting-window"?:
+          | "last-7-days"
+          | "last-90-days"
+          | "last-24-hours"
+          | "last-30-days"
+          | "last-60-days";
+        /**
+         * @description The names of VCS branches to include in branch-level workflow metrics.
+         * @example A single branch: ?branches=main or for multiple branches: ?branches=main&branches=feature&branches=dev
+         */
+        branches?: Record<string, never>;
+        /**
+         * @description The names of workflows to include in workflow-level metrics.
+         * @example A single workflow name: ?workflow-names=build-test-deploy or
+         *         for multiple workflow names: ?workflow-names=build&workflow-names=test-and-deploy.
+         */
+        "workflow-names"?: Record<string, never>;
+      };
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Aggregated summary metrics and trends by workflow and branches */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A list of all the branches for a given project. */
+            all_branches?: string[];
+            /** @description A list of all the workflows for a given project. */
+            all_workflows?: string[];
+            /** @description The unique ID of the organization */
+            org_id?: unknown;
+            /** @description Metrics and trends data aggregated for a given project. */
+            project_data?: {
+              /** @description Metrics aggregated across all workflows and branches for a project. */
+              metrics: {
+                /** Format: float */
+                success_rate: number;
+                /**
+                 * Format: float
+                 * @description The average number of runs per day.
+                 */
+                throughput: number;
+                /**
+                 * Format: int64
+                 * @description The total credits consumed over the current timeseries interval.
+                 */
+                total_credits_used: number;
+                /**
+                 * Format: int64
+                 * @description Total duration, in seconds.
+                 */
+                total_duration_secs: number;
+                /**
+                 * Format: int64
+                 * @description The total number of runs, including runs that are still on-hold or running.
+                 */
+                total_runs: number;
+              };
+              /** @description Metric trends aggregated across all workflows and branches for a project. */
+              trends: {
+                /**
+                 * Format: float
+                 * @description The trend value for the success rate.
+                 */
+                success_rate: number;
+                /**
+                 * Format: float
+                 * @description Trend value for the average number of runs per day.
+                 */
+                throughput: number;
+                /**
+                 * Format: float
+                 * @description The trend value for total credits consumed.
+                 */
+                total_credits_used: number;
+                /**
+                 * Format: float
+                 * @description Trend value for total duration.
+                 */
+                total_duration_secs: number;
+                /**
+                 * Format: float
+                 * @description The trend value for total number of runs.
+                 */
+                total_runs: number;
+              };
+            };
+            /** @description The unique ID of the project */
+            project_id?: unknown;
+            /** @description A list of metrics and trends data for branches for a given project. */
+            project_workflow_branch_data?: {
+              /**
+               * @description The VCS branch of a workflow's trigger.
+               * @example main
+               */
+              branch: string;
+              /** @description Metrics aggregated across a workflow or branchfor a project. */
+              metrics: {
+                /**
+                 * Format: float
+                 * @description The 95th percentile duration among a group of workflow runs.
+                 */
+                p95_duration_secs: number;
+                /** Format: float */
+                success_rate: number;
+                /**
+                 * Format: int64
+                 * @description The total credits consumed over the current timeseries interval.
+                 */
+                total_credits_used: number;
+                /**
+                 * Format: int64
+                 * @description The total number of runs, including runs that are still on-hold or running.
+                 */
+                total_runs: number;
+              };
+              /** @description Trends aggregated across a workflow or branch for a project. */
+              trends: {
+                /**
+                 * Format: float
+                 * @description The 95th percentile duration among a group of workflow runs.
+                 */
+                p95_duration_secs: number;
+                /**
+                 * Format: float
+                 * @description The trend value for the success rate.
+                 */
+                success_rate: number;
+                /**
+                 * Format: float
+                 * @description The trend value for total credits consumed.
+                 */
+                total_credits_used: number;
+                /**
+                 * Format: float
+                 * @description The trend value for total number of runs.
+                 */
+                total_runs: number;
+              };
+              /**
+               * @description The name of the workflow.
+               * @example build-and-test
+               */
+              workflow_name: string;
+            }[];
+            /** @description A list of metrics and trends data for workflows for a given project. */
+            project_workflow_data?: {
+              /** @description Metrics aggregated across a workflow or branchfor a project. */
+              metrics: {
+                /**
+                 * Format: float
+                 * @description The 95th percentile duration among a group of workflow runs.
+                 */
+                p95_duration_secs: number;
+                /** Format: float */
+                success_rate: number;
+                /**
+                 * Format: int64
+                 * @description The total credits consumed over the current timeseries interval.
+                 */
+                total_credits_used: number;
+                /**
+                 * Format: int64
+                 * @description The total number of runs, including runs that are still on-hold or running.
+                 */
+                total_runs: number;
+              };
+              /** @description Trends aggregated across a workflow or branch for a project. */
+              trends: {
+                /**
+                 * Format: float
+                 * @description The 95th percentile duration among a group of workflow runs.
+                 */
+                p95_duration_secs: number;
+                /**
+                 * Format: float
+                 * @description The trend value for the success rate.
+                 */
+                success_rate: number;
+                /**
+                 * Format: float
+                 * @description The trend value for total credits consumed.
+                 */
+                total_credits_used: number;
+                /**
+                 * Format: float
+                 * @description The trend value for total number of runs.
+                 */
+                total_runs: number;
+              };
+              /**
+               * @description The name of the workflow.
+               * @example build-and-test
+               */
+              workflow_name: string;
+            }[];
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getJobTimeseries: {
+    parameters: {
+      query?: {
+        /** @description The name of a vcs branch. If not passed we will scope the API call to the default branch. */
+        branch?: string;
+        /**
+         * @description The granularity for which to query timeseries data.
+         * @example hourly
+         */
+        granularity?: "daily" | "hourly";
+        /**
+         * @description Include only executions that started at or after this date. This must be specified if an end-date is provided.
+         * @example 2020-08-21T13:26:29Z
+         */
+        "start-date"?: string;
+        /**
+         * @description Include only executions that started before this date. This date can be at most 90 days after the start-date.
+         * @example 2020-09-04T13:26:29Z
+         */
+        "end-date"?: string;
+      };
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+        /**
+         * @description The name of the workflow.
+         * @example build-and-test
+         */
+        "workflow-name": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description An array of timeseries data, one entry per job. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description Aggregate metrics for a workflow at a time granularity */
+            items: {
+              /**
+               * Format: date-time
+               * @description The end time of the last execution included in the metrics.
+               */
+              max_ended_at: string;
+              /** @description Metrics relating to a workflow's runs. */
+              metrics: {
+                /** @description Metrics relating to the duration of runs for a workflow. */
+                duration_metrics: {
+                  /**
+                   * Format: int64
+                   * @description The max duration, in seconds, among a group of runs.
+                   */
+                  max: number;
+                  /**
+                   * Format: int64
+                   * @description The median duration, in seconds, among a group of runs.
+                   */
+                  median: number;
+                  /**
+                   * Format: int64
+                   * @description The minimum duration, in seconds, among a group of runs.
+                   */
+                  min: number;
+                  /**
+                   * Format: int64
+                   * @description The 95th percentile duration, in seconds, among a group of runs.
+                   */
+                  p95: number;
+                  /**
+                   * Format: int64
+                   * @description The total duration, in seconds, added across a group of runs.
+                   */
+                  total: number;
+                };
+                /**
+                 * Format: int64
+                 * @description The number of failed runs.
+                 */
+                failed_runs: number;
+                /**
+                 * Format: int64
+                 * @description The median credits consumed over the current timeseries interval.
+                 */
+                median_credits_used: number;
+                /**
+                 * Format: int64
+                 * @description The number of successful runs.
+                 */
+                successful_runs: number;
+                /**
+                 * Format: float
+                 * @description The average number of runs per day.
+                 */
+                throughput: number;
+                /**
+                 * Format: int64
+                 * @description The total credits consumed over the current timeseries interval.
+                 */
+                total_credits_used: number;
+                /**
+                 * Format: int64
+                 * @description The total number of runs, including runs that are still on-hold or running.
+                 */
+                total_runs: number;
+              };
+              /**
+               * Format: date-time
+               * @description The start time for the earliest execution included in the metrics.
+               */
+              min_started_at: string;
+              /**
+               * @description The name of the workflow.
+               * @example build-and-test
+               */
+              name: string;
+              /**
+               * Format: date-time
+               * @description The start of the interval for timeseries metrics.
+               */
+              timestamp: string;
+            }[];
+            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+            next_page_token: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getOrgSummaryData: {
+    parameters: {
+      query?: {
+        /**
+         * @description The time window used to calculate summary metrics. If not provided, defaults to last-90-days
+         * @example last-90-days
+         */
+        "reporting-window"?:
+          | "last-7-days"
+          | "last-90-days"
+          | "last-24-hours"
+          | "last-30-days"
+          | "last-60-days";
+        /**
+         * @description List of project names.
+         * @example For a single project: ?project-names=some-project or for multiple projects: ?project-names=some-project1&project-names=some-project2
+         */
+        "project-names"?: Record<string, never>;
+      };
+      header?: never;
+      path: {
+        /**
+         * @description Org slug in the form `vcs-slug/org-name`. The `/` characters may be URL-escaped.
+         * @example gh/CircleCI-Public
+         */
+        "org-slug": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description summary metrics with trends for an entire org and it's projects. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A list of all the project names in the organization. */
+            all_projects: string[];
+            /** @description Aggregated metrics for an org, with trends. */
+            org_data: {
+              /** @description Metrics for a single org metrics. */
+              metrics: {
+                /** Format: float */
+                success_rate: number;
+                /**
+                 * Format: float
+                 * @description The average number of runs per day.
+                 */
+                throughput: number;
+                /**
+                 * Format: int64
+                 * @description The total credits consumed over the current timeseries interval.
+                 */
+                total_credits_used: number;
+                /**
+                 * Format: int64
+                 * @description Total duration, in seconds.
+                 */
+                total_duration_secs: number;
+                /**
+                 * Format: int64
+                 * @description The total number of runs, including runs that are still on-hold or running.
+                 */
+                total_runs: number;
+              };
+              /** @description Trends for a single org. */
+              trends: {
+                /**
+                 * Format: float
+                 * @description The trend value for the success rate.
+                 */
+                success_rate: number;
+                /**
+                 * Format: float
+                 * @description Trend value for the average number of runs per day.
+                 */
+                throughput: number;
+                /**
+                 * Format: float
+                 * @description The trend value for total credits consumed.
+                 */
+                total_credits_used: number;
+                /**
+                 * Format: float
+                 * @description Trend value for total duration.
+                 */
+                total_duration_secs: number;
+                /**
+                 * Format: float
+                 * @description The trend value for total number of runs.
+                 */
+                total_runs: number;
+              };
+            };
+            /** @description Metrics for a single project, across all branches */
+            org_project_data: {
+              /** @description Metrics for a single project, across all branches. */
+              metrics: {
+                /** Format: float */
+                success_rate: number;
+                /**
+                 * Format: int64
+                 * @description The total credits consumed over the current timeseries interval.
+                 */
+                total_credits_used: number;
+                /**
+                 * Format: int64
+                 * @description Total duration, in seconds.
+                 */
+                total_duration_secs: number;
+                /**
+                 * Format: int64
+                 * @description The total number of runs, including runs that are still on-hold or running.
+                 */
+                total_runs: number;
+              };
+              /**
+               * @description The name of the project.
+               * @example api-preview-docs
+               */
+              project_name: string;
+              /** @description Trends for a single project, across all branches. */
+              trends: {
+                /**
+                 * Format: float
+                 * @description The trend value for the success rate.
+                 */
+                success_rate: number;
+                /**
+                 * Format: float
+                 * @description The trend value for total credits consumed.
+                 */
+                total_credits_used: number;
+                /**
+                 * Format: float
+                 * @description Trend value for total duration.
+                 */
+                total_duration_secs: number;
+                /**
+                 * Format: float
+                 * @description The trend value for total number of runs.
+                 */
+                total_runs: number;
+              };
+            }[];
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getAllInsightsBranches: {
+    parameters: {
+      query?: {
+        /**
+         * @description The name of a workflow. If not passed we will scope the API call to the project.
+         * @example build-and-test
+         */
+        "workflow-name"?: string;
+      };
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A list of branches for a project */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A list of all the branches for a given project. */
+            branches: string[];
+            /** @description The unique ID of the organization */
+            org_id: unknown;
+            /** @description The unique ID of the project */
+            project_id: unknown;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getFlakyTests: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A list of flaky tests for a project */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A list of all instances of flakes. Note that a test is no longer considered flaky after 2 weeks have passed without a flake. Each flake resets this timer. */
+            "flaky-tests": {
+              /** @description The class the test belongs to. */
+              classname: string;
+              /** @description The file the test belongs to. */
+              file: string;
+              /** @description The name of the job. */
+              "job-name": string;
+              /** @description The number of the job. */
+              "job-number": number;
+              /** @description The number of the pipeline. */
+              "pipeline-number": number;
+              /** @description The source of the test. */
+              source: string;
+              /** @description The name of the test. */
+              "test-name": string;
+              "time-wasted"?: number;
+              /**
+               * Format: int64
+               * @description The number of times the test flaked.
+               */
+              "times-flaked": number;
+              /** @description The date and time when workflow was created. */
+              "workflow-created-at": string;
+              /** @description The ID of the workflow associated with the provided test counts */
+              "workflow-id": unknown;
+              /** @description The name of the workflow. */
+              "workflow-name": string;
+            }[];
+            /**
+             * Format: double
+             * @description A count of unique tests that have failed. If your project has N tests that have flaked multiple times each, this will be equal to N.
+             * @example 5
+             */
+            "total-flaky-tests": number;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getProjectWorkflowMetrics: {
+    parameters: {
+      query?: {
+        /** @description A token to retrieve the next page of results. */
+        "page-token"?: string;
+        /** @description Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. */
+        "all-branches"?: boolean;
+        /** @description The name of a vcs branch. If not passed we will scope the API call to the default branch. */
+        branch?: string;
+        /**
+         * @description The time window used to calculate summary metrics. If not provided, defaults to last-90-days
+         * @example last-90-days
+         */
+        "reporting-window"?:
+          | "last-7-days"
+          | "last-90-days"
+          | "last-24-hours"
+          | "last-30-days"
+          | "last-60-days";
+      };
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A paginated list of summary metrics by workflow */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description Workflow summary metrics. */
+            items: {
+              /** @description Metrics relating to a workflow's runs. */
+              metrics: {
+                /** @description Metrics relating to the duration of runs for a workflow. */
+                duration_metrics: {
+                  /**
+                   * Format: int64
+                   * @description The max duration, in seconds, among a group of runs.
+                   */
+                  max: number;
+                  /**
+                   * Format: int64
+                   * @description The mean duration, in seconds, among a group of runs.
+                   */
+                  mean: number;
+                  /**
+                   * Format: int64
+                   * @description The median duration, in seconds, among a group of runs.
+                   */
+                  median: number;
+                  /**
+                   * Format: int64
+                   * @description The minimum duration, in seconds, among a group of runs.
+                   */
+                  min: number;
+                  /**
+                   * Format: int64
+                   * @description The 95th percentile duration, in seconds, among a group of runs.
+                   */
+                  p95: number;
+                  /**
+                   * Format: float
+                   * @description The standard deviation, in seconds, among a group of runs.
+                   */
+                  standard_deviation: number;
+                };
+                /**
+                 * Format: int64
+                 * @description The number of failed runs.
+                 */
+                failed_runs: number;
+                /**
+                 * Format: int64
+                 * @description The mean time to recovery (mean time between failures and their next success) in seconds.
+                 */
+                mttr: number;
+                /** Format: float */
+                success_rate: number;
+                /**
+                 * Format: int64
+                 * @description The number of successful runs.
+                 */
+                successful_runs: number;
+                /**
+                 * Format: float
+                 * @description The average number of runs per day.
+                 */
+                throughput: number;
+                /**
+                 * Format: int64
+                 * @description The total credits consumed by the workflow in the aggregation window. Note that Insights is not a real time financial reporting tool and should not be used for credit reporting.
+                 */
+                total_credits_used: number;
+                /**
+                 * Format: int64
+                 * @description The number of recovered workflow executions per day.
+                 */
+                total_recoveries: number;
+                /**
+                 * Format: int64
+                 * @description The total number of runs, including runs that are still on-hold or running.
+                 */
+                total_runs: number;
+              };
+              /**
+               * @description The name of the workflow.
+               * @example build-and-test
+               */
+              name: string;
+              /** @description The unique ID of the project */
+              project_id: unknown;
+              /**
+               * Format: date-time
+               * @description The timestamp of the last build within the requested reporting window.
+               */
+              window_end: string;
+              /**
+               * Format: date-time
+               * @description The timestamp of the first build within the requested reporting window.
+               */
+              window_start: string;
+            }[];
+            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+            next_page_token: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getProjectWorkflowRuns: {
+    parameters: {
+      query?: {
+        /** @description Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. */
+        "all-branches"?: boolean;
+        /** @description The name of a vcs branch. If not passed we will scope the API call to the default branch. */
+        branch?: string;
+        /** @description A token to retrieve the next page of results. */
+        "page-token"?: string;
+        /**
+         * @description Include only executions that started at or after this date. This must be specified if an end-date is provided.
+         * @example 2020-08-21T13:26:29Z
+         */
+        "start-date"?: string;
+        /**
+         * @description Include only executions that started before this date. This date can be at most 90 days after the start-date.
+         * @example 2020-09-04T13:26:29Z
+         */
+        "end-date"?: string;
+      };
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+        /**
+         * @description The name of the workflow.
+         * @example build-and-test
+         */
+        "workflow-name": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A paginated list of recent workflow runs */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description Recent workflow runs. */
+            items: {
+              /**
+               * @description The VCS branch of a Workflow's trigger.
+               * @example main
+               */
+              branch: string;
+              /**
+               * Format: date-time
+               * @description The date and time the workflow was created.
+               */
+              created_at: string;
+              /**
+               * Format: int64
+               * @description The number of credits used during execution. Note that Insights is not a real time financial reporting tool and should not be used for credit reporting.
+               */
+              credits_used: number;
+              /**
+               * Format: int64
+               * @description The duration in seconds of a run.
+               */
+              duration: number;
+              /**
+               * Format: uuid
+               * @description The unique ID of the workflow.
+               */
+              id: string;
+              /**
+               * @description Describes if the job is an approval job or not. Approval jobs are intermediary jobs that are created to pause the workflow until approved.
+               * @example false
+               */
+              is_approval: boolean;
+              /**
+               * @description Workflow status.
+               * @enum {string}
+               */
+              status: "success" | "failed" | "error" | "canceled" | "unauthorized";
+              /**
+               * Format: date-time
+               * @description The date and time the workflow stopped.
+               */
+              stopped_at: string;
+            }[];
+            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+            next_page_token: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getProjectWorkflowJobMetrics: {
+    parameters: {
+      query?: {
+        /** @description A token to retrieve the next page of results. */
+        "page-token"?: string;
+        /** @description Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. */
+        "all-branches"?: boolean;
+        /** @description The name of a vcs branch. If not passed we will scope the API call to the default branch. */
+        branch?: string;
+        /**
+         * @description The time window used to calculate summary metrics. If not provided, defaults to last-90-days
+         * @example last-90-days
+         */
+        "reporting-window"?:
+          | "last-7-days"
+          | "last-90-days"
+          | "last-24-hours"
+          | "last-30-days"
+          | "last-60-days";
+        /**
+         * @description The name of the jobs you would like to filter from your workflow. If not specified, all workflow jobs will be returned. The job name can either be the full job name or just a substring of the job name.
+         * @example lint
+         */
+        "job-name"?: string;
+      };
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+        /**
+         * @description The name of the workflow.
+         * @example build-and-test
+         */
+        "workflow-name": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A paginated list of summary metrics by workflow job. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description Job summary metrics. */
+            items: {
+              /** @description Metrics relating to a workflow job's runs. */
+              metrics: {
+                /** @description Metrics relating to the duration of runs for a workflow job. */
+                duration_metrics: {
+                  /**
+                   * Format: int64
+                   * @description The max duration, in seconds, among a group of runs.
+                   */
+                  max: number;
+                  /**
+                   * Format: int64
+                   * @description The mean duration, in seconds, among a group of runs.
+                   */
+                  mean: number;
+                  /**
+                   * Format: int64
+                   * @description The median duration, in seconds, among a group of runs.
+                   */
+                  median: number;
+                  /**
+                   * Format: int64
+                   * @description The minimum duration, in seconds, among a group of runs.
+                   */
+                  min: number;
+                  /**
+                   * Format: int64
+                   * @description The 95th percentile duration, in seconds, among a group of runs.
+                   */
+                  p95: number;
+                  /**
+                   * Format: float
+                   * @description The standard deviation, in seconds, among a group of runs.
+                   */
+                  standard_deviation: number;
+                };
+                /**
+                 * Format: int64
+                 * @description The number of failed runs.
+                 */
+                failed_runs: number;
+                /** Format: float */
+                success_rate: number;
+                /**
+                 * Format: int64
+                 * @description The number of successful runs.
+                 */
+                successful_runs: number;
+                /**
+                 * Format: float
+                 * @description The average number of runs per day.
+                 */
+                throughput: number;
+                /**
+                 * Format: int64
+                 * @description The total credits consumed by the job in the aggregation window. Note that Insights is not a real time financial reporting tool and should not be used for credit reporting.
+                 */
+                total_credits_used: number;
+                /**
+                 * Format: int64
+                 * @description The total number of runs, including runs that are still on-hold or running.
+                 */
+                total_runs: number;
+              };
+              /** @description The name of the job. */
+              name: string;
+              /**
+               * Format: date-time
+               * @description The timestamp of the last build within the requested reporting window.
+               */
+              window_end: string;
+              /**
+               * Format: date-time
+               * @description The timestamp of the first build within the requested reporting window.
+               */
+              window_start: string;
+            }[];
+            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+            next_page_token: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getWorkflowSummary: {
+    parameters: {
+      query?: {
+        /** @description Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. */
+        "all-branches"?: boolean;
+        /** @description The name of a vcs branch. If not passed we will scope the API call to the default branch. */
+        branch?: string;
+      };
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+        /**
+         * @description The name of the workflow.
+         * @example build-and-test
+         */
+        "workflow-name": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Metrics and trends for a workflow */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description Metrics aggregated across a workflow for a given time window. */
+            metrics: {
+              /**
+               * Format: int64
+               * @description The number of runs that ran to completion within the aggregation window
+               */
+              completed_runs: number;
+              /** @description Metrics relating to the duration of runs for a workflow. */
+              duration_metrics: {
+                /**
+                 * Format: int64
+                 * @description The max duration, in seconds, among a group of runs.
+                 */
+                max: number;
+                /**
+                 * Format: int64
+                 * @description The mean duration, in seconds, among a group of runs.
+                 */
+                mean: number;
+                /**
+                 * Format: int64
+                 * @description The median duration, in seconds, among a group of runs.
+                 */
+                median: number;
+                /**
+                 * Format: int64
+                 * @description The minimum duration, in seconds, among a group of runs.
+                 */
+                min: number;
+                /**
+                 * Format: int64
+                 * @description The 95th percentile duration, in seconds, among a group of runs.
+                 */
+                p95: number;
+                /**
+                 * Format: float
+                 * @description The standard deviation, in seconds, among a group of runs.
+                 */
+                standard_deviation: number;
+              };
+              /**
+               * Format: int64
+               * @description The number of failed runs.
+               */
+              failed_runs: number;
+              /**
+               * Format: int64
+               * @description The mean time to recovery (mean time between failures and their next success) in seconds.
+               */
+              mttr: number;
+              /** Format: float */
+              success_rate: number;
+              /**
+               * Format: int64
+               * @description The number of successful runs.
+               */
+              successful_runs: number;
+              /**
+               * Format: float
+               * @description The average number of runs per day.
+               */
+              throughput: number;
+              /**
+               * Format: int64
+               * @description The total credits consumed by the workflow in the aggregation window. Note that Insights is not a real time financial reporting tool and should not be used for credit reporting.
+               */
+              total_credits_used: number;
+              /**
+               * Format: int64
+               * @description The total number of runs, including runs that are still on-hold or running.
+               */
+              total_runs: number;
+              /**
+               * Format: date-time
+               * @description The timestamp of the last build within the requested reporting window.
+               */
+              window_end: string;
+              /**
+               * Format: date-time
+               * @description The timestamp of the first build within the requested reporting window.
+               */
+              window_start: string;
+            };
+            /** @description Trends for aggregated metrics across a workflow for a given time window. */
+            trends: {
+              /**
+               * Format: float
+               * @description The trend value for number of failed runs.
+               */
+              failed_runs: number;
+              /**
+               * Format: float
+               * @description Trend value for the 50th percentile duration for a workflow for a given time window.
+               */
+              median_duration_secs: number;
+              /**
+               * Format: float
+               * @description trend for mean time to recovery (mean time between failures and their next success).
+               */
+              mttr: number;
+              /**
+               * Format: float
+               * @description Trend value for the 95th percentile duration for a workflow for a given time window.
+               */
+              p95_duration_secs: number;
+              /**
+               * Format: float
+               * @description The trend value for the success rate.
+               */
+              success_rate: number;
+              /**
+               * Format: float
+               * @description Trend value for the average number of runs per day.
+               */
+              throughput: number;
+              /**
+               * Format: float
+               * @description The trend value for total credits consumed.
+               */
+              total_credits_used: number;
+              /**
+               * Format: float
+               * @description The trend value for total number of runs.
+               */
+              total_runs: number;
+            };
+            /** @description A list of all the workflow names for a given project. */
+            workflow_names: string[];
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getProjectWorkflowTestMetrics: {
+    parameters: {
+      query?: {
+        /** @description The name of a vcs branch. If not passed we will scope the API call to the default branch. */
+        branch?: string;
+        /** @description Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. */
+        "all-branches"?: boolean;
+      };
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+        /**
+         * @description The name of the workflow.
+         * @example build-and-test
+         */
+        "workflow-name": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A list of test metrics by workflow */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /**
+             * Format: int64
+             * @description The average number of tests executed per run
+             */
+            average_test_count: number;
+            /** @description Metrics for the most frequently failing tests */
+            most_failed_tests: {
+              /** @description The class the test belongs to. */
+              classname: string;
+              /**
+               * Format: int64
+               * @description The number of times the test failed
+               */
+              failed_runs: number;
+              /** @description The file the test belongs to. */
+              file: string;
+              /** @description Whether the test is flaky. */
+              flaky: boolean;
+              /** @description The name of the job. */
+              job_name: string;
+              /**
+               * Format: double
+               * @description The 95th percentile duration, in seconds, among a group of test runs.
+               */
+              p95_duration: number;
+              /** @description The source of the test. */
+              source: string;
+              /** @description The name of the test. */
+              test_name: string;
+              /**
+               * Format: int64
+               * @description The total number of times the test was run.
+               */
+              total_runs: number;
+            }[];
+            /**
+             * Format: int64
+             * @description The number of tests with the same success rate being omitted from most_failed_tests
+             */
+            most_failed_tests_extra: number;
+            /** @description Metrics for the slowest running tests */
+            slowest_tests: {
+              /** @description The class the test belongs to. */
+              classname: string;
+              /**
+               * Format: int64
+               * @description The number of times the test failed
+               */
+              failed_runs: number;
+              /** @description The file the test belongs to. */
+              file: string;
+              /** @description Whether the test is flaky. */
+              flaky: boolean;
+              /** @description The name of the job. */
+              job_name: string;
+              /**
+               * Format: double
+               * @description The 95th percentile duration, in seconds, among a group of test runs.
+               */
+              p95_duration: number;
+              /** @description The source of the test. */
+              source: string;
+              /** @description The name of the test. */
+              test_name: string;
+              /**
+               * Format: int64
+               * @description The total number of times the test was run.
+               */
+              total_runs: number;
+            }[];
+            /**
+             * Format: int64
+             * @description The number of tests with the same duration rate being omitted from slowest_tests
+             */
+            slowest_tests_extra: number;
+            /** @description Test counts grouped by pipeline number and workflow id */
+            test_runs: {
+              /**
+               * Format: int64
+               * @description The number of the pipeline associated with the provided test counts
+               */
+              pipeline_number: number;
+              /**
+               * Format: float
+               * @description The success rate calculated from test counts
+               */
+              success_rate: number;
+              /** @description Test counts for a given pipeline number */
+              test_counts: {
+                /**
+                 * Format: int64
+                 * @description The number of tests with the error status
+                 */
+                error: number;
+                /**
+                 * Format: int64
+                 * @description The number of tests with the failure status
+                 */
+                failure: number;
+                /**
+                 * Format: int64
+                 * @description The number of tests with the skipped status
+                 */
+                skipped: number;
+                /**
+                 * Format: int64
+                 * @description The number of tests with the success status
+                 */
+                success: number;
+                /**
+                 * Format: int64
+                 * @description The total number of tests
+                 */
+                total: number;
+              };
+              /** @description The ID of the workflow associated with the provided test counts */
+              workflow_id: unknown;
+            }[];
+            /**
+             * Format: int64
+             * @description The total number of test runs
+             */
+            total_test_runs: number;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  cancelJobByJobID: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description The unique ID of the job. */
+        "job-id": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Job cancelled successfully. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A human-readable message */
+            message: string;
+          };
+        };
+      };
+      /** @description Bad request error. */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A human-readable message */
+            message: string;
+          };
+        };
+      };
+      /** @description Unauthorized error. */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A human-readable message */
+            message: string;
+          };
+        };
+      };
+      /** @description Forbidden error. */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A human-readable message */
+            message: string;
+          };
+        };
+      };
+      /** @description Job not found error. */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A human-readable message */
+            message: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getCurrentUser: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description User login information. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description URL to the user's avatar on the VCS */
+            avatar_url: string;
+            /**
+             * Format: uuid
+             * @description The unique ID of the user.
+             */
+            id: string;
+            /**
+             * Login
+             * @description The login information for the user on the VCS.
+             */
+            login: string;
+            /** @description The name of the user. */
+            name: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getCollaborations: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Collaborations */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description URL to the user's avatar on the VCS */
+            avatar_url: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the organization
+             */
+            id: string;
+            /** @description The name of the organization */
+            name: string;
+            /** @description The slug of the organization */
+            slug: string;
+            /** @description The VCS provider */
+            "vcs-type": string;
+          }[];
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  GetOrgClaims: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        orgID: components["parameters"]["OrgID"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Claims successfully fetched. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ClaimResponse"];
+        };
+      };
+      400: components["responses"]["BadRequest"];
+      403: components["responses"]["Forbidden"];
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  DeleteOrgClaims: {
+    parameters: {
+      query: {
+        /** @description comma separated list of claims to delete. Valid values are "audience" and "ttl". */
+        claims: components["parameters"]["Claims"];
+      };
+      header?: never;
+      path: {
+        orgID: components["parameters"]["OrgID"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Claims successfully deleted. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ClaimResponse"];
+        };
+      };
+      400: components["responses"]["BadRequest"];
+      403: components["responses"]["Forbidden"];
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  PatchOrgClaims: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        orgID: components["parameters"]["OrgID"];
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": components["schemas"]["PatchClaimsRequest"];
+      };
+    };
+    responses: {
+      /** @description Claims successfully patched. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ClaimResponse"];
+        };
+      };
+      400: components["responses"]["BadRequest"];
+      403: components["responses"]["Forbidden"];
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  GetProjectClaims: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        orgID: components["parameters"]["OrgID"];
+        projectID: components["parameters"]["ProjectID"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Claims successfully fetched. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ClaimResponse"];
+        };
+      };
+      400: components["responses"]["BadRequest"];
+      403: components["responses"]["Forbidden"];
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  DeleteProjectClaims: {
+    parameters: {
+      query: {
+        /** @description comma separated list of claims to delete. Valid values are "audience" and "ttl". */
+        claims: components["parameters"]["Claims"];
+      };
+      header?: never;
+      path: {
+        orgID: components["parameters"]["OrgID"];
+        projectID: components["parameters"]["ProjectID"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Claims successfully deleted. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ClaimResponse"];
+        };
+      };
+      400: components["responses"]["BadRequest"];
+      403: components["responses"]["Forbidden"];
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  PatchProjectClaims: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        orgID: components["parameters"]["OrgID"];
+        projectID: components["parameters"]["ProjectID"];
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": components["schemas"]["PatchClaimsRequest"];
+      };
+    };
+    responses: {
+      /** @description Claims successfully patched. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ClaimResponse"];
+        };
+      };
+      400: components["responses"]["BadRequest"];
+      403: components["responses"]["Forbidden"];
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  createOrganization: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": {
+          /** @description The name of the organization. */
+          name: string;
+          /**
+           * @description The version control system type for the organization.
+           * @example github
+           * @enum {string}
+           */
+          vcs_type: "github" | "bitbucket" | "circleci";
+        };
+      };
+    };
+    responses: {
+      /** @description The newly created organization */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description The unique ID of the organization. */
+            id: string;
+            /** @description The name of the organization. */
+            name: string;
+            /** @description Org slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings). */
+            slug: string;
+            /**
+             * @description The version control system type for the organization.
+             * @example github
+             * @enum {string}
+             */
+            vcs_type: "github" | "bitbucket" | "circleci";
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getOrganization: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).
+         * @example gh/CircleCI-Public
+         */
+        "org-slug-or-id": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description An organization object */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description The unique ID of the organization. */
+            id: string;
+            /** @description The name of the organization. */
+            name: string;
+            /** @description Org slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings). */
+            slug: string;
+            /**
+             * @description The version control system type for the organization.
+             * @example github
+             * @enum {string}
+             */
+            vcs_type: "github" | "bitbucket" | "circleci";
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  deleteOrganization: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).
+         * @example gh/CircleCI-Public
+         */
+        "org-slug-or-id": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A confirmation message. */
+      202: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A human-readable message */
+            message: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  createProject: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).
+         * @example gh/CircleCI-Public
+         */
+        "org-slug-or-id": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": {
+          /**
+           * @description The name of the project
+           * @example api-preview-docs
+           */
+          name: string;
+        };
+      };
+    };
+    responses: {
+      /** @description The new project */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** Format: uuid */
+            id: string;
+            /**
+             * @description The name of the project
+             * @example api-preview-docs
+             */
+            name: string;
+            /**
+             * Format: uuid
+             * @description The id of the organization the project belongs to
+             * @example ec6887ec-7d44-4b31-b468-7e552408ee32
+             */
+            organization_id: string;
+            /**
+             * @description The name of the organization the project belongs to
+             * @example CircleCI-Public
+             */
+            organization_name: string;
+            /**
+             * @description The slug of the organization the project belongs to
+             * @example gh/CircleCI-Public
+             */
+            organization_slug: string;
+            /**
+             * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+             * @example gh/CircleCI-Public/api-preview-docs
+             */
+            slug: string;
+            /** @description Information about the VCS that hosts the project source code. */
+            vcs_info: {
+              /** @example main */
+              default_branch: string;
+              /**
+               * @description The VCS provider
+               * @enum {string}
+               */
+              provider: "Bitbucket" | "CircleCI" | "GitHub";
+              /**
+               * @description URL to the repository hosting the project's code
+               * @example https://github.com/CircleCI-Public/api-preview-docs
+               */
+              vcs_url: string;
+            };
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  listURLOrbAllowListEntries: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).
+         * @example gh/CircleCI-Public
+         */
+        "org-slug-or-id": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description URL Orb allow-list entries */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            items: {
+              /**
+               * @description An authentication method to use for fetching URL orb references that match this allow-list entry's prefix. Allowed values are "bitbucket-oauth", "github-oauth", "github-app", or "none".
+               * @example github-app
+               * @enum {string}
+               */
+              auth: "github-oauth" | "none" | "bitbucket-oauth" | "github-app";
+              /**
+               * @description URL orb allow-list entry UUID.
+               * @example ba98990a-5a00-4cad-b55e-b44117b92e0c
+               */
+              id: string;
+              /**
+               * @description Name of the URL orb allow-list entry.
+               * @example Allow URL orbs from raw.githubusercontent.com/CircleCI-Public
+               */
+              name: string;
+              /**
+               * @description URL prefix. URL orb references that start with this prefix will be allowed by this allow-list entry.
+               * @example https://raw.githubusercontent.com/CircleCI-Public/orbs/refs/heads/main/
+               */
+              prefix: unknown;
+            }[];
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  createURLOrbAllowListEntry: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).
+         * @example gh/CircleCI-Public
+         */
+        "org-slug-or-id": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": {
+          /**
+           * @description An authentication method to use for fetching URL orb references that match this allow-list entry's prefix. Allowed values are "bitbucket-oauth", "github-oauth", "github-app", or "none".
+           * @example github-app
+           * @enum {string}
+           */
+          auth: "github-oauth" | "none" | "bitbucket-oauth" | "github-app";
+          /**
+           * @description Name of the URL orb allow-list entry.
+           * @example Allow URL orbs from raw.githubusercontent.com/CircleCI-Public
+           */
+          name: string;
+          /**
+           * @description URL prefix. URL orb references that start with this prefix will be allowed by this allow-list entry.
+           * @example https://raw.githubusercontent.com/CircleCI-Public/orbs/refs/heads/main/
+           */
+          prefix: unknown;
+        };
+      };
+    };
+    responses: {
+      /** @description The ID of the new URL Orb allow-list entry */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /**
+             * @description URL orb allow-list entry UUID.
+             * @example ba98990a-5a00-4cad-b55e-b44117b92e0c
+             */
+            id: string;
+            /**
+             * @description Message describing the outcome of an operation
+             * @example Created.
+             */
+            message: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  removeURLOrbAllowListEntry: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).
+         * @example gh/CircleCI-Public
+         */
+        "org-slug-or-id": string;
+        /**
+         * @description URL orb allow-list entry UUID.
+         * @example ba98990a-5a00-4cad-b55e-b44117b92e0c
+         */
+        "allow-list-entry-id": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description The ID of the removed URL Orb allow-list entry */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /**
+             * @description URL orb allow-list entry UUID.
+             * @example ba98990a-5a00-4cad-b55e-b44117b92e0c
+             */
+            id: string;
+            /**
+             * @description Message describing the outcome of an operation
+             * @example Created.
+             */
+            message: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getOrganizationGroups: {
+    parameters: {
+      query?: {
+        /** @description The number of results per page. */
+        limit?: components["parameters"]["limit"];
+        /** @description A token to specify which page of results to fetch. */
+        "page-token"?: components["parameters"]["page_token"];
+      };
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of an organization.
+         * @example b9291e0d-a11e-41fb-8517-c545388b5953
+         */
+        org_id: components["parameters"]["org_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successfully get all the groups in an organization. Results are paginated. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["groups"];
+        };
+      };
+      403: components["responses"]["403_permission_denied"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  createOrganizationGroup: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of an organization.
+         * @example b9291e0d-a11e-41fb-8517-c545388b5953
+         */
+        org_id: components["parameters"]["org_id"];
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
+          /** @description Description to describe the group */
+          description?: string;
+          /** @description Name of the group */
+          name: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful creation of a group. */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["group"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      401: components["responses"]["401_invalid_token"];
+      403: components["responses"]["403_permission_denied"];
+      404: components["responses"]["404_entity_not_found"];
+      409: components["responses"]["409_group_conflict"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  getGroup: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of an organization.
+         * @example b9291e0d-a11e-41fb-8517-c545388b5953
+         */
+        org_id: components["parameters"]["org_id"];
+        /**
+         * @description An opaque identifier of a group.
+         * @example 39f660db-f49b-417e-ad79-2769ba29faf7
+         */
+        group_id: components["parameters"]["group_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successfully gets a group. Members not included. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["group"];
+        };
+      };
+      403: components["responses"]["403_permission_denied"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  deleteGroup: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of an organization.
+         * @example b9291e0d-a11e-41fb-8517-c545388b5953
+         */
+        org_id: components["parameters"]["org_id"];
+        /**
+         * @description An opaque identifier of a group.
+         * @example 39f660db-f49b-417e-ad79-2769ba29faf7
+         */
+        group_id: components["parameters"]["group_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful deletion of a group. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @default Group deleted. */
+            message: string;
+          };
+        };
+      };
+      401: components["responses"]["401_invalid_token"];
+      403: components["responses"]["403_permission_denied"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  createUsageExport: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of an organization.
+         * @example b9291e0d-a11e-41fb-8517-c545388b5953
+         */
+        org_id: components["parameters"]["org_id"];
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
+          /**
+           * Format: date-time
+           * @description The end date & time (inclusive) of the range from which data will be pulled. Must be no more than 31 days after `start`.
+           */
+          end: string;
+          shared_org_ids?: string[];
+          /**
+           * Format: date-time
+           * @description The start date & time (inclusive) of the range from which data will be pulled. Must be no more than one year ago.
+           */
+          start: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Usage export created successfully */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["usage_export_job"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      429: components["responses"]["429_rate_limit_exceeded"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  getUsageExport: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of an organization.
+         * @example b9291e0d-a11e-41fb-8517-c545388b5953
+         */
+        org_id: components["parameters"]["org_id"];
         /**
          * @description An opaque identifier of a usage export job.
          * @example e8235eed-f121-4ae3-9c72-2719d6572818
          */
-        usage_export_job_id: string;
+        usage_export_job_id: components["parameters"]["usage_export_job_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Usage export fetched successfully */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["get_usage_export_job_status"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      429: components["responses"]["429_rate_limit_exceeded"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  GetDecisionLogs: {
+    parameters: {
+      query?: {
+        /** @description Return decisions matching this decision status. */
+        status?: string;
+        /** @description Return decisions made after this date. */
+        after?: string;
+        /** @description Return decisions made before this date. */
+        before?: string;
+        /** @description Return decisions made on this branch. */
+        branch?: string;
+        /** @description Return decisions made for this project. */
+        project_id?: string;
+        /** @description Return decisions made for this build number. */
+        build_number?: string;
+        /** @description Sets the offset when retrieving the decisions, for paging. */
+        offset?: number;
+      };
+      header?: never;
+      path: {
+        ownerID: components["parameters"]["OwnerID"];
+        context: components["parameters"]["Context"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Decision logs successfully retrieved. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["DecisionLog"][];
+        };
+      };
+      400: components["responses"]["BadRequest"];
+      401: components["responses"]["Unauthorized"];
+      403: components["responses"]["Forbidden"];
+      500: components["responses"]["UnexpectedServerError"];
+    };
+  };
+  MakeDecision: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        ownerID: components["parameters"]["OwnerID"];
+        context: components["parameters"]["Context"];
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": {
+          input: string;
+          metadata?: Record<string, never>;
+        };
+      };
+    };
+    responses: {
+      /** @description Decision rendered by applying the policy against the provided data. Response will be modeled by the data and rego processed. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["Decision"];
+        };
+      };
+      /** @description The request is malformed */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @example context: must be a valid value. */
+            error: string;
+          };
+        };
+      };
+      /** @description The request is unauthorized */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @example Unauthorized. */
+            error: string;
+          };
+        };
+      };
+      /** @description Something unexpected happened on the server. */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @example There was an error processing your request. */
+            error: string;
+          };
+        };
+      };
+    };
+  };
+  GetDecisionSettings: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        ownerID: components["parameters"]["OwnerID"];
+        context: components["parameters"]["Context"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Decision settings successfully retrieved. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["DecisionSettings"];
+        };
+      };
+      400: components["responses"]["BadRequest"];
+      401: components["responses"]["Unauthorized"];
+      403: components["responses"]["Forbidden"];
+      500: components["responses"]["UnexpectedServerError"];
+    };
+  };
+  SetDecisionSettings: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        ownerID: components["parameters"]["OwnerID"];
+        context: components["parameters"]["Context"];
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": components["schemas"]["DecisionSettings"];
+      };
+    };
+    responses: {
+      /** @description Decision settings successfully set. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["DecisionSettings"];
+        };
+      };
+      400: components["responses"]["BadRequest"];
+      401: components["responses"]["Unauthorized"];
+      403: components["responses"]["Forbidden"];
+      500: components["responses"]["UnexpectedServerError"];
+    };
+  };
+  GetDecisionLog: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        ownerID: components["parameters"]["OwnerID"];
+        context: components["parameters"]["Context"];
+        decisionID: components["parameters"]["DecisionID"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Decision log successfully retrieved. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["DecisionLog"];
+        };
+      };
+      400: components["responses"]["BadRequest"];
+      401: components["responses"]["Unauthorized"];
+      403: components["responses"]["Forbidden"];
+      /** @description There was no decision log found for given decision_id, and owner_id. */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @example decision log not found */
+            error: string;
+          };
+        };
+      };
+      500: components["responses"]["UnexpectedServerError"];
+    };
+  };
+  GetDecisionLogPolicyBundle: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        ownerID: components["parameters"]["OwnerID"];
+        context: components["parameters"]["Context"];
+        decisionID: components["parameters"]["DecisionID"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Policy-Bundle retrieved successfully for given decision log ID */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["PolicyBundle"];
+        };
+      };
+      400: components["responses"]["BadRequest"];
+      401: components["responses"]["Unauthorized"];
+      403: components["responses"]["Forbidden"];
+      /** @description There was no decision log found for given decision_id, and owner_id. */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @example decision log not found */
+            error: string;
+          };
+        };
+      };
+      500: components["responses"]["UnexpectedServerError"];
+    };
+  };
+  GetPolicyBundle: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        ownerID: components["parameters"]["OwnerID"];
+        context: components["parameters"]["Context"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Policy-Bundle retrieved successfully. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["PolicyBundle"];
+        };
+      };
+      400: components["responses"]["BadRequest"];
+      401: components["responses"]["Unauthorized"];
+      403: components["responses"]["Forbidden"];
+      500: components["responses"]["UnexpectedServerError"];
+    };
+  };
+  CreatePolicyBundle: {
+    parameters: {
+      query?: {
+        dry?: boolean;
+      };
+      header?: never;
+      path: {
+        ownerID: components["parameters"]["OwnerID"];
+        context: components["parameters"]["Context"];
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": components["schemas"]["BundlePayload"];
+      };
+    };
+    responses: {
+      /** @description Policy-Bundle diff successfully returned. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["BundleDiff"];
+        };
+      };
+      /** @description Policy-Bundle successfully created. */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["BundleDiff"];
+        };
+      };
+      400: components["responses"]["BadRequest"];
+      401: components["responses"]["Unauthorized"];
+      403: components["responses"]["Forbidden"];
+      /** @description The request exceeds the maximum payload size for policy bundles ~2.5Mib */
+      413: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @example http: request payload too large */
+            error: string;
+          };
+        };
+      };
+      500: components["responses"]["UnexpectedServerError"];
+    };
+  };
+  GetPolicyDocument: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        ownerID: components["parameters"]["OwnerID"];
+        context: components["parameters"]["Context"];
+        /** @description the policy name set by the rego policy_name rule */
+        policyName: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Policy retrieved successfully. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["Policy"];
+        };
+      };
+      400: components["responses"]["BadRequest"];
+      401: components["responses"]["Unauthorized"];
+      403: components["responses"]["Forbidden"];
+      /** @description There was no policy that was found with the given owner_id and policy name. */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @example policy not found */
+            error: string;
+          };
+        };
+      };
+      500: components["responses"]["UnexpectedServerError"];
+    };
+  };
+  listPipelines: {
+    parameters: {
+      query?: {
         /**
-         * @description An opaque identifier of a user.
-         * @example a68942a8-c217-4d92-96e5-3b47f9a2f0d9
+         * @description Org slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).
+         * @example gh/CircleCI-Public
          */
-        user_id: string;
+        "org-slug"?: string;
+        /** @description A token to retrieve the next page of results. */
+        "page-token"?: string;
+        /** @description Only include entries created by your user. */
+        mine?: boolean;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A sequence of pipelines. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            items: {
+              /**
+               * Format: date-time
+               * @description The date and time the pipeline was created.
+               */
+              created_at: string;
+              /** @description A sequence of errors that have occurred within the pipeline. */
+              errors: {
+                /** @description A human-readable error message. */
+                message: string;
+                /**
+                 * @description The type of error.
+                 * @enum {string}
+                 */
+                type:
+                  | "config"
+                  | "invalid-trigger-setup"
+                  | "config-fetch"
+                  | "timeout"
+                  | "permission"
+                  | "other"
+                  | "trigger-rule"
+                  | "plan";
+              }[];
+              /**
+               * Format: uuid
+               * @description The unique ID of the pipeline.
+               * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+               */
+              id: string;
+              /**
+               * Format: int64
+               * @description The number of the pipeline.
+               * @example 25
+               */
+              number: number;
+              /**
+               * @description The project-slug for the pipeline.
+               * @example gh/CircleCI-Public/api-preview-docs
+               */
+              project_slug: string;
+              /**
+               * @description The current state of the pipeline.
+               * @enum {string}
+               */
+              state: "created" | "errored" | "setup-pending" | "setup" | "pending";
+              /** @description A summary of the trigger. */
+              trigger: {
+                /** @description The user who triggered the Pipeline. */
+                actor: {
+                  /** @description URL to the user's avatar on the VCS */
+                  avatar_url: string;
+                  /**
+                   * Login
+                   * @description The login information for the user on the VCS.
+                   */
+                  login: string;
+                };
+                /**
+                 * Format: date-time
+                 * @description The date and time the trigger was received.
+                 */
+                received_at: string;
+                /**
+                 * @description The type of trigger.
+                 * @enum {string}
+                 */
+                type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
+              };
+              trigger_parameters?: {
+                [key: string]: string | number | boolean | Record<string, never>;
+              };
+              /**
+               * Format: date-time
+               * @description The date and time the pipeline was last updated.
+               */
+              updated_at?: string;
+              /** @description VCS information for the pipeline. */
+              vcs?: {
+                /**
+                 * @description The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
+                 * @example feature/design-new-api
+                 */
+                branch?: string;
+                /** @description The latest commit in the pipeline. */
+                commit?: {
+                  /** @description The body of the commit message. */
+                  body: string;
+                  /** @description The subject of the commit message. */
+                  subject: string;
+                };
+                /**
+                 * @description URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
+                 * @example https://github.com/CircleCI-Public/api-preview-docs
+                 */
+                origin_repository_url: string;
+                /**
+                 * @description Name of the VCS provider (e.g. GitHub, Bitbucket).
+                 * @example GitHub
+                 */
+                provider_name: string;
+                /**
+                 * @description The code review id.
+                 * @example 123
+                 */
+                review_id?: string;
+                /**
+                 * @description The code review URL.
+                 * @example https://github.com/CircleCI-Public/api-preview-docs/pull/123
+                 */
+                review_url?: string;
+                /**
+                 * @description The code revision the pipeline ran.
+                 * @example f454a02b5d10fcccfd7d9dd7608a76d6493a98b4
+                 */
+                revision: string;
+                /**
+                 * @description The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.
+                 * @example v3.1.4159
+                 */
+                tag?: string;
+                /**
+                 * @description URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
+                 * @example https://github.com/CircleCI-Public/api-preview-docs
+                 */
+                target_repository_url: string;
+              };
+            }[];
+            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+            next_page_token: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  continuePipeline: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": {
+          /** @description A configuration string for the pipeline. */
+          configuration: string;
+          /**
+           * PipelineContinuationKey
+           * @description A pipeline continuation key.
+           */
+          "continuation-key": string;
+          /**
+           * @description An object containing pipeline parameters and their values. Pipeline parameters have the following size limits: 100 max entries, 128 maximum key length, 512 maximum value length.
+           * @example {
+           *       "deploy_prod": true
+           *     }
+           */
+          parameters?: {
+            [key: string]: number | string | boolean;
+          };
+        };
+      };
+    };
+    responses: {
+      /** @description A confirmation message. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A human-readable message */
+            message: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getPipelineById: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
         /**
-         * @description The specific version of an Orb.
-         * @example 3.1.2
+         * @description The unique ID of the pipeline.
+         * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
          */
-        version: string;
+        "pipeline-id": string;
+      };
+      cookie?: never;
     };
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
-}
-export type $defs = Record<string, never>;
-export interface operations {
-    listContexts: {
-        parameters: {
-            query?: {
-                /** @description The unique ID of the owner of the context. This is the organization ID. Specify either owner/organization ID or the owner/organization slug. Find the organization ID and slug in the CircleCI web app (Organization Settings > Overview). Owner/organization slug is not supported for CircleCI server. */
-                "owner-id"?: components["parameters"]["owner_id_query"];
-                /** @description A string that represents an organization. This is the organization slug. Specify either this or organization/owner ID. Find the organization ID and slug in the CircleCI web app (Organization Settings > Overview). Owner/organization slug is not supported for CircleCI server. */
-                "owner-slug"?: components["parameters"]["owner_slug_query"];
-                /** @description The type of the owner. Defaults to "organization". Use "account" if you are using CircleCI server. */
-                "owner-type"?: components["parameters"]["owner_type_query"];
-                /** @description A token to specify which page of results to fetch. */
-                "page-token"?: components["parameters"]["page_token"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description A pipeline object. */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description A paginated list of contexts */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["context_list"];
-                };
+        content: {
+          "application/json": {
+            /**
+             * Format: date-time
+             * @description The date and time the pipeline was created.
+             */
+            created_at: string;
+            /** @description A sequence of errors that have occurred within the pipeline. */
+            errors: {
+              /** @description A human-readable error message. */
+              message: string;
+              /**
+               * @description The type of error.
+               * @enum {string}
+               */
+              type:
+                | "config"
+                | "invalid-trigger-setup"
+                | "config-fetch"
+                | "timeout"
+                | "permission"
+                | "other"
+                | "trigger-rule"
+                | "plan";
+            }[];
+            /**
+             * Format: uuid
+             * @description The unique ID of the pipeline.
+             * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+             */
+            id: string;
+            /**
+             * Format: int64
+             * @description The number of the pipeline.
+             * @example 25
+             */
+            number: number;
+            /**
+             * @description The project-slug for the pipeline.
+             * @example gh/CircleCI-Public/api-preview-docs
+             */
+            project_slug: string;
+            /**
+             * @description The current state of the pipeline.
+             * @enum {string}
+             */
+            state: "created" | "errored" | "setup-pending" | "setup" | "pending";
+            /** @description A summary of the trigger. */
+            trigger: {
+              /** @description The user who triggered the Pipeline. */
+              actor: {
+                /** @description URL to the user's avatar on the VCS */
+                avatar_url: string;
+                /**
+                 * Login
+                 * @description The login information for the user on the VCS.
+                 */
+                login: string;
+              };
+              /**
+               * Format: date-time
+               * @description The date and time the trigger was received.
+               */
+              received_at: string;
+              /**
+               * @description The type of trigger.
+               * @enum {string}
+               */
+              type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
             };
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            429: components["responses"]["429_rate_limit_exceeded"];
-            500: components["responses"]["500_internal_server_error"];
+            trigger_parameters?: {
+              [key: string]: string | number | boolean | Record<string, never>;
+            };
+            /**
+             * Format: date-time
+             * @description The date and time the pipeline was last updated.
+             */
+            updated_at?: string;
+            /** @description VCS information for the pipeline. */
+            vcs?: {
+              /**
+               * @description The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
+               * @example feature/design-new-api
+               */
+              branch?: string;
+              /** @description The latest commit in the pipeline. */
+              commit?: {
+                /** @description The body of the commit message. */
+                body: string;
+                /** @description The subject of the commit message. */
+                subject: string;
+              };
+              /**
+               * @description URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
+               * @example https://github.com/CircleCI-Public/api-preview-docs
+               */
+              origin_repository_url: string;
+              /**
+               * @description Name of the VCS provider (e.g. GitHub, Bitbucket).
+               * @example GitHub
+               */
+              provider_name: string;
+              /**
+               * @description The code review id.
+               * @example 123
+               */
+              review_id?: string;
+              /**
+               * @description The code review URL.
+               * @example https://github.com/CircleCI-Public/api-preview-docs/pull/123
+               */
+              review_url?: string;
+              /**
+               * @description The code revision the pipeline ran.
+               * @example f454a02b5d10fcccfd7d9dd7608a76d6493a98b4
+               */
+              revision: string;
+              /**
+               * @description The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.
+               * @example v3.1.4159
+               */
+              tag?: string;
+              /**
+               * @description URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
+               * @example https://github.com/CircleCI-Public/api-preview-docs
+               */
+              target_repository_url: string;
+            };
+          };
         };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
     };
-    createContext: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["context_created"];
-            };
-        };
-        responses: {
-            /** @description The new context */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * Format: date-time
-                         * @description The date and time the context was created.
-                         * @example 2015-09-21T17:29:21.042Z
-                         */
-                        created_at: string;
-                        /**
-                         * Format: uuid
-                         * @description The unique ID of the context.
-                         */
-                        id: string;
-                        /** @description The user-defined name of the context. */
-                        name: string;
-                    };
-                };
-            };
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            429: components["responses"]["429_rate_limit_exceeded"];
-            500: components["responses"]["500_internal_server_error"];
-        };
+  };
+  getPipelineConfigById: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description The unique ID of the pipeline.
+         * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+         */
+        "pipeline-id": string;
+      };
+      cookie?: never;
     };
-    getContext: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a context.
-                 * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
-                 */
-                context_id: components["parameters"]["context_id"];
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description The configuration strings for the pipeline. */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description The context */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["context"];
-                };
-            };
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            429: components["responses"]["429_rate_limit_exceeded"];
-            500: components["responses"]["500_internal_server_error"];
+        content: {
+          "application/json": {
+            /** @description The compiled configuration for the pipeline, after all orb expansion has been performed. If there were errors processing the pipeline's configuration, then this field may be empty. */
+            compiled: string;
+            /** @description The compiled setup configuration for the pipeline, after all orb expansion has been performed. If there were errors processing the pipeline's setup workflows, then this field may be empty. */
+            "compiled-setup-config"?: string;
+            /** @description The setup configuration for the pipeline used for Setup Workflows. If there were errors processing the pipeline's configuration or if setup workflows are not enabled, then this field should not exist */
+            "setup-config"?: string;
+            /** @description The source configuration for the pipeline, before any config compilation has been performed. If there is no config, then this field will be empty. */
+            source: string;
+          };
         };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
     };
-    deleteContext: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a context.
-                 * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
-                 */
-                context_id: components["parameters"]["context_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A confirmation message */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["delete_context_response"];
-                };
-            };
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            429: components["responses"]["429_rate_limit_exceeded"];
-            500: components["responses"]["500_internal_server_error"];
-        };
+  };
+  getPipelineValuesById: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description The unique ID of the pipeline.
+         * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+         */
+        "pipeline-id": string;
+      };
+      cookie?: never;
     };
-    listEnvironmentVariablesFromContext: {
-        parameters: {
-            query?: {
-                /** @description A token to specify which page of results to fetch. */
-                "page-token"?: components["parameters"]["page_token"];
-            };
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a context.
-                 * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
-                 */
-                context_id: components["parameters"]["context_id"];
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description A JSON object of pipeline values */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description A paginated list of environment variables */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["env_var_list"];
-                };
-            };
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            429: components["responses"]["429_rate_limit_exceeded"];
-            500: components["responses"]["500_internal_server_error"];
+        content: {
+          "application/json": {
+            [key: string]: string | number | boolean;
+          };
         };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
     };
-    addEnvironmentVariableToContext: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a context.
-                 * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
-                 */
-                context_id: components["parameters"]["context_id"];
-                /**
-                 * @description The name of the environment variable.
-                 * @example POSTGRES_USER
-                 */
-                env_var_name: components["parameters"]["env_var_name"];
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    /**
-                     * @description The value of the environment variable
-                     * @example some-secret-value
-                     */
-                    value: string;
-                };
-            };
-        };
-        responses: {
-            /** @description The new environment variable */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["update_env_var"];
-                };
-            };
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            429: components["responses"]["429_rate_limit_exceeded"];
-            500: components["responses"]["500_internal_server_error"];
-        };
+  };
+  listWorkflowsByPipelineId: {
+    parameters: {
+      query?: {
+        /** @description A token to retrieve the next page of results. */
+        "page-token"?: string;
+      };
+      header?: never;
+      path: {
+        /**
+         * @description The unique ID of the pipeline.
+         * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+         */
+        "pipeline-id": string;
+      };
+      cookie?: never;
     };
-    deleteEnvironmentVariableFromContext: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a context.
-                 * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
-                 */
-                context_id: components["parameters"]["context_id"];
-                /**
-                 * @description The name of the environment variable.
-                 * @example POSTGRES_USER
-                 */
-                env_var_name: components["parameters"]["env_var_name"];
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description A paginated list of workflow objects. */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description A confirmation message */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["delete_env_var"];
-                };
-            };
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            429: components["responses"]["429_rate_limit_exceeded"];
-            500: components["responses"]["500_internal_server_error"];
+        content: {
+          "application/json": {
+            /**
+             * Workflow list
+             * @description A list of workflows.
+             */
+            items: {
+              /**
+               * Format: int64
+               * @description Present if this workflow was auto-rerun from a previous workflow. The Nth auto-rerun workflow will have auto_rerun_number N
+               * @example 1
+               */
+              auto_rerun_number?: number;
+              /** Format: uuid */
+              canceled_by?: string;
+              /**
+               * Format: date-time
+               * @description The date and time the workflow was created.
+               */
+              created_at: string;
+              /** Format: uuid */
+              errored_by?: string;
+              /**
+               * Format: uuid
+               * @description The unique ID of the workflow.
+               */
+              id: string;
+              /**
+               * Format: int64
+               * @description The maximum number of auto reruns specified for the workflow.
+               * @example 5
+               */
+              max_auto_reruns?: number;
+              /**
+               * @description The name of the workflow.
+               * @example build-and-test
+               */
+              name: string;
+              /**
+               * Format: uuid
+               * @description The ID of the pipeline this workflow belongs to.
+               * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+               */
+              pipeline_id: string;
+              /**
+               * Format: int64
+               * @description The number of the pipeline this workflow belongs to.
+               * @example 25
+               */
+              pipeline_number: number;
+              /**
+               * @description The project-slug for the pipeline this workflow belongs to.
+               * @example gh/CircleCI-Public/api-preview-docs
+               */
+              project_slug: string;
+              /** Format: uuid */
+              started_by: string;
+              /**
+               * @description The current status of the workflow.
+               * @enum {string}
+               */
+              status:
+                | "success"
+                | "running"
+                | "not_run"
+                | "failed"
+                | "error"
+                | "failing"
+                | "on_hold"
+                | "canceled"
+                | "unauthorized";
+              /**
+               * Format: date-time
+               * @description The date and time the workflow stopped.
+               */
+              stopped_at: string;
+              /**
+               * @description Tag used for the workflow
+               * @example setup
+               * @enum {string}
+               */
+              tag?: "setup";
+            }[];
+            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+            next_page_token: string;
+          };
         };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
     };
-    getContextRestrictions: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a context.
-                 * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
-                 */
-                context_id: components["parameters"]["context_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["context_project_restrictions_list"];
-                };
-            };
-            400: components["responses"]["400_invalid_context_id"];
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            429: components["responses"]["429_rate_limit_exceeded"];
-            500: components["responses"]["500_internal_server_error"];
-        };
+  };
+  getProjectBySlug: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
     };
-    createContextRestriction: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a context.
-                 * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
-                 */
-                context_id: components["parameters"]["context_id"];
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description A project object */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody: {
-            content: {
-                "application/json": {
-                    /**
-                     * @description Type of the restriction.
-                     * @enum {string}
-                     */
-                    restriction_type?: "project" | "expression" | "group";
-                    /**
-                     * @description Value used to evaluate the restriction. If the `restriction_type`
-                     *     is `project`, this will be the project UUID. If the `restriction_type`
-                     *     is `expression`, this will be the expression rule.
-                     */
-                    restriction_value?: string;
-                };
+        content: {
+          "application/json": {
+            /** Format: uuid */
+            id: string;
+            /**
+             * @description The name of the project
+             * @example api-preview-docs
+             */
+            name: string;
+            /**
+             * Format: uuid
+             * @description The id of the organization the project belongs to
+             * @example ec6887ec-7d44-4b31-b468-7e552408ee32
+             */
+            organization_id: string;
+            /**
+             * @description The name of the organization the project belongs to
+             * @example CircleCI-Public
+             */
+            organization_name: string;
+            /**
+             * @description The slug of the organization the project belongs to
+             * @example gh/CircleCI-Public
+             */
+            organization_slug: string;
+            /**
+             * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+             * @example gh/CircleCI-Public/api-preview-docs
+             */
+            slug: string;
+            /** @description Information about the VCS that hosts the project source code. */
+            vcs_info: {
+              /** @example main */
+              default_branch: string;
+              /**
+               * @description The VCS provider
+               * @enum {string}
+               */
+              provider: "Bitbucket" | "CircleCI" | "GitHub";
+              /**
+               * @description URL to the repository hosting the project's code
+               * @example https://github.com/CircleCI-Public/api-preview-docs
+               */
+              vcs_url: string;
             };
+          };
         };
-        responses: {
-            /** @description Successful response. */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["restriction_created"];
-                };
-            };
-            /** @description Bad request. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            /** @description Request conflict. */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-            429: components["responses"]["429_rate_limit_exceeded"];
-            500: components["responses"]["500_internal_server_error"];
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
         };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
     };
-    deleteContextRestriction: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a context.
-                 * @example be8bb2e3-c3d6-4098-89f4-572ff976ba9a
-                 */
-                context_id: components["parameters"]["context_id"];
-                /**
-                 * @description An opaque identifier of a context restriction.
-                 * @example 1c23d2cb-07b1-4a28-8af3-e369732050ed
-                 */
-                restriction_id: components["parameters"]["restriction_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["restriction_deleted"];
-                };
-            };
-            400: components["responses"]["400_invalid_restriction_id"];
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            429: components["responses"]["429_rate_limit_exceeded"];
-            500: components["responses"]["500_internal_server_error"];
-        };
+  };
+  deleteProjectBySlug: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
     };
-    listComponents: {
-        parameters: {
-            query: {
-                /**
-                 * @description An opaque identifier of an organization used in query parameters.
-                 * @example b9291e0d-a11e-41fb-8517-c545388b5953
-                 */
-                "org-id": components["parameters"]["org_id_query"];
-                /**
-                 * @description An opaque identifier of an project used in query parameters.
-                 * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
-                 */
-                "project-id"?: components["parameters"]["project_id_query"];
-                /** @description The number of results per page. */
-                "page-size": components["parameters"]["page_size"];
-                /** @description A token to specify which page of results to fetch. */
-                "page-token"?: components["parameters"]["page_token"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description A confirmation message. */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Paginated components list */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["paginatedComponentList"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
+        content: {
+          "application/json": {
+            /** @description A human-readable message */
+            message: string;
+          };
         };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
     };
-    getComponent: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a component.
-                 * @example b9291e0d-a11e-41fb-8517-c545388b5953
-                 */
-                component_id: components["parameters"]["component_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["component"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
-        };
+  };
+  listCheckoutKeys: {
+    parameters: {
+      query?: {
+        /** @description The fingerprint digest type to return. This may be either `md5` or `sha256`. If not passed, defaults to `md5`. */
+        digest?: "sha256" | "md5";
+      };
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
     };
-    listComponentVersions: {
-        parameters: {
-            query?: {
-                /**
-                 * @description An opaque identifier of an environment used in query parameters.
-                 * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
-                 */
-                "environment-id"?: components["parameters"]["environment_id_query"];
-            };
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a component.
-                 * @example b9291e0d-a11e-41fb-8517-c545388b5953
-                 */
-                component_id: components["parameters"]["component_id"];
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description A sequence of checkout keys. */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Paginated component versions list */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["paginatedComponentVersionList"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
+        content: {
+          "application/json": {
+            items: {
+              /**
+               * Format: date-time
+               * @description The date and time the checkout key was created.
+               * @example 2015-09-21T17:29:21.042Z
+               */
+              "created-at": string;
+              /**
+               * @description An SSH key fingerprint.
+               * @example c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f
+               */
+              fingerprint: string;
+              /**
+               * @description A boolean value that indicates if this key is preferred.
+               * @example true
+               */
+              preferred: boolean;
+              /**
+               * @description A public SSH key.
+               * @example ssh-rsa ...
+               */
+              "public-key": string;
+              /**
+               * CheckoutKeyType
+               * @description The type of checkout key. This may be either `deploy-key` or `github-user-key`.
+               * @example deploy-key
+               * @enum {string}
+               */
+              type: "deploy-key" | "github-user-key";
+            }[];
+            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+            next_page_token: string;
+          };
         };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
     };
-    listEnvironments: {
-        parameters: {
-            query: {
-                /**
-                 * @description An opaque identifier of an organization used in query parameters.
-                 * @example b9291e0d-a11e-41fb-8517-c545388b5953
-                 */
-                "org-id": components["parameters"]["org_id_query"];
-                /** @description The number of results per page. */
-                "page-size": components["parameters"]["page_size"];
-                /** @description A token to specify which page of results to fetch. */
-                "page-token"?: components["parameters"]["page_token"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Paginated environments list */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["paginatedEnvironmentList"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
-        };
+  };
+  createCheckoutKey: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
     };
-    getEnvironment: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of an environment.
-                 * @example 1c23d2cb-07b1-4a28-8af3-e369732050ed
-                 */
-                environment_id: components["parameters"]["environment_id"];
-            };
-            cookie?: never;
+    requestBody?: {
+      content: {
+        "application/json": {
+          /**
+           * CheckoutKeyInputType
+           * @description The type of checkout key to create. This may be either `deploy-key` or `user-key`.
+           * @example deploy-key
+           * @enum {string}
+           */
+          type: "user-key" | "deploy-key";
         };
-        requestBody?: never;
-        responses: {
-            /** @description Environment */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["environment"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
-        };
+      };
     };
-    getProjectWorkflowsPageData: {
-        parameters: {
-            query?: {
-                /**
-                 * @description The time window used to calculate summary metrics. If not provided, defaults to last-90-days
-                 * @example last-90-days
-                 */
-                "reporting-window"?: "last-7-days" | "last-90-days" | "last-24-hours" | "last-30-days" | "last-60-days";
-                /**
-                 * @description The names of VCS branches to include in branch-level workflow metrics.
-                 * @example A single branch: ?branches=main or for multiple branches: ?branches=main&branches=feature&branches=dev
-                 */
-                branches?: Record<string, never>;
-                /**
-                 * @description The names of workflows to include in workflow-level metrics.
-                 * @example A single workflow name: ?workflow-names=build-test-deploy or
-                 *         for multiple workflow names: ?workflow-names=build&workflow-names=test-and-deploy.
-                 */
-                "workflow-names"?: Record<string, never>;
-            };
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-            };
-            cookie?: never;
+    responses: {
+      /** @description The checkout key. */
+      201: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Aggregated summary metrics and trends by workflow and branches */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A list of all the branches for a given project. */
-                        all_branches?: string[];
-                        /** @description A list of all the workflows for a given project. */
-                        all_workflows?: string[];
-                        /** @description The unique ID of the organization */
-                        org_id?: unknown;
-                        /** @description Metrics and trends data aggregated for a given project. */
-                        project_data?: {
-                            /** @description Metrics aggregated across all workflows and branches for a project. */
-                            metrics: {
-                                /** Format: float */
-                                success_rate: number;
-                                /**
-                                 * Format: float
-                                 * @description The average number of runs per day.
-                                 */
-                                throughput: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total credits consumed over the current timeseries interval.
-                                 */
-                                total_credits_used: number;
-                                /**
-                                 * Format: int64
-                                 * @description Total duration, in seconds.
-                                 */
-                                total_duration_secs: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total number of runs, including runs that are still on-hold or running.
-                                 */
-                                total_runs: number;
-                            };
-                            /** @description Metric trends aggregated across all workflows and branches for a project. */
-                            trends: {
-                                /**
-                                 * Format: float
-                                 * @description The trend value for the success rate.
-                                 */
-                                success_rate: number;
-                                /**
-                                 * Format: float
-                                 * @description Trend value for the average number of runs per day.
-                                 */
-                                throughput: number;
-                                /**
-                                 * Format: float
-                                 * @description The trend value for total credits consumed.
-                                 */
-                                total_credits_used: number;
-                                /**
-                                 * Format: float
-                                 * @description Trend value for total duration.
-                                 */
-                                total_duration_secs: number;
-                                /**
-                                 * Format: float
-                                 * @description The trend value for total number of runs.
-                                 */
-                                total_runs: number;
-                            };
-                        };
-                        /** @description The unique ID of the project */
-                        project_id?: unknown;
-                        /** @description A list of metrics and trends data for branches for a given project. */
-                        project_workflow_branch_data?: {
-                            /**
-                             * @description The VCS branch of a workflow's trigger.
-                             * @example main
-                             */
-                            branch: string;
-                            /** @description Metrics aggregated across a workflow or branchfor a project. */
-                            metrics: {
-                                /**
-                                 * Format: float
-                                 * @description The 95th percentile duration among a group of workflow runs.
-                                 */
-                                p95_duration_secs: number;
-                                /** Format: float */
-                                success_rate: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total credits consumed over the current timeseries interval.
-                                 */
-                                total_credits_used: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total number of runs, including runs that are still on-hold or running.
-                                 */
-                                total_runs: number;
-                            };
-                            /** @description Trends aggregated across a workflow or branch for a project. */
-                            trends: {
-                                /**
-                                 * Format: float
-                                 * @description The 95th percentile duration among a group of workflow runs.
-                                 */
-                                p95_duration_secs: number;
-                                /**
-                                 * Format: float
-                                 * @description The trend value for the success rate.
-                                 */
-                                success_rate: number;
-                                /**
-                                 * Format: float
-                                 * @description The trend value for total credits consumed.
-                                 */
-                                total_credits_used: number;
-                                /**
-                                 * Format: float
-                                 * @description The trend value for total number of runs.
-                                 */
-                                total_runs: number;
-                            };
-                            /**
-                             * @description The name of the workflow.
-                             * @example build-and-test
-                             */
-                            workflow_name: string;
-                        }[];
-                        /** @description A list of metrics and trends data for workflows for a given project. */
-                        project_workflow_data?: {
-                            /** @description Metrics aggregated across a workflow or branchfor a project. */
-                            metrics: {
-                                /**
-                                 * Format: float
-                                 * @description The 95th percentile duration among a group of workflow runs.
-                                 */
-                                p95_duration_secs: number;
-                                /** Format: float */
-                                success_rate: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total credits consumed over the current timeseries interval.
-                                 */
-                                total_credits_used: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total number of runs, including runs that are still on-hold or running.
-                                 */
-                                total_runs: number;
-                            };
-                            /** @description Trends aggregated across a workflow or branch for a project. */
-                            trends: {
-                                /**
-                                 * Format: float
-                                 * @description The 95th percentile duration among a group of workflow runs.
-                                 */
-                                p95_duration_secs: number;
-                                /**
-                                 * Format: float
-                                 * @description The trend value for the success rate.
-                                 */
-                                success_rate: number;
-                                /**
-                                 * Format: float
-                                 * @description The trend value for total credits consumed.
-                                 */
-                                total_credits_used: number;
-                                /**
-                                 * Format: float
-                                 * @description The trend value for total number of runs.
-                                 */
-                                total_runs: number;
-                            };
-                            /**
-                             * @description The name of the workflow.
-                             * @example build-and-test
-                             */
-                            workflow_name: string;
-                        }[];
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
+        content: {
+          "application/json": {
+            /**
+             * Format: date-time
+             * @description The date and time the checkout key was created.
+             * @example 2015-09-21T17:29:21.042Z
+             */
+            "created-at": string;
+            /**
+             * @description An SSH key fingerprint.
+             * @example c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f
+             */
+            fingerprint: string;
+            /**
+             * @description A boolean value that indicates if this key is preferred.
+             * @example true
+             */
+            preferred: boolean;
+            /**
+             * @description A public SSH key.
+             * @example ssh-rsa ...
+             */
+            "public-key": string;
+            /**
+             * CheckoutKeyType
+             * @description The type of checkout key. This may be either `deploy-key` or `github-user-key`.
+             * @example deploy-key
+             * @enum {string}
+             */
+            type: "deploy-key" | "github-user-key";
+          };
         };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
     };
-    getJobTimeseries: {
-        parameters: {
-            query?: {
-                /** @description The name of a vcs branch. If not passed we will scope the API call to the default branch. */
+  };
+  getCheckoutKey: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+        /**
+         * @description An SSH key fingerprint.
+         * @example c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f
+         */
+        fingerprint: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description The checkout key. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /**
+             * Format: date-time
+             * @description The date and time the checkout key was created.
+             * @example 2015-09-21T17:29:21.042Z
+             */
+            "created-at": string;
+            /**
+             * @description An SSH key fingerprint.
+             * @example c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f
+             */
+            fingerprint: string;
+            /**
+             * @description A boolean value that indicates if this key is preferred.
+             * @example true
+             */
+            preferred: boolean;
+            /**
+             * @description A public SSH key.
+             * @example ssh-rsa ...
+             */
+            "public-key": string;
+            /**
+             * CheckoutKeyType
+             * @description The type of checkout key. This may be either `deploy-key` or `github-user-key`.
+             * @example deploy-key
+             * @enum {string}
+             */
+            type: "deploy-key" | "github-user-key";
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  deleteCheckoutKey: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+        /**
+         * @description An SSH key fingerprint.
+         * @example c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f
+         */
+        fingerprint: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A confirmation message. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A human-readable message */
+            message: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  listEnvVars: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A sequence of environment variables. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            items: {
+              /**
+               * @description The creation timestamp of the environment variable.
+               * @example #joda/inst 2023-04-14T21:20:14+0000
+               */
+              "created-at"?: unknown;
+              /**
+               * @description The name of the environment variable.
+               * @example foo
+               */
+              name: string;
+              /**
+               * @description The value of the environment variable.
+               * @example xxxx1234
+               */
+              value: string;
+            }[];
+            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+            next_page_token: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  createEnvVar: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": {
+          /**
+           * @description The name of the environment variable.
+           * @example foo
+           */
+          name: string;
+          /**
+           * @description The value of the environment variable.
+           * @example xxxx1234
+           */
+          value: string;
+        };
+      };
+    };
+    responses: {
+      /** @description The environment variable. */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /**
+             * @description The creation timestamp of the environment variable.
+             * @example #joda/inst 2023-04-14T21:20:14+0000
+             */
+            "created-at"?: unknown;
+            /**
+             * @description The name of the environment variable.
+             * @example foo
+             */
+            name: string;
+            /**
+             * @description The value of the environment variable.
+             * @example xxxx1234
+             */
+            value: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getEnvVar: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+        /**
+         * @description The name of the environment variable.
+         * @example foo
+         */
+        name: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description The environment variable. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /**
+             * @description The creation timestamp of the environment variable.
+             * @example #joda/inst 2023-04-14T21:20:14+0000
+             */
+            "created-at"?: unknown;
+            /**
+             * @description The name of the environment variable.
+             * @example foo
+             */
+            name: string;
+            /**
+             * @description The value of the environment variable.
+             * @example xxxx1234
+             */
+            value: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  deleteEnvVar: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+        /**
+         * @description The name of the environment variable.
+         * @example foo
+         */
+        name: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A confirmation message. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A human-readable message */
+            message: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getJobDetails: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description The number of the job.
+         * @example 123
+         */
+        "job-number": unknown;
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Job details. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description List of contexts used by the job. */
+            contexts: {
+              /** @description The name of the context. */
+              name: string;
+            }[];
+            /**
+             * Format: date-time
+             * @description The time when the job was created.
+             */
+            created_at: string;
+            /**
+             * Format: int64
+             * @description Duration of a job in milliseconds.
+             */
+            duration: number;
+            /** @description Information about executor used for a job. */
+            executor: {
+              /** @description Resource class name. */
+              resource_class: string;
+              /** @description Executor type. */
+              type?: string;
+            };
+            /** @description Info about the latest workflow the job was a part of. */
+            latest_workflow: {
+              /**
+               * Format: uuid
+               * @description The unique ID of the workflow.
+               */
+              id: string;
+              /**
+               * @description The name of the workflow.
+               * @example build-and-test
+               */
+              name: string;
+            };
+            /** @description Messages from CircleCI execution platform. */
+            messages: {
+              /** @description Information describing message. */
+              message: string;
+              /** @description Value describing the reason for message to be added to the job. */
+              reason?: string;
+              /** @description Message type. */
+              type: string;
+            }[];
+            /** @description The name of the job. */
+            name: string;
+            /**
+             * Format: int64
+             * @description The number of the job.
+             * @example 1
+             */
+            number: number;
+            /** @description Information about an organization. */
+            organization: {
+              /** @description The name of the organization. */
+              name: string;
+            };
+            /** @description Info about parallels runs and their status. */
+            parallel_runs: {
+              /**
+               * Format: int64
+               * @description Index of the parallel run.
+               */
+              index: number;
+              /** @description Status of the parallel run. */
+              status: string;
+            }[];
+            /**
+             * Format: int64
+             * @description A number of parallel runs the job has.
+             */
+            parallelism: number;
+            /** @description Info about a pipeline the job is a part of. */
+            pipeline: {
+              /**
+               * Format: uuid
+               * @description The unique ID of the pipeline.
+               * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+               */
+              id: string;
+            };
+            /** @description Information about a project. */
+            project: {
+              /**
+               * @description URL to the repository hosting the project's code
+               * @example https://github.com/CircleCI-Public/api-preview-docs
+               */
+              external_url: string;
+              /** Format: uuid */
+              id: string;
+              /**
+               * @description The name of the project
+               * @example api-preview-docs
+               */
+              name: string;
+              /**
+               * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+               * @example gh/CircleCI-Public/api-preview-docs
+               */
+              slug: string;
+            };
+            /**
+             * Format: date-time
+             * @description The time when the job was placed in a queue.
+             */
+            queued_at: string;
+            /**
+             * Format: date-time
+             * @description The date and time the job started.
+             */
+            started_at: string;
+            /**
+             * @description The current status of the job.
+             * @enum {string}
+             */
+            status:
+              | "success"
+              | "running"
+              | "not_run"
+              | "failed"
+              | "retried"
+              | "queued"
+              | "not_running"
+              | "infrastructure_fail"
+              | "timedout"
+              | "on_hold"
+              | "terminated-unknown"
+              | "blocked"
+              | "canceled"
+              | "unauthorized";
+            /**
+             * Format: date-time
+             * @description The time when the job stopped.
+             */
+            stopped_at?: string;
+            /** @description URL of the job in CircleCI Web UI. */
+            web_url: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  cancelJobByJobNumber: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description The number of the job.
+         * @example 123
+         */
+        "job-number": unknown;
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A human-readable message */
+            message: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  listPipelinesForProject: {
+    parameters: {
+      query?: {
+        /** @description The name of a vcs branch. */
+        branch?: string;
+        /** @description A token to retrieve the next page of results. */
+        "page-token"?: string;
+      };
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A sequence of pipelines. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            items: {
+              /**
+               * Format: date-time
+               * @description The date and time the pipeline was created.
+               */
+              created_at: string;
+              /** @description A sequence of errors that have occurred within the pipeline. */
+              errors: {
+                /** @description A human-readable error message. */
+                message: string;
+                /**
+                 * @description The type of error.
+                 * @enum {string}
+                 */
+                type:
+                  | "config"
+                  | "invalid-trigger-setup"
+                  | "config-fetch"
+                  | "timeout"
+                  | "permission"
+                  | "other"
+                  | "trigger-rule"
+                  | "plan";
+              }[];
+              /**
+               * Format: uuid
+               * @description The unique ID of the pipeline.
+               * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+               */
+              id: string;
+              /**
+               * Format: int64
+               * @description The number of the pipeline.
+               * @example 25
+               */
+              number: number;
+              /**
+               * @description The project-slug for the pipeline.
+               * @example gh/CircleCI-Public/api-preview-docs
+               */
+              project_slug: string;
+              /**
+               * @description The current state of the pipeline.
+               * @enum {string}
+               */
+              state: "created" | "errored" | "setup-pending" | "setup" | "pending";
+              /** @description A summary of the trigger. */
+              trigger: {
+                /** @description The user who triggered the Pipeline. */
+                actor: {
+                  /** @description URL to the user's avatar on the VCS */
+                  avatar_url: string;
+                  /**
+                   * Login
+                   * @description The login information for the user on the VCS.
+                   */
+                  login: string;
+                };
+                /**
+                 * Format: date-time
+                 * @description The date and time the trigger was received.
+                 */
+                received_at: string;
+                /**
+                 * @description The type of trigger.
+                 * @enum {string}
+                 */
+                type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
+              };
+              trigger_parameters?: {
+                [key: string]: string | number | boolean | Record<string, never>;
+              };
+              /**
+               * Format: date-time
+               * @description The date and time the pipeline was last updated.
+               */
+              updated_at?: string;
+              /** @description VCS information for the pipeline. */
+              vcs?: {
+                /**
+                 * @description The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
+                 * @example feature/design-new-api
+                 */
                 branch?: string;
+                /** @description The latest commit in the pipeline. */
+                commit?: {
+                  /** @description The body of the commit message. */
+                  body: string;
+                  /** @description The subject of the commit message. */
+                  subject: string;
+                };
                 /**
-                 * @description The granularity for which to query timeseries data.
-                 * @example hourly
+                 * @description URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
+                 * @example https://github.com/CircleCI-Public/api-preview-docs
                  */
-                granularity?: "daily" | "hourly";
+                origin_repository_url: string;
                 /**
-                 * @description Include only executions that started at or after this date. This must be specified if an end-date is provided.
-                 * @example 2020-08-21T13:26:29Z
+                 * @description Name of the VCS provider (e.g. GitHub, Bitbucket).
+                 * @example GitHub
                  */
-                "start-date"?: string;
+                provider_name: string;
                 /**
-                 * @description Include only executions that started before this date. This date can be at most 90 days after the start-date.
-                 * @example 2020-09-04T13:26:29Z
-                 */
-                "end-date"?: string;
-            };
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-                /**
-                 * @description The name of the workflow.
-                 * @example build-and-test
-                 */
-                "workflow-name": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description An array of timeseries data, one entry per job. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description Aggregate metrics for a workflow at a time granularity */
-                        items: {
-                            /**
-                             * Format: date-time
-                             * @description The end time of the last execution included in the metrics.
-                             */
-                            max_ended_at: string;
-                            /** @description Metrics relating to a workflow's runs. */
-                            metrics: {
-                                /** @description Metrics relating to the duration of runs for a workflow. */
-                                duration_metrics: {
-                                    /**
-                                     * Format: int64
-                                     * @description The max duration, in seconds, among a group of runs.
-                                     */
-                                    max: number;
-                                    /**
-                                     * Format: int64
-                                     * @description The median duration, in seconds, among a group of runs.
-                                     */
-                                    median: number;
-                                    /**
-                                     * Format: int64
-                                     * @description The minimum duration, in seconds, among a group of runs.
-                                     */
-                                    min: number;
-                                    /**
-                                     * Format: int64
-                                     * @description The 95th percentile duration, in seconds, among a group of runs.
-                                     */
-                                    p95: number;
-                                    /**
-                                     * Format: int64
-                                     * @description The total duration, in seconds, added across a group of runs.
-                                     */
-                                    total: number;
-                                };
-                                /**
-                                 * Format: int64
-                                 * @description The number of failed runs.
-                                 */
-                                failed_runs: number;
-                                /**
-                                 * Format: int64
-                                 * @description The median credits consumed over the current timeseries interval.
-                                 */
-                                median_credits_used: number;
-                                /**
-                                 * Format: int64
-                                 * @description The number of successful runs.
-                                 */
-                                successful_runs: number;
-                                /**
-                                 * Format: float
-                                 * @description The average number of runs per day.
-                                 */
-                                throughput: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total credits consumed over the current timeseries interval.
-                                 */
-                                total_credits_used: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total number of runs, including runs that are still on-hold or running.
-                                 */
-                                total_runs: number;
-                            };
-                            /**
-                             * Format: date-time
-                             * @description The start time for the earliest execution included in the metrics.
-                             */
-                            min_started_at: string;
-                            /**
-                             * @description The name of the workflow.
-                             * @example build-and-test
-                             */
-                            name: string;
-                            /**
-                             * Format: date-time
-                             * @description The start of the interval for timeseries metrics.
-                             */
-                            timestamp: string;
-                        }[];
-                        /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-                        next_page_token: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getOrgSummaryData: {
-        parameters: {
-            query?: {
-                /**
-                 * @description The time window used to calculate summary metrics. If not provided, defaults to last-90-days
-                 * @example last-90-days
-                 */
-                "reporting-window"?: "last-7-days" | "last-90-days" | "last-24-hours" | "last-30-days" | "last-60-days";
-                /**
-                 * @description List of project names.
-                 * @example For a single project: ?project-names=some-project or for multiple projects: ?project-names=some-project1&project-names=some-project2
-                 */
-                "project-names"?: Record<string, never>;
-            };
-            header?: never;
-            path: {
-                /**
-                 * @description Org slug in the form `vcs-slug/org-name`. The `/` characters may be URL-escaped.
-                 * @example gh/CircleCI-Public
-                 */
-                "org-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description summary metrics with trends for an entire org and it's projects. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A list of all the project names in the organization. */
-                        all_projects: string[];
-                        /** @description Aggregated metrics for an org, with trends. */
-                        org_data: {
-                            /** @description Metrics for a single org metrics. */
-                            metrics: {
-                                /** Format: float */
-                                success_rate: number;
-                                /**
-                                 * Format: float
-                                 * @description The average number of runs per day.
-                                 */
-                                throughput: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total credits consumed over the current timeseries interval.
-                                 */
-                                total_credits_used: number;
-                                /**
-                                 * Format: int64
-                                 * @description Total duration, in seconds.
-                                 */
-                                total_duration_secs: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total number of runs, including runs that are still on-hold or running.
-                                 */
-                                total_runs: number;
-                            };
-                            /** @description Trends for a single org. */
-                            trends: {
-                                /**
-                                 * Format: float
-                                 * @description The trend value for the success rate.
-                                 */
-                                success_rate: number;
-                                /**
-                                 * Format: float
-                                 * @description Trend value for the average number of runs per day.
-                                 */
-                                throughput: number;
-                                /**
-                                 * Format: float
-                                 * @description The trend value for total credits consumed.
-                                 */
-                                total_credits_used: number;
-                                /**
-                                 * Format: float
-                                 * @description Trend value for total duration.
-                                 */
-                                total_duration_secs: number;
-                                /**
-                                 * Format: float
-                                 * @description The trend value for total number of runs.
-                                 */
-                                total_runs: number;
-                            };
-                        };
-                        /** @description Metrics for a single project, across all branches */
-                        org_project_data: {
-                            /** @description Metrics for a single project, across all branches. */
-                            metrics: {
-                                /** Format: float */
-                                success_rate: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total credits consumed over the current timeseries interval.
-                                 */
-                                total_credits_used: number;
-                                /**
-                                 * Format: int64
-                                 * @description Total duration, in seconds.
-                                 */
-                                total_duration_secs: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total number of runs, including runs that are still on-hold or running.
-                                 */
-                                total_runs: number;
-                            };
-                            /**
-                             * @description The name of the project.
-                             * @example api-preview-docs
-                             */
-                            project_name: string;
-                            /** @description Trends for a single project, across all branches. */
-                            trends: {
-                                /**
-                                 * Format: float
-                                 * @description The trend value for the success rate.
-                                 */
-                                success_rate: number;
-                                /**
-                                 * Format: float
-                                 * @description The trend value for total credits consumed.
-                                 */
-                                total_credits_used: number;
-                                /**
-                                 * Format: float
-                                 * @description Trend value for total duration.
-                                 */
-                                total_duration_secs: number;
-                                /**
-                                 * Format: float
-                                 * @description The trend value for total number of runs.
-                                 */
-                                total_runs: number;
-                            };
-                        }[];
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getAllInsightsBranches: {
-        parameters: {
-            query?: {
-                /**
-                 * @description The name of a workflow. If not passed we will scope the API call to the project.
-                 * @example build-and-test
-                 */
-                "workflow-name"?: string;
-            };
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A list of branches for a project */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A list of all the branches for a given project. */
-                        branches: string[];
-                        /** @description The unique ID of the organization */
-                        org_id: unknown;
-                        /** @description The unique ID of the project */
-                        project_id: unknown;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getFlakyTests: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A list of flaky tests for a project */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A list of all instances of flakes. Note that a test is no longer considered flaky after 2 weeks have passed without a flake. Each flake resets this timer. */
-                        "flaky-tests": {
-                            /** @description The class the test belongs to. */
-                            classname: string;
-                            /** @description The file the test belongs to. */
-                            file: string;
-                            /** @description The name of the job. */
-                            "job-name": string;
-                            /** @description The number of the job. */
-                            "job-number": number;
-                            /** @description The number of the pipeline. */
-                            "pipeline-number": number;
-                            /** @description The source of the test. */
-                            source: string;
-                            /** @description The name of the test. */
-                            "test-name": string;
-                            "time-wasted"?: number;
-                            /**
-                             * Format: int64
-                             * @description The number of times the test flaked.
-                             */
-                            "times-flaked": number;
-                            /** @description The date and time when workflow was created. */
-                            "workflow-created-at": string;
-                            /** @description The ID of the workflow associated with the provided test counts */
-                            "workflow-id": unknown;
-                            /** @description The name of the workflow. */
-                            "workflow-name": string;
-                        }[];
-                        /**
-                         * Format: double
-                         * @description A count of unique tests that have failed. If your project has N tests that have flaked multiple times each, this will be equal to N.
-                         * @example 5
-                         */
-                        "total-flaky-tests": number;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getProjectWorkflowMetrics: {
-        parameters: {
-            query?: {
-                /** @description A token to retrieve the next page of results. */
-                "page-token"?: string;
-                /** @description Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. */
-                "all-branches"?: boolean;
-                /** @description The name of a vcs branch. If not passed we will scope the API call to the default branch. */
-                branch?: string;
-                /**
-                 * @description The time window used to calculate summary metrics. If not provided, defaults to last-90-days
-                 * @example last-90-days
-                 */
-                "reporting-window"?: "last-7-days" | "last-90-days" | "last-24-hours" | "last-30-days" | "last-60-days";
-            };
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A paginated list of summary metrics by workflow */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description Workflow summary metrics. */
-                        items: {
-                            /** @description Metrics relating to a workflow's runs. */
-                            metrics: {
-                                /** @description Metrics relating to the duration of runs for a workflow. */
-                                duration_metrics: {
-                                    /**
-                                     * Format: int64
-                                     * @description The max duration, in seconds, among a group of runs.
-                                     */
-                                    max: number;
-                                    /**
-                                     * Format: int64
-                                     * @description The mean duration, in seconds, among a group of runs.
-                                     */
-                                    mean: number;
-                                    /**
-                                     * Format: int64
-                                     * @description The median duration, in seconds, among a group of runs.
-                                     */
-                                    median: number;
-                                    /**
-                                     * Format: int64
-                                     * @description The minimum duration, in seconds, among a group of runs.
-                                     */
-                                    min: number;
-                                    /**
-                                     * Format: int64
-                                     * @description The 95th percentile duration, in seconds, among a group of runs.
-                                     */
-                                    p95: number;
-                                    /**
-                                     * Format: float
-                                     * @description The standard deviation, in seconds, among a group of runs.
-                                     */
-                                    standard_deviation: number;
-                                };
-                                /**
-                                 * Format: int64
-                                 * @description The number of failed runs.
-                                 */
-                                failed_runs: number;
-                                /**
-                                 * Format: int64
-                                 * @description The mean time to recovery (mean time between failures and their next success) in seconds.
-                                 */
-                                mttr: number;
-                                /** Format: float */
-                                success_rate: number;
-                                /**
-                                 * Format: int64
-                                 * @description The number of successful runs.
-                                 */
-                                successful_runs: number;
-                                /**
-                                 * Format: float
-                                 * @description The average number of runs per day.
-                                 */
-                                throughput: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total credits consumed by the workflow in the aggregation window. Note that Insights is not a real time financial reporting tool and should not be used for credit reporting.
-                                 */
-                                total_credits_used: number;
-                                /**
-                                 * Format: int64
-                                 * @description The number of recovered workflow executions per day.
-                                 */
-                                total_recoveries: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total number of runs, including runs that are still on-hold or running.
-                                 */
-                                total_runs: number;
-                            };
-                            /**
-                             * @description The name of the workflow.
-                             * @example build-and-test
-                             */
-                            name: string;
-                            /** @description The unique ID of the project */
-                            project_id: unknown;
-                            /**
-                             * Format: date-time
-                             * @description The timestamp of the last build within the requested reporting window.
-                             */
-                            window_end: string;
-                            /**
-                             * Format: date-time
-                             * @description The timestamp of the first build within the requested reporting window.
-                             */
-                            window_start: string;
-                        }[];
-                        /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-                        next_page_token: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getProjectWorkflowRuns: {
-        parameters: {
-            query?: {
-                /** @description Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. */
-                "all-branches"?: boolean;
-                /** @description The name of a vcs branch. If not passed we will scope the API call to the default branch. */
-                branch?: string;
-                /** @description A token to retrieve the next page of results. */
-                "page-token"?: string;
-                /**
-                 * @description Include only executions that started at or after this date. This must be specified if an end-date is provided.
-                 * @example 2020-08-21T13:26:29Z
-                 */
-                "start-date"?: string;
-                /**
-                 * @description Include only executions that started before this date. This date can be at most 90 days after the start-date.
-                 * @example 2020-09-04T13:26:29Z
-                 */
-                "end-date"?: string;
-            };
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-                /**
-                 * @description The name of the workflow.
-                 * @example build-and-test
-                 */
-                "workflow-name": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A paginated list of recent workflow runs */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description Recent workflow runs. */
-                        items: {
-                            /**
-                             * @description The VCS branch of a Workflow's trigger.
-                             * @example main
-                             */
-                            branch: string;
-                            /**
-                             * Format: date-time
-                             * @description The date and time the workflow was created.
-                             */
-                            created_at: string;
-                            /**
-                             * Format: int64
-                             * @description The number of credits used during execution. Note that Insights is not a real time financial reporting tool and should not be used for credit reporting.
-                             */
-                            credits_used: number;
-                            /**
-                             * Format: int64
-                             * @description The duration in seconds of a run.
-                             */
-                            duration: number;
-                            /**
-                             * Format: uuid
-                             * @description The unique ID of the workflow.
-                             */
-                            id: string;
-                            /**
-                             * @description Describes if the job is an approval job or not. Approval jobs are intermediary jobs that are created to pause the workflow until approved.
-                             * @example false
-                             */
-                            is_approval: boolean;
-                            /**
-                             * @description Workflow status.
-                             * @enum {string}
-                             */
-                            status: "success" | "failed" | "error" | "canceled" | "unauthorized";
-                            /**
-                             * Format: date-time
-                             * @description The date and time the workflow stopped.
-                             */
-                            stopped_at: string;
-                        }[];
-                        /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-                        next_page_token: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getProjectWorkflowJobMetrics: {
-        parameters: {
-            query?: {
-                /** @description A token to retrieve the next page of results. */
-                "page-token"?: string;
-                /** @description Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. */
-                "all-branches"?: boolean;
-                /** @description The name of a vcs branch. If not passed we will scope the API call to the default branch. */
-                branch?: string;
-                /**
-                 * @description The time window used to calculate summary metrics. If not provided, defaults to last-90-days
-                 * @example last-90-days
-                 */
-                "reporting-window"?: "last-7-days" | "last-90-days" | "last-24-hours" | "last-30-days" | "last-60-days";
-                /**
-                 * @description The name of the jobs you would like to filter from your workflow. If not specified, all workflow jobs will be returned. The job name can either be the full job name or just a substring of the job name.
-                 * @example lint
-                 */
-                "job-name"?: string;
-            };
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-                /**
-                 * @description The name of the workflow.
-                 * @example build-and-test
-                 */
-                "workflow-name": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A paginated list of summary metrics by workflow job. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description Job summary metrics. */
-                        items: {
-                            /** @description Metrics relating to a workflow job's runs. */
-                            metrics: {
-                                /** @description Metrics relating to the duration of runs for a workflow job. */
-                                duration_metrics: {
-                                    /**
-                                     * Format: int64
-                                     * @description The max duration, in seconds, among a group of runs.
-                                     */
-                                    max: number;
-                                    /**
-                                     * Format: int64
-                                     * @description The mean duration, in seconds, among a group of runs.
-                                     */
-                                    mean: number;
-                                    /**
-                                     * Format: int64
-                                     * @description The median duration, in seconds, among a group of runs.
-                                     */
-                                    median: number;
-                                    /**
-                                     * Format: int64
-                                     * @description The minimum duration, in seconds, among a group of runs.
-                                     */
-                                    min: number;
-                                    /**
-                                     * Format: int64
-                                     * @description The 95th percentile duration, in seconds, among a group of runs.
-                                     */
-                                    p95: number;
-                                    /**
-                                     * Format: float
-                                     * @description The standard deviation, in seconds, among a group of runs.
-                                     */
-                                    standard_deviation: number;
-                                };
-                                /**
-                                 * Format: int64
-                                 * @description The number of failed runs.
-                                 */
-                                failed_runs: number;
-                                /** Format: float */
-                                success_rate: number;
-                                /**
-                                 * Format: int64
-                                 * @description The number of successful runs.
-                                 */
-                                successful_runs: number;
-                                /**
-                                 * Format: float
-                                 * @description The average number of runs per day.
-                                 */
-                                throughput: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total credits consumed by the job in the aggregation window. Note that Insights is not a real time financial reporting tool and should not be used for credit reporting.
-                                 */
-                                total_credits_used: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total number of runs, including runs that are still on-hold or running.
-                                 */
-                                total_runs: number;
-                            };
-                            /** @description The name of the job. */
-                            name: string;
-                            /**
-                             * Format: date-time
-                             * @description The timestamp of the last build within the requested reporting window.
-                             */
-                            window_end: string;
-                            /**
-                             * Format: date-time
-                             * @description The timestamp of the first build within the requested reporting window.
-                             */
-                            window_start: string;
-                        }[];
-                        /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-                        next_page_token: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getWorkflowSummary: {
-        parameters: {
-            query?: {
-                /** @description Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. */
-                "all-branches"?: boolean;
-                /** @description The name of a vcs branch. If not passed we will scope the API call to the default branch. */
-                branch?: string;
-            };
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-                /**
-                 * @description The name of the workflow.
-                 * @example build-and-test
-                 */
-                "workflow-name": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Metrics and trends for a workflow */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description Metrics aggregated across a workflow for a given time window. */
-                        metrics: {
-                            /**
-                             * Format: int64
-                             * @description The number of runs that ran to completion within the aggregation window
-                             */
-                            completed_runs: number;
-                            /** @description Metrics relating to the duration of runs for a workflow. */
-                            duration_metrics: {
-                                /**
-                                 * Format: int64
-                                 * @description The max duration, in seconds, among a group of runs.
-                                 */
-                                max: number;
-                                /**
-                                 * Format: int64
-                                 * @description The mean duration, in seconds, among a group of runs.
-                                 */
-                                mean: number;
-                                /**
-                                 * Format: int64
-                                 * @description The median duration, in seconds, among a group of runs.
-                                 */
-                                median: number;
-                                /**
-                                 * Format: int64
-                                 * @description The minimum duration, in seconds, among a group of runs.
-                                 */
-                                min: number;
-                                /**
-                                 * Format: int64
-                                 * @description The 95th percentile duration, in seconds, among a group of runs.
-                                 */
-                                p95: number;
-                                /**
-                                 * Format: float
-                                 * @description The standard deviation, in seconds, among a group of runs.
-                                 */
-                                standard_deviation: number;
-                            };
-                            /**
-                             * Format: int64
-                             * @description The number of failed runs.
-                             */
-                            failed_runs: number;
-                            /**
-                             * Format: int64
-                             * @description The mean time to recovery (mean time between failures and their next success) in seconds.
-                             */
-                            mttr: number;
-                            /** Format: float */
-                            success_rate: number;
-                            /**
-                             * Format: int64
-                             * @description The number of successful runs.
-                             */
-                            successful_runs: number;
-                            /**
-                             * Format: float
-                             * @description The average number of runs per day.
-                             */
-                            throughput: number;
-                            /**
-                             * Format: int64
-                             * @description The total credits consumed by the workflow in the aggregation window. Note that Insights is not a real time financial reporting tool and should not be used for credit reporting.
-                             */
-                            total_credits_used: number;
-                            /**
-                             * Format: int64
-                             * @description The total number of runs, including runs that are still on-hold or running.
-                             */
-                            total_runs: number;
-                            /**
-                             * Format: date-time
-                             * @description The timestamp of the last build within the requested reporting window.
-                             */
-                            window_end: string;
-                            /**
-                             * Format: date-time
-                             * @description The timestamp of the first build within the requested reporting window.
-                             */
-                            window_start: string;
-                        };
-                        /** @description Trends for aggregated metrics across a workflow for a given time window. */
-                        trends: {
-                            /**
-                             * Format: float
-                             * @description The trend value for number of failed runs.
-                             */
-                            failed_runs: number;
-                            /**
-                             * Format: float
-                             * @description Trend value for the 50th percentile duration for a workflow for a given time window.
-                             */
-                            median_duration_secs: number;
-                            /**
-                             * Format: float
-                             * @description trend for mean time to recovery (mean time between failures and their next success).
-                             */
-                            mttr: number;
-                            /**
-                             * Format: float
-                             * @description Trend value for the 95th percentile duration for a workflow for a given time window.
-                             */
-                            p95_duration_secs: number;
-                            /**
-                             * Format: float
-                             * @description The trend value for the success rate.
-                             */
-                            success_rate: number;
-                            /**
-                             * Format: float
-                             * @description Trend value for the average number of runs per day.
-                             */
-                            throughput: number;
-                            /**
-                             * Format: float
-                             * @description The trend value for total credits consumed.
-                             */
-                            total_credits_used: number;
-                            /**
-                             * Format: float
-                             * @description The trend value for total number of runs.
-                             */
-                            total_runs: number;
-                        };
-                        /** @description A list of all the workflow names for a given project. */
-                        workflow_names: string[];
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getProjectWorkflowTestMetrics: {
-        parameters: {
-            query?: {
-                /** @description The name of a vcs branch. If not passed we will scope the API call to the default branch. */
-                branch?: string;
-                /** @description Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter. */
-                "all-branches"?: boolean;
-            };
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-                /**
-                 * @description The name of the workflow.
-                 * @example build-and-test
-                 */
-                "workflow-name": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A list of test metrics by workflow */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * Format: int64
-                         * @description The average number of tests executed per run
-                         */
-                        average_test_count: number;
-                        /** @description Metrics for the most frequently failing tests */
-                        most_failed_tests: {
-                            /** @description The class the test belongs to. */
-                            classname: string;
-                            /**
-                             * Format: int64
-                             * @description The number of times the test failed
-                             */
-                            failed_runs: number;
-                            /** @description The file the test belongs to. */
-                            file: string;
-                            /** @description Whether the test is flaky. */
-                            flaky: boolean;
-                            /** @description The name of the job. */
-                            job_name: string;
-                            /**
-                             * Format: double
-                             * @description The 95th percentile duration, in seconds, among a group of test runs.
-                             */
-                            p95_duration: number;
-                            /** @description The source of the test. */
-                            source: string;
-                            /** @description The name of the test. */
-                            test_name: string;
-                            /**
-                             * Format: int64
-                             * @description The total number of times the test was run.
-                             */
-                            total_runs: number;
-                        }[];
-                        /**
-                         * Format: int64
-                         * @description The number of tests with the same success rate being omitted from most_failed_tests
-                         */
-                        most_failed_tests_extra: number;
-                        /** @description Metrics for the slowest running tests */
-                        slowest_tests: {
-                            /** @description The class the test belongs to. */
-                            classname: string;
-                            /**
-                             * Format: int64
-                             * @description The number of times the test failed
-                             */
-                            failed_runs: number;
-                            /** @description The file the test belongs to. */
-                            file: string;
-                            /** @description Whether the test is flaky. */
-                            flaky: boolean;
-                            /** @description The name of the job. */
-                            job_name: string;
-                            /**
-                             * Format: double
-                             * @description The 95th percentile duration, in seconds, among a group of test runs.
-                             */
-                            p95_duration: number;
-                            /** @description The source of the test. */
-                            source: string;
-                            /** @description The name of the test. */
-                            test_name: string;
-                            /**
-                             * Format: int64
-                             * @description The total number of times the test was run.
-                             */
-                            total_runs: number;
-                        }[];
-                        /**
-                         * Format: int64
-                         * @description The number of tests with the same duration rate being omitted from slowest_tests
-                         */
-                        slowest_tests_extra: number;
-                        /** @description Test counts grouped by pipeline number and workflow id */
-                        test_runs: {
-                            /**
-                             * Format: int64
-                             * @description The number of the pipeline associated with the provided test counts
-                             */
-                            pipeline_number: number;
-                            /**
-                             * Format: float
-                             * @description The success rate calculated from test counts
-                             */
-                            success_rate: number;
-                            /** @description Test counts for a given pipeline number */
-                            test_counts: {
-                                /**
-                                 * Format: int64
-                                 * @description The number of tests with the error status
-                                 */
-                                error: number;
-                                /**
-                                 * Format: int64
-                                 * @description The number of tests with the failure status
-                                 */
-                                failure: number;
-                                /**
-                                 * Format: int64
-                                 * @description The number of tests with the skipped status
-                                 */
-                                skipped: number;
-                                /**
-                                 * Format: int64
-                                 * @description The number of tests with the success status
-                                 */
-                                success: number;
-                                /**
-                                 * Format: int64
-                                 * @description The total number of tests
-                                 */
-                                total: number;
-                            };
-                            /** @description The ID of the workflow associated with the provided test counts */
-                            workflow_id: unknown;
-                        }[];
-                        /**
-                         * Format: int64
-                         * @description The total number of test runs
-                         */
-                        total_test_runs: number;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    cancelJobByJobID: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The unique ID of the job. */
-                "job-id": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Job cancelled successfully. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A human-readable message */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Bad request error. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A human-readable message */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Unauthorized error. */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A human-readable message */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Forbidden error. */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A human-readable message */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Job not found error. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A human-readable message */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getCurrentUser: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description User login information. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description URL to the user's avatar on the VCS */
-                        avatar_url: string;
-                        /**
-                         * Format: uuid
-                         * @description The unique ID of the user.
-                         */
-                        id: string;
-                        /**
-                         * Login
-                         * @description The login information for the user on the VCS.
-                         */
-                        login: string;
-                        /** @description The name of the user. */
-                        name: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getCollaborations: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Collaborations */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description URL to the user's avatar on the VCS */
-                        avatar_url: string;
-                        /**
-                         * Format: uuid
-                         * @description The UUID of the organization
-                         */
-                        id: string;
-                        /** @description The name of the organization */
-                        name: string;
-                        /** @description The slug of the organization */
-                        slug: string;
-                        /** @description The VCS provider */
-                        "vcs-type": string;
-                    }[];
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    GetOrgClaims: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                orgID: components["parameters"]["OrgID"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Claims successfully fetched. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ClaimResponse"];
-                };
-            };
-            400: components["responses"]["BadRequest"];
-            403: components["responses"]["Forbidden"];
-            500: components["responses"]["InternalServerError"];
-        };
-    };
-    DeleteOrgClaims: {
-        parameters: {
-            query: {
-                /** @description comma separated list of claims to delete. Valid values are "audience" and "ttl". */
-                claims: components["parameters"]["Claims"];
-            };
-            header?: never;
-            path: {
-                orgID: components["parameters"]["OrgID"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Claims successfully deleted. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ClaimResponse"];
-                };
-            };
-            400: components["responses"]["BadRequest"];
-            403: components["responses"]["Forbidden"];
-            500: components["responses"]["InternalServerError"];
-        };
-    };
-    PatchOrgClaims: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                orgID: components["parameters"]["OrgID"];
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["PatchClaimsRequest"];
-            };
-        };
-        responses: {
-            /** @description Claims successfully patched. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ClaimResponse"];
-                };
-            };
-            400: components["responses"]["BadRequest"];
-            403: components["responses"]["Forbidden"];
-            500: components["responses"]["InternalServerError"];
-        };
-    };
-    GetProjectClaims: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                orgID: components["parameters"]["OrgID"];
-                projectID: components["parameters"]["ProjectID"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Claims successfully fetched. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ClaimResponse"];
-                };
-            };
-            400: components["responses"]["BadRequest"];
-            403: components["responses"]["Forbidden"];
-            500: components["responses"]["InternalServerError"];
-        };
-    };
-    DeleteProjectClaims: {
-        parameters: {
-            query: {
-                /** @description comma separated list of claims to delete. Valid values are "audience" and "ttl". */
-                claims: components["parameters"]["Claims"];
-            };
-            header?: never;
-            path: {
-                orgID: components["parameters"]["OrgID"];
-                projectID: components["parameters"]["ProjectID"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Claims successfully deleted. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ClaimResponse"];
-                };
-            };
-            400: components["responses"]["BadRequest"];
-            403: components["responses"]["Forbidden"];
-            500: components["responses"]["InternalServerError"];
-        };
-    };
-    PatchProjectClaims: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                orgID: components["parameters"]["OrgID"];
-                projectID: components["parameters"]["ProjectID"];
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["PatchClaimsRequest"];
-            };
-        };
-        responses: {
-            /** @description Claims successfully patched. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ClaimResponse"];
-                };
-            };
-            400: components["responses"]["BadRequest"];
-            403: components["responses"]["Forbidden"];
-            500: components["responses"]["InternalServerError"];
-        };
-    };
-    createOrganization: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    /** @description The name of the organization. */
-                    name: string;
-                    /**
-                     * @description The version control system type for the organization.
-                     * @example github
-                     * @enum {string}
-                     */
-                    vcs_type: "github" | "bitbucket" | "circleci";
-                };
-            };
-        };
-        responses: {
-            /** @description The newly created organization */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description The unique ID of the organization. */
-                        id: string;
-                        /** @description The name of the organization. */
-                        name: string;
-                        /** @description Org slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings). */
-                        slug: string;
-                        /**
-                         * @description The version control system type for the organization.
-                         * @example github
-                         * @enum {string}
-                         */
-                        vcs_type: "github" | "bitbucket" | "circleci";
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getOrganization: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).
-                 * @example gh/CircleCI-Public
-                 */
-                "org-slug-or-id": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description An organization object */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description The unique ID of the organization. */
-                        id: string;
-                        /** @description The name of the organization. */
-                        name: string;
-                        /** @description Org slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings). */
-                        slug: string;
-                        /**
-                         * @description The version control system type for the organization.
-                         * @example github
-                         * @enum {string}
-                         */
-                        vcs_type: "github" | "bitbucket" | "circleci";
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    deleteOrganization: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).
-                 * @example gh/CircleCI-Public
-                 */
-                "org-slug-or-id": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A confirmation message. */
-            202: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A human-readable message */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    createProject: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).
-                 * @example gh/CircleCI-Public
-                 */
-                "org-slug-or-id": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    /**
-                     * @description The name of the project
-                     * @example api-preview-docs
-                     */
-                    name: string;
-                };
-            };
-        };
-        responses: {
-            /** @description The new project */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** Format: uuid */
-                        id: string;
-                        /**
-                         * @description The name of the project
-                         * @example api-preview-docs
-                         */
-                        name: string;
-                        /**
-                         * Format: uuid
-                         * @description The id of the organization the project belongs to
-                         * @example ec6887ec-7d44-4b31-b468-7e552408ee32
-                         */
-                        organization_id: string;
-                        /**
-                         * @description The name of the organization the project belongs to
-                         * @example CircleCI-Public
-                         */
-                        organization_name: string;
-                        /**
-                         * @description The slug of the organization the project belongs to
-                         * @example gh/CircleCI-Public
-                         */
-                        organization_slug: string;
-                        /**
-                         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                         * @example gh/CircleCI-Public/api-preview-docs
-                         */
-                        slug: string;
-                        /** @description Information about the VCS that hosts the project source code. */
-                        vcs_info: {
-                            /** @example main */
-                            default_branch: string;
-                            /**
-                             * @description The VCS provider
-                             * @enum {string}
-                             */
-                            provider: "Bitbucket" | "CircleCI" | "GitHub";
-                            /**
-                             * @description URL to the repository hosting the project's code
-                             * @example https://github.com/CircleCI-Public/api-preview-docs
-                             */
-                            vcs_url: string;
-                        };
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    listURLOrbAllowListEntries: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).
-                 * @example gh/CircleCI-Public
-                 */
-                "org-slug-or-id": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description URL Orb allow-list entries */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            /**
-                             * @description An authentication method to use for fetching URL orb references that match this allow-list entry's prefix. Allowed values are "bitbucket-oauth", "github-oauth", "github-app", or "none".
-                             * @example github-app
-                             * @enum {string}
-                             */
-                            auth: "github-oauth" | "none" | "bitbucket-oauth" | "github-app";
-                            /**
-                             * @description URL orb allow-list entry UUID.
-                             * @example ba98990a-5a00-4cad-b55e-b44117b92e0c
-                             */
-                            id: string;
-                            /**
-                             * @description Name of the URL orb allow-list entry.
-                             * @example Allow URL orbs from raw.githubusercontent.com/CircleCI-Public
-                             */
-                            name: string;
-                            /**
-                             * @description URL prefix. URL orb references that start with this prefix will be allowed by this allow-list entry.
-                             * @example https://raw.githubusercontent.com/CircleCI-Public/orbs/refs/heads/main/
-                             */
-                            prefix: unknown;
-                        }[];
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    createURLOrbAllowListEntry: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).
-                 * @example gh/CircleCI-Public
-                 */
-                "org-slug-or-id": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    /**
-                     * @description An authentication method to use for fetching URL orb references that match this allow-list entry's prefix. Allowed values are "bitbucket-oauth", "github-oauth", "github-app", or "none".
-                     * @example github-app
-                     * @enum {string}
-                     */
-                    auth: "github-oauth" | "none" | "bitbucket-oauth" | "github-app";
-                    /**
-                     * @description Name of the URL orb allow-list entry.
-                     * @example Allow URL orbs from raw.githubusercontent.com/CircleCI-Public
-                     */
-                    name: string;
-                    /**
-                     * @description URL prefix. URL orb references that start with this prefix will be allowed by this allow-list entry.
-                     * @example https://raw.githubusercontent.com/CircleCI-Public/orbs/refs/heads/main/
-                     */
-                    prefix: unknown;
-                };
-            };
-        };
-        responses: {
-            /** @description The ID of the new URL Orb allow-list entry */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * @description URL orb allow-list entry UUID.
-                         * @example ba98990a-5a00-4cad-b55e-b44117b92e0c
-                         */
-                        id: string;
-                        /**
-                         * @description Message describing the outcome of an operation
-                         * @example Created.
-                         */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    removeURLOrbAllowListEntry: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Org UUID or slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).
-                 * @example gh/CircleCI-Public
-                 */
-                "org-slug-or-id": string;
-                /**
-                 * @description URL orb allow-list entry UUID.
-                 * @example ba98990a-5a00-4cad-b55e-b44117b92e0c
-                 */
-                "allow-list-entry-id": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description The ID of the removed URL Orb allow-list entry */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * @description URL orb allow-list entry UUID.
-                         * @example ba98990a-5a00-4cad-b55e-b44117b92e0c
-                         */
-                        id: string;
-                        /**
-                         * @description Message describing the outcome of an operation
-                         * @example Created.
-                         */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getOrganizationGroups: {
-        parameters: {
-            query?: {
-                /** @description The number of results per page. */
-                limit?: components["parameters"]["limit"];
-                /** @description A token to specify which page of results to fetch. */
-                "page-token"?: components["parameters"]["page_token"];
-            };
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of an organization.
-                 * @example b9291e0d-a11e-41fb-8517-c545388b5953
-                 */
-                org_id: components["parameters"]["org_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successfully get all the groups in an organization. Results are paginated. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["groups"];
-                };
-            };
-            403: components["responses"]["403_permission_denied"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    createOrganizationGroup: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of an organization.
-                 * @example b9291e0d-a11e-41fb-8517-c545388b5953
-                 */
-                org_id: components["parameters"]["org_id"];
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    /** @description Description to describe the group */
-                    description?: string;
-                    /** @description Name of the group */
-                    name: string;
-                };
-            };
-        };
-        responses: {
-            /** @description Successful creation of a group. */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["group"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            401: components["responses"]["401_invalid_token"];
-            403: components["responses"]["403_permission_denied"];
-            404: components["responses"]["404_entity_not_found"];
-            409: components["responses"]["409_group_conflict"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    getGroup: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of an organization.
-                 * @example b9291e0d-a11e-41fb-8517-c545388b5953
-                 */
-                org_id: components["parameters"]["org_id"];
-                /**
-                 * @description An opaque identifier of a group.
-                 * @example 39f660db-f49b-417e-ad79-2769ba29faf7
-                 */
-                group_id: components["parameters"]["group_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successfully gets a group. Members not included. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["group"];
-                };
-            };
-            403: components["responses"]["403_permission_denied"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    deleteGroup: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of an organization.
-                 * @example b9291e0d-a11e-41fb-8517-c545388b5953
-                 */
-                org_id: components["parameters"]["org_id"];
-                /**
-                 * @description An opaque identifier of a group.
-                 * @example 39f660db-f49b-417e-ad79-2769ba29faf7
-                 */
-                group_id: components["parameters"]["group_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful deletion of a group. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @default Group deleted. */
-                        message: string;
-                    };
-                };
-            };
-            401: components["responses"]["401_invalid_token"];
-            403: components["responses"]["403_permission_denied"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    createUsageExport: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of an organization.
-                 * @example b9291e0d-a11e-41fb-8517-c545388b5953
-                 */
-                org_id: components["parameters"]["org_id"];
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    /**
-                     * Format: date-time
-                     * @description The end date & time (inclusive) of the range from which data will be pulled. Must be no more than 31 days after `start`.
-                     */
-                    end: string;
-                    shared_org_ids?: string[];
-                    /**
-                     * Format: date-time
-                     * @description The start date & time (inclusive) of the range from which data will be pulled. Must be no more than one year ago.
-                     */
-                    start: string;
-                };
-            };
-        };
-        responses: {
-            /** @description Usage export created successfully */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["usage_export_job"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            429: components["responses"]["429_rate_limit_exceeded"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    getUsageExport: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of an organization.
-                 * @example b9291e0d-a11e-41fb-8517-c545388b5953
-                 */
-                org_id: components["parameters"]["org_id"];
-                /**
-                 * @description An opaque identifier of a usage export job.
-                 * @example e8235eed-f121-4ae3-9c72-2719d6572818
-                 */
-                usage_export_job_id: components["parameters"]["usage_export_job_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Usage export fetched successfully */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["get_usage_export_job_status"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            429: components["responses"]["429_rate_limit_exceeded"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    GetDecisionLogs: {
-        parameters: {
-            query?: {
-                /** @description Return decisions matching this decision status. */
-                status?: string;
-                /** @description Return decisions made after this date. */
-                after?: string;
-                /** @description Return decisions made before this date. */
-                before?: string;
-                /** @description Return decisions made on this branch. */
-                branch?: string;
-                /** @description Return decisions made for this project. */
-                project_id?: string;
-                /** @description Return decisions made for this build number. */
-                build_number?: string;
-                /** @description Sets the offset when retrieving the decisions, for paging. */
-                offset?: number;
-            };
-            header?: never;
-            path: {
-                ownerID: components["parameters"]["OwnerID"];
-                context: components["parameters"]["Context"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Decision logs successfully retrieved. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DecisionLog"][];
-                };
-            };
-            400: components["responses"]["BadRequest"];
-            401: components["responses"]["Unauthorized"];
-            403: components["responses"]["Forbidden"];
-            500: components["responses"]["UnexpectedServerError"];
-        };
-    };
-    MakeDecision: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                ownerID: components["parameters"]["OwnerID"];
-                context: components["parameters"]["Context"];
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    input: string;
-                    metadata?: Record<string, never>;
-                };
-            };
-        };
-        responses: {
-            /** @description Decision rendered by applying the policy against the provided data. Response will be modeled by the data and rego processed. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Decision"];
-                };
-            };
-            /** @description The request is malformed */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @example context: must be a valid value. */
-                        error: string;
-                    };
-                };
-            };
-            /** @description The request is unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @example Unauthorized. */
-                        error: string;
-                    };
-                };
-            };
-            /** @description Something unexpected happened on the server. */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @example There was an error processing your request. */
-                        error: string;
-                    };
-                };
-            };
-        };
-    };
-    GetDecisionSettings: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                ownerID: components["parameters"]["OwnerID"];
-                context: components["parameters"]["Context"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Decision settings successfully retrieved. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DecisionSettings"];
-                };
-            };
-            400: components["responses"]["BadRequest"];
-            401: components["responses"]["Unauthorized"];
-            403: components["responses"]["Forbidden"];
-            500: components["responses"]["UnexpectedServerError"];
-        };
-    };
-    SetDecisionSettings: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                ownerID: components["parameters"]["OwnerID"];
-                context: components["parameters"]["Context"];
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["DecisionSettings"];
-            };
-        };
-        responses: {
-            /** @description Decision settings successfully set. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DecisionSettings"];
-                };
-            };
-            400: components["responses"]["BadRequest"];
-            401: components["responses"]["Unauthorized"];
-            403: components["responses"]["Forbidden"];
-            500: components["responses"]["UnexpectedServerError"];
-        };
-    };
-    GetDecisionLog: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                ownerID: components["parameters"]["OwnerID"];
-                context: components["parameters"]["Context"];
-                decisionID: components["parameters"]["DecisionID"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Decision log successfully retrieved. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DecisionLog"];
-                };
-            };
-            400: components["responses"]["BadRequest"];
-            401: components["responses"]["Unauthorized"];
-            403: components["responses"]["Forbidden"];
-            /** @description There was no decision log found for given decision_id, and owner_id. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @example decision log not found */
-                        error: string;
-                    };
-                };
-            };
-            500: components["responses"]["UnexpectedServerError"];
-        };
-    };
-    GetDecisionLogPolicyBundle: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                ownerID: components["parameters"]["OwnerID"];
-                context: components["parameters"]["Context"];
-                decisionID: components["parameters"]["DecisionID"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Policy-Bundle retrieved successfully for given decision log ID */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PolicyBundle"];
-                };
-            };
-            400: components["responses"]["BadRequest"];
-            401: components["responses"]["Unauthorized"];
-            403: components["responses"]["Forbidden"];
-            /** @description There was no decision log found for given decision_id, and owner_id. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @example decision log not found */
-                        error: string;
-                    };
-                };
-            };
-            500: components["responses"]["UnexpectedServerError"];
-        };
-    };
-    GetPolicyBundle: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                ownerID: components["parameters"]["OwnerID"];
-                context: components["parameters"]["Context"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Policy-Bundle retrieved successfully. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PolicyBundle"];
-                };
-            };
-            400: components["responses"]["BadRequest"];
-            401: components["responses"]["Unauthorized"];
-            403: components["responses"]["Forbidden"];
-            500: components["responses"]["UnexpectedServerError"];
-        };
-    };
-    CreatePolicyBundle: {
-        parameters: {
-            query?: {
-                dry?: boolean;
-            };
-            header?: never;
-            path: {
-                ownerID: components["parameters"]["OwnerID"];
-                context: components["parameters"]["Context"];
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["BundlePayload"];
-            };
-        };
-        responses: {
-            /** @description Policy-Bundle diff successfully returned. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["BundleDiff"];
-                };
-            };
-            /** @description Policy-Bundle successfully created. */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["BundleDiff"];
-                };
-            };
-            400: components["responses"]["BadRequest"];
-            401: components["responses"]["Unauthorized"];
-            403: components["responses"]["Forbidden"];
-            /** @description The request exceeds the maximum payload size for policy bundles ~2.5Mib */
-            413: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @example http: request payload too large */
-                        error: string;
-                    };
-                };
-            };
-            500: components["responses"]["UnexpectedServerError"];
-        };
-    };
-    GetPolicyDocument: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                ownerID: components["parameters"]["OwnerID"];
-                context: components["parameters"]["Context"];
-                /** @description the policy name set by the rego policy_name rule */
-                policyName: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Policy retrieved successfully. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Policy"];
-                };
-            };
-            400: components["responses"]["BadRequest"];
-            401: components["responses"]["Unauthorized"];
-            403: components["responses"]["Forbidden"];
-            /** @description There was no policy that was found with the given owner_id and policy name. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @example policy not found */
-                        error: string;
-                    };
-                };
-            };
-            500: components["responses"]["UnexpectedServerError"];
-        };
-    };
-    listPipelines: {
-        parameters: {
-            query?: {
-                /**
-                 * @description Org slug in the form `vcs-slug/org-name`. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug` and replace the `org-name` with the organization ID (found in Organization Settings).
-                 * @example gh/CircleCI-Public
-                 */
-                "org-slug"?: string;
-                /** @description A token to retrieve the next page of results. */
-                "page-token"?: string;
-                /** @description Only include entries created by your user. */
-                mine?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A sequence of pipelines. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            /**
-                             * Format: date-time
-                             * @description The date and time the pipeline was created.
-                             */
-                            created_at: string;
-                            /** @description A sequence of errors that have occurred within the pipeline. */
-                            errors: {
-                                /** @description A human-readable error message. */
-                                message: string;
-                                /**
-                                 * @description The type of error.
-                                 * @enum {string}
-                                 */
-                                type: "config" | "invalid-trigger-setup" | "config-fetch" | "timeout" | "permission" | "other" | "trigger-rule" | "plan";
-                            }[];
-                            /**
-                             * Format: uuid
-                             * @description The unique ID of the pipeline.
-                             * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                             */
-                            id: string;
-                            /**
-                             * Format: int64
-                             * @description The number of the pipeline.
-                             * @example 25
-                             */
-                            number: number;
-                            /**
-                             * @description The project-slug for the pipeline.
-                             * @example gh/CircleCI-Public/api-preview-docs
-                             */
-                            project_slug: string;
-                            /**
-                             * @description The current state of the pipeline.
-                             * @enum {string}
-                             */
-                            state: "created" | "errored" | "setup-pending" | "setup" | "pending";
-                            /** @description A summary of the trigger. */
-                            trigger: {
-                                /** @description The user who triggered the Pipeline. */
-                                actor: {
-                                    /** @description URL to the user's avatar on the VCS */
-                                    avatar_url: string;
-                                    /**
-                                     * Login
-                                     * @description The login information for the user on the VCS.
-                                     */
-                                    login: string;
-                                };
-                                /**
-                                 * Format: date-time
-                                 * @description The date and time the trigger was received.
-                                 */
-                                received_at: string;
-                                /**
-                                 * @description The type of trigger.
-                                 * @enum {string}
-                                 */
-                                type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
-                            };
-                            trigger_parameters?: {
-                                [key: string]: string | number | boolean | Record<string, never>;
-                            };
-                            /**
-                             * Format: date-time
-                             * @description The date and time the pipeline was last updated.
-                             */
-                            updated_at?: string;
-                            /** @description VCS information for the pipeline. */
-                            vcs?: {
-                                /**
-                                 * @description The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
-                                 * @example feature/design-new-api
-                                 */
-                                branch?: string;
-                                /** @description The latest commit in the pipeline. */
-                                commit?: {
-                                    /** @description The body of the commit message. */
-                                    body: string;
-                                    /** @description The subject of the commit message. */
-                                    subject: string;
-                                };
-                                /**
-                                 * @description URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
-                                 * @example https://github.com/CircleCI-Public/api-preview-docs
-                                 */
-                                origin_repository_url: string;
-                                /**
-                                 * @description Name of the VCS provider (e.g. GitHub, Bitbucket).
-                                 * @example GitHub
-                                 */
-                                provider_name: string;
-                                /**
-                                 * @description The code review id.
-                                 * @example 123
-                                 */
-                                review_id?: string;
-                                /**
-                                 * @description The code review URL.
-                                 * @example https://github.com/CircleCI-Public/api-preview-docs/pull/123
-                                 */
-                                review_url?: string;
-                                /**
-                                 * @description The code revision the pipeline ran.
-                                 * @example f454a02b5d10fcccfd7d9dd7608a76d6493a98b4
-                                 */
-                                revision: string;
-                                /**
-                                 * @description The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.
-                                 * @example v3.1.4159
-                                 */
-                                tag?: string;
-                                /**
-                                 * @description URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
-                                 * @example https://github.com/CircleCI-Public/api-preview-docs
-                                 */
-                                target_repository_url: string;
-                            };
-                        }[];
-                        /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-                        next_page_token: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    continuePipeline: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    /** @description A configuration string for the pipeline. */
-                    configuration: string;
-                    /**
-                     * PipelineContinuationKey
-                     * @description A pipeline continuation key.
-                     */
-                    "continuation-key": string;
-                    /**
-                     * @description An object containing pipeline parameters and their values. Pipeline parameters have the following size limits: 100 max entries, 128 maximum key length, 512 maximum value length.
-                     * @example {
-                     *       "deploy_prod": true
-                     *     }
-                     */
-                    parameters?: {
-                        [key: string]: number | string | boolean;
-                    };
-                };
-            };
-        };
-        responses: {
-            /** @description A confirmation message. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A human-readable message */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getPipelineById: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The unique ID of the pipeline.
-                 * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                 */
-                "pipeline-id": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A pipeline object. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * Format: date-time
-                         * @description The date and time the pipeline was created.
-                         */
-                        created_at: string;
-                        /** @description A sequence of errors that have occurred within the pipeline. */
-                        errors: {
-                            /** @description A human-readable error message. */
-                            message: string;
-                            /**
-                             * @description The type of error.
-                             * @enum {string}
-                             */
-                            type: "config" | "invalid-trigger-setup" | "config-fetch" | "timeout" | "permission" | "other" | "trigger-rule" | "plan";
-                        }[];
-                        /**
-                         * Format: uuid
-                         * @description The unique ID of the pipeline.
-                         * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                         */
-                        id: string;
-                        /**
-                         * Format: int64
-                         * @description The number of the pipeline.
-                         * @example 25
-                         */
-                        number: number;
-                        /**
-                         * @description The project-slug for the pipeline.
-                         * @example gh/CircleCI-Public/api-preview-docs
-                         */
-                        project_slug: string;
-                        /**
-                         * @description The current state of the pipeline.
-                         * @enum {string}
-                         */
-                        state: "created" | "errored" | "setup-pending" | "setup" | "pending";
-                        /** @description A summary of the trigger. */
-                        trigger: {
-                            /** @description The user who triggered the Pipeline. */
-                            actor: {
-                                /** @description URL to the user's avatar on the VCS */
-                                avatar_url: string;
-                                /**
-                                 * Login
-                                 * @description The login information for the user on the VCS.
-                                 */
-                                login: string;
-                            };
-                            /**
-                             * Format: date-time
-                             * @description The date and time the trigger was received.
-                             */
-                            received_at: string;
-                            /**
-                             * @description The type of trigger.
-                             * @enum {string}
-                             */
-                            type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
-                        };
-                        trigger_parameters?: {
-                            [key: string]: string | number | boolean | Record<string, never>;
-                        };
-                        /**
-                         * Format: date-time
-                         * @description The date and time the pipeline was last updated.
-                         */
-                        updated_at?: string;
-                        /** @description VCS information for the pipeline. */
-                        vcs?: {
-                            /**
-                             * @description The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
-                             * @example feature/design-new-api
-                             */
-                            branch?: string;
-                            /** @description The latest commit in the pipeline. */
-                            commit?: {
-                                /** @description The body of the commit message. */
-                                body: string;
-                                /** @description The subject of the commit message. */
-                                subject: string;
-                            };
-                            /**
-                             * @description URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
-                             * @example https://github.com/CircleCI-Public/api-preview-docs
-                             */
-                            origin_repository_url: string;
-                            /**
-                             * @description Name of the VCS provider (e.g. GitHub, Bitbucket).
-                             * @example GitHub
-                             */
-                            provider_name: string;
-                            /**
-                             * @description The code review id.
-                             * @example 123
-                             */
-                            review_id?: string;
-                            /**
-                             * @description The code review URL.
-                             * @example https://github.com/CircleCI-Public/api-preview-docs/pull/123
-                             */
-                            review_url?: string;
-                            /**
-                             * @description The code revision the pipeline ran.
-                             * @example f454a02b5d10fcccfd7d9dd7608a76d6493a98b4
-                             */
-                            revision: string;
-                            /**
-                             * @description The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.
-                             * @example v3.1.4159
-                             */
-                            tag?: string;
-                            /**
-                             * @description URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
-                             * @example https://github.com/CircleCI-Public/api-preview-docs
-                             */
-                            target_repository_url: string;
-                        };
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getPipelineConfigById: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The unique ID of the pipeline.
-                 * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                 */
-                "pipeline-id": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description The configuration strings for the pipeline. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description The compiled configuration for the pipeline, after all orb expansion has been performed. If there were errors processing the pipeline's configuration, then this field may be empty. */
-                        compiled: string;
-                        /** @description The compiled setup configuration for the pipeline, after all orb expansion has been performed. If there were errors processing the pipeline's setup workflows, then this field may be empty. */
-                        "compiled-setup-config"?: string;
-                        /** @description The setup configuration for the pipeline used for Setup Workflows. If there were errors processing the pipeline's configuration or if setup workflows are not enabled, then this field should not exist */
-                        "setup-config"?: string;
-                        /** @description The source configuration for the pipeline, before any config compilation has been performed. If there is no config, then this field will be empty. */
-                        source: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getPipelineValuesById: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The unique ID of the pipeline.
-                 * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                 */
-                "pipeline-id": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A JSON object of pipeline values */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        [key: string]: string | number | boolean;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    listWorkflowsByPipelineId: {
-        parameters: {
-            query?: {
-                /** @description A token to retrieve the next page of results. */
-                "page-token"?: string;
-            };
-            header?: never;
-            path: {
-                /**
-                 * @description The unique ID of the pipeline.
-                 * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                 */
-                "pipeline-id": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A paginated list of workflow objects. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * Workflow list
-                         * @description A list of workflows.
-                         */
-                        items: {
-                            /**
-                             * Format: int64
-                             * @description Present if this workflow was auto-rerun from a previous workflow. The Nth auto-rerun workflow will have auto_rerun_number N
-                             * @example 1
-                             */
-                            auto_rerun_number?: number;
-                            /** Format: uuid */
-                            canceled_by?: string;
-                            /**
-                             * Format: date-time
-                             * @description The date and time the workflow was created.
-                             */
-                            created_at: string;
-                            /** Format: uuid */
-                            errored_by?: string;
-                            /**
-                             * Format: uuid
-                             * @description The unique ID of the workflow.
-                             */
-                            id: string;
-                            /**
-                             * Format: int64
-                             * @description The maximum number of auto reruns specified for the workflow.
-                             * @example 5
-                             */
-                            max_auto_reruns?: number;
-                            /**
-                             * @description The name of the workflow.
-                             * @example build-and-test
-                             */
-                            name: string;
-                            /**
-                             * Format: uuid
-                             * @description The ID of the pipeline this workflow belongs to.
-                             * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                             */
-                            pipeline_id: string;
-                            /**
-                             * Format: int64
-                             * @description The number of the pipeline this workflow belongs to.
-                             * @example 25
-                             */
-                            pipeline_number: number;
-                            /**
-                             * @description The project-slug for the pipeline this workflow belongs to.
-                             * @example gh/CircleCI-Public/api-preview-docs
-                             */
-                            project_slug: string;
-                            /** Format: uuid */
-                            started_by: string;
-                            /**
-                             * @description The current status of the workflow.
-                             * @enum {string}
-                             */
-                            status: "success" | "running" | "not_run" | "failed" | "error" | "failing" | "on_hold" | "canceled" | "unauthorized";
-                            /**
-                             * Format: date-time
-                             * @description The date and time the workflow stopped.
-                             */
-                            stopped_at: string;
-                            /**
-                             * @description Tag used for the workflow
-                             * @example setup
-                             * @enum {string}
-                             */
-                            tag?: "setup";
-                        }[];
-                        /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-                        next_page_token: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getProjectBySlug: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A project object */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** Format: uuid */
-                        id: string;
-                        /**
-                         * @description The name of the project
-                         * @example api-preview-docs
-                         */
-                        name: string;
-                        /**
-                         * Format: uuid
-                         * @description The id of the organization the project belongs to
-                         * @example ec6887ec-7d44-4b31-b468-7e552408ee32
-                         */
-                        organization_id: string;
-                        /**
-                         * @description The name of the organization the project belongs to
-                         * @example CircleCI-Public
-                         */
-                        organization_name: string;
-                        /**
-                         * @description The slug of the organization the project belongs to
-                         * @example gh/CircleCI-Public
-                         */
-                        organization_slug: string;
-                        /**
-                         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                         * @example gh/CircleCI-Public/api-preview-docs
-                         */
-                        slug: string;
-                        /** @description Information about the VCS that hosts the project source code. */
-                        vcs_info: {
-                            /** @example main */
-                            default_branch: string;
-                            /**
-                             * @description The VCS provider
-                             * @enum {string}
-                             */
-                            provider: "Bitbucket" | "CircleCI" | "GitHub";
-                            /**
-                             * @description URL to the repository hosting the project's code
-                             * @example https://github.com/CircleCI-Public/api-preview-docs
-                             */
-                            vcs_url: string;
-                        };
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    deleteProjectBySlug: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A confirmation message. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A human-readable message */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    listCheckoutKeys: {
-        parameters: {
-            query?: {
-                /** @description The fingerprint digest type to return. This may be either `md5` or `sha256`. If not passed, defaults to `md5`. */
-                digest?: "sha256" | "md5";
-            };
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A sequence of checkout keys. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            /**
-                             * Format: date-time
-                             * @description The date and time the checkout key was created.
-                             * @example 2015-09-21T17:29:21.042Z
-                             */
-                            "created-at": string;
-                            /**
-                             * @description An SSH key fingerprint.
-                             * @example c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f
-                             */
-                            fingerprint: string;
-                            /**
-                             * @description A boolean value that indicates if this key is preferred.
-                             * @example true
-                             */
-                            preferred: boolean;
-                            /**
-                             * @description A public SSH key.
-                             * @example ssh-rsa ...
-                             */
-                            "public-key": string;
-                            /**
-                             * CheckoutKeyType
-                             * @description The type of checkout key. This may be either `deploy-key` or `github-user-key`.
-                             * @example deploy-key
-                             * @enum {string}
-                             */
-                            type: "deploy-key" | "github-user-key";
-                        }[];
-                        /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-                        next_page_token: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    createCheckoutKey: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    /**
-                     * CheckoutKeyInputType
-                     * @description The type of checkout key to create. This may be either `deploy-key` or `user-key`.
-                     * @example deploy-key
-                     * @enum {string}
-                     */
-                    type: "user-key" | "deploy-key";
-                };
-            };
-        };
-        responses: {
-            /** @description The checkout key. */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * Format: date-time
-                         * @description The date and time the checkout key was created.
-                         * @example 2015-09-21T17:29:21.042Z
-                         */
-                        "created-at": string;
-                        /**
-                         * @description An SSH key fingerprint.
-                         * @example c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f
-                         */
-                        fingerprint: string;
-                        /**
-                         * @description A boolean value that indicates if this key is preferred.
-                         * @example true
-                         */
-                        preferred: boolean;
-                        /**
-                         * @description A public SSH key.
-                         * @example ssh-rsa ...
-                         */
-                        "public-key": string;
-                        /**
-                         * CheckoutKeyType
-                         * @description The type of checkout key. This may be either `deploy-key` or `github-user-key`.
-                         * @example deploy-key
-                         * @enum {string}
-                         */
-                        type: "deploy-key" | "github-user-key";
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getCheckoutKey: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-                /**
-                 * @description An SSH key fingerprint.
-                 * @example c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f
-                 */
-                fingerprint: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description The checkout key. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * Format: date-time
-                         * @description The date and time the checkout key was created.
-                         * @example 2015-09-21T17:29:21.042Z
-                         */
-                        "created-at": string;
-                        /**
-                         * @description An SSH key fingerprint.
-                         * @example c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f
-                         */
-                        fingerprint: string;
-                        /**
-                         * @description A boolean value that indicates if this key is preferred.
-                         * @example true
-                         */
-                        preferred: boolean;
-                        /**
-                         * @description A public SSH key.
-                         * @example ssh-rsa ...
-                         */
-                        "public-key": string;
-                        /**
-                         * CheckoutKeyType
-                         * @description The type of checkout key. This may be either `deploy-key` or `github-user-key`.
-                         * @example deploy-key
-                         * @enum {string}
-                         */
-                        type: "deploy-key" | "github-user-key";
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    deleteCheckoutKey: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-                /**
-                 * @description An SSH key fingerprint.
-                 * @example c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f
-                 */
-                fingerprint: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A confirmation message. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A human-readable message */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    listEnvVars: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A sequence of environment variables. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            /**
-                             * @description The creation timestamp of the environment variable.
-                             * @example #joda/inst 2023-04-14T21:20:14+0000
-                             */
-                            "created-at"?: unknown;
-                            /**
-                             * @description The name of the environment variable.
-                             * @example foo
-                             */
-                            name: string;
-                            /**
-                             * @description The value of the environment variable.
-                             * @example xxxx1234
-                             */
-                            value: string;
-                        }[];
-                        /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-                        next_page_token: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    createEnvVar: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    /**
-                     * @description The name of the environment variable.
-                     * @example foo
-                     */
-                    name: string;
-                    /**
-                     * @description The value of the environment variable.
-                     * @example xxxx1234
-                     */
-                    value: string;
-                };
-            };
-        };
-        responses: {
-            /** @description The environment variable. */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * @description The creation timestamp of the environment variable.
-                         * @example #joda/inst 2023-04-14T21:20:14+0000
-                         */
-                        "created-at"?: unknown;
-                        /**
-                         * @description The name of the environment variable.
-                         * @example foo
-                         */
-                        name: string;
-                        /**
-                         * @description The value of the environment variable.
-                         * @example xxxx1234
-                         */
-                        value: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getEnvVar: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-                /**
-                 * @description The name of the environment variable.
-                 * @example foo
-                 */
-                name: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description The environment variable. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * @description The creation timestamp of the environment variable.
-                         * @example #joda/inst 2023-04-14T21:20:14+0000
-                         */
-                        "created-at"?: unknown;
-                        /**
-                         * @description The name of the environment variable.
-                         * @example foo
-                         */
-                        name: string;
-                        /**
-                         * @description The value of the environment variable.
-                         * @example xxxx1234
-                         */
-                        value: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    deleteEnvVar: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-                /**
-                 * @description The name of the environment variable.
-                 * @example foo
-                 */
-                name: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A confirmation message. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A human-readable message */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getJobDetails: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The number of the job.
+                 * @description The code review id.
                  * @example 123
                  */
-                "job-number": unknown;
+                review_id?: string;
                 /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
+                 * @description The code review URL.
+                 * @example https://github.com/CircleCI-Public/api-preview-docs/pull/123
                  */
-                "project-slug": string;
-            };
-            cookie?: never;
+                review_url?: string;
+                /**
+                 * @description The code revision the pipeline ran.
+                 * @example f454a02b5d10fcccfd7d9dd7608a76d6493a98b4
+                 */
+                revision: string;
+                /**
+                 * @description The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.
+                 * @example v3.1.4159
+                 */
+                tag?: string;
+                /**
+                 * @description URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
+                 * @example https://github.com/CircleCI-Public/api-preview-docs
+                 */
+                target_repository_url: string;
+              };
+            }[];
+            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+            next_page_token: string;
+          };
         };
-        requestBody?: never;
-        responses: {
-            /** @description Job details. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description List of contexts used by the job. */
-                        contexts: {
-                            /** @description The name of the context. */
-                            name: string;
-                        }[];
-                        /**
-                         * Format: date-time
-                         * @description The time when the job was created.
-                         */
-                        created_at: string;
-                        /**
-                         * Format: int64
-                         * @description Duration of a job in milliseconds.
-                         */
-                        duration: number;
-                        /** @description Information about executor used for a job. */
-                        executor: {
-                            /** @description Resource class name. */
-                            resource_class: string;
-                            /** @description Executor type. */
-                            type?: string;
-                        };
-                        /** @description Info about the latest workflow the job was a part of. */
-                        latest_workflow: {
-                            /**
-                             * Format: uuid
-                             * @description The unique ID of the workflow.
-                             */
-                            id: string;
-                            /**
-                             * @description The name of the workflow.
-                             * @example build-and-test
-                             */
-                            name: string;
-                        };
-                        /** @description Messages from CircleCI execution platform. */
-                        messages: {
-                            /** @description Information describing message. */
-                            message: string;
-                            /** @description Value describing the reason for message to be added to the job. */
-                            reason?: string;
-                            /** @description Message type. */
-                            type: string;
-                        }[];
-                        /** @description The name of the job. */
-                        name: string;
-                        /**
-                         * Format: int64
-                         * @description The number of the job.
-                         * @example 1
-                         */
-                        number: number;
-                        /** @description Information about an organization. */
-                        organization: {
-                            /** @description The name of the organization. */
-                            name: string;
-                        };
-                        /** @description Info about parallels runs and their status. */
-                        parallel_runs: {
-                            /**
-                             * Format: int64
-                             * @description Index of the parallel run.
-                             */
-                            index: number;
-                            /** @description Status of the parallel run. */
-                            status: string;
-                        }[];
-                        /**
-                         * Format: int64
-                         * @description A number of parallel runs the job has.
-                         */
-                        parallelism: number;
-                        /** @description Info about a pipeline the job is a part of. */
-                        pipeline: {
-                            /**
-                             * Format: uuid
-                             * @description The unique ID of the pipeline.
-                             * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                             */
-                            id: string;
-                        };
-                        /** @description Information about a project. */
-                        project: {
-                            /**
-                             * @description URL to the repository hosting the project's code
-                             * @example https://github.com/CircleCI-Public/api-preview-docs
-                             */
-                            external_url: string;
-                            /** Format: uuid */
-                            id: string;
-                            /**
-                             * @description The name of the project
-                             * @example api-preview-docs
-                             */
-                            name: string;
-                            /**
-                             * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                             * @example gh/CircleCI-Public/api-preview-docs
-                             */
-                            slug: string;
-                        };
-                        /**
-                         * Format: date-time
-                         * @description The time when the job was placed in a queue.
-                         */
-                        queued_at: string;
-                        /**
-                         * Format: date-time
-                         * @description The date and time the job started.
-                         */
-                        started_at: string;
-                        /**
-                         * @description The current status of the job.
-                         * @enum {string}
-                         */
-                        status: "success" | "running" | "not_run" | "failed" | "retried" | "queued" | "not_running" | "infrastructure_fail" | "timedout" | "on_hold" | "terminated-unknown" | "blocked" | "canceled" | "unauthorized";
-                        /**
-                         * Format: date-time
-                         * @description The time when the job stopped.
-                         */
-                        stopped_at?: string;
-                        /** @description URL of the job in CircleCI Web UI. */
-                        web_url: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
         };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
     };
-    cancelJobByJobNumber: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The number of the job.
-                 * @example 123
-                 */
-                "job-number": unknown;
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A human-readable message */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
+  };
+  triggerPipeline: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
     };
-    listPipelinesForProject: {
-        parameters: {
-            query?: {
-                /** @description The name of a vcs branch. */
+    requestBody?: {
+      content: {
+        "application/json": {
+          /**
+           * @description The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
+           * @example feature/design-new-api
+           */
+          branch?: string;
+          /**
+           * @description An object containing pipeline parameters and their values. Pipeline parameters have the following size limits: 100 max entries, 128 maximum key length, 512 maximum value length.
+           * @example {
+           *       "deploy_prod": true
+           *     }
+           */
+          parameters?: {
+            [key: string]: number | string | boolean;
+          };
+          /**
+           * @description The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.
+           * @example v3.1.4159
+           */
+          tag?: string;
+        };
+      };
+    };
+    responses: {
+      /** @description The created pipeline. */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /**
+             * Format: date-time
+             * @description The date and time the pipeline was created.
+             */
+            created_at: string;
+            /**
+             * Format: uuid
+             * @description The unique ID of the pipeline.
+             * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+             */
+            id: string;
+            /**
+             * Format: int64
+             * @description The number of the pipeline.
+             * @example 25
+             */
+            number: number;
+            /**
+             * @description The current state of the pipeline.
+             * @enum {string}
+             */
+            state: "created" | "errored" | "setup-pending" | "setup" | "pending";
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  listMyPipelines: {
+    parameters: {
+      query?: {
+        /** @description A token to retrieve the next page of results. */
+        "page-token"?: string;
+      };
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A sequence of pipelines. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            items: {
+              /**
+               * Format: date-time
+               * @description The date and time the pipeline was created.
+               */
+              created_at: string;
+              /** @description A sequence of errors that have occurred within the pipeline. */
+              errors: {
+                /** @description A human-readable error message. */
+                message: string;
+                /**
+                 * @description The type of error.
+                 * @enum {string}
+                 */
+                type:
+                  | "config"
+                  | "invalid-trigger-setup"
+                  | "config-fetch"
+                  | "timeout"
+                  | "permission"
+                  | "other"
+                  | "trigger-rule"
+                  | "plan";
+              }[];
+              /**
+               * Format: uuid
+               * @description The unique ID of the pipeline.
+               * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+               */
+              id: string;
+              /**
+               * Format: int64
+               * @description The number of the pipeline.
+               * @example 25
+               */
+              number: number;
+              /**
+               * @description The project-slug for the pipeline.
+               * @example gh/CircleCI-Public/api-preview-docs
+               */
+              project_slug: string;
+              /**
+               * @description The current state of the pipeline.
+               * @enum {string}
+               */
+              state: "created" | "errored" | "setup-pending" | "setup" | "pending";
+              /** @description A summary of the trigger. */
+              trigger: {
+                /** @description The user who triggered the Pipeline. */
+                actor: {
+                  /** @description URL to the user's avatar on the VCS */
+                  avatar_url: string;
+                  /**
+                   * Login
+                   * @description The login information for the user on the VCS.
+                   */
+                  login: string;
+                };
+                /**
+                 * Format: date-time
+                 * @description The date and time the trigger was received.
+                 */
+                received_at: string;
+                /**
+                 * @description The type of trigger.
+                 * @enum {string}
+                 */
+                type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
+              };
+              trigger_parameters?: {
+                [key: string]: string | number | boolean | Record<string, never>;
+              };
+              /**
+               * Format: date-time
+               * @description The date and time the pipeline was last updated.
+               */
+              updated_at?: string;
+              /** @description VCS information for the pipeline. */
+              vcs?: {
+                /**
+                 * @description The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
+                 * @example feature/design-new-api
+                 */
                 branch?: string;
-                /** @description A token to retrieve the next page of results. */
-                "page-token"?: string;
-            };
-            header?: never;
-            path: {
+                /** @description The latest commit in the pipeline. */
+                commit?: {
+                  /** @description The body of the commit message. */
+                  body: string;
+                  /** @description The subject of the commit message. */
+                  subject: string;
+                };
                 /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
+                 * @description URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
+                 * @example https://github.com/CircleCI-Public/api-preview-docs
                  */
-                "project-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A sequence of pipelines. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            /**
-                             * Format: date-time
-                             * @description The date and time the pipeline was created.
-                             */
-                            created_at: string;
-                            /** @description A sequence of errors that have occurred within the pipeline. */
-                            errors: {
-                                /** @description A human-readable error message. */
-                                message: string;
-                                /**
-                                 * @description The type of error.
-                                 * @enum {string}
-                                 */
-                                type: "config" | "invalid-trigger-setup" | "config-fetch" | "timeout" | "permission" | "other" | "trigger-rule" | "plan";
-                            }[];
-                            /**
-                             * Format: uuid
-                             * @description The unique ID of the pipeline.
-                             * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                             */
-                            id: string;
-                            /**
-                             * Format: int64
-                             * @description The number of the pipeline.
-                             * @example 25
-                             */
-                            number: number;
-                            /**
-                             * @description The project-slug for the pipeline.
-                             * @example gh/CircleCI-Public/api-preview-docs
-                             */
-                            project_slug: string;
-                            /**
-                             * @description The current state of the pipeline.
-                             * @enum {string}
-                             */
-                            state: "created" | "errored" | "setup-pending" | "setup" | "pending";
-                            /** @description A summary of the trigger. */
-                            trigger: {
-                                /** @description The user who triggered the Pipeline. */
-                                actor: {
-                                    /** @description URL to the user's avatar on the VCS */
-                                    avatar_url: string;
-                                    /**
-                                     * Login
-                                     * @description The login information for the user on the VCS.
-                                     */
-                                    login: string;
-                                };
-                                /**
-                                 * Format: date-time
-                                 * @description The date and time the trigger was received.
-                                 */
-                                received_at: string;
-                                /**
-                                 * @description The type of trigger.
-                                 * @enum {string}
-                                 */
-                                type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
-                            };
-                            trigger_parameters?: {
-                                [key: string]: string | number | boolean | Record<string, never>;
-                            };
-                            /**
-                             * Format: date-time
-                             * @description The date and time the pipeline was last updated.
-                             */
-                            updated_at?: string;
-                            /** @description VCS information for the pipeline. */
-                            vcs?: {
-                                /**
-                                 * @description The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
-                                 * @example feature/design-new-api
-                                 */
-                                branch?: string;
-                                /** @description The latest commit in the pipeline. */
-                                commit?: {
-                                    /** @description The body of the commit message. */
-                                    body: string;
-                                    /** @description The subject of the commit message. */
-                                    subject: string;
-                                };
-                                /**
-                                 * @description URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
-                                 * @example https://github.com/CircleCI-Public/api-preview-docs
-                                 */
-                                origin_repository_url: string;
-                                /**
-                                 * @description Name of the VCS provider (e.g. GitHub, Bitbucket).
-                                 * @example GitHub
-                                 */
-                                provider_name: string;
-                                /**
-                                 * @description The code review id.
-                                 * @example 123
-                                 */
-                                review_id?: string;
-                                /**
-                                 * @description The code review URL.
-                                 * @example https://github.com/CircleCI-Public/api-preview-docs/pull/123
-                                 */
-                                review_url?: string;
-                                /**
-                                 * @description The code revision the pipeline ran.
-                                 * @example f454a02b5d10fcccfd7d9dd7608a76d6493a98b4
-                                 */
-                                revision: string;
-                                /**
-                                 * @description The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.
-                                 * @example v3.1.4159
-                                 */
-                                tag?: string;
-                                /**
-                                 * @description URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
-                                 * @example https://github.com/CircleCI-Public/api-preview-docs
-                                 */
-                                target_repository_url: string;
-                            };
-                        }[];
-                        /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-                        next_page_token: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    triggerPipeline: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
+                origin_repository_url: string;
                 /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
+                 * @description Name of the VCS provider (e.g. GitHub, Bitbucket).
+                 * @example GitHub
                  */
-                "project-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    /**
-                     * @description The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
-                     * @example feature/design-new-api
-                     */
-                    branch?: string;
-                    /**
-                     * @description An object containing pipeline parameters and their values. Pipeline parameters have the following size limits: 100 max entries, 128 maximum key length, 512 maximum value length.
-                     * @example {
-                     *       "deploy_prod": true
-                     *     }
-                     */
-                    parameters?: {
-                        [key: string]: number | string | boolean;
-                    };
-                    /**
-                     * @description The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.
-                     * @example v3.1.4159
-                     */
-                    tag?: string;
-                };
-            };
-        };
-        responses: {
-            /** @description The created pipeline. */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * Format: date-time
-                         * @description The date and time the pipeline was created.
-                         */
-                        created_at: string;
-                        /**
-                         * Format: uuid
-                         * @description The unique ID of the pipeline.
-                         * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                         */
-                        id: string;
-                        /**
-                         * Format: int64
-                         * @description The number of the pipeline.
-                         * @example 25
-                         */
-                        number: number;
-                        /**
-                         * @description The current state of the pipeline.
-                         * @enum {string}
-                         */
-                        state: "created" | "errored" | "setup-pending" | "setup" | "pending";
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    listMyPipelines: {
-        parameters: {
-            query?: {
-                /** @description A token to retrieve the next page of results. */
-                "page-token"?: string;
-            };
-            header?: never;
-            path: {
+                provider_name: string;
                 /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A sequence of pipelines. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            /**
-                             * Format: date-time
-                             * @description The date and time the pipeline was created.
-                             */
-                            created_at: string;
-                            /** @description A sequence of errors that have occurred within the pipeline. */
-                            errors: {
-                                /** @description A human-readable error message. */
-                                message: string;
-                                /**
-                                 * @description The type of error.
-                                 * @enum {string}
-                                 */
-                                type: "config" | "invalid-trigger-setup" | "config-fetch" | "timeout" | "permission" | "other" | "trigger-rule" | "plan";
-                            }[];
-                            /**
-                             * Format: uuid
-                             * @description The unique ID of the pipeline.
-                             * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                             */
-                            id: string;
-                            /**
-                             * Format: int64
-                             * @description The number of the pipeline.
-                             * @example 25
-                             */
-                            number: number;
-                            /**
-                             * @description The project-slug for the pipeline.
-                             * @example gh/CircleCI-Public/api-preview-docs
-                             */
-                            project_slug: string;
-                            /**
-                             * @description The current state of the pipeline.
-                             * @enum {string}
-                             */
-                            state: "created" | "errored" | "setup-pending" | "setup" | "pending";
-                            /** @description A summary of the trigger. */
-                            trigger: {
-                                /** @description The user who triggered the Pipeline. */
-                                actor: {
-                                    /** @description URL to the user's avatar on the VCS */
-                                    avatar_url: string;
-                                    /**
-                                     * Login
-                                     * @description The login information for the user on the VCS.
-                                     */
-                                    login: string;
-                                };
-                                /**
-                                 * Format: date-time
-                                 * @description The date and time the trigger was received.
-                                 */
-                                received_at: string;
-                                /**
-                                 * @description The type of trigger.
-                                 * @enum {string}
-                                 */
-                                type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
-                            };
-                            trigger_parameters?: {
-                                [key: string]: string | number | boolean | Record<string, never>;
-                            };
-                            /**
-                             * Format: date-time
-                             * @description The date and time the pipeline was last updated.
-                             */
-                            updated_at?: string;
-                            /** @description VCS information for the pipeline. */
-                            vcs?: {
-                                /**
-                                 * @description The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
-                                 * @example feature/design-new-api
-                                 */
-                                branch?: string;
-                                /** @description The latest commit in the pipeline. */
-                                commit?: {
-                                    /** @description The body of the commit message. */
-                                    body: string;
-                                    /** @description The subject of the commit message. */
-                                    subject: string;
-                                };
-                                /**
-                                 * @description URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
-                                 * @example https://github.com/CircleCI-Public/api-preview-docs
-                                 */
-                                origin_repository_url: string;
-                                /**
-                                 * @description Name of the VCS provider (e.g. GitHub, Bitbucket).
-                                 * @example GitHub
-                                 */
-                                provider_name: string;
-                                /**
-                                 * @description The code review id.
-                                 * @example 123
-                                 */
-                                review_id?: string;
-                                /**
-                                 * @description The code review URL.
-                                 * @example https://github.com/CircleCI-Public/api-preview-docs/pull/123
-                                 */
-                                review_url?: string;
-                                /**
-                                 * @description The code revision the pipeline ran.
-                                 * @example f454a02b5d10fcccfd7d9dd7608a76d6493a98b4
-                                 */
-                                revision: string;
-                                /**
-                                 * @description The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.
-                                 * @example v3.1.4159
-                                 */
-                                tag?: string;
-                                /**
-                                 * @description URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
-                                 * @example https://github.com/CircleCI-Public/api-preview-docs
-                                 */
-                                target_repository_url: string;
-                            };
-                        }[];
-                        /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-                        next_page_token: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getPipelineByNumber: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-                /**
-                 * @description The number of the pipeline.
+                 * @description The code review id.
                  * @example 123
                  */
-                "pipeline-number": unknown;
-            };
-            cookie?: never;
+                review_id?: string;
+                /**
+                 * @description The code review URL.
+                 * @example https://github.com/CircleCI-Public/api-preview-docs/pull/123
+                 */
+                review_url?: string;
+                /**
+                 * @description The code revision the pipeline ran.
+                 * @example f454a02b5d10fcccfd7d9dd7608a76d6493a98b4
+                 */
+                revision: string;
+                /**
+                 * @description The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.
+                 * @example v3.1.4159
+                 */
+                tag?: string;
+                /**
+                 * @description URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
+                 * @example https://github.com/CircleCI-Public/api-preview-docs
+                 */
+                target_repository_url: string;
+              };
+            }[];
+            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+            next_page_token: string;
+          };
         };
-        requestBody?: never;
-        responses: {
-            /** @description A pipeline object. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * Format: date-time
-                         * @description The date and time the pipeline was created.
-                         */
-                        created_at: string;
-                        /** @description A sequence of errors that have occurred within the pipeline. */
-                        errors: {
-                            /** @description A human-readable error message. */
-                            message: string;
-                            /**
-                             * @description The type of error.
-                             * @enum {string}
-                             */
-                            type: "config" | "invalid-trigger-setup" | "config-fetch" | "timeout" | "permission" | "other" | "trigger-rule" | "plan";
-                        }[];
-                        /**
-                         * Format: uuid
-                         * @description The unique ID of the pipeline.
-                         * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                         */
-                        id: string;
-                        /**
-                         * Format: int64
-                         * @description The number of the pipeline.
-                         * @example 25
-                         */
-                        number: number;
-                        /**
-                         * @description The project-slug for the pipeline.
-                         * @example gh/CircleCI-Public/api-preview-docs
-                         */
-                        project_slug: string;
-                        /**
-                         * @description The current state of the pipeline.
-                         * @enum {string}
-                         */
-                        state: "created" | "errored" | "setup-pending" | "setup" | "pending";
-                        /** @description A summary of the trigger. */
-                        trigger: {
-                            /** @description The user who triggered the Pipeline. */
-                            actor: {
-                                /** @description URL to the user's avatar on the VCS */
-                                avatar_url: string;
-                                /**
-                                 * Login
-                                 * @description The login information for the user on the VCS.
-                                 */
-                                login: string;
-                            };
-                            /**
-                             * Format: date-time
-                             * @description The date and time the trigger was received.
-                             */
-                            received_at: string;
-                            /**
-                             * @description The type of trigger.
-                             * @enum {string}
-                             */
-                            type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
-                        };
-                        trigger_parameters?: {
-                            [key: string]: string | number | boolean | Record<string, never>;
-                        };
-                        /**
-                         * Format: date-time
-                         * @description The date and time the pipeline was last updated.
-                         */
-                        updated_at?: string;
-                        /** @description VCS information for the pipeline. */
-                        vcs?: {
-                            /**
-                             * @description The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
-                             * @example feature/design-new-api
-                             */
-                            branch?: string;
-                            /** @description The latest commit in the pipeline. */
-                            commit?: {
-                                /** @description The body of the commit message. */
-                                body: string;
-                                /** @description The subject of the commit message. */
-                                subject: string;
-                            };
-                            /**
-                             * @description URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
-                             * @example https://github.com/CircleCI-Public/api-preview-docs
-                             */
-                            origin_repository_url: string;
-                            /**
-                             * @description Name of the VCS provider (e.g. GitHub, Bitbucket).
-                             * @example GitHub
-                             */
-                            provider_name: string;
-                            /**
-                             * @description The code review id.
-                             * @example 123
-                             */
-                            review_id?: string;
-                            /**
-                             * @description The code review URL.
-                             * @example https://github.com/CircleCI-Public/api-preview-docs/pull/123
-                             */
-                            review_url?: string;
-                            /**
-                             * @description The code revision the pipeline ran.
-                             * @example f454a02b5d10fcccfd7d9dd7608a76d6493a98b4
-                             */
-                            revision: string;
-                            /**
-                             * @description The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.
-                             * @example v3.1.4159
-                             */
-                            tag?: string;
-                            /**
-                             * @description URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
-                             * @example https://github.com/CircleCI-Public/api-preview-docs
-                             */
-                            target_repository_url: string;
-                        };
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
         };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
     };
-    listSchedulesForProject: {
-        parameters: {
-            query?: {
-                /** @description A token to retrieve the next page of results. */
-                "page-token"?: string;
-            };
-            header?: never;
-            path: {
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A sequence of schedules. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            /**
-                             * User
-                             * @description The attribution actor who will run the scheduled pipeline.
-                             */
-                            actor: {
-                                /** @description URL to the user's avatar on the VCS */
-                                avatar_url: string;
-                                /**
-                                 * Format: uuid
-                                 * @description The unique ID of the user.
-                                 */
-                                id: string;
-                                /**
-                                 * Login
-                                 * @description The login information for the user on the VCS.
-                                 */
-                                login: string;
-                                /** @description The name of the user. */
-                                name: string;
-                            };
-                            /**
-                             * Format: date-time
-                             * @description The date and time the pipeline was created.
-                             */
-                            "created-at": string;
-                            /** @description Description of the schedule. */
-                            description: string;
-                            /**
-                             * Format: uuid
-                             * @description The unique ID of the schedule.
-                             */
-                            id: string;
-                            /** @description Name of the schedule. */
-                            name: string;
-                            /**
-                             * @description Pipeline parameters represented as key-value pairs. Must contain branch or tag.
-                             * @example {
-                             *       "branch": "feature/design-new-api",
-                             *       "deploy_prod": true
-                             *     }
-                             */
-                            parameters: {
-                                [key: string]: number | string | boolean;
-                            };
-                            /**
-                             * @description The project-slug for the schedule
-                             * @example gh/CircleCI-Public/api-preview-docs
-                             */
-                            "project-slug": string;
-                            /** @description Timetable that specifies when a schedule triggers. */
-                            timetable: {
-                                /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
-                                "days-of-month"?: number[];
-                                /** @description Days in a week in which the schedule triggers. */
-                                "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
-                                /** @description Hours in a day in which the schedule triggers. */
-                                "hours-of-day": number[];
-                                /** @description Months in which the schedule triggers. */
-                                months?: ("MAR" | "NOV" | "DEC" | "JUN" | "MAY" | "OCT" | "FEB" | "APR" | "SEP" | "AUG" | "JAN" | "JUL")[];
-                                /**
-                                 * Format: integer
-                                 * @description Number of times a schedule triggers per hour, value must be between 1 and 60
-                                 */
-                                "per-hour": number;
-                            } | {
-                                /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
-                                "days-of-month": number[];
-                                /** @description Days in a week in which the schedule triggers. */
-                                "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
-                                /** @description Hours in a day in which the schedule triggers. */
-                                "hours-of-day": number[];
-                                /** @description Months in which the schedule triggers. */
-                                months?: ("MAR" | "NOV" | "DEC" | "JUN" | "MAY" | "OCT" | "FEB" | "APR" | "SEP" | "AUG" | "JAN" | "JUL")[];
-                                /**
-                                 * Format: integer
-                                 * @description Number of times a schedule triggers per hour, value must be between 1 and 60
-                                 */
-                                "per-hour": number;
-                            };
-                            /**
-                             * Format: date-time
-                             * @description The date and time the pipeline was last updated.
-                             */
-                            "updated-at": string;
-                        }[];
-                        /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-                        next_page_token: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
+  };
+  getPipelineByNumber: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+        /**
+         * @description The number of the pipeline.
+         * @example 123
+         */
+        "pipeline-number": unknown;
+      };
+      cookie?: never;
     };
-    createSchedule: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
+    requestBody?: never;
+    responses: {
+      /** @description A pipeline object. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /**
+             * Format: date-time
+             * @description The date and time the pipeline was created.
+             */
+            created_at: string;
+            /** @description A sequence of errors that have occurred within the pipeline. */
+            errors: {
+              /** @description A human-readable error message. */
+              message: string;
+              /**
+               * @description The type of error.
+               * @enum {string}
+               */
+              type:
+                | "config"
+                | "invalid-trigger-setup"
+                | "config-fetch"
+                | "timeout"
+                | "permission"
+                | "other"
+                | "trigger-rule"
+                | "plan";
+            }[];
+            /**
+             * Format: uuid
+             * @description The unique ID of the pipeline.
+             * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+             */
+            id: string;
+            /**
+             * Format: int64
+             * @description The number of the pipeline.
+             * @example 25
+             */
+            number: number;
+            /**
+             * @description The project-slug for the pipeline.
+             * @example gh/CircleCI-Public/api-preview-docs
+             */
+            project_slug: string;
+            /**
+             * @description The current state of the pipeline.
+             * @enum {string}
+             */
+            state: "created" | "errored" | "setup-pending" | "setup" | "pending";
+            /** @description A summary of the trigger. */
+            trigger: {
+              /** @description The user who triggered the Pipeline. */
+              actor: {
+                /** @description URL to the user's avatar on the VCS */
+                avatar_url: string;
                 /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
+                 * Login
+                 * @description The login information for the user on the VCS.
                  */
-                "project-slug": string;
+                login: string;
+              };
+              /**
+               * Format: date-time
+               * @description The date and time the trigger was received.
+               */
+              received_at: string;
+              /**
+               * @description The type of trigger.
+               * @enum {string}
+               */
+              type: "scheduled_pipeline" | "explicit" | "api" | "webhook";
             };
-            cookie?: never;
+            trigger_parameters?: {
+              [key: string]: string | number | boolean | Record<string, never>;
+            };
+            /**
+             * Format: date-time
+             * @description The date and time the pipeline was last updated.
+             */
+            updated_at?: string;
+            /** @description VCS information for the pipeline. */
+            vcs?: {
+              /**
+               * @description The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).
+               * @example feature/design-new-api
+               */
+              branch?: string;
+              /** @description The latest commit in the pipeline. */
+              commit?: {
+                /** @description The body of the commit message. */
+                body: string;
+                /** @description The subject of the commit message. */
+                subject: string;
+              };
+              /**
+               * @description URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.
+               * @example https://github.com/CircleCI-Public/api-preview-docs
+               */
+              origin_repository_url: string;
+              /**
+               * @description Name of the VCS provider (e.g. GitHub, Bitbucket).
+               * @example GitHub
+               */
+              provider_name: string;
+              /**
+               * @description The code review id.
+               * @example 123
+               */
+              review_id?: string;
+              /**
+               * @description The code review URL.
+               * @example https://github.com/CircleCI-Public/api-preview-docs/pull/123
+               */
+              review_url?: string;
+              /**
+               * @description The code revision the pipeline ran.
+               * @example f454a02b5d10fcccfd7d9dd7608a76d6493a98b4
+               */
+              revision: string;
+              /**
+               * @description The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.
+               * @example v3.1.4159
+               */
+              tag?: string;
+              /**
+               * @description URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.
+               * @example https://github.com/CircleCI-Public/api-preview-docs
+               */
+              target_repository_url: string;
+            };
+          };
         };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    /**
-                     * @description The attribution-actor of the scheduled pipeline.
-                     * @example current
-                     * @enum {string}
-                     */
-                    "attribution-actor": "current" | "system";
-                    /** @description Description of the schedule. */
-                    description?: string;
-                    /** @description Name of the schedule. */
-                    name: string;
-                    /**
-                     * @description Pipeline parameters represented as key-value pairs. Must contain branch or tag.
-                     * @example {
-                     *       "branch": "feature/design-new-api",
-                     *       "deploy_prod": true
-                     *     }
-                     */
-                    parameters: {
-                        [key: string]: number | string | boolean;
-                    };
-                    /** @description Timetable that specifies when a schedule triggers. */
-                    timetable: {
-                        /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
-                        "days-of-month"?: number[];
-                        /** @description Days in a week in which the schedule triggers. */
-                        "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
-                        /** @description Hours in a day in which the schedule triggers. */
-                        "hours-of-day": number[];
-                        /** @description Months in which the schedule triggers. */
-                        months?: ("MAR" | "NOV" | "DEC" | "JUN" | "MAY" | "OCT" | "FEB" | "APR" | "SEP" | "AUG" | "JAN" | "JUL")[];
-                        /**
-                         * Format: integer
-                         * @description Number of times a schedule triggers per hour, value must be between 1 and 60
-                         */
-                        "per-hour": number;
-                    } | {
-                        /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
-                        "days-of-month": number[];
-                        /** @description Days in a week in which the schedule triggers. */
-                        "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
-                        /** @description Hours in a day in which the schedule triggers. */
-                        "hours-of-day": number[];
-                        /** @description Months in which the schedule triggers. */
-                        months?: ("MAR" | "NOV" | "DEC" | "JUN" | "MAY" | "OCT" | "FEB" | "APR" | "SEP" | "AUG" | "JAN" | "JUL")[];
-                        /**
-                         * Format: integer
-                         * @description Number of times a schedule triggers per hour, value must be between 1 and 60
-                         */
-                        "per-hour": number;
-                    };
-                };
-            };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
         };
-        responses: {
-            /** @description A schedule object. */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * User
-                         * @description The attribution actor who will run the scheduled pipeline.
-                         */
-                        actor: {
-                            /** @description URL to the user's avatar on the VCS */
-                            avatar_url: string;
-                            /**
-                             * Format: uuid
-                             * @description The unique ID of the user.
-                             */
-                            id: string;
-                            /**
-                             * Login
-                             * @description The login information for the user on the VCS.
-                             */
-                            login: string;
-                            /** @description The name of the user. */
-                            name: string;
-                        };
-                        /**
-                         * Format: date-time
-                         * @description The date and time the pipeline was created.
-                         */
-                        "created-at": string;
-                        /** @description Description of the schedule. */
-                        description: string;
-                        /**
-                         * Format: uuid
-                         * @description The unique ID of the schedule.
-                         */
-                        id: string;
-                        /** @description Name of the schedule. */
-                        name: string;
-                        /**
-                         * @description Pipeline parameters represented as key-value pairs. Must contain branch or tag.
-                         * @example {
-                         *       "branch": "feature/design-new-api",
-                         *       "deploy_prod": true
-                         *     }
-                         */
-                        parameters: {
-                            [key: string]: number | string | boolean;
-                        };
-                        /**
-                         * @description The project-slug for the schedule
-                         * @example gh/CircleCI-Public/api-preview-docs
-                         */
-                        "project-slug": string;
-                        /** @description Timetable that specifies when a schedule triggers. */
-                        timetable: {
-                            /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
-                            "days-of-month"?: number[];
-                            /** @description Days in a week in which the schedule triggers. */
-                            "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
-                            /** @description Hours in a day in which the schedule triggers. */
-                            "hours-of-day": number[];
-                            /** @description Months in which the schedule triggers. */
-                            months?: ("MAR" | "NOV" | "DEC" | "JUN" | "MAY" | "OCT" | "FEB" | "APR" | "SEP" | "AUG" | "JAN" | "JUL")[];
-                            /**
-                             * Format: integer
-                             * @description Number of times a schedule triggers per hour, value must be between 1 and 60
-                             */
-                            "per-hour": number;
-                        } | {
-                            /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
-                            "days-of-month": number[];
-                            /** @description Days in a week in which the schedule triggers. */
-                            "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
-                            /** @description Hours in a day in which the schedule triggers. */
-                            "hours-of-day": number[];
-                            /** @description Months in which the schedule triggers. */
-                            months?: ("MAR" | "NOV" | "DEC" | "JUN" | "MAY" | "OCT" | "FEB" | "APR" | "SEP" | "AUG" | "JAN" | "JUL")[];
-                            /**
-                             * Format: integer
-                             * @description Number of times a schedule triggers per hour, value must be between 1 and 60
-                             */
-                            "per-hour": number;
-                        };
-                        /**
-                         * Format: date-time
-                         * @description The date and time the pipeline was last updated.
-                         */
-                        "updated-at": string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
+        content: {
+          "application/json": {
+            message?: string;
+          };
         };
+      };
     };
-    getJobArtifacts: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The number of the job.
-                 * @example 123
-                 */
-                "job-number": unknown;
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A paginated list of the job's artifacts. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            /**
-                             * Format: int64
-                             * @description The index of the node that stored the artifact.
-                             */
-                            node_index: number;
-                            /** @description The artifact path. */
-                            path: string;
-                            /** @description The URL to download the artifact contents. */
-                            url: string;
-                        }[];
-                        /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-                        next_page_token: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
+  };
+  listSchedulesForProject: {
+    parameters: {
+      query?: {
+        /** @description A token to retrieve the next page of results. */
+        "page-token"?: string;
+      };
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
     };
-    getTests: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
+    requestBody?: never;
+    responses: {
+      /** @description A sequence of schedules. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            items: {
+              /**
+               * User
+               * @description The attribution actor who will run the scheduled pipeline.
+               */
+              actor: {
+                /** @description URL to the user's avatar on the VCS */
+                avatar_url: string;
                 /**
-                 * @description The number of the job.
-                 * @example 123
+                 * Format: uuid
+                 * @description The unique ID of the user.
                  */
-                "job-number": unknown;
-                /**
-                 * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
-                 * @example gh/CircleCI-Public/api-preview-docs
-                 */
-                "project-slug": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A paginated list of test results. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** TestsResponse */
-                        items: {
-                            /**
-                             * @description The programmatic location of the test.
-                             * @example
-                             */
-                            classname: string;
-                            /**
-                             * @description The file in which the test is defined.
-                             * @example
-                             */
-                            file: string;
-                            /**
-                             * @description The failure message associated with the test.
-                             * @example
-                             */
-                            message: string;
-                            /**
-                             * @description The name of the test.
-                             * @example
-                             */
-                            name: string;
-                            /**
-                             * @description Indication of whether the test succeeded.
-                             * @example
-                             */
-                            result: string;
-                            /**
-                             * Format: double
-                             * @description The time it took to run the test in seconds
-                             * @example
-                             */
-                            run_time: number;
-                            /**
-                             * @description The program that generated the test results
-                             * @example
-                             */
-                            source: string;
-                        }[];
-                        /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-                        next_page_token: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    createProject1: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The first segment of the slash-separated project slug, as shown in Project Settings > Overview.
-                 * @example gh
-                 */
-                provider: components["parameters"]["provider"];
-                /**
-                 * @description The second segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the org name (e.g. `my-org`) or an ID (e.g. `43G3lM5RtfFE7v5sa4nWAU`).
-                 * @example CircleCI-Public
-                 */
-                organization: components["parameters"]["organization"];
-                /**
-                 * @description The third segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the project name (e.g. `my-project`) or an ID (e.g. `44n9wujWcTnVZ2b5S8Fnat`).
-                 * @example api-preview-docs
-                 */
-                project: components["parameters"]["project"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response. */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["project_settings"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            401: components["responses"]["401_invalid_token"];
-            403: components["responses"]["403_permission_denied"];
-            /** @description Either a branch or a project were not found. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-            405: components["responses"]["405_cannot_create_standalone_project"];
-            429: components["responses"]["429_rate_limit_exceeded"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    triggerPipelineRun: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The first segment of the slash-separated project slug, as shown in Project Settings > Overview.
-                 * @example gh
-                 */
-                provider: components["parameters"]["providerNoGitlab"];
-                /**
-                 * @description The second segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the org name (e.g. `my-org`) or an ID (e.g. `43G3lM5RtfFE7v5sa4nWAU`).
-                 * @example CircleCI-Public
-                 */
-                organization: components["parameters"]["organization"];
-                /**
-                 * @description The third segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the project name (e.g. `my-project`) or an ID (e.g. `44n9wujWcTnVZ2b5S8Fnat`).
-                 * @example api-preview-docs
-                 */
-                project: components["parameters"]["project"];
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["triggerPipelineRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful response with no created pipeline. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["pipelineNotTriggeredResponse"];
-                };
-            };
-            /** @description Successful response. */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["pipelineTriggeredResponse"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-        };
-    };
-    getProjectSettings: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The first segment of the slash-separated project slug, as shown in Project Settings > Overview.
-                 * @example gh
-                 */
-                provider: components["parameters"]["provider"];
-                /**
-                 * @description The second segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the org name (e.g. `my-org`) or an ID (e.g. `43G3lM5RtfFE7v5sa4nWAU`).
-                 * @example CircleCI-Public
-                 */
-                organization: components["parameters"]["organization"];
-                /**
-                 * @description The third segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the project name (e.g. `my-project`) or an ID (e.g. `44n9wujWcTnVZ2b5S8Fnat`).
-                 * @example api-preview-docs
-                 */
-                project: components["parameters"]["project"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["project_settings"];
-                };
-            };
-            401: components["responses"]["401_invalid_token"];
-            403: components["responses"]["403_permission_denied"];
-            404: components["responses"]["404_project_not_found"];
-            429: components["responses"]["429_rate_limit_exceeded"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    patchProjectSettings: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The first segment of the slash-separated project slug, as shown in Project Settings > Overview.
-                 * @example gh
-                 */
-                provider: components["parameters"]["provider"];
-                /**
-                 * @description The second segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the org name (e.g. `my-org`) or an ID (e.g. `43G3lM5RtfFE7v5sa4nWAU`).
-                 * @example CircleCI-Public
-                 */
-                organization: components["parameters"]["organization"];
-                /**
-                 * @description The third segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the project name (e.g. `my-project`) or an ID (e.g. `44n9wujWcTnVZ2b5S8Fnat`).
-                 * @example api-preview-docs
-                 */
-                project: components["parameters"]["project"];
-            };
-            cookie?: never;
-        };
-        /** @description The setting(s) to update, including one or more fields in the JSON object. Note that `oss: true` will only be set on projects whose underlying repositories are actually open source. */
-        requestBody: {
-            content: {
-                /**
-                 * @example {
-                 *       "advanced": {
-                 *         "autocancel_builds": false,
-                 *         "build_prs_only": true,
-                 *         "pr_only_branch_overrides": [
-                 *           "main"
-                 *         ]
-                 *       }
-                 *     }
-                 */
-                "application/json": components["schemas"]["project_settings"];
-            };
-        };
-        responses: {
-            /** @description Successful response. Always includes the full advanced settings object. Returned even when the provided updates match the existing settings, but can also be returned when `oss: true` fails to set. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["project_settings"];
-                };
-            };
-            /** @description Request is malformed, e.g. with improperly encoded JSON */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-            401: components["responses"]["401_invalid_token"];
-            403: components["responses"]["403_permission_denied"];
-            404: components["responses"]["404_project_not_found"];
-            429: components["responses"]["429_rate_limit_exceeded"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    listPipelineDefinitions: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a project.
-                 * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
-                 */
-                project_id: components["parameters"]["project_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["pipelineDefinitionList"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    createPipelineDefinition: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a project.
-                 * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
-                 */
-                project_id: components["parameters"]["project_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["createPipelineDefinitionRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful response. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["pipelineDefinition"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    getPipelineDefinition: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a project.
-                 * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
-                 */
-                project_id: components["parameters"]["project_id"];
-                /**
-                 * @description An opaque identifier of a pipeline definition.
-                 * @example 6cb29b00-8e02-4357-8bc0-313983bf1f46
-                 */
-                pipeline_definition_id: components["parameters"]["pipeline_definition_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["pipelineDefinition"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    deletePipelineDefinition: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a project.
-                 * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
-                 */
-                project_id: components["parameters"]["project_id"];
-                /**
-                 * @description An opaque identifier of a pipeline definition.
-                 * @example 6cb29b00-8e02-4357-8bc0-313983bf1f46
-                 */
-                pipeline_definition_id: components["parameters"]["pipeline_definition_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["pipelineDefinitionDeleted"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    updatePipelineDefinition: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a project.
-                 * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
-                 */
-                project_id: components["parameters"]["project_id"];
-                /**
-                 * @description An opaque identifier of a pipeline definition.
-                 * @example 6cb29b00-8e02-4357-8bc0-313983bf1f46
-                 */
-                pipeline_definition_id: components["parameters"]["pipeline_definition_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["updatePipelineDefinitionRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful response. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["pipelineDefinition"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    listPipelineDefinitionTriggers: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a project.
-                 * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
-                 */
-                project_id: components["parameters"]["project_id"];
-                /**
-                 * @description An opaque identifier of a pipeline definition.
-                 * @example 6cb29b00-8e02-4357-8bc0-313983bf1f46
-                 */
-                pipeline_definition_id: components["parameters"]["pipeline_definition_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["triggerList"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    createTrigger: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a project.
-                 * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
-                 */
-                project_id: components["parameters"]["project_id"];
-                /**
-                 * @description An opaque identifier of a pipeline definition.
-                 * @example 6cb29b00-8e02-4357-8bc0-313983bf1f46
-                 */
-                pipeline_definition_id: components["parameters"]["pipeline_definition_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["createTriggerRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful response. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["trigger"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    rollbackProject: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a project.
-                 * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
-                 */
-                project_id: components["parameters"]["project_id"];
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["rollbackProjectRequest"];
-            };
-        };
-        responses: {
-            /** @description Rollback request accepted. */
-            202: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["rollbackProjectResponse"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            404: components["responses"]["404_entity_not_found"];
-            409: components["responses"]["409_entity_conflict"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    getTrigger: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a project.
-                 * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
-                 */
-                project_id: components["parameters"]["project_id"];
-                /**
-                 * @description An opaque identifier of a trigger.
-                 * @example bbea3a3d-4686-48b6-8d2d-2a14ace3913c
-                 */
-                trigger_id: components["parameters"]["trigger_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["trigger"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    deleteTrigger: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a project.
-                 * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
-                 */
-                project_id: components["parameters"]["project_id"];
-                /**
-                 * @description An opaque identifier of a trigger.
-                 * @example bbea3a3d-4686-48b6-8d2d-2a14ace3913c
-                 */
-                trigger_id: components["parameters"]["trigger_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["triggerDeleted"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    updateTrigger: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description An opaque identifier of a project.
-                 * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
-                 */
-                project_id: components["parameters"]["project_id"];
-                /**
-                 * @description An opaque identifier of a trigger.
-                 * @example bbea3a3d-4686-48b6-8d2d-2a14ace3913c
-                 */
-                trigger_id: components["parameters"]["trigger_id"];
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["updateTriggerRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful response. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["trigger"];
-                };
-            };
-            400: components["responses"]["400_unexpected_request_body"];
-            401: components["responses"]["401_invalid_token"];
-            404: components["responses"]["404_entity_not_found"];
-            500: components["responses"]["500_internal_server_error"];
-        };
-    };
-    getScheduleById: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The unique ID of the schedule. */
-                "schedule-id": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A schedule object. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * User
-                         * @description The attribution actor who will run the scheduled pipeline.
-                         */
-                        actor: {
-                            /** @description URL to the user's avatar on the VCS */
-                            avatar_url: string;
-                            /**
-                             * Format: uuid
-                             * @description The unique ID of the user.
-                             */
-                            id: string;
-                            /**
-                             * Login
-                             * @description The login information for the user on the VCS.
-                             */
-                            login: string;
-                            /** @description The name of the user. */
-                            name: string;
-                        };
-                        /**
-                         * Format: date-time
-                         * @description The date and time the pipeline was created.
-                         */
-                        "created-at": string;
-                        /** @description Description of the schedule. */
-                        description: string;
-                        /**
-                         * Format: uuid
-                         * @description The unique ID of the schedule.
-                         */
-                        id: string;
-                        /** @description Name of the schedule. */
-                        name: string;
-                        /**
-                         * @description Pipeline parameters represented as key-value pairs. Must contain branch or tag.
-                         * @example {
-                         *       "branch": "feature/design-new-api",
-                         *       "deploy_prod": true
-                         *     }
-                         */
-                        parameters: {
-                            [key: string]: number | string | boolean;
-                        };
-                        /**
-                         * @description The project-slug for the schedule
-                         * @example gh/CircleCI-Public/api-preview-docs
-                         */
-                        "project-slug": string;
-                        /** @description Timetable that specifies when a schedule triggers. */
-                        timetable: {
-                            /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
-                            "days-of-month"?: number[];
-                            /** @description Days in a week in which the schedule triggers. */
-                            "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
-                            /** @description Hours in a day in which the schedule triggers. */
-                            "hours-of-day": number[];
-                            /** @description Months in which the schedule triggers. */
-                            months?: ("MAR" | "NOV" | "DEC" | "JUN" | "MAY" | "OCT" | "FEB" | "APR" | "SEP" | "AUG" | "JAN" | "JUL")[];
-                            /**
-                             * Format: integer
-                             * @description Number of times a schedule triggers per hour, value must be between 1 and 60
-                             */
-                            "per-hour": number;
-                        } | {
-                            /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
-                            "days-of-month": number[];
-                            /** @description Days in a week in which the schedule triggers. */
-                            "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
-                            /** @description Hours in a day in which the schedule triggers. */
-                            "hours-of-day": number[];
-                            /** @description Months in which the schedule triggers. */
-                            months?: ("MAR" | "NOV" | "DEC" | "JUN" | "MAY" | "OCT" | "FEB" | "APR" | "SEP" | "AUG" | "JAN" | "JUL")[];
-                            /**
-                             * Format: integer
-                             * @description Number of times a schedule triggers per hour, value must be between 1 and 60
-                             */
-                            "per-hour": number;
-                        };
-                        /**
-                         * Format: date-time
-                         * @description The date and time the pipeline was last updated.
-                         */
-                        "updated-at": string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    deleteScheduleById: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The unique ID of the schedule. */
-                "schedule-id": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A confirmation message. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A human-readable message */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    updateSchedule: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The unique ID of the schedule. */
-                "schedule-id": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    /**
-                     * @description The attribution-actor of the scheduled pipeline.
-                     * @example current
-                     * @enum {string}
-                     */
-                    "attribution-actor"?: "current" | "system";
-                    /** @description Description of the schedule. */
-                    description?: string;
-                    /** @description Name of the schedule. */
-                    name?: string;
-                    /**
-                     * @description Pipeline parameters represented as key-value pairs. Must contain branch or tag.
-                     * @example {
-                     *       "branch": "feature/design-new-api",
-                     *       "deploy_prod": true
-                     *     }
-                     */
-                    parameters?: {
-                        [key: string]: number | string | boolean;
-                    };
-                    /** @description Timetable that specifies when a schedule triggers. */
-                    timetable?: {
-                        /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
-                        "days-of-month"?: number[];
-                        /** @description Days in a week in which the schedule triggers. */
-                        "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
-                        /** @description Hours in a day in which the schedule triggers. */
-                        "hours-of-day"?: number[];
-                        /** @description Months in which the schedule triggers. */
-                        months?: ("MAR" | "NOV" | "DEC" | "JUN" | "MAY" | "OCT" | "FEB" | "APR" | "SEP" | "AUG" | "JAN" | "JUL")[];
-                        /**
-                         * Format: integer
-                         * @description Number of times a schedule triggers per hour, value must be between 1 and 60
-                         */
-                        "per-hour"?: number;
-                    };
-                };
-            };
-        };
-        responses: {
-            /** @description A schedule object. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * User
-                         * @description The attribution actor who will run the scheduled pipeline.
-                         */
-                        actor: {
-                            /** @description URL to the user's avatar on the VCS */
-                            avatar_url: string;
-                            /**
-                             * Format: uuid
-                             * @description The unique ID of the user.
-                             */
-                            id: string;
-                            /**
-                             * Login
-                             * @description The login information for the user on the VCS.
-                             */
-                            login: string;
-                            /** @description The name of the user. */
-                            name: string;
-                        };
-                        /**
-                         * Format: date-time
-                         * @description The date and time the pipeline was created.
-                         */
-                        "created-at": string;
-                        /** @description Description of the schedule. */
-                        description: string;
-                        /**
-                         * Format: uuid
-                         * @description The unique ID of the schedule.
-                         */
-                        id: string;
-                        /** @description Name of the schedule. */
-                        name: string;
-                        /**
-                         * @description Pipeline parameters represented as key-value pairs. Must contain branch or tag.
-                         * @example {
-                         *       "branch": "feature/design-new-api",
-                         *       "deploy_prod": true
-                         *     }
-                         */
-                        parameters: {
-                            [key: string]: number | string | boolean;
-                        };
-                        /**
-                         * @description The project-slug for the schedule
-                         * @example gh/CircleCI-Public/api-preview-docs
-                         */
-                        "project-slug": string;
-                        /** @description Timetable that specifies when a schedule triggers. */
-                        timetable: {
-                            /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
-                            "days-of-month"?: number[];
-                            /** @description Days in a week in which the schedule triggers. */
-                            "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
-                            /** @description Hours in a day in which the schedule triggers. */
-                            "hours-of-day": number[];
-                            /** @description Months in which the schedule triggers. */
-                            months?: ("MAR" | "NOV" | "DEC" | "JUN" | "MAY" | "OCT" | "FEB" | "APR" | "SEP" | "AUG" | "JAN" | "JUL")[];
-                            /**
-                             * Format: integer
-                             * @description Number of times a schedule triggers per hour, value must be between 1 and 60
-                             */
-                            "per-hour": number;
-                        } | {
-                            /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
-                            "days-of-month": number[];
-                            /** @description Days in a week in which the schedule triggers. */
-                            "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
-                            /** @description Hours in a day in which the schedule triggers. */
-                            "hours-of-day": number[];
-                            /** @description Months in which the schedule triggers. */
-                            months?: ("MAR" | "NOV" | "DEC" | "JUN" | "MAY" | "OCT" | "FEB" | "APR" | "SEP" | "AUG" | "JAN" | "JUL")[];
-                            /**
-                             * Format: integer
-                             * @description Number of times a schedule triggers per hour, value must be between 1 and 60
-                             */
-                            "per-hour": number;
-                        };
-                        /**
-                         * Format: date-time
-                         * @description The date and time the pipeline was last updated.
-                         */
-                        "updated-at": string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
-    };
-    getUser: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The unique ID of the user. */
                 id: string;
-            };
-            cookie?: never;
+                /**
+                 * Login
+                 * @description The login information for the user on the VCS.
+                 */
+                login: string;
+                /** @description The name of the user. */
+                name: string;
+              };
+              /**
+               * Format: date-time
+               * @description The date and time the pipeline was created.
+               */
+              "created-at": string;
+              /** @description Description of the schedule. */
+              description: string;
+              /**
+               * Format: uuid
+               * @description The unique ID of the schedule.
+               */
+              id: string;
+              /** @description Name of the schedule. */
+              name: string;
+              /**
+               * @description Pipeline parameters represented as key-value pairs. Must contain branch or tag.
+               * @example {
+               *       "branch": "feature/design-new-api",
+               *       "deploy_prod": true
+               *     }
+               */
+              parameters: {
+                [key: string]: number | string | boolean;
+              };
+              /**
+               * @description The project-slug for the schedule
+               * @example gh/CircleCI-Public/api-preview-docs
+               */
+              "project-slug": string;
+              /** @description Timetable that specifies when a schedule triggers. */
+              timetable:
+                | {
+                    /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
+                    "days-of-month"?: number[];
+                    /** @description Days in a week in which the schedule triggers. */
+                    "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
+                    /** @description Hours in a day in which the schedule triggers. */
+                    "hours-of-day": number[];
+                    /** @description Months in which the schedule triggers. */
+                    months?: (
+                      | "MAR"
+                      | "NOV"
+                      | "DEC"
+                      | "JUN"
+                      | "MAY"
+                      | "OCT"
+                      | "FEB"
+                      | "APR"
+                      | "SEP"
+                      | "AUG"
+                      | "JAN"
+                      | "JUL"
+                    )[];
+                    /**
+                     * Format: integer
+                     * @description Number of times a schedule triggers per hour, value must be between 1 and 60
+                     */
+                    "per-hour": number;
+                  }
+                | {
+                    /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
+                    "days-of-month": number[];
+                    /** @description Days in a week in which the schedule triggers. */
+                    "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
+                    /** @description Hours in a day in which the schedule triggers. */
+                    "hours-of-day": number[];
+                    /** @description Months in which the schedule triggers. */
+                    months?: (
+                      | "MAR"
+                      | "NOV"
+                      | "DEC"
+                      | "JUN"
+                      | "MAY"
+                      | "OCT"
+                      | "FEB"
+                      | "APR"
+                      | "SEP"
+                      | "AUG"
+                      | "JAN"
+                      | "JUL"
+                    )[];
+                    /**
+                     * Format: integer
+                     * @description Number of times a schedule triggers per hour, value must be between 1 and 60
+                     */
+                    "per-hour": number;
+                  };
+              /**
+               * Format: date-time
+               * @description The date and time the pipeline was last updated.
+               */
+              "updated-at": string;
+            }[];
+            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+            next_page_token: string;
+          };
         };
-        requestBody?: never;
-        responses: {
-            /** @description User login information. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description URL to the user's avatar on the VCS */
-                        avatar_url: string;
-                        /**
-                         * Format: uuid
-                         * @description The unique ID of the user.
-                         */
-                        id: string;
-                        /**
-                         * Login
-                         * @description The login information for the user on the VCS.
-                         */
-                        login: string;
-                        /** @description The name of the user. */
-                        name: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
         };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
     };
-    getWebhooks: {
-        parameters: {
-            query: {
-                /** @description ID of the scope being used (at the moment, only project ID is supported) */
-                "scope-id": string;
+  };
+  createSchedule: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": {
+          /**
+           * @description The attribution-actor of the scheduled pipeline.
+           * @example current
+           * @enum {string}
+           */
+          "attribution-actor": "current" | "system";
+          /** @description Description of the schedule. */
+          description?: string;
+          /** @description Name of the schedule. */
+          name: string;
+          /**
+           * @description Pipeline parameters represented as key-value pairs. Must contain branch or tag.
+           * @example {
+           *       "branch": "feature/design-new-api",
+           *       "deploy_prod": true
+           *     }
+           */
+          parameters: {
+            [key: string]: number | string | boolean;
+          };
+          /** @description Timetable that specifies when a schedule triggers. */
+          timetable:
+            | {
+                /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
+                "days-of-month"?: number[];
+                /** @description Days in a week in which the schedule triggers. */
+                "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
+                /** @description Hours in a day in which the schedule triggers. */
+                "hours-of-day": number[];
+                /** @description Months in which the schedule triggers. */
+                months?: (
+                  | "MAR"
+                  | "NOV"
+                  | "DEC"
+                  | "JUN"
+                  | "MAY"
+                  | "OCT"
+                  | "FEB"
+                  | "APR"
+                  | "SEP"
+                  | "AUG"
+                  | "JAN"
+                  | "JUL"
+                )[];
+                /**
+                 * Format: integer
+                 * @description Number of times a schedule triggers per hour, value must be between 1 and 60
+                 */
+                "per-hour": number;
+              }
+            | {
+                /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
+                "days-of-month": number[];
+                /** @description Days in a week in which the schedule triggers. */
+                "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
+                /** @description Hours in a day in which the schedule triggers. */
+                "hours-of-day": number[];
+                /** @description Months in which the schedule triggers. */
+                months?: (
+                  | "MAR"
+                  | "NOV"
+                  | "DEC"
+                  | "JUN"
+                  | "MAY"
+                  | "OCT"
+                  | "FEB"
+                  | "APR"
+                  | "SEP"
+                  | "AUG"
+                  | "JAN"
+                  | "JUL"
+                )[];
+                /**
+                 * Format: integer
+                 * @description Number of times a schedule triggers per hour, value must be between 1 and 60
+                 */
+                "per-hour": number;
+              };
+        };
+      };
+    };
+    responses: {
+      /** @description A schedule object. */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /**
+             * User
+             * @description The attribution actor who will run the scheduled pipeline.
+             */
+            actor: {
+              /** @description URL to the user's avatar on the VCS */
+              avatar_url: string;
+              /**
+               * Format: uuid
+               * @description The unique ID of the user.
+               */
+              id: string;
+              /**
+               * Login
+               * @description The login information for the user on the VCS.
+               */
+              login: string;
+              /** @description The name of the user. */
+              name: string;
+            };
+            /**
+             * Format: date-time
+             * @description The date and time the pipeline was created.
+             */
+            "created-at": string;
+            /** @description Description of the schedule. */
+            description: string;
+            /**
+             * Format: uuid
+             * @description The unique ID of the schedule.
+             */
+            id: string;
+            /** @description Name of the schedule. */
+            name: string;
+            /**
+             * @description Pipeline parameters represented as key-value pairs. Must contain branch or tag.
+             * @example {
+             *       "branch": "feature/design-new-api",
+             *       "deploy_prod": true
+             *     }
+             */
+            parameters: {
+              [key: string]: number | string | boolean;
+            };
+            /**
+             * @description The project-slug for the schedule
+             * @example gh/CircleCI-Public/api-preview-docs
+             */
+            "project-slug": string;
+            /** @description Timetable that specifies when a schedule triggers. */
+            timetable:
+              | {
+                  /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
+                  "days-of-month"?: number[];
+                  /** @description Days in a week in which the schedule triggers. */
+                  "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
+                  /** @description Hours in a day in which the schedule triggers. */
+                  "hours-of-day": number[];
+                  /** @description Months in which the schedule triggers. */
+                  months?: (
+                    | "MAR"
+                    | "NOV"
+                    | "DEC"
+                    | "JUN"
+                    | "MAY"
+                    | "OCT"
+                    | "FEB"
+                    | "APR"
+                    | "SEP"
+                    | "AUG"
+                    | "JAN"
+                    | "JUL"
+                  )[];
+                  /**
+                   * Format: integer
+                   * @description Number of times a schedule triggers per hour, value must be between 1 and 60
+                   */
+                  "per-hour": number;
+                }
+              | {
+                  /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
+                  "days-of-month": number[];
+                  /** @description Days in a week in which the schedule triggers. */
+                  "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
+                  /** @description Hours in a day in which the schedule triggers. */
+                  "hours-of-day": number[];
+                  /** @description Months in which the schedule triggers. */
+                  months?: (
+                    | "MAR"
+                    | "NOV"
+                    | "DEC"
+                    | "JUN"
+                    | "MAY"
+                    | "OCT"
+                    | "FEB"
+                    | "APR"
+                    | "SEP"
+                    | "AUG"
+                    | "JAN"
+                    | "JUL"
+                  )[];
+                  /**
+                   * Format: integer
+                   * @description Number of times a schedule triggers per hour, value must be between 1 and 60
+                   */
+                  "per-hour": number;
+                };
+            /**
+             * Format: date-time
+             * @description The date and time the pipeline was last updated.
+             */
+            "updated-at": string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getJobArtifacts: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description The number of the job.
+         * @example 123
+         */
+        "job-number": unknown;
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A paginated list of the job's artifacts. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            items: {
+              /**
+               * Format: int64
+               * @description The index of the node that stored the artifact.
+               */
+              node_index: number;
+              /** @description The artifact path. */
+              path: string;
+              /** @description The URL to download the artifact contents. */
+              url: string;
+            }[];
+            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+            next_page_token: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getTests: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description The number of the job.
+         * @example 123
+         */
+        "job-number": unknown;
+        /**
+         * @description Project slug in the form `vcs-slug/org-name/repo-name`. The `/` characters may be URL-escaped. For projects that use GitLab or GitHub App, use `circleci` as the `vcs-slug`, replace `org-name` with the organization ID (found in Organization Settings), and replace `repo-name` with the project ID (found in Project Settings).
+         * @example gh/CircleCI-Public/api-preview-docs
+         */
+        "project-slug": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A paginated list of test results. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** TestsResponse */
+            items: {
+              /**
+               * @description The programmatic location of the test.
+               * @example
+               */
+              classname: string;
+              /**
+               * @description The file in which the test is defined.
+               * @example
+               */
+              file: string;
+              /**
+               * @description The failure message associated with the test.
+               * @example
+               */
+              message: string;
+              /**
+               * @description The name of the test.
+               * @example
+               */
+              name: string;
+              /**
+               * @description Indication of whether the test succeeded.
+               * @example
+               */
+              result: string;
+              /**
+               * Format: double
+               * @description The time it took to run the test in seconds
+               * @example
+               */
+              run_time: number;
+              /**
+               * @description The program that generated the test results
+               * @example
+               */
+              source: string;
+            }[];
+            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+            next_page_token: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  createProject1: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description The first segment of the slash-separated project slug, as shown in Project Settings > Overview.
+         * @example gh
+         */
+        provider: components["parameters"]["provider"];
+        /**
+         * @description The second segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the org name (e.g. `my-org`) or an ID (e.g. `43G3lM5RtfFE7v5sa4nWAU`).
+         * @example CircleCI-Public
+         */
+        organization: components["parameters"]["organization"];
+        /**
+         * @description The third segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the project name (e.g. `my-project`) or an ID (e.g. `44n9wujWcTnVZ2b5S8Fnat`).
+         * @example api-preview-docs
+         */
+        project: components["parameters"]["project"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful response. */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["project_settings"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      401: components["responses"]["401_invalid_token"];
+      403: components["responses"]["403_permission_denied"];
+      /** @description Either a branch or a project were not found. */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+      405: components["responses"]["405_cannot_create_standalone_project"];
+      429: components["responses"]["429_rate_limit_exceeded"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  triggerPipelineRun: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description The first segment of the slash-separated project slug, as shown in Project Settings > Overview.
+         * @example gh
+         */
+        provider: components["parameters"]["providerNoGitlab"];
+        /**
+         * @description The second segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the org name (e.g. `my-org`) or an ID (e.g. `43G3lM5RtfFE7v5sa4nWAU`).
+         * @example CircleCI-Public
+         */
+        organization: components["parameters"]["organization"];
+        /**
+         * @description The third segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the project name (e.g. `my-project`) or an ID (e.g. `44n9wujWcTnVZ2b5S8Fnat`).
+         * @example api-preview-docs
+         */
+        project: components["parameters"]["project"];
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": components["schemas"]["triggerPipelineRequest"];
+      };
+    };
+    responses: {
+      /** @description Successful response with no created pipeline. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["pipelineNotTriggeredResponse"];
+        };
+      };
+      /** @description Successful response. */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["pipelineTriggeredResponse"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+    };
+  };
+  getProjectSettings: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description The first segment of the slash-separated project slug, as shown in Project Settings > Overview.
+         * @example gh
+         */
+        provider: components["parameters"]["provider"];
+        /**
+         * @description The second segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the org name (e.g. `my-org`) or an ID (e.g. `43G3lM5RtfFE7v5sa4nWAU`).
+         * @example CircleCI-Public
+         */
+        organization: components["parameters"]["organization"];
+        /**
+         * @description The third segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the project name (e.g. `my-project`) or an ID (e.g. `44n9wujWcTnVZ2b5S8Fnat`).
+         * @example api-preview-docs
+         */
+        project: components["parameters"]["project"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful response. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["project_settings"];
+        };
+      };
+      401: components["responses"]["401_invalid_token"];
+      403: components["responses"]["403_permission_denied"];
+      404: components["responses"]["404_project_not_found"];
+      429: components["responses"]["429_rate_limit_exceeded"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  patchProjectSettings: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description The first segment of the slash-separated project slug, as shown in Project Settings > Overview.
+         * @example gh
+         */
+        provider: components["parameters"]["provider"];
+        /**
+         * @description The second segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the org name (e.g. `my-org`) or an ID (e.g. `43G3lM5RtfFE7v5sa4nWAU`).
+         * @example CircleCI-Public
+         */
+        organization: components["parameters"]["organization"];
+        /**
+         * @description The third segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the project name (e.g. `my-project`) or an ID (e.g. `44n9wujWcTnVZ2b5S8Fnat`).
+         * @example api-preview-docs
+         */
+        project: components["parameters"]["project"];
+      };
+      cookie?: never;
+    };
+    /** @description The setting(s) to update, including one or more fields in the JSON object. Note that `oss: true` will only be set on projects whose underlying repositories are actually open source. */
+    requestBody: {
+      content: {
+        /**
+         * @example {
+         *       "advanced": {
+         *         "autocancel_builds": false,
+         *         "build_prs_only": true,
+         *         "pr_only_branch_overrides": [
+         *           "main"
+         *         ]
+         *       }
+         *     }
+         */
+        "application/json": components["schemas"]["project_settings"];
+      };
+    };
+    responses: {
+      /** @description Successful response. Always includes the full advanced settings object. Returned even when the provided updates match the existing settings, but can also be returned when `oss: true` fails to set. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["project_settings"];
+        };
+      };
+      /** @description Request is malformed, e.g. with improperly encoded JSON */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+      401: components["responses"]["401_invalid_token"];
+      403: components["responses"]["403_permission_denied"];
+      404: components["responses"]["404_project_not_found"];
+      429: components["responses"]["429_rate_limit_exceeded"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  listPipelineDefinitions: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a project.
+         * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+         */
+        project_id: components["parameters"]["project_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful response. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["pipelineDefinitionList"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  createPipelineDefinition: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a project.
+         * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+         */
+        project_id: components["parameters"]["project_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": components["schemas"]["createPipelineDefinitionRequest"];
+      };
+    };
+    responses: {
+      /** @description Successful response. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["pipelineDefinition"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  getPipelineDefinition: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a project.
+         * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+         */
+        project_id: components["parameters"]["project_id"];
+        /**
+         * @description An opaque identifier of a pipeline definition.
+         * @example 6cb29b00-8e02-4357-8bc0-313983bf1f46
+         */
+        pipeline_definition_id: components["parameters"]["pipeline_definition_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful response. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["pipelineDefinition"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  deletePipelineDefinition: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a project.
+         * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+         */
+        project_id: components["parameters"]["project_id"];
+        /**
+         * @description An opaque identifier of a pipeline definition.
+         * @example 6cb29b00-8e02-4357-8bc0-313983bf1f46
+         */
+        pipeline_definition_id: components["parameters"]["pipeline_definition_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful response. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["pipelineDefinitionDeleted"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  updatePipelineDefinition: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a project.
+         * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+         */
+        project_id: components["parameters"]["project_id"];
+        /**
+         * @description An opaque identifier of a pipeline definition.
+         * @example 6cb29b00-8e02-4357-8bc0-313983bf1f46
+         */
+        pipeline_definition_id: components["parameters"]["pipeline_definition_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": components["schemas"]["updatePipelineDefinitionRequest"];
+      };
+    };
+    responses: {
+      /** @description Successful response. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["pipelineDefinition"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  listPipelineDefinitionTriggers: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a project.
+         * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+         */
+        project_id: components["parameters"]["project_id"];
+        /**
+         * @description An opaque identifier of a pipeline definition.
+         * @example 6cb29b00-8e02-4357-8bc0-313983bf1f46
+         */
+        pipeline_definition_id: components["parameters"]["pipeline_definition_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful response. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["triggerList"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  createTrigger: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a project.
+         * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+         */
+        project_id: components["parameters"]["project_id"];
+        /**
+         * @description An opaque identifier of a pipeline definition.
+         * @example 6cb29b00-8e02-4357-8bc0-313983bf1f46
+         */
+        pipeline_definition_id: components["parameters"]["pipeline_definition_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": components["schemas"]["createTriggerRequest"];
+      };
+    };
+    responses: {
+      /** @description Successful response. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["trigger"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  rollbackProject: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a project.
+         * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+         */
+        project_id: components["parameters"]["project_id"];
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["rollbackProjectRequest"];
+      };
+    };
+    responses: {
+      /** @description Rollback request accepted. */
+      202: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["rollbackProjectResponse"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      404: components["responses"]["404_entity_not_found"];
+      409: components["responses"]["409_entity_conflict"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  getTrigger: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a project.
+         * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+         */
+        project_id: components["parameters"]["project_id"];
+        /**
+         * @description An opaque identifier of a trigger.
+         * @example bbea3a3d-4686-48b6-8d2d-2a14ace3913c
+         */
+        trigger_id: components["parameters"]["trigger_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful response. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["trigger"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  deleteTrigger: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a project.
+         * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+         */
+        project_id: components["parameters"]["project_id"];
+        /**
+         * @description An opaque identifier of a trigger.
+         * @example bbea3a3d-4686-48b6-8d2d-2a14ace3913c
+         */
+        trigger_id: components["parameters"]["trigger_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful response. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["triggerDeleted"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  updateTrigger: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description An opaque identifier of a project.
+         * @example 39723015-b399-4601-9ff6-bd1bfbed8fa8
+         */
+        project_id: components["parameters"]["project_id"];
+        /**
+         * @description An opaque identifier of a trigger.
+         * @example bbea3a3d-4686-48b6-8d2d-2a14ace3913c
+         */
+        trigger_id: components["parameters"]["trigger_id"];
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": components["schemas"]["updateTriggerRequest"];
+      };
+    };
+    responses: {
+      /** @description Successful response. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["trigger"];
+        };
+      };
+      400: components["responses"]["400_unexpected_request_body"];
+      401: components["responses"]["401_invalid_token"];
+      404: components["responses"]["404_entity_not_found"];
+      500: components["responses"]["500_internal_server_error"];
+    };
+  };
+  getScheduleById: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description The unique ID of the schedule. */
+        "schedule-id": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A schedule object. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /**
+             * User
+             * @description The attribution actor who will run the scheduled pipeline.
+             */
+            actor: {
+              /** @description URL to the user's avatar on the VCS */
+              avatar_url: string;
+              /**
+               * Format: uuid
+               * @description The unique ID of the user.
+               */
+              id: string;
+              /**
+               * Login
+               * @description The login information for the user on the VCS.
+               */
+              login: string;
+              /** @description The name of the user. */
+              name: string;
+            };
+            /**
+             * Format: date-time
+             * @description The date and time the pipeline was created.
+             */
+            "created-at": string;
+            /** @description Description of the schedule. */
+            description: string;
+            /**
+             * Format: uuid
+             * @description The unique ID of the schedule.
+             */
+            id: string;
+            /** @description Name of the schedule. */
+            name: string;
+            /**
+             * @description Pipeline parameters represented as key-value pairs. Must contain branch or tag.
+             * @example {
+             *       "branch": "feature/design-new-api",
+             *       "deploy_prod": true
+             *     }
+             */
+            parameters: {
+              [key: string]: number | string | boolean;
+            };
+            /**
+             * @description The project-slug for the schedule
+             * @example gh/CircleCI-Public/api-preview-docs
+             */
+            "project-slug": string;
+            /** @description Timetable that specifies when a schedule triggers. */
+            timetable:
+              | {
+                  /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
+                  "days-of-month"?: number[];
+                  /** @description Days in a week in which the schedule triggers. */
+                  "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
+                  /** @description Hours in a day in which the schedule triggers. */
+                  "hours-of-day": number[];
+                  /** @description Months in which the schedule triggers. */
+                  months?: (
+                    | "MAR"
+                    | "NOV"
+                    | "DEC"
+                    | "JUN"
+                    | "MAY"
+                    | "OCT"
+                    | "FEB"
+                    | "APR"
+                    | "SEP"
+                    | "AUG"
+                    | "JAN"
+                    | "JUL"
+                  )[];
+                  /**
+                   * Format: integer
+                   * @description Number of times a schedule triggers per hour, value must be between 1 and 60
+                   */
+                  "per-hour": number;
+                }
+              | {
+                  /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
+                  "days-of-month": number[];
+                  /** @description Days in a week in which the schedule triggers. */
+                  "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
+                  /** @description Hours in a day in which the schedule triggers. */
+                  "hours-of-day": number[];
+                  /** @description Months in which the schedule triggers. */
+                  months?: (
+                    | "MAR"
+                    | "NOV"
+                    | "DEC"
+                    | "JUN"
+                    | "MAY"
+                    | "OCT"
+                    | "FEB"
+                    | "APR"
+                    | "SEP"
+                    | "AUG"
+                    | "JAN"
+                    | "JUL"
+                  )[];
+                  /**
+                   * Format: integer
+                   * @description Number of times a schedule triggers per hour, value must be between 1 and 60
+                   */
+                  "per-hour": number;
+                };
+            /**
+             * Format: date-time
+             * @description The date and time the pipeline was last updated.
+             */
+            "updated-at": string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  deleteScheduleById: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description The unique ID of the schedule. */
+        "schedule-id": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A confirmation message. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A human-readable message */
+            message: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  updateSchedule: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description The unique ID of the schedule. */
+        "schedule-id": string;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": {
+          /**
+           * @description The attribution-actor of the scheduled pipeline.
+           * @example current
+           * @enum {string}
+           */
+          "attribution-actor"?: "current" | "system";
+          /** @description Description of the schedule. */
+          description?: string;
+          /** @description Name of the schedule. */
+          name?: string;
+          /**
+           * @description Pipeline parameters represented as key-value pairs. Must contain branch or tag.
+           * @example {
+           *       "branch": "feature/design-new-api",
+           *       "deploy_prod": true
+           *     }
+           */
+          parameters?: {
+            [key: string]: number | string | boolean;
+          };
+          /** @description Timetable that specifies when a schedule triggers. */
+          timetable?: {
+            /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
+            "days-of-month"?: number[];
+            /** @description Days in a week in which the schedule triggers. */
+            "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
+            /** @description Hours in a day in which the schedule triggers. */
+            "hours-of-day"?: number[];
+            /** @description Months in which the schedule triggers. */
+            months?: (
+              | "MAR"
+              | "NOV"
+              | "DEC"
+              | "JUN"
+              | "MAY"
+              | "OCT"
+              | "FEB"
+              | "APR"
+              | "SEP"
+              | "AUG"
+              | "JAN"
+              | "JUL"
+            )[];
+            /**
+             * Format: integer
+             * @description Number of times a schedule triggers per hour, value must be between 1 and 60
+             */
+            "per-hour"?: number;
+          };
+        };
+      };
+    };
+    responses: {
+      /** @description A schedule object. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /**
+             * User
+             * @description The attribution actor who will run the scheduled pipeline.
+             */
+            actor: {
+              /** @description URL to the user's avatar on the VCS */
+              avatar_url: string;
+              /**
+               * Format: uuid
+               * @description The unique ID of the user.
+               */
+              id: string;
+              /**
+               * Login
+               * @description The login information for the user on the VCS.
+               */
+              login: string;
+              /** @description The name of the user. */
+              name: string;
+            };
+            /**
+             * Format: date-time
+             * @description The date and time the pipeline was created.
+             */
+            "created-at": string;
+            /** @description Description of the schedule. */
+            description: string;
+            /**
+             * Format: uuid
+             * @description The unique ID of the schedule.
+             */
+            id: string;
+            /** @description Name of the schedule. */
+            name: string;
+            /**
+             * @description Pipeline parameters represented as key-value pairs. Must contain branch or tag.
+             * @example {
+             *       "branch": "feature/design-new-api",
+             *       "deploy_prod": true
+             *     }
+             */
+            parameters: {
+              [key: string]: number | string | boolean;
+            };
+            /**
+             * @description The project-slug for the schedule
+             * @example gh/CircleCI-Public/api-preview-docs
+             */
+            "project-slug": string;
+            /** @description Timetable that specifies when a schedule triggers. */
+            timetable:
+              | {
+                  /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
+                  "days-of-month"?: number[];
+                  /** @description Days in a week in which the schedule triggers. */
+                  "days-of-week": ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
+                  /** @description Hours in a day in which the schedule triggers. */
+                  "hours-of-day": number[];
+                  /** @description Months in which the schedule triggers. */
+                  months?: (
+                    | "MAR"
+                    | "NOV"
+                    | "DEC"
+                    | "JUN"
+                    | "MAY"
+                    | "OCT"
+                    | "FEB"
+                    | "APR"
+                    | "SEP"
+                    | "AUG"
+                    | "JAN"
+                    | "JUL"
+                  )[];
+                  /**
+                   * Format: integer
+                   * @description Number of times a schedule triggers per hour, value must be between 1 and 60
+                   */
+                  "per-hour": number;
+                }
+              | {
+                  /** @description Days in a month in which the schedule triggers. This is mutually exclusive with days in a week. */
+                  "days-of-month": number[];
+                  /** @description Days in a week in which the schedule triggers. */
+                  "days-of-week"?: ("TUE" | "SAT" | "SUN" | "MON" | "THU" | "WED" | "FRI")[];
+                  /** @description Hours in a day in which the schedule triggers. */
+                  "hours-of-day": number[];
+                  /** @description Months in which the schedule triggers. */
+                  months?: (
+                    | "MAR"
+                    | "NOV"
+                    | "DEC"
+                    | "JUN"
+                    | "MAY"
+                    | "OCT"
+                    | "FEB"
+                    | "APR"
+                    | "SEP"
+                    | "AUG"
+                    | "JAN"
+                    | "JUL"
+                  )[];
+                  /**
+                   * Format: integer
+                   * @description Number of times a schedule triggers per hour, value must be between 1 and 60
+                   */
+                  "per-hour": number;
+                };
+            /**
+             * Format: date-time
+             * @description The date and time the pipeline was last updated.
+             */
+            "updated-at": string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getUser: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description The unique ID of the user. */
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description User login information. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description URL to the user's avatar on the VCS */
+            avatar_url: string;
+            /**
+             * Format: uuid
+             * @description The unique ID of the user.
+             */
+            id: string;
+            /**
+             * Login
+             * @description The login information for the user on the VCS.
+             */
+            login: string;
+            /** @description The name of the user. */
+            name: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getWebhooks: {
+    parameters: {
+      query: {
+        /** @description ID of the scope being used (at the moment, only project ID is supported) */
+        "scope-id": string;
+        /** @description Type of the scope being used */
+        "scope-type": "project";
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A list of webhooks */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            items: {
+              /**
+               * Format: date-time
+               * @description The date and time the webhook was created.
+               * @example 2015-09-21T17:29:21.042Z
+               */
+              "created-at": string;
+              /** @description Events that will trigger the webhook */
+              events: ("workflow-completed" | "job-completed")[];
+              /**
+               * Format: uuid
+               * @description The unique ID of the webhook
+               */
+              id: string;
+              /** @description Name of the webhook */
+              name: string;
+              /** @description The scope in which the relevant events that will trigger webhooks */
+              scope: {
+                /**
+                 * Format: uuid
+                 * @description ID of the scope being used (at the moment, only project ID is supported)
+                 */
+                id: string;
                 /** @description Type of the scope being used */
-                "scope-type": "project";
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+                type: string;
+              };
+              /** @description Masked value of the secret used to build an HMAC hash of the payload and passed as a header in the webhook request */
+              "signing-secret": string;
+              /**
+               * Format: date-time
+               * @description The date and time the webhook was last updated.
+               * @example 2015-09-21T17:29:21.042Z
+               */
+              "updated-at": string;
+              /** @description URL to deliver the webhook to. Note: protocol must be included as well (only https is supported) */
+              url: string;
+              /** @description Whether to enforce TLS certificate verification when delivering the webhook */
+              "verify-tls": boolean;
+            }[];
+            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+            next_page_token: string;
+          };
         };
-        requestBody?: never;
-        responses: {
-            /** @description A list of webhooks */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            /**
-                             * Format: date-time
-                             * @description The date and time the webhook was created.
-                             * @example 2015-09-21T17:29:21.042Z
-                             */
-                            "created-at": string;
-                            /** @description Events that will trigger the webhook */
-                            events: ("workflow-completed" | "job-completed")[];
-                            /**
-                             * Format: uuid
-                             * @description The unique ID of the webhook
-                             */
-                            id: string;
-                            /** @description Name of the webhook */
-                            name: string;
-                            /** @description The scope in which the relevant events that will trigger webhooks */
-                            scope: {
-                                /**
-                                 * Format: uuid
-                                 * @description ID of the scope being used (at the moment, only project ID is supported)
-                                 */
-                                id: string;
-                                /** @description Type of the scope being used */
-                                type: string;
-                            };
-                            /** @description Masked value of the secret used to build an HMAC hash of the payload and passed as a header in the webhook request */
-                            "signing-secret": string;
-                            /**
-                             * Format: date-time
-                             * @description The date and time the webhook was last updated.
-                             * @example 2015-09-21T17:29:21.042Z
-                             */
-                            "updated-at": string;
-                            /** @description URL to deliver the webhook to. Note: protocol must be included as well (only https is supported) */
-                            url: string;
-                            /** @description Whether to enforce TLS certificate verification when delivering the webhook */
-                            "verify-tls": boolean;
-                        }[];
-                        /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-                        next_page_token: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
         };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
     };
-    createWebhook: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    /** @description Events that will trigger the webhook */
-                    events: ("workflow-completed" | "job-completed")[];
-                    /** @description Name of the webhook */
-                    name: string;
-                    /** @description The scope in which the relevant events that will trigger webhooks */
-                    scope: {
-                        /**
-                         * Format: uuid
-                         * @description ID of the scope being used (at the moment, only project ID is supported)
-                         */
-                        id: string;
-                        /**
-                         * @description Type of the scope being used
-                         * @enum {string}
-                         */
-                        type: "project";
-                    };
-                    /** @description Secret used to build an HMAC hash of the payload and passed as a header in the webhook request */
-                    "signing-secret": string;
-                    /** @description URL to deliver the webhook to. Note: protocol must be included as well (only https is supported) */
-                    url: string;
-                    /** @description Whether to enforce TLS certificate verification when delivering the webhook */
-                    "verify-tls": boolean;
-                };
-            };
-        };
-        responses: {
-            /** @description A webhook */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * Format: date-time
-                         * @description The date and time the webhook was created.
-                         * @example 2015-09-21T17:29:21.042Z
-                         */
-                        "created-at": string;
-                        /** @description Events that will trigger the webhook */
-                        events: ("workflow-completed" | "job-completed")[];
-                        /**
-                         * Format: uuid
-                         * @description The unique ID of the webhook
-                         */
-                        id: string;
-                        /** @description Name of the webhook */
-                        name: string;
-                        /** @description The scope in which the relevant events that will trigger webhooks */
-                        scope: {
-                            /**
-                             * Format: uuid
-                             * @description ID of the scope being used (at the moment, only project ID is supported)
-                             */
-                            id: string;
-                            /** @description Type of the scope being used */
-                            type: string;
-                        };
-                        /** @description Masked value of the secret used to build an HMAC hash of the payload and passed as a header in the webhook request */
-                        "signing-secret": string;
-                        /**
-                         * Format: date-time
-                         * @description The date and time the webhook was last updated.
-                         * @example 2015-09-21T17:29:21.042Z
-                         */
-                        "updated-at": string;
-                        /** @description URL to deliver the webhook to. Note: protocol must be included as well (only https is supported) */
-                        url: string;
-                        /** @description Whether to enforce TLS certificate verification when delivering the webhook */
-                        "verify-tls": boolean;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
+  };
+  createWebhook: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    getWebhookById: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description ID of the webhook (UUID) */
-                "webhook-id": string;
-            };
-            cookie?: never;
+    requestBody?: {
+      content: {
+        "application/json": {
+          /** @description Events that will trigger the webhook */
+          events: ("workflow-completed" | "job-completed")[];
+          /** @description Name of the webhook */
+          name: string;
+          /** @description The scope in which the relevant events that will trigger webhooks */
+          scope: {
+            /**
+             * Format: uuid
+             * @description ID of the scope being used (at the moment, only project ID is supported)
+             */
+            id: string;
+            /**
+             * @description Type of the scope being used
+             * @enum {string}
+             */
+            type: "project";
+          };
+          /** @description Secret used to build an HMAC hash of the payload and passed as a header in the webhook request */
+          "signing-secret": string;
+          /** @description URL to deliver the webhook to. Note: protocol must be included as well (only https is supported) */
+          url: string;
+          /** @description Whether to enforce TLS certificate verification when delivering the webhook */
+          "verify-tls": boolean;
         };
-        requestBody?: never;
-        responses: {
-            /** @description A webhook */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * Format: date-time
-                         * @description The date and time the webhook was created.
-                         * @example 2015-09-21T17:29:21.042Z
-                         */
-                        "created-at": string;
-                        /** @description Events that will trigger the webhook */
-                        events: ("workflow-completed" | "job-completed")[];
-                        /**
-                         * Format: uuid
-                         * @description The unique ID of the webhook
-                         */
-                        id: string;
-                        /** @description Name of the webhook */
-                        name: string;
-                        /** @description The scope in which the relevant events that will trigger webhooks */
-                        scope: {
-                            /**
-                             * Format: uuid
-                             * @description ID of the scope being used (at the moment, only project ID is supported)
-                             */
-                            id: string;
-                            /** @description Type of the scope being used */
-                            type: string;
-                        };
-                        /** @description Masked value of the secret used to build an HMAC hash of the payload and passed as a header in the webhook request */
-                        "signing-secret": string;
-                        /**
-                         * Format: date-time
-                         * @description The date and time the webhook was last updated.
-                         * @example 2015-09-21T17:29:21.042Z
-                         */
-                        "updated-at": string;
-                        /** @description URL to deliver the webhook to. Note: protocol must be included as well (only https is supported) */
-                        url: string;
-                        /** @description Whether to enforce TLS certificate verification when delivering the webhook */
-                        "verify-tls": boolean;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
+      };
     };
-    updateWebhook: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description ID of the webhook (UUID) */
-                "webhook-id": string;
-            };
-            cookie?: never;
+    responses: {
+      /** @description A webhook */
+      201: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    /** @description Events that will trigger the webhook */
-                    events?: ("workflow-completed" | "job-completed")[];
-                    /** @description Name of the webhook */
-                    name?: string;
-                    /** @description Secret used to build an HMAC hash of the payload and passed as a header in the webhook request */
-                    "signing-secret"?: string;
-                    /** @description URL to deliver the webhook to. Note: protocol must be included as well (only https is supported) */
-                    url?: string;
-                    /** @description Whether to enforce TLS certificate verification when delivering the webhook */
-                    "verify-tls"?: boolean;
-                };
+        content: {
+          "application/json": {
+            /**
+             * Format: date-time
+             * @description The date and time the webhook was created.
+             * @example 2015-09-21T17:29:21.042Z
+             */
+            "created-at": string;
+            /** @description Events that will trigger the webhook */
+            events: ("workflow-completed" | "job-completed")[];
+            /**
+             * Format: uuid
+             * @description The unique ID of the webhook
+             */
+            id: string;
+            /** @description Name of the webhook */
+            name: string;
+            /** @description The scope in which the relevant events that will trigger webhooks */
+            scope: {
+              /**
+               * Format: uuid
+               * @description ID of the scope being used (at the moment, only project ID is supported)
+               */
+              id: string;
+              /** @description Type of the scope being used */
+              type: string;
             };
+            /** @description Masked value of the secret used to build an HMAC hash of the payload and passed as a header in the webhook request */
+            "signing-secret": string;
+            /**
+             * Format: date-time
+             * @description The date and time the webhook was last updated.
+             * @example 2015-09-21T17:29:21.042Z
+             */
+            "updated-at": string;
+            /** @description URL to deliver the webhook to. Note: protocol must be included as well (only https is supported) */
+            url: string;
+            /** @description Whether to enforce TLS certificate verification when delivering the webhook */
+            "verify-tls": boolean;
+          };
         };
-        responses: {
-            /** @description A webhook */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * Format: date-time
-                         * @description The date and time the webhook was created.
-                         * @example 2015-09-21T17:29:21.042Z
-                         */
-                        "created-at": string;
-                        /** @description Events that will trigger the webhook */
-                        events: ("workflow-completed" | "job-completed")[];
-                        /**
-                         * Format: uuid
-                         * @description The unique ID of the webhook
-                         */
-                        id: string;
-                        /** @description Name of the webhook */
-                        name: string;
-                        /** @description The scope in which the relevant events that will trigger webhooks */
-                        scope: {
-                            /**
-                             * Format: uuid
-                             * @description ID of the scope being used (at the moment, only project ID is supported)
-                             */
-                            id: string;
-                            /** @description Type of the scope being used */
-                            type: string;
-                        };
-                        /** @description Masked value of the secret used to build an HMAC hash of the payload and passed as a header in the webhook request */
-                        "signing-secret": string;
-                        /**
-                         * Format: date-time
-                         * @description The date and time the webhook was last updated.
-                         * @example 2015-09-21T17:29:21.042Z
-                         */
-                        "updated-at": string;
-                        /** @description URL to deliver the webhook to. Note: protocol must be included as well (only https is supported) */
-                        url: string;
-                        /** @description Whether to enforce TLS certificate verification when delivering the webhook */
-                        "verify-tls": boolean;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
         };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
     };
-    deleteWebhook: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description ID of the webhook (UUID) */
-                "webhook-id": string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A confirmation message */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A human-readable message */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
+  };
+  getWebhookById: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description ID of the webhook (UUID) */
+        "webhook-id": string;
+      };
+      cookie?: never;
     };
-    getWorkflowById: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The unique ID of the workflow.
-                 * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                 */
-                id: string;
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description A webhook */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description A workflow object. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * Format: int64
-                         * @description Present if this workflow was auto-rerun from a previous workflow. The Nth auto-rerun workflow will have auto_rerun_number N
-                         * @example 1
-                         */
-                        auto_rerun_number?: number;
-                        /** Format: uuid */
-                        canceled_by?: string;
-                        /**
-                         * Format: date-time
-                         * @description The date and time the workflow was created.
-                         */
-                        created_at: string;
-                        /** Format: uuid */
-                        errored_by?: string;
-                        /**
-                         * Format: uuid
-                         * @description The unique ID of the workflow.
-                         */
-                        id: string;
-                        /**
-                         * Format: int64
-                         * @description The maximum number of auto reruns specified for the workflow.
-                         * @example 5
-                         */
-                        max_auto_reruns?: number;
-                        /**
-                         * @description The name of the workflow.
-                         * @example build-and-test
-                         */
-                        name: string;
-                        /**
-                         * Format: uuid
-                         * @description The ID of the pipeline this workflow belongs to.
-                         * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                         */
-                        pipeline_id: string;
-                        /**
-                         * Format: int64
-                         * @description The number of the pipeline this workflow belongs to.
-                         * @example 25
-                         */
-                        pipeline_number: number;
-                        /**
-                         * @description The project-slug for the pipeline this workflow belongs to.
-                         * @example gh/CircleCI-Public/api-preview-docs
-                         */
-                        project_slug: string;
-                        /** Format: uuid */
-                        started_by: string;
-                        /**
-                         * @description The current status of the workflow.
-                         * @enum {string}
-                         */
-                        status: "success" | "running" | "not_run" | "failed" | "error" | "failing" | "on_hold" | "canceled" | "unauthorized";
-                        /**
-                         * Format: date-time
-                         * @description The date and time the workflow stopped.
-                         */
-                        stopped_at: string;
-                        /**
-                         * @description Tag used for the workflow
-                         * @example setup
-                         * @enum {string}
-                         */
-                        tag?: "setup";
-                    };
-                };
+        content: {
+          "application/json": {
+            /**
+             * Format: date-time
+             * @description The date and time the webhook was created.
+             * @example 2015-09-21T17:29:21.042Z
+             */
+            "created-at": string;
+            /** @description Events that will trigger the webhook */
+            events: ("workflow-completed" | "job-completed")[];
+            /**
+             * Format: uuid
+             * @description The unique ID of the webhook
+             */
+            id: string;
+            /** @description Name of the webhook */
+            name: string;
+            /** @description The scope in which the relevant events that will trigger webhooks */
+            scope: {
+              /**
+               * Format: uuid
+               * @description ID of the scope being used (at the moment, only project ID is supported)
+               */
+              id: string;
+              /** @description Type of the scope being used */
+              type: string;
             };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
+            /** @description Masked value of the secret used to build an HMAC hash of the payload and passed as a header in the webhook request */
+            "signing-secret": string;
+            /**
+             * Format: date-time
+             * @description The date and time the webhook was last updated.
+             * @example 2015-09-21T17:29:21.042Z
+             */
+            "updated-at": string;
+            /** @description URL to deliver the webhook to. Note: protocol must be included as well (only https is supported) */
+            url: string;
+            /** @description Whether to enforce TLS certificate verification when delivering the webhook */
+            "verify-tls": boolean;
+          };
         };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
     };
-    approvePendingApprovalJobById: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The ID of the job being approved. */
-                approval_request_id: string;
-                /**
-                 * @description The unique ID of the workflow.
-                 * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                 */
-                id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A confirmation message. */
-            202: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A human-readable message */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
+  };
+  updateWebhook: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description ID of the webhook (UUID) */
+        "webhook-id": string;
+      };
+      cookie?: never;
     };
-    cancelWorkflow: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The unique ID of the workflow.
-                 * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                 */
-                id: string;
-            };
-            cookie?: never;
+    requestBody?: {
+      content: {
+        "application/json": {
+          /** @description Events that will trigger the webhook */
+          events?: ("workflow-completed" | "job-completed")[];
+          /** @description Name of the webhook */
+          name?: string;
+          /** @description Secret used to build an HMAC hash of the payload and passed as a header in the webhook request */
+          "signing-secret"?: string;
+          /** @description URL to deliver the webhook to. Note: protocol must be included as well (only https is supported) */
+          url?: string;
+          /** @description Whether to enforce TLS certificate verification when delivering the webhook */
+          "verify-tls"?: boolean;
         };
-        requestBody?: never;
-        responses: {
-            /** @description A confirmation message. */
-            202: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description A human-readable message */
-                        message: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
+      };
     };
-    listWorkflowJobs: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The unique ID of the workflow.
-                 * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                 */
-                id: string;
-            };
-            cookie?: never;
+    responses: {
+      /** @description A webhook */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description A paginated sequence of jobs. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            /**
-                             * Format: uuid
-                             * @description The unique ID of the job.
-                             */
-                            approval_request_id?: string;
-                            /**
-                             * Format: uuid
-                             * @description The unique ID of the user.
-                             */
-                            approved_by?: string;
-                            /**
-                             * Format: uuid
-                             * @description The unique ID of the user.
-                             */
-                            canceled_by?: string;
-                            /** @description A sequence of the unique job IDs for the jobs that this job depends upon in the workflow. */
-                            dependencies: string[];
-                            /**
-                             * Format: uuid
-                             * @description The unique ID of the job.
-                             */
-                            id: string;
-                            /**
-                             * Format: int64
-                             * @description The number of the job.
-                             * @example 1
-                             */
-                            job_number?: number;
-                            /** @description The name of the job. */
-                            name: string;
-                            /**
-                             * @description The project-slug for the job.
-                             * @example gh/CircleCI-Public/api-preview-docs
-                             */
-                            project_slug: string;
-                            /**
-                             * @description A sequence of the unique jobs and required statuses that this job depends upon in the workflow.
-                             * @example {
-                             *       "74be7583-44de-42a6-be75-8344de52a6f2": [
-                             *         "failed",
-                             *         "canceled"
-                             *       ],
-                             *       "a3349b77-90f7-4a39-b49b-7790f7da3943": [
-                             *         "success",
-                             *         "failed",
-                             *         "canceled"
-                             *       ],
-                             *       "d212e286-9962-4ed7-92e2-8699622ed720": [
-                             *         "success"
-                             *       ]
-                             *     }
-                             */
-                            requires?: {
-                                [key: string]: ("success" | "failed" | "canceled")[];
-                            };
-                            /**
-                             * Format: date-time
-                             * @description The date and time the job started.
-                             */
-                            started_at: string;
-                            /**
-                             * @description The current status of the job.
-                             * @enum {string}
-                             */
-                            status: "success" | "running" | "not_run" | "failed" | "retried" | "queued" | "not_running" | "infrastructure_fail" | "timedout" | "on_hold" | "terminated-unknown" | "blocked" | "canceled" | "unauthorized";
-                            /**
-                             * Format: date-time
-                             * @description The time when the job stopped.
-                             */
-                            stopped_at?: string;
-                            /**
-                             * @description The type of job.
-                             * @enum {string}
-                             */
-                            type: "build" | "approval";
-                        }[];
-                        /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
-                        next_page_token: string;
-                    };
-                };
+        content: {
+          "application/json": {
+            /**
+             * Format: date-time
+             * @description The date and time the webhook was created.
+             * @example 2015-09-21T17:29:21.042Z
+             */
+            "created-at": string;
+            /** @description Events that will trigger the webhook */
+            events: ("workflow-completed" | "job-completed")[];
+            /**
+             * Format: uuid
+             * @description The unique ID of the webhook
+             */
+            id: string;
+            /** @description Name of the webhook */
+            name: string;
+            /** @description The scope in which the relevant events that will trigger webhooks */
+            scope: {
+              /**
+               * Format: uuid
+               * @description ID of the scope being used (at the moment, only project ID is supported)
+               */
+              id: string;
+              /** @description Type of the scope being used */
+              type: string;
             };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
+            /** @description Masked value of the secret used to build an HMAC hash of the payload and passed as a header in the webhook request */
+            "signing-secret": string;
+            /**
+             * Format: date-time
+             * @description The date and time the webhook was last updated.
+             * @example 2015-09-21T17:29:21.042Z
+             */
+            "updated-at": string;
+            /** @description URL to deliver the webhook to. Note: protocol must be included as well (only https is supported) */
+            url: string;
+            /** @description Whether to enforce TLS certificate verification when delivering the webhook */
+            "verify-tls": boolean;
+          };
         };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
     };
-    rerunWorkflow: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The unique ID of the workflow.
-                 * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
-                 */
-                id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    /**
-                     * @description Whether to enable SSH access for the triggering user on the newly-rerun job. Requires the jobs parameter to be used and so is mutually exclusive with the from_failed parameter.
-                     * @example false
-                     */
-                    enable_ssh?: boolean;
-                    /**
-                     * @description Whether to rerun the workflow from the failed job. Mutually exclusive with the jobs parameter.
-                     * @example false
-                     */
-                    from_failed?: boolean;
-                    /**
-                     * @description A list of job IDs to rerun.
-                     * @example [
-                     *       "c65b68ef-e73b-4bf2-be9a-7a322a9df150",
-                     *       "5e957edd-5e8c-4985-9178-5d0d69561822"
-                     *     ]
-                     */
-                    jobs?: string[];
-                    /**
-                     * @description Completes rerun using sparse trees logic, an optimization for workflows that have disconnected subgraphs. Requires jobs parameter and so is mutually exclusive with the from_failed parameter.
-                     * @example false
-                     */
-                    sparse_tree?: boolean;
-                };
-            };
-        };
-        responses: {
-            /** @description A confirmation message. */
-            202: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * Format: uuid
-                         * @description The ID of the newly-created workflow.
-                         * @example 0e53027b-521a-4c40-9042-47e72b3c63a3
-                         */
-                        workflow_id: string;
-                    };
-                };
-            };
-            /** @description Error response. */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        message?: string;
-                    };
-                };
-            };
-        };
+  };
+  deleteWebhook: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description ID of the webhook (UUID) */
+        "webhook-id": string;
+      };
+      cookie?: never;
     };
+    requestBody?: never;
+    responses: {
+      /** @description A confirmation message */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A human-readable message */
+            message: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  getWorkflowById: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description The unique ID of the workflow.
+         * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+         */
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A workflow object. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /**
+             * Format: int64
+             * @description Present if this workflow was auto-rerun from a previous workflow. The Nth auto-rerun workflow will have auto_rerun_number N
+             * @example 1
+             */
+            auto_rerun_number?: number;
+            /** Format: uuid */
+            canceled_by?: string;
+            /**
+             * Format: date-time
+             * @description The date and time the workflow was created.
+             */
+            created_at: string;
+            /** Format: uuid */
+            errored_by?: string;
+            /**
+             * Format: uuid
+             * @description The unique ID of the workflow.
+             */
+            id: string;
+            /**
+             * Format: int64
+             * @description The maximum number of auto reruns specified for the workflow.
+             * @example 5
+             */
+            max_auto_reruns?: number;
+            /**
+             * @description The name of the workflow.
+             * @example build-and-test
+             */
+            name: string;
+            /**
+             * Format: uuid
+             * @description The ID of the pipeline this workflow belongs to.
+             * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+             */
+            pipeline_id: string;
+            /**
+             * Format: int64
+             * @description The number of the pipeline this workflow belongs to.
+             * @example 25
+             */
+            pipeline_number: number;
+            /**
+             * @description The project-slug for the pipeline this workflow belongs to.
+             * @example gh/CircleCI-Public/api-preview-docs
+             */
+            project_slug: string;
+            /** Format: uuid */
+            started_by: string;
+            /**
+             * @description The current status of the workflow.
+             * @enum {string}
+             */
+            status:
+              | "success"
+              | "running"
+              | "not_run"
+              | "failed"
+              | "error"
+              | "failing"
+              | "on_hold"
+              | "canceled"
+              | "unauthorized";
+            /**
+             * Format: date-time
+             * @description The date and time the workflow stopped.
+             */
+            stopped_at: string;
+            /**
+             * @description Tag used for the workflow
+             * @example setup
+             * @enum {string}
+             */
+            tag?: "setup";
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  approvePendingApprovalJobById: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description The ID of the job being approved. */
+        approval_request_id: string;
+        /**
+         * @description The unique ID of the workflow.
+         * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+         */
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A confirmation message. */
+      202: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A human-readable message */
+            message: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  cancelWorkflow: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description The unique ID of the workflow.
+         * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+         */
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A confirmation message. */
+      202: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /** @description A human-readable message */
+            message: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  listWorkflowJobs: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description The unique ID of the workflow.
+         * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+         */
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description A paginated sequence of jobs. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            items: {
+              /**
+               * Format: uuid
+               * @description The unique ID of the job.
+               */
+              approval_request_id?: string;
+              /**
+               * Format: uuid
+               * @description The unique ID of the user.
+               */
+              approved_by?: string;
+              /**
+               * Format: uuid
+               * @description The unique ID of the user.
+               */
+              canceled_by?: string;
+              /** @description A sequence of the unique job IDs for the jobs that this job depends upon in the workflow. */
+              dependencies: string[];
+              /**
+               * Format: uuid
+               * @description The unique ID of the job.
+               */
+              id: string;
+              /**
+               * Format: int64
+               * @description The number of the job.
+               * @example 1
+               */
+              job_number?: number;
+              /** @description The name of the job. */
+              name: string;
+              /**
+               * @description The project-slug for the job.
+               * @example gh/CircleCI-Public/api-preview-docs
+               */
+              project_slug: string;
+              /**
+               * @description A sequence of the unique jobs and required statuses that this job depends upon in the workflow.
+               * @example {
+               *       "74be7583-44de-42a6-be75-8344de52a6f2": [
+               *         "failed",
+               *         "canceled"
+               *       ],
+               *       "a3349b77-90f7-4a39-b49b-7790f7da3943": [
+               *         "success",
+               *         "failed",
+               *         "canceled"
+               *       ],
+               *       "d212e286-9962-4ed7-92e2-8699622ed720": [
+               *         "success"
+               *       ]
+               *     }
+               */
+              requires?: {
+                [key: string]: ("success" | "failed" | "canceled")[];
+              };
+              /**
+               * Format: date-time
+               * @description The date and time the job started.
+               */
+              started_at: string;
+              /**
+               * @description The current status of the job.
+               * @enum {string}
+               */
+              status:
+                | "success"
+                | "running"
+                | "not_run"
+                | "failed"
+                | "retried"
+                | "queued"
+                | "not_running"
+                | "infrastructure_fail"
+                | "timedout"
+                | "on_hold"
+                | "terminated-unknown"
+                | "blocked"
+                | "canceled"
+                | "unauthorized";
+              /**
+               * Format: date-time
+               * @description The time when the job stopped.
+               */
+              stopped_at?: string;
+              /**
+               * @description The type of job.
+               * @enum {string}
+               */
+              type: "build" | "approval";
+            }[];
+            /** @description A token to pass as a `page-token` query parameter to return the next page of results. */
+            next_page_token: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
+  rerunWorkflow: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description The unique ID of the workflow.
+         * @example 5034460f-c7c4-4c43-9457-de07e2029e7b
+         */
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        "application/json": {
+          /**
+           * @description Whether to enable SSH access for the triggering user on the newly-rerun job. Requires the jobs parameter to be used and so is mutually exclusive with the from_failed parameter.
+           * @example false
+           */
+          enable_ssh?: boolean;
+          /**
+           * @description Whether to rerun the workflow from the failed job. Mutually exclusive with the jobs parameter.
+           * @example false
+           */
+          from_failed?: boolean;
+          /**
+           * @description A list of job IDs to rerun.
+           * @example [
+           *       "c65b68ef-e73b-4bf2-be9a-7a322a9df150",
+           *       "5e957edd-5e8c-4985-9178-5d0d69561822"
+           *     ]
+           */
+          jobs?: string[];
+          /**
+           * @description Completes rerun using sparse trees logic, an optimization for workflows that have disconnected subgraphs. Requires jobs parameter and so is mutually exclusive with the from_failed parameter.
+           * @example false
+           */
+          sparse_tree?: boolean;
+        };
+      };
+    };
+    responses: {
+      /** @description A confirmation message. */
+      202: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            /**
+             * Format: uuid
+             * @description The ID of the newly-created workflow.
+             * @example 0e53027b-521a-4c40-9042-47e72b3c63a3
+             */
+            workflow_id: string;
+          };
+        };
+      };
+      /** @description Error response. */
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            message?: string;
+          };
+        };
+      };
+    };
+  };
 }
