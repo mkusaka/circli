@@ -15,7 +15,7 @@ import { oidcCommand } from "./commands/oidc.js";
 import { usageCommand } from "./commands/usage.js";
 
 export const cli = new Command()
-  .name("circleci")
+  .name("circli")
   .version("0.1.0")
   .description("Command line interface for CircleCI")
   .globalOption("--debug", "Enable debug logging")
