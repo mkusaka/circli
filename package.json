@@ -27,7 +27,7 @@
     "zod": "^4.3.5"
   },
   "devDependencies": {
-    "@tsconfig/node22": "^22.0.5",
+    "@tsconfig/node24": "^24.0.0",
     "@types/node": "^25.0.10",
     "msw": "^2.12.7",
     "openapi-typescript": "^7.10.1",
