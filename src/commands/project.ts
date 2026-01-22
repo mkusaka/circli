@@ -4,6 +4,8 @@ import { createClient } from "../utils/api.js";
 import { printJson, printYaml, printTable } from "../utils/output.js";
 import { handleApiError } from "../utils/error.js";
 
+type Provider = "github" | "gh" | "bitbucket" | "bb" | "circleci";
+
 // Environment variables subcommand
 const envCommand = new Command()
   .name("env")
@@ -359,7 +361,7 @@ const settingsCommand = new Command()
     try {
       const response = await client.GET("/project/{provider}/{organization}/{project}/settings", {
         params: {
-          path: { provider, organization, project },
+          path: { provider: provider as Provider, organization, project },
         },
       });
 
@@ -428,7 +430,7 @@ const settingsCommand = new Command()
 
       const response = await client.PATCH("/project/{provider}/{organization}/{project}/settings", {
         params: {
-          path: { provider, organization, project },
+          path: { provider: provider as Provider, organization, project },
         },
         body: { advanced },
       });
@@ -520,7 +522,7 @@ export const projectCommand = new Command()
     try {
       const response = await client.POST("/project/{provider}/{organization}/{project}", {
         params: {
-          path: { provider, organization, project },
+          path: { provider: provider as Provider, organization, project },
         },
       });
 

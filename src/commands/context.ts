@@ -24,9 +24,9 @@ const envCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET("/context/{context-id}/environment-variable", {
+      const response = await client.GET("/context/{context_id}/environment-variable", {
         params: {
-          path: { "context-id": contextId },
+          path: { context_id: contextId },
           query: { "page-token": options.pageToken },
         },
       });
@@ -71,10 +71,10 @@ const envCommand = new Command()
 
     try {
       const response = await client.PUT(
-        "/context/{context-id}/environment-variable/{env-var-name}",
+        "/context/{context_id}/environment-variable/{env_var_name}",
         {
           params: {
-            path: { "context-id": contextId, "env-var-name": name },
+            path: { context_id: contextId, env_var_name: name },
           },
           body: { value },
         },
@@ -112,10 +112,10 @@ const envCommand = new Command()
 
     try {
       const response = await client.DELETE(
-        "/context/{context-id}/environment-variable/{env-var-name}",
+        "/context/{context_id}/environment-variable/{env_var_name}",
         {
           params: {
-            path: { "context-id": contextId, "env-var-name": name },
+            path: { context_id: contextId, env_var_name: name },
           },
         },
       );
@@ -208,7 +208,7 @@ const restrictionCommand = new Command()
         },
         body: {
           project_id: options.projectId,
-          restriction_type: options.restrictionType,
+          restriction_type: options.restrictionType as "project" | "expression" | "group",
           restriction_value: options.restrictionValue,
         },
       });
@@ -407,9 +407,9 @@ export const contextCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.GET("/context/{context-id}", {
+      const response = await client.GET("/context/{context_id}", {
         params: {
-          path: { "context-id": contextId },
+          path: { context_id: contextId },
         },
       });
 
@@ -446,9 +446,9 @@ export const contextCommand = new Command()
     const client = clientResult.value;
 
     try {
-      const response = await client.DELETE("/context/{context-id}", {
+      const response = await client.DELETE("/context/{context_id}", {
         params: {
-          path: { "context-id": contextId },
+          path: { context_id: contextId },
         },
       });
 

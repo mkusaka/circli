@@ -259,11 +259,18 @@ export const pipelineCommand = new Command()
       } else if (options.yaml) {
         printYaml(data);
       } else {
-        console.log(`Pipeline triggered.`);
-        console.log(`ID: ${data.id}`);
-        console.log(`Number: ${data.number}`);
-        console.log(`State: ${data.state}`);
-        console.log(`Created At: ${data.created_at}`);
+        // Check if pipeline was actually triggered (201 response has id, 200 response only has message)
+        if ("id" in data && data.id) {
+          console.log(`Pipeline triggered.`);
+          console.log(`ID: ${data.id}`);
+          console.log(`Number: ${data.number}`);
+          console.log(`State: ${data.state}`);
+          console.log(`Created At: ${data.created_at}`);
+        } else if ("message" in data && data.message) {
+          console.log(`Pipeline not triggered: ${data.message}`);
+        } else {
+          console.log(`Pipeline triggered.`);
+        }
       }
     } catch (error) {
       const handledError = handleApiError(error);
