@@ -16,7 +16,7 @@ import { usageCommand } from "./commands/usage.js";
 
 export const cli = new Command()
   .name("circli")
-  .version("0.1.0")
+  .version("0.0.136")
   .description("Command line interface for CircleCI")
   .globalOption("--debug", "Enable debug logging")
   .command("config", configCommand)
