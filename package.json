@@ -1,6 +1,7 @@
 {
   "name": "circli",
   "version": "0.0.12",
+  "packageManager": "pnpm@10.26.2",
   "description": "cli which implements useful command for circleci",
   "license": "MIT",
   "author": "mkusaka <hinoshita1992@gmail.com>",
