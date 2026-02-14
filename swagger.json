@@ -2116,7 +2116,8 @@
           "only-branch-delete",
           "only-build-pushes-to-non-draft-prs",
           "only-merged-or-closed-prs",
-          "pr-comment-equals-run-ci"
+          "pr-comment-equals-run-ci",
+          "non-draft-pr-opened"
         ],
         "example": "all-pushes",
         "type": "string"
@@ -11639,7 +11640,7 @@
     },
     "/project/{provider}/{organization}/{project}/settings": {
       "get": {
-        "description": "[__EXPERIMENTAL__] Returns a list of the advanced settings for a CircleCI project, whether enabled (true) or not (false).",
+        "description": "Returns a list of the advanced settings for a CircleCI project, whether enabled (true) or not (false).",
         "operationId": "getProjectSettings",
         "responses": {
           "200": {
@@ -11668,7 +11669,7 @@
             "$ref": "#/components/responses/500_internal_server_error"
           }
         },
-        "summary": "🧪 Get project settings",
+        "summary": "Get project settings",
         "tags": ["Project"]
       },
       "parameters": [
@@ -11683,7 +11684,7 @@
         }
       ],
       "patch": {
-        "description": "[__EXPERIMENTAL__] Updates one or more of the advanced settings for a CircleCI project.",
+        "description": "Updates one or more of the advanced settings for a CircleCI project.",
         "operationId": "patchProjectSettings",
         "requestBody": {
           "content": {
@@ -11789,7 +11790,7 @@
             "$ref": "#/components/responses/500_internal_server_error"
           }
         },
-        "summary": "🧪 Update project settings",
+        "summary": "Update project settings",
         "tags": ["Project"]
       }
     },
