@@ -22,7 +22,7 @@
   "dependencies": {
     "@cliffy/command": "npm:@jsr/cliffy__command@1.0.0-rc.8",
     "neverthrow": "^8.2.0",
-    "openapi-fetch": "^0.15.0",
+    "openapi-fetch": "^0.17.0",
     "yaml": "^2.8.2",
     "zod": "^4.3.5"
   },
