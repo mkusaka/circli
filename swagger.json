@@ -2117,7 +2117,8 @@
           "only-build-pushes-to-non-draft-prs",
           "only-merged-or-closed-prs",
           "pr-comment-equals-run-ci",
-          "non-draft-pr-opened"
+          "non-draft-pr-opened",
+          "pushes-to-merge-queues"
         ],
         "example": "all-pushes",
         "type": "string"
