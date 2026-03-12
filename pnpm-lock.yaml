@@ -25,34 +25,34 @@ importers:
         version: 4.3.6
     devDependencies:
       '@tsconfig/node24':
-        specifier: ^24.0.0
+        specifier: 24.0.4
         version: 24.0.4
       '@types/node':
         specifier: ^25.0.10
         version: 25.3.5
       msw:
-        specifier: ^2.12.7
+        specifier: 2.12.10
         version: 2.12.10(@types/node@25.3.5)(typescript@5.9.3)
       openapi-typescript:
-        specifier: ^7.10.1
+        specifier: 7.13.0
         version: 7.13.0(typescript@5.9.3)
       oxfmt:
-        specifier: ^0.36.0
+        specifier: 0.36.0
         version: 0.36.0
       oxlint:
-        specifier: ^1.41.0
+        specifier: 1.51.0
         version: 1.51.0
       sort-json:
-        specifier: ^2.0.1
+        specifier: 2.0.1
         version: 2.0.1
       tsx:
-        specifier: ^4.21.0
+        specifier: 4.21.0
         version: 4.21.0
       typescript:
-        specifier: ^5.9.3
+        specifier: 5.9.3
         version: 5.9.3
       vitest:
-        specifier: ^4.0.17
+        specifier: 4.0.18
         version: 4.0.18(@types/node@25.3.5)(msw@2.12.10(@types/node@25.3.5)(typescript@5.9.3))(tsx@4.21.0)(yaml@2.8.2)
 
 packages:
