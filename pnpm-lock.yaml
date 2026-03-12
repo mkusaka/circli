@@ -28,7 +28,7 @@ importers:
         specifier: 24.0.4
         version: 24.0.4
       '@types/node':
-        specifier: ^25.0.10
+        specifier: 25.3.5
         version: 25.3.5
       msw:
         specifier: 2.12.10
