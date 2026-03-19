@@ -164,6 +164,16 @@
           "type": "string"
         }
       },
+      "namespace_name": {
+        "description": "The name of the registry namespace.",
+        "example": "circleci",
+        "in": "path",
+        "name": "name",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "namespace_path": {
         "description": "The namespace that the Orb belongs to.",
         "example": "circleci",
