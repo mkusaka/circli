@@ -226,6 +226,16 @@
           "type": "string"
         }
       },
+      "otel_exporter_id": {
+        "description": "The ID of an OTLP exporter configuration.",
+        "in": "path",
+        "name": "otel_exporter_id",
+        "required": true,
+        "schema": {
+          "format": "uuid",
+          "type": "string"
+        }
+      },
       "owner_id_query": {
         "description": "The unique ID of the owner of the context. This is the organization ID. Specify either owner/organization ID or the owner/organization slug. Find the organization ID and slug in the CircleCI web app (Organization Settings > Overview). Owner/organization slug is not supported for CircleCI server.",
         "in": "query",
@@ -398,6 +408,41 @@
       }
     },
     "responses": {
+      "400_improper_payload": {
+        "content": {
+          "application/json": {
+            "examples": {
+              "incorrect_type": {
+                "summary": "A field was passed with an incorrect type.",
+                "value": {
+                  "message": "JSON field 'field_name' is of incorrect type."
+                }
+              },
+              "missing_field": {
+                "summary": "A required field was not present.",
+                "value": {
+                  "message": "Missing one or more JSON fields."
+                }
+              },
+              "unexpected_field": {
+                "summary": "An unexpected JSON field was present.",
+                "value": {
+                  "message": "Unexpected JSON field 'field_name'."
+                }
+              }
+            },
+            "schema": {
+              "additionalProperties": false,
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "description": "JSON passed in the request does not adhere to the expected schema."
+      },
       "400_invalid_context_id": {
         "content": {
           "application/json": {
@@ -1234,6 +1279,47 @@
         },
         "type": "object"
       },
+      "createExporterRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "endpoint": {
+            "description": "The OTLP endpoint to send spans to. Don't include https:// or grpc://. Just the hostname and port are required.",
+            "example": "otel.example.com:4317",
+            "type": "string",
+            "x-go-name": "Endpoint"
+          },
+          "headers": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Additional headers to include in export requests.",
+            "type": "object",
+            "x-go-name": "Headers"
+          },
+          "insecure": {
+            "description": "Whether to use an insecure connection to the endpoint.",
+            "example": false,
+            "type": "boolean",
+            "x-go-name": "Insecure"
+          },
+          "org_id": {
+            "description": "The organization ID to create the exporter for.",
+            "example": "b9291e0d-a11e-41fb-8517-c545388b5953",
+            "format": "uuid",
+            "type": "string",
+            "x-go-name": "OrgID"
+          },
+          "protocol": {
+            "description": "The OTLP transport to use when exporting data.",
+            "enum": ["grpc", "http"],
+            "example": "grpc",
+            "type": "string",
+            "x-go-name": "Protocol"
+          }
+        },
+        "required": ["org_id", "endpoint", "protocol"],
+        "type": "object"
+      },
       "createPipelineDefinitionRequest": {
         "additionalProperties": false,
         "properties": {
@@ -1512,6 +1598,59 @@
           }
         },
         "type": "object"
+      },
+      "exporter": {
+        "additionalProperties": false,
+        "properties": {
+          "endpoint": {
+            "description": "The OTLP endpoint to send spans to.",
+            "example": "otel.example.com:4317",
+            "type": "string",
+            "x-go-name": "Endpoint"
+          },
+          "headers": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Additional headers to include in export requests. Header values are encrypted at rest and will appear redacted as \"xxxx\" in responses.",
+            "type": "object",
+            "x-go-name": "Headers"
+          },
+          "id": {
+            "description": "The exporter ID.",
+            "example": "123e4127-e89b-12d3-a456-426123417400",
+            "format": "uuid",
+            "type": "string",
+            "x-go-name": "ID"
+          },
+          "insecure": {
+            "description": "Whether to use an insecure connection to the endpoint.",
+            "example": false,
+            "type": "boolean",
+            "x-go-name": "Insecure"
+          },
+          "org_id": {
+            "description": "The organization ID that owns this exporter.",
+            "example": "b9291e0d-a11e-41fb-8517-c545388b5953",
+            "format": "uuid",
+            "type": "string",
+            "x-go-name": "OrgID"
+          },
+          "protocol": {
+            "description": "The OTLP transport to use when exporting data.",
+            "enum": ["grpc", "http"],
+            "example": "grpc",
+            "type": "string",
+            "x-go-name": "Protocol"
+          }
+        },
+        "type": "object"
+      },
+      "exporterList": {
+        "items": {
+          "$ref": "#/components/schemas/exporter"
+        },
+        "type": "array"
       },
       "get_usage_export_job_status": {
         "additionalProperties": false,
@@ -6879,6 +7018,113 @@
           "$ref": "#/components/parameters/usage_export_job_id"
         }
       ]
+    },
+    "/otel/exporters": {
+      "get": {
+        "description": "[__EXPERIMENTAL__] Returns a list of OTLP exporter configurations for the given organization.",
+        "operationId": "listOtelExporters",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org_id_query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/exporterList"
+                }
+              }
+            },
+            "description": "List of OTLP exporters."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 List OTLP exporters",
+        "tags": ["OTel"]
+      },
+      "post": {
+        "description": "[__EXPERIMENTAL__] Creates a new OTLP exporter configuration for the given organization.",
+        "operationId": "createOtelExporter",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createExporterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/exporter"
+                }
+              }
+            },
+            "description": "OTLP exporter created."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_improper_payload"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 Create an OTLP exporter",
+        "tags": ["OTel"]
+      }
+    },
+    "/otel/exporters/{otel_exporter_id}": {
+      "delete": {
+        "description": "[__EXPERIMENTAL__] Deletes an OTLP exporter configuration by ID.",
+        "operationId": "deleteOtelExporter",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/otel_exporter_id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OTLP exporter deleted."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "🧪 Delete an OTLP exporter",
+        "tags": ["OTel"]
+      }
     },
     "/owner/{ownerID}/context/{context}/decision": {
       "get": {
@@ -13944,7 +14190,13 @@
                             "additionalProperties": {
                               "description": "A sequence of statuses that the job must have one of to satisfy a dependency.",
                               "items": {
-                                "enum": ["success", "failed", "canceled"],
+                                "enum": [
+                                  "success",
+                                  "not_run",
+                                  "failed",
+                                  "canceled",
+                                  "unauthorized"
+                                ],
                                 "type": "string"
                               },
                               "type": "array"
@@ -14211,6 +14463,10 @@
     {
       "description": "Endpoints related to deploy management.",
       "name": "Deploy"
+    },
+    {
+      "description": "[__EXPERIMENTAL__] Endpoints related to managing OpenTelemetry exporter configurations.",
+      "name": "OTel"
     },
     {
       "description": "Endpoints related to creating and managing pipeline definitions.",
