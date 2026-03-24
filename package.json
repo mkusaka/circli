@@ -29,7 +29,7 @@
   "devDependencies": {
     "@tsconfig/node24": "24.0.4",
     "@types/node": "25.5.0",
-    "msw": "2.12.11",
+    "msw": "2.12.12",
     "openapi-typescript": "7.13.0",
     "oxfmt": "0.41.0",
     "oxlint": "1.56.0",
