@@ -1629,6 +1629,14 @@
             "type": "boolean",
             "x-go-name": "Insecure"
           },
+          "issues": {
+            "description": "A list of validation issues detected with this exporter configuration, such as an endpoint that no longer resolves. Only present when issues are detected.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "x-go-name": "Issues"
+          },
           "org_id": {
             "description": "The organization ID that owns this exporter.",
             "example": "b9291e0d-a11e-41fb-8517-c545388b5953",
@@ -7056,7 +7064,7 @@
         "tags": ["OTel"]
       },
       "post": {
-        "description": "[__EXPERIMENTAL__] Creates a new OTLP exporter configuration for the given organization.",
+        "description": "[__EXPERIMENTAL__] Creates a new OTLP exporter configuration for the given organization. A maximum of 5 exporter configurations are allowed per organization.",
         "operationId": "createOtelExporter",
         "requestBody": {
           "content": {
