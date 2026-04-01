@@ -405,6 +405,17 @@
         "schema": {
           "type": "string"
         }
+      },
+      "workflow_id": {
+        "description": "The unique ID of the workflow.",
+        "example": "5034460f-c7c4-4c43-9457-de07e2029e7b",
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "format": "uuid",
+          "type": "string"
+        }
       }
     },
     "responses": {
@@ -506,6 +517,22 @@
           }
         },
         "description": "Context restriction ID provided is invalid."
+      },
+      "400_invalid_workflow_id": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "additionalProperties": false,
+              "properties": {
+                "message": {
+                  "default": "Workflow ID provided is invalid.",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "description": "Workflow ID provided is invalid."
       },
       "400_unexpected_request_body": {
         "content": {
@@ -1420,22 +1447,22 @@
         "additionalProperties": false,
         "properties": {
           "checkout_ref": {
-            "description": "The ref to use when checking out code for pipeline runs created from this trigger. Always required when `event_source.provider` is `webhook`. When `event_source.provider` is `github_app`, only expected if the event source repository (identified by `event_source.provider.repo.external_id`) is different to the checkout source repository of the associated Pipeline Definition. Otherwise, must be omitted.",
+            "description": "The ref to use when checking out code for pipeline runs created from this trigger. Always required when `event_source.provider` is `webhook` or `schedule`. When `event_source.provider` is `github_app`, only expected if the event source repository (identified by `event_source.repo.external_id`) is different to the checkout source repository of the associated Pipeline Definition. Otherwise, must be omitted.",
             "example": "some-checkout-ref",
             "type": "string"
           },
           "config_ref": {
-            "description": "The ref to use when fetching config for pipeline runs created from this trigger. Always required when `event_source.provider` is `webhook`. When `event_source.provider` is `github_app`, only expected if the event source repository (identified by `event_source.provider.repo.external_id`) is different to the config source repository of the associated Pipeline Definition. Otherwise, must be omitted.",
+            "description": "The ref to use when fetching config for pipeline runs created from this trigger. Always required when `event_source.provider` is `webhook` or `schedule`. When `event_source.provider` is `github_app`, only expected if the event source repository (identified by `event_source.repo.external_id`) is different to the config source repository of the associated Pipeline Definition. Otherwise, must be omitted.",
             "example": "some-config-ref",
             "type": "string"
           },
           "disabled": {
-            "description": "Whether the trigger should be disabled upon creation. Not supported for pipeline definitions where `config_source.provider` is `github_oauth`.",
+            "description": "Whether the trigger should be disabled upon creation. Not supported for triggers where `event_source.provider` is `github_oauth`.",
             "example": false,
             "type": "boolean"
           },
           "event_name": {
-            "description": "The name of the triggering event. This should only be set for triggers where `provider` is `webhook`.",
+            "description": "The name of the triggering event. Required when `provider` is `webhook` or `schedule`. Should not be set for other providers.",
             "example": "some-event-name",
             "type": "string"
           },
@@ -1444,10 +1471,10 @@
           },
           "event_source": {
             "additionalProperties": false,
-            "description": "The source of events to use for this trigger. The `repo` object must be specified when `provider` is `github_app` or `github_oauth`, and the `webhook` object may only be specified when `provider` is `webhook`.",
+            "description": "The source of events to use for this trigger. The `repo` object must be specified when `provider` is `github_app` or `github_oauth`, the `webhook` object may only be specified when `provider` is `webhook`, and the `schedule` object must be specified when `provider` is `schedule`.",
             "properties": {
               "provider": {
-                "description": "The integration provider for this resource. Currently `github_app`, `github_oauth`, and `webhook` are the only supported values.",
+                "description": "The integration provider for this resource. Currently `github_app`, `github_oauth`, `webhook`, and `schedule` are the only supported values.",
                 "example": "github_app",
                 "type": "string"
               },
@@ -1464,6 +1491,24 @@
                 "required": ["external_id"],
                 "type": "object"
               },
+              "schedule": {
+                "additionalProperties": false,
+                "description": "Schedule configuration for this trigger. Only applicable when `provider` is `schedule`.",
+                "properties": {
+                  "attribution_actor": {
+                    "description": "The actor to attribute pipeline runs to. Use `current` to attribute runs to the user who created the trigger, or `system` to attribute runs to the CircleCI system actor.",
+                    "enum": ["current", "system"],
+                    "example": "current",
+                    "type": "string"
+                  },
+                  "cron_expression": {
+                    "description": "A cron expression defining when the trigger fires (e.g. `*/5 * * * *` for every 5 minutes).",
+                    "example": "*/5 * * * *",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
               "webhook": {
                 "additionalProperties": false,
                 "description": "Information pertaining to the custom webhook being used as a source of events for this trigger, if applicable.",
@@ -1478,6 +1523,14 @@
               }
             },
             "required": ["provider"],
+            "type": "object"
+          },
+          "parameters": {
+            "additionalProperties": true,
+            "description": "Pipeline parameters to pass when running pipelines from this trigger. Currently only supported for triggers where `event_source.provider` is `schedule`.",
+            "example": {
+              "deploy_env": "staging"
+            },
             "type": "object"
           }
         },
@@ -2112,7 +2165,7 @@
             "type": "string"
           },
           "disabled": {
-            "description": "Whether the trigger is disabled. Not supported for pipeline definitions where `config_source.provider` is `github_oauth`.",
+            "description": "Whether the trigger is disabled. Not supported for triggers where `event_source.provider` is `github_oauth`.",
             "example": false,
             "type": "boolean"
           },
@@ -2126,10 +2179,10 @@
           },
           "event_source": {
             "additionalProperties": false,
-            "description": "The source of events to use for this trigger. Will contain either a `repo` or `webhook` object depending on the `provider`. (The `github_app` and `github_oauth` providers imply a `repo` and `webhook` implies a `webhook`.)",
+            "description": "The source of events to use for this trigger. Will contain either a `repo`, `webhook`, or `schedule` object depending on the `provider`. (The `github_app` and `github_oauth` providers imply a `repo`, `webhook` implies a `webhook`, and `schedule` implies a `schedule`.)",
             "properties": {
               "provider": {
-                "description": "The integration provider for this resource. Currently `github_app`, `github_oauth`, and `webhook` are the only supported values.",
+                "description": "The integration provider for this resource. One of `github_app`, `github_oauth`, `webhook`, or `schedule`.",
                 "example": "github_app",
                 "type": "string"
               },
@@ -2150,12 +2203,24 @@
                 },
                 "type": "object"
               },
+              "schedule": {
+                "additionalProperties": false,
+                "description": "Information pertaining to the schedule used as a source of events for this trigger, if applicable.",
+                "properties": {
+                  "cron_expression": {
+                    "description": "The cron expression defining when this trigger fires.",
+                    "example": "*/5 * * * *",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
               "webhook": {
                 "additionalProperties": false,
                 "description": "Information pertaining to the custom webhook used as a source of events for this trigger, if applicable.",
                 "properties": {
                   "sender": {
-                    "description": "The name of the webhook sender..",
+                    "description": "The name of the webhook sender.",
                     "example": "datadog",
                     "type": "string"
                   },
@@ -2174,6 +2239,14 @@
             "description": "The unique ID of the trigger.",
             "format": "uuid",
             "type": "string"
+          },
+          "parameters": {
+            "additionalProperties": true,
+            "description": "Pipeline parameters passed when running pipelines from this trigger. Currently only supported for triggers where `event_source.provider` is `schedule`.",
+            "example": {
+              "deploy_env": "staging"
+            },
+            "type": "object"
           }
         },
         "type": "object"
@@ -2345,12 +2418,12 @@
             "type": "string"
           },
           "disabled": {
-            "description": "A flag indicating whether the trigger is disabled or not. This can only be set for triggers where `provider` is `github_oauth`, `github_app`, or `webhook`.",
+            "description": "A flag indicating whether the trigger is disabled or not. Not supported for triggers where `event_source.provider` is `github_oauth`.",
             "example": false,
             "type": "boolean"
           },
           "event_name": {
-            "description": "The name of the triggering event. This can only be set for triggers where `provider` is `webhook`.",
+            "description": "The name of the triggering event. Required when `provider` is `webhook` or `schedule`. Should not be set for other providers.",
             "example": "some event name",
             "type": "string"
           },
@@ -2360,6 +2433,24 @@
           "event_source": {
             "additionalProperties": false,
             "properties": {
+              "schedule": {
+                "additionalProperties": false,
+                "description": "Schedule configuration to update for this trigger. Only applicable when `provider` is `schedule`.",
+                "properties": {
+                  "attribution_actor": {
+                    "description": "The actor to attribute pipeline runs to. Use `current` to attribute runs to the user who sends this update request, or `system` to attribute runs to the CircleCI system actor.",
+                    "enum": ["current", "system"],
+                    "example": "current",
+                    "type": "string"
+                  },
+                  "cron_expression": {
+                    "description": "A cron expression defining when the trigger fires (e.g. `*/5 * * * *` for every 5 minutes).",
+                    "example": "*/5 * * * *",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
               "webhook": {
                 "additionalProperties": false,
                 "properties": {
@@ -2371,6 +2462,14 @@
                 },
                 "type": "object"
               }
+            },
+            "type": "object"
+          },
+          "parameters": {
+            "additionalProperties": true,
+            "description": "Pipeline parameters to pass when running pipelines from this trigger. Currently only supported for triggers where `event_source.provider` is `schedule`.",
+            "example": {
+              "deploy_env": "staging"
             },
             "type": "object"
           }
@@ -2518,6 +2617,112 @@
             "x-go-name": "WorkflowID"
           }
         },
+        "type": "object"
+      },
+      "workflow": {
+        "additionalProperties": false,
+        "properties": {
+          "auto_rerun_number": {
+            "description": "Present if this workflow was auto-rerun from a previous workflow. The Nth auto-rerun workflow will have auto_rerun_number N.",
+            "example": 1,
+            "type": "integer"
+          },
+          "canceled_by": {
+            "description": "The ID of the user who canceled the workflow.",
+            "example": "026a6d28-c22e-4aab-a8b4-bd7131a8ea35",
+            "format": "uuid",
+            "type": "string"
+          },
+          "created_at": {
+            "description": "The date and time the workflow was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "errored_by": {
+            "description": "The ID of the user associated with the error on the workflow.",
+            "example": "c6e40f70-a80a-4ccc-af88-8d985a7bc622",
+            "format": "uuid",
+            "type": "string"
+          },
+          "id": {
+            "description": "The unique ID of the workflow.",
+            "example": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+            "format": "uuid",
+            "type": "string"
+          },
+          "max_auto_reruns": {
+            "description": "The maximum number of auto reruns specified for the workflow.",
+            "example": 5,
+            "type": "integer"
+          },
+          "name": {
+            "description": "The name of the workflow.",
+            "example": "build-and-test",
+            "type": "string"
+          },
+          "pipeline_id": {
+            "description": "The ID of the pipeline this workflow belongs to.",
+            "example": "5034460f-c7c4-4c43-9457-de07e2029e7b",
+            "format": "uuid",
+            "type": "string"
+          },
+          "pipeline_number": {
+            "description": "The number of the pipeline this workflow belongs to.",
+            "example": 25,
+            "format": "int64",
+            "type": "integer"
+          },
+          "project_slug": {
+            "description": "The project-slug for the pipeline this workflow belongs to.",
+            "example": "gh/CircleCI-Public/api-preview-docs",
+            "type": "string"
+          },
+          "started_by": {
+            "description": "The ID of the user who started the workflow.",
+            "example": "03987f6a-4c27-4dc1-b6ab-c7e83bb3e713",
+            "format": "uuid",
+            "type": "string"
+          },
+          "status": {
+            "description": "The current status of the workflow.",
+            "enum": [
+              "success",
+              "canceled",
+              "error",
+              "failed",
+              "failing",
+              "not_run",
+              "on_hold",
+              "running",
+              "unauthorized"
+            ],
+            "type": "string"
+          },
+          "stopped_at": {
+            "description": "The date and time the workflow stopped.",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "tag": {
+            "description": "Tag used for the workflow.",
+            "enum": ["setup"],
+            "example": "setup",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "status",
+          "created_at",
+          "stopped_at",
+          "pipeline_id",
+          "pipeline_number",
+          "project_slug",
+          "started_by"
+        ],
         "type": "object"
       }
     },
@@ -12189,7 +12394,7 @@
     },
     "/projects/{project_id}/pipeline-definitions/{pipeline_definition_id}/triggers": {
       "get": {
-        "description": "List all triggers for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_oauth`, `github_app` or `bitbucket_dc`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "List all triggers for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_oauth`, `github_app`, `bitbucket_dc`, or `schedule`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "listPipelineDefinitionTriggers",
         "parameters": [
           {
@@ -12227,7 +12432,7 @@
         "tags": ["Trigger"]
       },
       "post": {
-        "description": "Create a trigger for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_oauth` or `github_app`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Create a trigger for a given pipeline definition. Currently only supported for pipeline definitions where `config_source.provider` is `github_oauth`, `github_app`, or `schedule`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "createTrigger",
         "parameters": [
           {
@@ -12323,7 +12528,7 @@
     },
     "/projects/{project_id}/triggers/{trigger_id}": {
       "delete": {
-        "description": "Delete a trigger. Currently only supported for triggers where `event_source.provider` is `github_oauth`, `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Delete a trigger. Currently only supported for triggers where `event_source.provider` is `github_oauth`, `github_app`, `bitbucket_dc`, `webhook`, or `schedule`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "deleteTrigger",
         "parameters": [
           {
@@ -12361,7 +12566,7 @@
         "tags": ["Trigger"]
       },
       "get": {
-        "description": "Get details for a trigger. Currently only supported for triggers where `event_source.provider` is `github_oauth`, `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Get details for a trigger. Currently only supported for triggers where `event_source.provider` is `github_oauth`, `github_app`, `bitbucket_dc`, `webhook`, or `schedule`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "getTrigger",
         "parameters": [
           {
@@ -12399,7 +12604,7 @@
         "tags": ["Trigger"]
       },
       "patch": {
-        "description": "Update a trigger. Currently only supported for triggers where `event_source.provider` is `github_oauth`, `github_app`, `bitbucket_dc` or `webhook`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
+        "description": "Update a trigger. Currently only supported for triggers where `event_source.provider` is `github_oauth`, `github_app`, `bitbucket_dc`, `webhook`, or `schedule`. [Share feedback](https://circleci.canny.io/cloud-feature-requests/p/project-administration-apis) about our Project Administration APIs.",
         "operationId": "updateTrigger",
         "parameters": [
           {
@@ -13836,15 +14041,7 @@
         "operationId": "getWorkflowById",
         "parameters": [
           {
-            "description": "The unique ID of the workflow.",
-            "example": "5034460f-c7c4-4c43-9457-de07e2029e7b",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/workflow_id"
           }
         ],
         "responses": {
@@ -13852,108 +14049,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "A workflow",
-                  "properties": {
-                    "auto_rerun_number": {
-                      "description": "Present if this workflow was auto-rerun from a previous workflow. The Nth auto-rerun workflow will have auto_rerun_number N",
-                      "example": 1,
-                      "format": "int64",
-                      "minimum": 1,
-                      "type": "integer"
-                    },
-                    "canceled_by": {
-                      "format": "uuid",
-                      "type": "string"
-                    },
-                    "created_at": {
-                      "description": "The date and time the workflow was created.",
-                      "format": "date-time",
-                      "type": "string"
-                    },
-                    "errored_by": {
-                      "format": "uuid",
-                      "type": "string"
-                    },
-                    "id": {
-                      "description": "The unique ID of the workflow.",
-                      "format": "uuid",
-                      "type": "string"
-                    },
-                    "max_auto_reruns": {
-                      "description": "The maximum number of auto reruns specified for the workflow.",
-                      "example": 5,
-                      "format": "int64",
-                      "minimum": 1,
-                      "type": "integer"
-                    },
-                    "name": {
-                      "description": "The name of the workflow.",
-                      "example": "build-and-test",
-                      "type": "string"
-                    },
-                    "pipeline_id": {
-                      "description": "The ID of the pipeline this workflow belongs to.",
-                      "example": "5034460f-c7c4-4c43-9457-de07e2029e7b",
-                      "format": "uuid",
-                      "type": "string"
-                    },
-                    "pipeline_number": {
-                      "description": "The number of the pipeline this workflow belongs to.",
-                      "example": 25,
-                      "format": "int64",
-                      "type": "integer"
-                    },
-                    "project_slug": {
-                      "description": "The project-slug for the pipeline this workflow belongs to.",
-                      "example": "gh/CircleCI-Public/api-preview-docs",
-                      "type": "string"
-                    },
-                    "started_by": {
-                      "format": "uuid",
-                      "type": "string"
-                    },
-                    "status": {
-                      "description": "The current status of the workflow.",
-                      "enum": [
-                        "success",
-                        "running",
-                        "not_run",
-                        "failed",
-                        "error",
-                        "failing",
-                        "on_hold",
-                        "canceled",
-                        "unauthorized"
-                      ],
-                      "type": "string"
-                    },
-                    "stopped_at": {
-                      "description": "The date and time the workflow stopped.",
-                      "format": "date-time",
-                      "type": "string",
-                      "x-nullable": true
-                    },
-                    "tag": {
-                      "description": "Tag used for the workflow",
-                      "enum": ["setup"],
-                      "example": "setup",
-                      "type": "string",
-                      "x-nullable": true
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name",
-                    "status",
-                    "created_at",
-                    "stopped_at",
-                    "pipeline_id",
-                    "pipeline_number",
-                    "project_slug",
-                    "started_by"
-                  ],
-                  "title": "Workflow",
-                  "type": "object"
+                  "$ref": "#/components/schemas/workflow"
                 }
               }
             },
@@ -13979,20 +14075,20 @@
               }
             }
           },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Error response."
+          "400": {
+            "$ref": "#/components/responses/400_invalid_workflow_id"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "429": {
+            "$ref": "#/components/responses/429_rate_limit_exceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
           }
         },
         "summary": "Get a workflow",
