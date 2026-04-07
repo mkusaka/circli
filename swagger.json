@@ -1714,6 +1714,47 @@
         },
         "type": "array"
       },
+      "getJobResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "pipeline_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "project_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "started_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "stopped_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "type": {
+            "description": "The type of the job.",
+            "type": "string"
+          },
+          "workflow_id": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": ["id", "name", "status", "project_id", "pipeline_id", "workflow_id"],
+        "type": "object"
+      },
       "get_usage_export_job_status": {
         "additionalProperties": false,
         "properties": {
@@ -5982,6 +6023,46 @@
         "summary": "Cancel job by job ID",
         "tags": ["Job"]
       }
+    },
+    "/jobs/{job_id}": {
+      "get": {
+        "description": "Gets a job's metadata by its unique ID, including its name, type, status, and associated resource IDs.",
+        "operationId": "getJob",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getJobResponse"
+                }
+              }
+            },
+            "description": "Job fetched successfully"
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "429": {
+            "$ref": "#/components/responses/429_rate_limit_exceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "Get a job",
+        "tags": ["Job"]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/job_id"
+        }
+      ]
     },
     "/me": {
       "get": {
