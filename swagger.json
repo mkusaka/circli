@@ -293,6 +293,17 @@
           "type": "string"
         }
       },
+      "pipeline_id": {
+        "description": "An opaque identifier of a pipeline.",
+        "example": "5034460f-c7c4-4c43-9457-de07e2029e7b",
+        "in": "path",
+        "name": "pipeline_id",
+        "required": true,
+        "schema": {
+          "format": "uuid",
+          "type": "string"
+        }
+      },
       "project": {
         "description": "The third segment of the slash-separated project slug, as shown in Project Settings > Overview. Depending on the organization type, this may be the project name (e.g. `my-project`) or an ID (e.g. `44n9wujWcTnVZ2b5S8Fnat`).",
         "example": "api-preview-docs",
@@ -2023,6 +2034,15 @@
             "enum": ["created", "errored", "setup-pending", "setup", "pending"],
             "type": "string"
           }
+        },
+        "type": "object"
+      },
+      "pipelineValues": {
+        "additionalProperties": true,
+        "example": {
+          "another.field": 1,
+          "different.key": true,
+          "some.key": "some-value"
         },
         "type": "object"
       },
@@ -8714,70 +8734,6 @@
         "tags": ["Pipeline"]
       }
     },
-    "/pipeline/{pipeline-id}/values": {
-      "get": {
-        "description": "Returns a map of pipeline values by pipeline ID. For more information see the [pipeline values reference page](https://circleci.com/docs/variables/#pipeline-values).",
-        "operationId": "getPipelineValuesById",
-        "parameters": [
-          {
-            "description": "The unique ID of the pipeline.",
-            "example": "5034460f-c7c4-4c43-9457-de07e2029e7b",
-            "in": "path",
-            "name": "pipeline-id",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "additionalProperties": {
-                    "anyOf": [
-                      {
-                        "type": "string"
-                      },
-                      {
-                        "format": "int64",
-                        "type": "integer"
-                      },
-                      {
-                        "type": "boolean"
-                      }
-                    ]
-                  },
-                  "description": "The pipeline-values for the pipeline.",
-                  "title": "PipelineValues",
-                  "type": "object"
-                }
-              }
-            },
-            "description": "A JSON object of pipeline values"
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Error response."
-          }
-        },
-        "summary": "Get pipeline values for a pipeline",
-        "tags": ["Pipeline"]
-      }
-    },
     "/pipeline/{pipeline-id}/workflow": {
       "get": {
         "description": "Returns a paginated list of workflows by pipeline ID.",
@@ -8963,6 +8919,43 @@
         "summary": "Get a pipeline's workflows",
         "tags": ["Pipeline"]
       }
+    },
+    "/pipeline/{pipeline_id}/values": {
+      "get": {
+        "description": "Returns a map of pipeline values by pipeline ID. For more information see the [pipeline values reference page](https://circleci.com/docs/variables/#pipeline-values).",
+        "operationId": "getPipelineValuesById",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pipelineValues"
+                }
+              }
+            },
+            "description": "A JSON object of pipeline values."
+          },
+          "400": {
+            "$ref": "#/components/responses/400_unexpected_request_body"
+          },
+          "401": {
+            "$ref": "#/components/responses/401_invalid_token"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_entity_not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500_internal_server_error"
+          }
+        },
+        "summary": "Get pipeline values for a pipeline",
+        "tags": ["Pipeline"]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/pipeline_id"
+        }
+      ]
     },
     "/project/{project-slug}": {
       "delete": {
