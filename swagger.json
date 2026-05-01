@@ -1732,6 +1732,11 @@
             "format": "uuid",
             "type": "string"
           },
+          "job_number": {
+            "description": "The number of the job.",
+            "format": "int64",
+            "type": "integer"
+          },
           "name": {
             "type": "string"
           },
@@ -6046,7 +6051,7 @@
     },
     "/jobs/{job_id}": {
       "get": {
-        "description": "Gets a job's metadata by its unique ID, including its name, type, status, and associated resource IDs.",
+        "description": "Gets a job's metadata by its unique ID, including its name, job number, type, status, and associated resource IDs.",
         "operationId": "getJob",
         "responses": {
           "200": {
