@@ -1479,7 +1479,12 @@
             "type": "string"
           },
           "event_preset": {
-            "$ref": "#/components/schemas/trigger_event_preset"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/trigger_event_preset"
+              }
+            ],
+            "description": "The event preset to use for this trigger.\n\n- **`github_app` / `github_server`**: Optional. All preset values are supported.\n- **`github_oauth`**: **Required.** Only `all-pushes` and `only-build-prs` are accepted.\n- **`webhook` / `schedule`**: Not applicable. Must be omitted."
           },
           "event_source": {
             "additionalProperties": false,
@@ -2226,11 +2231,6 @@
             "example": "some-config-ref",
             "type": "string"
           },
-          "created_at": {
-            "description": "The date and time the trigger was created.",
-            "format": "date-time",
-            "type": "string"
-          },
           "disabled": {
             "description": "Whether the trigger is disabled. Not supported for triggers where `event_source.provider` is `github_oauth`.",
             "example": false,
@@ -2274,6 +2274,18 @@
                 "additionalProperties": false,
                 "description": "Information pertaining to the schedule used as a source of events for this trigger, if applicable.",
                 "properties": {
+                  "attribution_actor": {
+                    "additionalProperties": false,
+                    "description": "The actor that pipeline runs from this trigger are attributed to. On creation, callers supply `current` or `system` as a string; the response returns the resolved actor as an object containing their user ID.",
+                    "properties": {
+                      "id": {
+                        "description": "The unique ID of the user that pipeline runs are attributed to.",
+                        "format": "uuid",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
                   "cron_expression": {
                     "description": "The cron expression defining when this trigger fires.",
                     "example": "*/5 * * * *",
@@ -2400,7 +2412,7 @@
         "type": "object"
       },
       "trigger_event_preset": {
-        "description": "The name of the event preset to use when filtering events for this trigger. Only applicable when `event_source.provider` is `github_app` or `github_server`.",
+        "description": "The name of the event preset to use when filtering events for this trigger.\n\nWhen `event_source.provider` is `github_app` or `github_server`, all preset values are supported.\n\nWhen `event_source.provider` is `github_oauth`, this field is **required** and only the following values are accepted: `all-pushes`, `only-build-prs`.\n\nNot applicable when `event_source.provider` is `webhook` or `schedule`.",
         "enum": [
           "all-pushes",
           "only-tags",
@@ -12525,6 +12537,81 @@
         "requestBody": {
           "content": {
             "application/json": {
+              "examples": {
+                "github_app_trigger": {
+                  "description": "Creates a trigger that fires on all push events from a GitHub App-connected repository. The `event_preset` controls which events are matched. For `github_app` and `github_server`, the full list of presets is available: `all-pushes`, `only-tags`, `default-branch-pushes`, `only-build-prs`, `only-open-prs`, `only-labeled-prs`, `only-merged-prs`, `only-ready-for-review-prs`, `only-branch-delete`, `only-build-pushes-to-non-draft-prs`, `only-merged-or-closed-prs`, `pr-comment-equals-run-ci`, `non-draft-pr-opened`, `pushes-to-merge-queues`.",
+                  "summary": "GitHub App trigger (all pushes)",
+                  "value": {
+                    "event_preset": "all-pushes",
+                    "event_source": {
+                      "provider": "github_app",
+                      "repo": {
+                        "external_id": "123456789"
+                      }
+                    }
+                  }
+                },
+                "github_oauth_trigger": {
+                  "description": "Creates a trigger for a GitHub OAuth-connected repository. For `github_oauth`, the `event_preset` field is **required** and only accepts two values: `all-pushes` or `only-build-prs`.",
+                  "summary": "GitHub OAuth trigger",
+                  "value": {
+                    "event_preset": "only-build-prs",
+                    "event_source": {
+                      "provider": "github_oauth",
+                      "repo": {
+                        "external_id": "123456789"
+                      }
+                    }
+                  }
+                },
+                "github_server_trigger": {
+                  "description": "Creates a trigger for a GitHub Enterprise Server-connected repository. Supports the same full set of `event_preset` values as `github_app`.",
+                  "summary": "GitHub Server trigger",
+                  "value": {
+                    "event_preset": "all-pushes",
+                    "event_source": {
+                      "provider": "github_server",
+                      "repo": {
+                        "external_id": "987654321"
+                      }
+                    }
+                  }
+                },
+                "schedule_trigger": {
+                  "description": "Creates a trigger that fires on a cron schedule. The `event_name`, `checkout_ref`, and `config_ref` are required. The `attribution_actor` determines who pipeline runs are attributed to: `current` (the user creating the trigger) or `system` (CircleCI system actor). Pipeline `parameters` are supported for schedule triggers.",
+                  "summary": "Schedule trigger",
+                  "value": {
+                    "checkout_ref": "main",
+                    "config_ref": "main",
+                    "event_name": "weekday-morning-build",
+                    "event_source": {
+                      "provider": "schedule",
+                      "schedule": {
+                        "attribution_actor": "current",
+                        "cron_expression": "0 9 * * 1-5"
+                      }
+                    },
+                    "parameters": {
+                      "deploy_env": "staging"
+                    }
+                  }
+                },
+                "webhook_trigger": {
+                  "description": "Creates a trigger that fires when a custom webhook is received. The `event_name`, `checkout_ref`, and `config_ref` are required for webhook triggers. The `sender` field is optional and can describe the external system sending the webhook (e.g. 'datadog', 'huggingface'). The response will include the generated webhook URL.",
+                  "summary": "Custom webhook trigger",
+                  "value": {
+                    "checkout_ref": "main",
+                    "config_ref": "main",
+                    "event_name": "monitor-alert",
+                    "event_source": {
+                      "provider": "webhook",
+                      "webhook": {
+                        "sender": "datadog"
+                      }
+                    }
+                  }
+                }
+              },
               "schema": {
                 "$ref": "#/components/schemas/createTriggerRequest"
               }
@@ -12535,6 +12622,99 @@
           "200": {
             "content": {
               "application/json": {
+                "examples": {
+                  "github_app_response": {
+                    "summary": "GitHub App trigger",
+                    "value": {
+                      "checkout_ref": "",
+                      "config_ref": "",
+                      "disabled": false,
+                      "event_name": "",
+                      "event_preset": "all-pushes",
+                      "event_source": {
+                        "provider": "github_app",
+                        "repo": {
+                          "external_id": "123456789",
+                          "full_name": "my-org/my-repo"
+                        }
+                      },
+                      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                    }
+                  },
+                  "github_oauth_response": {
+                    "summary": "GitHub OAuth trigger",
+                    "value": {
+                      "checkout_ref": "",
+                      "config_ref": "",
+                      "event_name": "Implicit trigger associated with an OAuth-based project.",
+                      "event_source": {
+                        "provider": "github_oauth",
+                        "repo": {
+                          "external_id": "123456789",
+                          "full_name": "my-org/my-repo"
+                        }
+                      },
+                      "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901"
+                    }
+                  },
+                  "github_server_response": {
+                    "summary": "GitHub Server trigger",
+                    "value": {
+                      "checkout_ref": "",
+                      "config_ref": "",
+                      "disabled": false,
+                      "event_name": "",
+                      "event_preset": "all-pushes",
+                      "event_source": {
+                        "provider": "github_server",
+                        "repo": {
+                          "external_id": "987654321",
+                          "full_name": "my-ghes-org/my-repo"
+                        }
+                      },
+                      "id": "c3d4e5f6-a7b8-9012-cdef-123456789012"
+                    }
+                  },
+                  "schedule_response": {
+                    "summary": "Schedule trigger",
+                    "value": {
+                      "checkout_ref": "main",
+                      "config_ref": "main",
+                      "disabled": false,
+                      "event_name": "weekday-morning-build",
+                      "event_source": {
+                        "provider": "schedule",
+                        "schedule": {
+                          "attribution_actor": {
+                            "id": "f6a7b8c9-d0e1-2345-fabc-456789012345"
+                          },
+                          "cron_expression": "0 9 * * 1-5"
+                        }
+                      },
+                      "id": "e5f6a7b8-c9d0-1234-efab-345678901234",
+                      "parameters": {
+                        "deploy_env": "staging"
+                      }
+                    }
+                  },
+                  "webhook_response": {
+                    "summary": "Custom webhook trigger",
+                    "value": {
+                      "checkout_ref": "main",
+                      "config_ref": "main",
+                      "disabled": false,
+                      "event_name": "monitor-alert",
+                      "event_source": {
+                        "provider": "webhook",
+                        "webhook": {
+                          "sender": "datadog",
+                          "url": "https://internal.circleci.com/private/soc/e/abcdef12-3456-7890-abcd-ef1234567890?secret=<webhook-secret>"
+                        }
+                      },
+                      "id": "d4e5f6a7-b8c9-0123-defa-234567890123"
+                    }
+                  }
+                },
                 "schema": {
                   "$ref": "#/components/schemas/trigger"
                 }
