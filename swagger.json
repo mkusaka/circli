@@ -2822,6 +2822,11 @@
         "description": "HTTP basic authentication. The username should be set as the circle-token value, and the password should be left blank. Note that project tokens are currently not supported on API v2.",
         "scheme": "basic",
         "type": "http"
+      },
+      "bearer_auth": {
+        "description": "(Recommended) Bearer token authentication as defined in RFC 6750. Project API tokens are not supported for API v2. Use a personal API token.",
+        "scheme": "bearer",
+        "type": "http"
       }
     }
   },
@@ -14774,6 +14779,9 @@
   "security": [
     {
       "api_key_header": []
+    },
+    {
+      "bearer_auth": []
     },
     {
       "basic_auth": []
